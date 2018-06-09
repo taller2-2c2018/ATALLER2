@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <SearchView
+            android:id="@+id/searchViewList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/com_facebook_auth_dialog_cancel_background" />
+
+        <android.support.v7.widget.AppCompatButton
+            style="@style/Widget.AppCompat.Button"
+            android:id="@+id/buttonIngresaHistoria"
+            android:backgroundTint="@color/naranjon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/button_ingrese_historia" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listHistoriasRecientes"
+            android:name="com.example.fernandon.android_client.TALLER2.ListadoFragmentHistorias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="LinearLayoutManager"
+            tools:context="com.example.fernandon.android_client.TALLER2.model.ListadoHistoriasFragment"
+            tools:listitem="@layout/layout_historia_larga">
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
+

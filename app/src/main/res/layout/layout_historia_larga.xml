@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    card_view:cardBackgroundColor="@color/blanco"
+    android:layout_marginTop="@dimen/card_view_margin_top"
+    android:layout_marginRight="@dimen/card_view_margin_right"
+    android:layout_marginBottom="@dimen/card_view_margin_botton"
+    android:layout_marginLeft="@dimen/card_view_margin_left"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="5dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                app:srcCompat="@drawable/ic_sentiment_satisfied_black_18dp"
+                android:id="@+id/imgUsuarioHistoria"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <TextView
+                android:text="Fernando Nitz"
+                android:textSize="26dp"
+                android:textStyle="bold"
+                android:id="@+id/nombreUsuarioHistoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="left"
+            android:textStyle="bold"
+            android:text="@string/txtHistoriaTitulo" />
+
+        <TextView
+            android:id="@+id/textDescripcion"
+            android:layout_width="match_parent"
+            android:textSize="18sp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textTitulo"
+            android:text="@string/txtHistoriaDescripcion" />
+
+
+        <ImageView
+            android:id="@+id/imageHistoria"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_alignStart="@+id/textDescripcion"
+            android:gravity="center_horizontal"
+            app:srcCompat="@drawable/river4" />
+
+        <TextView
+            android:id="@+id/textUbicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_alignStart="@+id/imageHistoria"
+            android:text="@string/txtHistoriaUbicacion" />
+
+        <TextView
+            android:id="@+id/textFechaHora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_alignStart="@+id/textUbicacion"
+            android:text="@string/txtHistoriaFechaHora" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:src="@drawable/ic_sentiment_satisfied_black_18dp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageButton
+                android:src="@drawable/ic_sms_black_18dp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

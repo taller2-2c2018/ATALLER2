@@ -1,0 +1,40 @@
+<resources>
+
+    <!-- Strings related to login -->
+    <string name="app_name">mi app</string>
+    <string name="prompt_email">Usuario</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="action_sign_in">Iniciar SESION</string>
+    <string name="action_register">REGISTRATE</string>
+
+    <string name="action_sign_in_short">Crear nueva cuenta</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="button_ingrese_historia">¿En qué estas pensando?</string>
+    <string name="permission_rationale">Contacts permissions are needed for providing email completions.</string>
+    <string name="prompt_username">Usuario</string>
+    <string name="title_activity_main"></string>
+
+    <string name="action_logout">Salir</string>
+    <string name="action_perfil">Mi Perfil</string>
+    <string name="hint_search">Buscar</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="app_id_face">188344395278473</string>
+    <string name="fb_login_protocol_scheme">fb188344395278473</string>
+
+    <string name="title_activity_mi_perfil"></string>
+    <string name="large_text">Historias del usuario</string>
+
+
+    <string name="nombreText">Fernando Nitz</string>
+    <string name="txtHistoriaTitulo">Impresionante!!!</string>
+    <string name="txtHistoriaDescripcion">Muy bueno, super recomendable, excelente atencion</string>
+    <string name="txtHistoriaUbicacion">Facultad de Ing. Capital Federal.</string>
+    <string name="txtHistoriaFechaHora">14 de Marzo de 2018</string>
+
+</resources>
