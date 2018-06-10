@@ -31,8 +31,11 @@ import taller2.ataller2.networking.NetworkResult;
 import taller2.ataller2.R;
 public class BaseFacebookService implements FacebookService {
 
-    private static final String POST_USERID_URL = "http://34.237.197.99:9000/api/v1/authenticate/facebook";
-    private static final String AUTH_HEADER_NAME = "authorization";
+    private static final String POST_REGISTER = "https://application-server-tdp2.herokuapp.com/user/register";
+    private static final String POST_AUTHENTICATE = "https://application-server-tdp2.herokuapp.com/user/authenticate";
+    private static final String AUTH_RESULT = "status";
+    private static final String AUTH_DATA = "data";
+    private static final String AUTH_TOKEN = "token";
 
     private CallbackManager mCallbackManager;
     private boolean mDownloading = false;
@@ -58,6 +61,7 @@ public class BaseFacebookService implements FacebookService {
     @Override
     public void loginWithAccesToken(Activity activity, LoginCallback loginCalback) {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        registerToken(loginCalback, activity.getFragmentManager(), accessToken.getUserId());
         requestAuthToken(loginCalback, activity.getFragmentManager(), accessToken.getUserId());
     }
 
@@ -122,8 +126,8 @@ public class BaseFacebookService implements FacebookService {
         return facebookCallback;
     }
 
-    private void requestAuthToken(final LoginCallback loginCallback, final FragmentManager fragmentManager, String userId) {
-        NetworkObject requestTokenObject = createRequestTokenObject(userId);
+    private void registerToken(final LoginCallback loginCallback, final FragmentManager fragmentManager, String userId) {
+        NetworkObject requestTokenObject = createRegistrationTokenObject(userId);
         NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
         if (!mDownloading) {
             mDownloading = true;
@@ -131,7 +135,7 @@ public class BaseFacebookService implements FacebookService {
                 @Override
                 public void onResponseReceived(NetworkResult result) {
                     if (result.mException == null) {
-                        mAuthToken = result.mResponseHeaders.get(AUTH_HEADER_NAME);
+                        mAuthToken = result.mResponseHeaders.get(AUTH_RESULT);
                         if (mAuthToken == null) {
                             loginCallback.onError("El usuario falló al ser autenticado");
                             mAuthToken = "";
@@ -163,11 +167,61 @@ public class BaseFacebookService implements FacebookService {
         }
     }
 
+    private void requestAuthToken(final LoginCallback loginCallback, final FragmentManager fragmentManager, String userId) {
+        NetworkObject requestTokenObject = createRequestTokenObject(userId);
+        NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
+        if (!mDownloading) {
+            mDownloading = true;
+            networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
+                @Override
+                public void onResponseReceived(NetworkResult result) {
+                    if (result.mException == null) {
+                        mAuthToken = result.mResponseHeaders.get(AUTH_DATA);
+                        if (mAuthToken == null) {
+                            loginCallback.onError("El usuario falló al ser autenticado");
+                            mAuthToken = "";
+                        } else {
+                            loginCallback.onSuccess();
+                        }
+                    } else {
+                        loginCallback.onError("El usuario falló al ser autenticado");
+                    }
+                    mDownloading = false;
+                }
+
+                @Override
+                public NetworkInfo getActiveNetworkInfo(Context context) {
+                    ConnectivityManager connectivityManager =
+                            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                    return networkInfo;
+                }
+
+                @Override
+                public void onProgressUpdate(int progressCode, int percentComplete) {}
+
+                @Override
+                public void onFinishDownloading() {
+                    mDownloading = false;
+                }
+            });
+        }
+    }
+
+    private NetworkObject createRegistrationTokenObject(String userId) {
+        String requestBody = createRequestTokenJson(userId).toString();
+        NetworkObject networkObject = new NetworkObject(POST_REGISTER, HttpMethodType.POST, requestBody);
+        List<String> responseHeaders = new ArrayList<>();
+        responseHeaders.add(AUTH_RESULT);
+        networkObject.setResponseHeaders(responseHeaders);
+        return networkObject;
+    }
+
     private NetworkObject createRequestTokenObject(String userId) {
         String requestBody = createRequestTokenJson(userId).toString();
-        NetworkObject networkObject = new NetworkObject(POST_USERID_URL, HttpMethodType.POST, requestBody);
+        NetworkObject networkObject = new NetworkObject(POST_AUTHENTICATE, HttpMethodType.POST, requestBody);
         List<String> responseHeaders = new ArrayList<>();
-        responseHeaders.add(AUTH_HEADER_NAME);
+        responseHeaders.add(AUTH_RESULT);
         networkObject.setResponseHeaders(responseHeaders);
         return networkObject;
     }
@@ -175,10 +229,10 @@ public class BaseFacebookService implements FacebookService {
     private JSONObject createRequestTokenJson(String userId) {
         JSONObject requestTokenJsonObject = new JSONObject();
         try {
-            String userToken = "1234";
-            userId = "100000193795359";
-
-            final String userIdField = "token";
+            String asd = AccessToken.getCurrentAccessToken().getUserId();
+            String accessToken = AccessToken.getCurrentAccessToken().getToken();
+            String userToken = accessToken;
+            final String userIdField = "facebookUserId";
             requestTokenJsonObject.put(userIdField, userId);
             final String userTokenField = "facebookAuthToken";
             requestTokenJsonObject.put(userTokenField,userToken);
