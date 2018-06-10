@@ -175,8 +175,14 @@ public class BaseFacebookService implements FacebookService {
     private JSONObject createRequestTokenJson(String userId) {
         JSONObject requestTokenJsonObject = new JSONObject();
         try {
+            String userToken = "1234";
+            userId = "100000193795359";
+
             final String userIdField = "token";
             requestTokenJsonObject.put(userIdField, userId);
+            final String userTokenField = "facebookAuthToken";
+            requestTokenJsonObject.put(userTokenField,userToken);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
