@@ -41,6 +41,7 @@ public class BaseFacebookService implements FacebookService {
     private CallbackManager mCallbackManager;
     private boolean mDownloading = false;
     private String mAuthToken = null;
+    private String mFacebookID = null;
 
     public BaseFacebookService() {
         mCallbackManager = CallbackManager.Factory.create();
@@ -52,6 +53,14 @@ public class BaseFacebookService implements FacebookService {
             Log.e("FacebookService", "Auth token is null");
         }
         return mAuthToken;
+    }
+
+    @Override
+    public String getFacebookID() {
+        if (mFacebookID == null) {
+            Log.e("FacebookService", "Facebook id is null");
+        }
+        return mFacebookID;
     }
 
     @Override
@@ -170,7 +179,7 @@ public class BaseFacebookService implements FacebookService {
         }
     }
 
-    private void requestAuthToken(final LoginCallback loginCallback, final FragmentManager fragmentManager, String userId) {
+    private void requestAuthToken(final LoginCallback loginCallback, final FragmentManager fragmentManager, final String userId) {
         final NetworkObject requestTokenObject = createRequestTokenObject(userId);
         final NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
         if (!mDownloading) {
@@ -183,6 +192,7 @@ public class BaseFacebookService implements FacebookService {
                         try{
                             resultToken = new JSONObject(result.mResultValue);
                             JSONObject data = resultToken.getJSONObject("data");
+                            mFacebookID = userId;
                             mAuthToken = data.getString("token");
                         }
                         catch (Throwable t) {

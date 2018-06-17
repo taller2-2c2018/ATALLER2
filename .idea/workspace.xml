@@ -24,19 +24,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="HerokuUsersService.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuUsersService.java">
+      <file leaf-file-name="HerokuAmistadesService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuAmistadesService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="28" column="115" lean-forward="false" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="115" />
+            <state relative-caret-position="144">
+              <caret line="57" column="49" lean-forward="true" selection-start-line="57" selection-start-column="49" selection-end-line="57" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#HerokuUsersService#0;class#HerokuUsersService#0" expanded="false" />
-                <element signature="method#getUsers#0;class#HerokuUsersService#0" expanded="false" />
-                <element signature="method#getUsersName#0;class#HerokuUsersService#0" expanded="false" />
-                <element signature="e#4386#4387#0" expanded="true" />
-                <element signature="e#4446#4447#0" expanded="true" />
+                <element signature="e#1381#1382#0" expanded="true" />
+                <element signature="e#1415#1416#0" expanded="true" />
+                <element signature="method#getAmistades#0;class#HerokuAmistadesService#0" expanded="false" />
+                <element signature="e#2292#2293#0" expanded="true" />
+                <element signature="e#2336#2337#0" expanded="true" />
+                <element signature="e#4240#4241#0" expanded="true" />
+                <element signature="e#4300#4301#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FacebookService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/FacebookService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="10" column="27" lean-forward="false" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -44,14 +56,29 @@
       <file leaf-file-name="BaseFacebookService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/BaseFacebookService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="42" selection-end-column="37" />
-              <folding>
-                <element signature="e#6897#6898#0" expanded="true" />
-                <element signature="e#6957#6958#0" expanded="true" />
-                <element signature="e#9233#9234#0" expanded="true" />
-                <element signature="e#9293#9294#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="95">
+              <caret line="202" column="44" lean-forward="false" selection-start-line="202" selection-start-column="44" selection-end-line="202" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NetworkObject.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/networking/NetworkObject.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="233">
+              <caret line="64" column="31" lean-forward="false" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MockAmistadesService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockAmistadesService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="282">
+              <caret line="43" column="1" lean-forward="false" selection-start-line="10" selection-start-column="34" selection-end-line="43" selection-end-column="1" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -73,12 +100,12 @@
       <find>contex</find>
       <find>registerToken</find>
       <find>AUTH_RESULT</find>
-      <find>mAuthToken</find>
       <find>requestAuthToken</find>
       <find>loginWithAccesToken</find>
       <find>fragmentManager</find>
       <find>create</find>
       <find>createRequestTokenJson</find>
+      <find>mAuthToken</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2112,8 +2139,11 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_historia_corta_imagen.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoHistoriasFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/networking/NetworkResult.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/BaseFacebookService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuUsersService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/networking/NetworkObject.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/FacebookService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/BaseFacebookService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuAmistadesService.java" />
       </list>
     </option>
   </component>
@@ -2188,7 +2218,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="C:/workspace/como-hoy-app" />
     <property name="device.picker.selection" value="ZY322D3W63" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
     <property name="ToolWindowStructure.ShowToolbar" value="false" />
@@ -2450,18 +2480,26 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/BaseFacebookService.java</url>
-          <line>226</line>
+          <line>236</line>
           <properties />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/BaseFacebookService.java</url>
-          <line>180</line>
+          <line>189</line>
           <properties />
           <option name="timeStamp" value="15" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuAmistadesService.java</url>
+          <line>77</line>
+          <properties class="taller2.ataller2.services.HerokuAmistadesService" method="getAmistades">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="18" />
+      <option name="time" value="19" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2748,10 +2786,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuAmistadesService.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockUsersService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="35" lean-forward="false" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+        <state relative-caret-position="102">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2772,31 +2810,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockUsersService.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockAmistadesService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        <state relative-caret-position="282">
+          <caret line="43" column="1" lean-forward="false" selection-start-line="10" selection-start-column="34" selection-end-line="43" selection-end-column="1" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/BaseFacebookService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="42" selection-end-column="37" />
-          <folding>
-            <element signature="e#6897#6898#0" expanded="true" />
-            <element signature="e#6957#6958#0" expanded="true" />
-            <element signature="e#9233#9234#0" expanded="true" />
-            <element signature="e#9293#9294#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuUsersService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="28" column="115" lean-forward="false" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="115" />
+        <state relative-caret-position="130">
+          <caret line="30" column="51" lean-forward="true" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#HerokuUsersService#0;class#HerokuUsersService#0" expanded="false" />
@@ -2804,6 +2829,47 @@
             <element signature="method#getUsersName#0;class#HerokuUsersService#0" expanded="false" />
             <element signature="e#4386#4387#0" expanded="true" />
             <element signature="e#4446#4447#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/networking/NetworkObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="64" column="31" lean-forward="false" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/FacebookService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="10" column="27" lean-forward="false" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/BaseFacebookService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="202" column="44" lean-forward="false" selection-start-line="202" selection-start-column="44" selection-end-line="202" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuAmistadesService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="57" column="49" lean-forward="true" selection-start-line="57" selection-start-column="49" selection-end-line="57" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1381#1382#0" expanded="true" />
+            <element signature="e#1415#1416#0" expanded="true" />
+            <element signature="method#getAmistades#0;class#HerokuAmistadesService#0" expanded="false" />
+            <element signature="e#2292#2293#0" expanded="true" />
+            <element signature="e#2336#2337#0" expanded="true" />
+            <element signature="e#4240#4241#0" expanded="true" />
+            <element signature="e#4300#4301#0" expanded="true" />
           </folding>
         </state>
       </provider>

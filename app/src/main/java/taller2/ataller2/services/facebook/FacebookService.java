@@ -8,6 +8,7 @@ import taller2.ataller2.services.CustomService;
 
 public interface FacebookService extends CustomService {
     String getAuthToken();
+    String getFacebookID();
     boolean isLoggedIn();
     void loginWithAccesToken (Activity activity, LoginCallback loginCalback);
     void initializeLoginButton(Activity activity, LoginCallback loginCallback);

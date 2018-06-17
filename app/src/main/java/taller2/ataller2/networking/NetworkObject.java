@@ -23,6 +23,7 @@ public class NetworkObject implements Parcelable {
 
     private final String mUrl;
     private String mAuthToken;
+    private String mFacebookID;
     private HttpMethodType mHttpMethod;
     private String mPostData;
     private Map<String, String> mRequestProperties;
@@ -31,6 +32,7 @@ public class NetworkObject implements Parcelable {
     public NetworkObject(String URL, HttpMethodType httpMethod) {
         this.mUrl = URL;
         this.mAuthToken = "";
+        this.mFacebookID = "";
         this.mHttpMethod = httpMethod;
         mResponseHeaders = new ArrayList<>();
     }
@@ -54,9 +56,13 @@ public class NetworkObject implements Parcelable {
         this.mAuthToken = authToken;
     }
 
+    public void setFacebookID (String facebookID) {this.mFacebookID = facebookID; }
+
     public String getAuthToken() {
         return this.mAuthToken;
     }
+
+    public String getFacebookID () {return this.mFacebookID; }
 
     public String getURL() {
         return mUrl;
@@ -101,6 +107,7 @@ public class NetworkObject implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(mUrl);
+        dest.writeString(mFacebookID);
         dest.writeString(mAuthToken);
         dest.writeInt(mHttpMethod.getValue());
         dest.writeString(mPostData);
@@ -110,6 +117,7 @@ public class NetworkObject implements Parcelable {
 
     private NetworkObject(Parcel in) {
         mUrl = in.readString();
+        mFacebookID = in.readString();
         mAuthToken = in.readString();
         mHttpMethod = HttpMethodType.fromInteger(in.readInt());
         mPostData = in.readString();
