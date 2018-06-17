@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.JsonReader;
 import android.util.Log;
 
 import com.facebook.AccessToken;
@@ -61,7 +62,7 @@ public class BaseFacebookService implements FacebookService {
     @Override
     public void loginWithAccesToken(Activity activity, LoginCallback loginCalback) {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        registerToken(loginCalback, activity.getFragmentManager(), accessToken.getUserId());
+        //registerToken(loginCalback, activity.getFragmentManager(), accessToken.getUserId());
         requestAuthToken(loginCalback, activity.getFragmentManager(), accessToken.getUserId());
     }
 
@@ -170,7 +171,7 @@ public class BaseFacebookService implements FacebookService {
     }
 
     private void requestAuthToken(final LoginCallback loginCallback, final FragmentManager fragmentManager, String userId) {
-        NetworkObject requestTokenObject = createRequestTokenObject(userId);
+        final NetworkObject requestTokenObject = createRequestTokenObject(userId);
         final NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
         if (!mDownloading) {
             mDownloading = true;
@@ -178,7 +179,15 @@ public class BaseFacebookService implements FacebookService {
                 @Override
                 public void onResponseReceived(NetworkResult result) {
                     if (result.mException == null) {
-                        mAuthToken = result.mResponseHeaders.get(AUTH_DATA);
+                        JSONObject resultToken = null;
+                        try{
+                            resultToken = new JSONObject(result.mResultValue);
+                            JSONObject data = resultToken.getJSONObject("data");
+                            mAuthToken = data.getString("token");
+                        }
+                        catch (Throwable t) {
+                            Log.e("My App", "Could not parse malformed JSON: \"" + result.mResultValue + "\"");
+                        }
                         if (mAuthToken == null) {
                             loginCallback.onError("El usuario falló al ser autenticado");
                             mAuthToken = "";
