@@ -24,6 +24,32 @@
             android:gravity="center_horizontal"
             android:text="@string/button_ingrese_historia" />
 
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/line_divider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/listHistoriasCortasRecientes"
+            android:name="com.example.fernandon.android_client.TALLER2.ListadoFragmentHistorias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="LinearLayoutManager"
+            tools:context="com.example.fernandon.android_client.TALLER2.model.ListadoHistoriasFragment"
+            tools:listitem="@layout/layout_historia_corta_imagen">
+        </android.support.v7.widget.RecyclerView>
+
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/line_divider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/listHistoriasRecientes"
             android:name="com.example.fernandon.android_client.TALLER2.ListadoFragmentHistorias"
@@ -31,8 +57,7 @@
             android:layout_height="wrap_content"
             app:layoutManager="LinearLayoutManager"
             tools:context="com.example.fernandon.android_client.TALLER2.model.ListadoHistoriasFragment"
-            tools:listitem="@layout/layout_historia_larga">
-        </android.support.v7.widget.RecyclerView>
+            tools:listitem="@layout/layout_historia_larga"></android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

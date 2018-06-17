@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import taller2.ataller2.model.Historia;
+import taller2.ataller2.model.HistoriaCorta;
 import taller2.ataller2.services.facebook.HistoriasService;
 import taller2.ataller2.R;
 
@@ -13,6 +14,8 @@ public class MockHistoriasService implements HistoriasService {
 
     //private static Context context;
     private List<Historia> mHistorias;
+    private List<HistoriaCorta> mHistoriasCortas;
+
     private Context mContext;
     public MockHistoriasService(Context context){
         mContext = context;
@@ -45,11 +48,35 @@ public class MockHistoriasService implements HistoriasService {
     }
 
     @Override
+    public void updateHistoriasCortasData() {
+        mHistoriasCortas = new ArrayList<>();
+        HistoriaCorta c1 = new HistoriaCorta();
+        HistoriaCorta c2 = new HistoriaCorta();
+
+        c1.setPicture(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.river4));
+        c2.setPicture(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.river4));
+
+        c1.setPictureUsr(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.diego));
+        c2.setPictureUsr(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.elche));
+
+        mHistoriasCortas.add(c1);
+        mHistoriasCortas.add(c2);
+    }
+
+    @Override
     public List<Historia> getHistorias() {
         if (mHistorias == null) {
             updateHistoriasData();
         }
         return mHistorias;
+    }
+
+    @Override
+    public List<HistoriaCorta> getHistoriasCortas() {
+        if (mHistoriasCortas == null) {
+            updateHistoriasCortasData();
+        }
+        return mHistoriasCortas;
     }
 
     @Override

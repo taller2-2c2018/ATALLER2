@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import taller2.ataller2.CameraActivity;
 import taller2.ataller2.Filters.SearchFilter;
+import taller2.ataller2.adapters.HistoriasCortasListAdapter;
 import taller2.ataller2.adapters.HistoriasListAdapter;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.services.UsersService;
@@ -25,14 +27,23 @@ import taller2.ataller2.R;
 public class ListadoHistoriasFragment extends Fragment {
 
     private HistoriasListListener mHistoriasListListener;
+    private HistoriasCortasListListener mHistoriasCortasListListener;
+
     private UsersListListener mUsersListListener;
     private AppCompatButton mButtonNuevaHistoriaView;
+
     private RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerViewCortas;
+
     private SearchView mSearchView;
 
 
     public interface HistoriasListListener {
         void onHistoriaClicked(Historia historia);
+    }
+
+    public interface HistoriasCortasListListener {
+        void onHistoriaClicked(HistoriaCorta historia);
     }
 
     public interface UsersListListener {
@@ -67,11 +78,17 @@ public class ListadoHistoriasFragment extends Fragment {
         HistoriasService historiasService = getHistoriasService();
         mRecyclerView.setAdapter(new HistoriasListAdapter(historiasService.getHistorias(), mHistoriasListListener));
 
+        mRecyclerViewCortas = view.findViewById(R.id.listHistoriasCortasRecientes);
+        mRecyclerViewCortas.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerViewCortas.setAdapter(new HistoriasCortasListAdapter(historiasService.getHistoriasCortas(), mHistoriasCortasListListener));
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(),1);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mRecyclerViewCortas.setLayoutManager(layoutManager);
+
         setUpNuevaHistoriaView();
         setUpSearchView();
         return view;
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -121,49 +138,6 @@ public class ListadoHistoriasFragment extends Fragment {
 
                 Intent intent = new Intent(getActivity(), CameraActivity.class);
                 getActivity().startActivity(intent);
-
-                /*Dialog dialog = new Dialog(v.getContext());
-                dialog.setContentView(R.layout.dialog_crear_historia_larga);
-
-                ImageView img = dialog.findViewById(R.id.imgMostrar);
-                Button btn_hacerfoto = dialog.findViewById(R.id.btn_camara);
-
-                btn_hacerfoto.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Creamos el Intent para llamar a la Camara
-                        Intent cameraIntent = new Intent(
-                                android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                        //Creamos una carpeta en la memeria del terminal
-                        File imagesFolder = new File(
-                                Environment.getExternalStorageDirectory(), "AndroidFacil");
-                        imagesFolder.mkdirs();
-                        //añadimos el nombre de la imagen
-                        File image = new File(imagesFolder, "foto.jpg");
-                        Uri uriSavedImage = Uri.fromFile(image);
-                        //Le decimos al Intent que queremos grabar la imagen
-                        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
-                        //Lanzamos la aplicacion de la camara con retorno (forResult)
-                        startActivityForResult(cameraIntent, 1);
-                    }
-                });
-                dialog.show();
-                */
-/*
-                protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-                    //Comprovamos que la foto se a realizado
-                    if (requestCode == 1 && resultCode == RESULT_OK) {
-                        //Creamos un bitmap con la imagen recientemente
-                        //almacenada en la memoria
-                        Bitmap bMap = BitmapFactory.decodeFile(
-                                Environment.getExternalStorageDirectory()+
-                                “/AndroidFacil/”+“foto.jpg”);
-                        //Añadimos el bitmap al imageView para
-                        //mostrarlo por pantalla
-                        img.setImageBitmap(bMap);
-                    }
-                }*/
-
             }
         });
     }
