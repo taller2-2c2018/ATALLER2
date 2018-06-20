@@ -2,12 +2,19 @@ package taller2.ataller2;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,17 +24,32 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.Toast;
+
+import com.zomato.photofilters.imageprocessors.Filter;
+import com.zomato.photofilters.imageprocessors.subfilters.BrightnessSubFilter;
+import com.zomato.photofilters.imageprocessors.subfilters.ContrastSubFilter;
+import com.zomato.photofilters.imageprocessors.subfilters.SaturationSubfilter;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 public class CameraActivity extends Activity {
+
+    static
+    {
+        System.loadLibrary("NativeImageProcessor");
+    }
+
     private static int TAKE_IMAGE = 1;
     private static int PICK_IMAGE = 2;
 
@@ -41,6 +63,10 @@ public class CameraActivity extends Activity {
     private File myFilesDir;
 
     Uri file = null;
+
+    int valueBrillo = 0;
+    int valueContraste = 0;
+    int valueSaturacion = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +106,7 @@ public class CameraActivity extends Activity {
         btn_editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                openDialogFilters(v.getContext());
             }
         });
 
@@ -134,6 +160,97 @@ public class CameraActivity extends Activity {
             ivPhoto.setImageURI(imageUri);
         }
 
+    }
+
+    private void openDialogFilters(final Context context) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_filter);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = dialog.getWindow();
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        lp.copyFrom(window.getAttributes());
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+        window.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+
+        Button acceptButton = dialog.findViewById(R.id.boton_aceptar);
+        Button cancelButton = dialog.findViewById(R.id.boton_rechazar);
+
+
+        SeekBar brillo = dialog.findViewById(R.id.seekBar1);
+        SeekBar contraste = dialog.findViewById(R.id.seekBar4);
+        final SeekBar saturacion = dialog.findViewById(R.id.seekBar3);
+        SeekBar asd = dialog.findViewById(R.id.seekBar2);
+
+        valueBrillo = brillo.getProgress();
+        valueContraste = contraste.getProgress();
+        valueSaturacion = saturacion.getProgress();
+
+        acceptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ivPhoto.getDrawable() != null) {
+                    Filter myFilter = new Filter();
+                    //brillo mayor a 0
+                    myFilter.addSubFilter(new BrightnessSubFilter(30));
+                    //contrast 0-2
+                    float contraste = (float) valueContraste/200;
+                    myFilter.addSubFilter(new ContrastSubFilter(1.1f));
+                    //saturacion 0-2
+                    float saturacion = (float) valueSaturacion /200;
+                    myFilter.addSubFilter(new SaturationSubfilter(1.3f));
+                    Bitmap inputImage = redimensionarImagenMaximo(drawableToBitmap(ivPhoto.getDrawable()),100,100);
+                    Bitmap outputImage = myFilter.processFilter(inputImage);
+                    ivPhoto.setImageBitmap(outputImage);
+                    dialog.dismiss();
+                }
+            }
+        });
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    public static Bitmap drawableToBitmap (Drawable drawable) {
+        Bitmap bitmap = null;
+
+        if (drawable instanceof BitmapDrawable) {
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+            if(bitmapDrawable.getBitmap() != null) {
+                return bitmapDrawable.getBitmap();
+            }
+        }
+
+        if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
+        } else {
+            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        }
+
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
+    }
+
+    public Bitmap redimensionarImagenMaximo(Bitmap mBitmap, float newWidth, float newHeigth){
+        //Redimensionamos
+        int width = mBitmap.getWidth();
+        int height = mBitmap.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeigth) / height;
+        // create a matrix for the manipulation
+        Matrix matrix = new Matrix();
+        // resize the bit map
+        matrix.postScale(scaleWidth, scaleHeight);
+        // recreate the new Bitmap
+        return Bitmap.createBitmap(mBitmap, 0, 0, width, height, matrix, false);
     }
 
 }
