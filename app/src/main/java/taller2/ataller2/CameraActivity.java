@@ -40,6 +40,8 @@ public class CameraActivity extends Activity {
 
     private File myFilesDir;
 
+    Uri file = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,16 +87,31 @@ public class CameraActivity extends Activity {
     }
 
     private void openTakeFoto(Context context){
-        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        File imagesFolder = new File(Environment.getExternalStorageDirectory(), "AndroidFacil");
-        imagesFolder.mkdirs();
-        File image = new File(imagesFolder, "foto.jpg");
-        if (image.exists ()) image.delete ();
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
+        }
+        Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         String authority =  context.getApplicationContext().getPackageName() + ".my.package.name.provider";
-        Uri uriSavedImage = FileProvider.getUriForFile(context, authority, image);
-        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
-        cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        startActivityForResult(cameraIntent, TAKE_IMAGE);
+        file = FileProvider.getUriForFile(context, authority, getOutputMediaFile());
+        i.putExtra(MediaStore.EXTRA_OUTPUT, file);
+        startActivityForResult(i, TAKE_IMAGE);
+    }
+
+    private static File getOutputMediaFile()
+    {
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "Android APP");
+
+        if (!mediaStorageDir.exists()){
+            if (!mediaStorageDir.mkdirs()){
+                return null;
+            }
+        }
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        return new File(mediaStorageDir.getPath() + File.separator +
+                "IMG_"+ timeStamp + ".jpg");
     }
 
     private void openGallery(){
@@ -106,15 +123,7 @@ public class CameraActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==TAKE_IMAGE){
             try {
-                String exSD = Environment.getExternalStorageDirectory()+ "/AndroidFacil/" + "foto.jpg";
-                String exSD2 = "/taller2.ataller2.my.package.name.provider/external_files/AndroidFacil/foto.jpg";
-
-                //Bitmap bMap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+ "/AndroidFacil/"+"foto.jpg");
-                Bitmap bMap2 = BitmapFactory.decodeFile(exSD2);
-                Bitmap bMap =  BitmapFactory.decodeFile(exSD);
-                //Bitmap bMap = BitmapFactory.decodeFile(myFilesDir.toString() + "/temp.jpg");
-                Bitmap.createBitmap(bMap);
-                ivPhoto.setImageBitmap(bMap);
+                ivPhoto.setImageURI(file);
             }
             catch(Exception e){
                 e.printStackTrace();
@@ -125,26 +134,6 @@ public class CameraActivity extends Activity {
             ivPhoto.setImageURI(imageUri);
         }
 
-    }
-
-    private void SaveImage(Bitmap finalBitmap) {
-        String root = Environment.getExternalStorageDirectory().toString();
-        File myDir = new File(root + "/saved_images");
-        myDir.mkdirs();
-        String fname = "Image.jpg";
-        File file = new File (myDir, fname);
-        if (file.exists ())
-            file.delete ();
-        try {
-            FileOutputStream out = new FileOutputStream(file);
-            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
-            out.flush();
-            out.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED,
-                Uri.parse("file://" + Environment.getExternalStorageDirectory())));
     }
 
 }
