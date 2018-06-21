@@ -5,6 +5,7 @@ import android.content.Context;
 
 import taller2.ataller2.services.AmistadesService;
 import taller2.ataller2.services.ConversacionService;
+import taller2.ataller2.services.HerokuHistoriasService;
 import taller2.ataller2.services.MockAmistadesService;
 import taller2.ataller2.services.MockConversacionService;
 import taller2.ataller2.services.MockHistoriasService;
@@ -29,7 +30,7 @@ public class AppMain extends Application {
         ServiceLocator.init(applicationContext);
         ServiceLocator.bindCustomServiceImplementation(FacebookService.class, BaseFacebookService.class);
         ServiceLocator.bindCustomServiceImplementation(AmistadesService.class, MockAmistadesService.class);
-        ServiceLocator.bindCustomServiceImplementation(HistoriasService.class, MockHistoriasService.class);
+        ServiceLocator.bindCustomServiceImplementation(HistoriasService.class, HerokuHistoriasService.class);
         ServiceLocator.bindCustomServiceImplementation(ConversacionService.class, MockConversacionService.class);
         ServiceLocator.bindCustomServiceImplementation(NotificacionesService.class, MockNotificacionService.class);
     }

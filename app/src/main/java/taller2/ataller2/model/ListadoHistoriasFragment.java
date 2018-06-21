@@ -76,11 +76,11 @@ public class ListadoHistoriasFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.listHistoriasRecientes);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         HistoriasService historiasService = getHistoriasService();
-        mRecyclerView.setAdapter(new HistoriasListAdapter(historiasService.getHistorias(), mHistoriasListListener));
+        mRecyclerView.setAdapter(new HistoriasListAdapter(historiasService.getHistorias(this.getActivity()), mHistoriasListListener));
 
         mRecyclerViewCortas = view.findViewById(R.id.listHistoriasCortasRecientes);
         mRecyclerViewCortas.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerViewCortas.setAdapter(new HistoriasCortasListAdapter(historiasService.getHistoriasCortas(), mHistoriasCortasListListener));
+        mRecyclerViewCortas.setAdapter(new HistoriasCortasListAdapter(historiasService.getHistoriasCortas(this.getActivity()), mHistoriasCortasListListener));
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(),1);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mRecyclerViewCortas.setLayoutManager(layoutManager);

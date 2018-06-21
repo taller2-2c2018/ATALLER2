@@ -1,5 +1,8 @@
 package taller2.ataller2.services.facebook;
 
+import android.app.Activity;
+import android.app.FragmentManager;
+
 import java.util.List;
 
 import taller2.ataller2.model.Historia;
@@ -8,12 +11,14 @@ import taller2.ataller2.services.CustomService;
 
 public interface HistoriasService extends CustomService {
 
-    void updateHistoriasData();
-    void updateHistoriasCortasData();
+    void updateHistoriasData(Activity activity);
+    void updateHistoriasCortasData(Activity activity);
 
-    List<Historia> getHistorias();
-    List<HistoriaCorta> getHistoriasCortas();
+    List<Historia> getHistorias(Activity activity);
+    List<HistoriaCorta> getHistoriasCortas(Activity activity);
 
     Historia getHistoria(int index);
     List<String> getUsers();
+
+    boolean crearHistoria(FragmentManager fragmentManager, Historia historia);
 }

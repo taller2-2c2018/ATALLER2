@@ -29,6 +29,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zomato.photofilters.imageprocessors.Filter;
@@ -42,6 +43,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+
+import taller2.ataller2.model.Historia;
+import taller2.ataller2.services.ServiceLocator;
+import taller2.ataller2.services.facebook.HistoriasService;
 
 public class CameraActivity extends Activity {
 
@@ -60,6 +65,8 @@ public class CameraActivity extends Activity {
     private ImageView btn_editar;
     private ImageView ivPhoto;
 
+    private TextView tv;
+
     private File myFilesDir;
 
     Uri file = null;
@@ -73,6 +80,8 @@ public class CameraActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_crear_historia_larga);
         ivPhoto = (ImageView) findViewById(R.id.imgMostrar);
+
+        tv = (TextView) findViewById(R.id.text_input_historia);
 
         myFilesDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.example.project/files");
         System.out.println (myFilesDir);
@@ -98,6 +107,7 @@ public class CameraActivity extends Activity {
         btm_publicar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                publicarHistoria();
                 finish();
             }
         });
@@ -112,6 +122,15 @@ public class CameraActivity extends Activity {
 
     }
 
+    private void publicarHistoria() {
+        Historia historia = new Historia(tv.getText().toString());
+        historia.setPicture(drawableToBitmap(ivPhoto.getDrawable()));
+        historia.setDescription("muy buena foto");
+        historia.setPictureUsr(drawableToBitmap(ivPhoto.getDrawable()));
+        Bitmap asd = historia.getPicture();
+        getHistoriasService().crearHistoria(this.getFragmentManager(),historia);
+    }
+
     private void openTakeFoto(Context context){
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
         {
@@ -124,8 +143,7 @@ public class CameraActivity extends Activity {
         startActivityForResult(i, TAKE_IMAGE);
     }
 
-    private static File getOutputMediaFile()
-    {
+    private static File getOutputMediaFile() {
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES), "Android APP");
 
@@ -158,6 +176,7 @@ public class CameraActivity extends Activity {
         if (requestCode==PICK_IMAGE){
             Uri imageUri = data.getData();
             ivPhoto.setImageURI(imageUri);
+            ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
         }
 
     }
@@ -251,6 +270,10 @@ public class CameraActivity extends Activity {
         matrix.postScale(scaleWidth, scaleHeight);
         // recreate the new Bitmap
         return Bitmap.createBitmap(mBitmap, 0, 0, width, height, matrix, false);
+    }
+
+    private HistoriasService getHistoriasService() {
+        return ServiceLocator.get(HistoriasService.class);
     }
 
 }

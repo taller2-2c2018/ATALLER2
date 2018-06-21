@@ -31,6 +31,7 @@ public class HerokuAmistadesService implements AmistadesService {
 
     private static final String GET_FRIENDSHIP = "https://application-server-tdp2.herokuapp.com/user/friendship";
     private static final String AUTH_DATA = "data";
+    private static final String AUTH_RESULT = "result";
     private boolean mDownloading = false;
     private String mAuthToken = null;
     JSONObject resultado;
@@ -124,6 +125,10 @@ public class HerokuAmistadesService implements AmistadesService {
         NetworkObject networkObject = new NetworkObject(GET_FRIENDSHIP, HttpMethodType.GET);
         networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
         networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
+        List<String> responseHeaders = new ArrayList<>();
+        responseHeaders.add(AUTH_RESULT);
+        responseHeaders.add(AUTH_DATA);
+        networkObject.setResponseHeaders(responseHeaders);
         return networkObject;
     }
 

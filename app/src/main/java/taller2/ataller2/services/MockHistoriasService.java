@@ -1,5 +1,7 @@
 package taller2.ataller2.services;
 
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import java.util.ArrayList;
@@ -13,8 +15,8 @@ import taller2.ataller2.R;
 public class MockHistoriasService implements HistoriasService {
 
     //private static Context context;
-    private List<Historia> mHistorias;
-    private List<HistoriaCorta> mHistoriasCortas;
+    private List<Historia> mHistorias = null;
+    private List<HistoriaCorta> mHistoriasCortas = null;
 
     private Context mContext;
     public MockHistoriasService(Context context){
@@ -22,33 +24,34 @@ public class MockHistoriasService implements HistoriasService {
     }
 
     @Override
-    public void updateHistoriasData() {
+    public void updateHistoriasData(Activity activity) {
+        if (mHistorias == null){
+            mHistorias = new ArrayList<>();
+            Historia c1 = new Historia("Increible lo que sucedio...");
+            Historia c2 = new Historia("Android funciona perfecto...");
 
-        mHistorias = new ArrayList<>();
-        Historia c1 = new Historia("Increible lo que sucedio...");
-        Historia c2 = new Historia("Android funciona perfecto...");
+            c1.setDescription("wow no te la puedo creer");
+            c2.setDescription("Esto es un lujo");
 
-        c1.setDescription("wow no te la puedo creer");
-        c2.setDescription("Esto es un lujo");
+            c1.setFecha("Facultad de Ing. Capital Federal.");
+            c2.setFecha("La Rural. Capital Federal");
 
-        c1.setFecha("Facultad de Ing. Capital Federal.");
-        c2.setFecha("La Rural. Capital Federal");
+            c1.setUbicacion("12 de Abril de 2016");
+            c2.setUbicacion("14 de Marzo de 2018");
 
-        c1.setUbicacion("12 de Abril de 2016");
-        c2.setUbicacion("14 de Marzo de 2018");
+            c1.setPicture(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.river4));
+            c2.setPicture(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.river4));
 
-        c1.setPicture(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.river4));
-        c2.setPicture(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.river4));
+            c1.setPictureUsr(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.diego));
+            c2.setPictureUsr(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.elche));
 
-        c1.setPictureUsr(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.diego));
-        c2.setPictureUsr(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.elche));
-
-        mHistorias.add(c1);
-        mHistorias.add(c2);
+            mHistorias.add(c1);
+            mHistorias.add(c2);
+        }
     }
 
     @Override
-    public void updateHistoriasCortasData() {
+    public void updateHistoriasCortasData(Activity activity) {
         mHistoriasCortas = new ArrayList<>();
         HistoriaCorta c1 = new HistoriaCorta();
         HistoriaCorta c2 = new HistoriaCorta();
@@ -64,17 +67,17 @@ public class MockHistoriasService implements HistoriasService {
     }
 
     @Override
-    public List<Historia> getHistorias() {
+    public List<Historia> getHistorias(Activity activity) {
         if (mHistorias == null) {
-            updateHistoriasData();
+            updateHistoriasData(activity);
         }
         return mHistorias;
     }
 
     @Override
-    public List<HistoriaCorta> getHistoriasCortas() {
+    public List<HistoriaCorta> getHistoriasCortas(Activity activity) {
         if (mHistoriasCortas == null) {
-            updateHistoriasCortasData();
+            updateHistoriasCortasData(activity);
         }
         return mHistoriasCortas;
     }
@@ -91,5 +94,11 @@ public class MockHistoriasService implements HistoriasService {
         usuarios.add("Diego Maradona");
         usuarios.add("Lionel Messi");
         return usuarios;
+    }
+
+    @Override
+    public boolean crearHistoria(FragmentManager fragmentManager, Historia historia) {
+        mHistorias.add(historia);
+        return true;
     }
 }

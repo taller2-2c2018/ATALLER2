@@ -51,7 +51,7 @@ public class PerfilFragment extends Fragment{
         mRecyclerView = view.findViewById(R.id.historias_perfil_local);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         HistoriasService historiasService = getHistoriasService();
-        mRecyclerView.setAdapter(new HistoriasListAdapter(historiasService.getHistorias(), mHistoriasListListener));
+        mRecyclerView.setAdapter(new HistoriasListAdapter(historiasService.getHistorias(this.getActivity()), mHistoriasListListener));
 
         AppCompatButton exit = view.findViewById(R.id.salir_app);
 
