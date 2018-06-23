@@ -23,6 +23,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.BufferUnderflowException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,7 +92,7 @@ public class HerokuHistoriasService implements HistoriasService {
         //TODO: desglozar las historias
 
 
-
+        /*
         Historia c1 = new Historia("Increible lo que sucedio...");
         Historia c2 = new Historia("Android funciona perfecto...");
 
@@ -111,7 +113,7 @@ public class HerokuHistoriasService implements HistoriasService {
 
         mHistorias.add(c1);
         mHistorias.add(c2);
-
+        */
 
     }
 
@@ -179,6 +181,7 @@ public class HerokuHistoriasService implements HistoriasService {
             networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
                 @Override
                 public void onResponseReceived(NetworkResult result) {
+                    String asd = result.mResultValue;
                     if (result.mException == null) {
                         JSONObject resultToken = null;
                         try{
@@ -219,6 +222,7 @@ public class HerokuHistoriasService implements HistoriasService {
     private JSONArray getHistoriasJSON( final FragmentManager fragmentManager) {
         final NetworkObject requestTokenObject = getHistoriasNetworkObject();
         final NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
+        mDownloading = false;
         resultado = null;
         if (!mDownloading) {
             mDownloading = true;
@@ -277,25 +281,41 @@ public class HerokuHistoriasService implements HistoriasService {
     private JSONObject createHistoriaObject(Historia historia) {
         JSONObject requestHistoriaJsonObject = new JSONObject();
         try {
+            //File f = new File(mContext.getCacheDir(), "hola");
+//            try{
+//                f.createNewFile();
+//                Bitmap bitmap = historia.getPicture();
+//                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//                bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+//                byte[] bitmapdata = bos.toByteArray();
+//                FileOutputStream fos = new FileOutputStream(f);
+//                fos.write(bitmapdata);
+//                fos.flush();
+//                fos.close();
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            FileOutputStream fo = new FileOutputStream(f);
 
-            File f = new File(mContext.getCacheDir(), "hola");
-            try{
-                f.createNewFile();
-                Bitmap bitmap = historia.getPicture();
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
-                byte[] bitmapdata = bos.toByteArray();
-                FileOutputStream fos = new FileOutputStream(f);
-                fos.write(bitmapdata);
-                fos.flush();
-                fos.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            Bitmap bmp   = historia.getPicture();
+            int size     = bmp.getRowBytes() * bmp.getHeight();
+            ByteBuffer b = ByteBuffer.allocate(size);
+
+            bmp.copyPixelsToBuffer(b);
+
+            byte[] bytes = new byte[size];
+
+            try {
+                b.get(bytes, 0, bytes.length);
+            } catch (BufferUnderflowException e) {
+                // always happens
             }
+
+            // do something with byte[]
             final String file = "file";
-            requestHistoriaJsonObject.put(file, f);
+            requestHistoriaJsonObject.put(file, b.array().toString());
             final String fileType = "mFileType";
             requestHistoriaJsonObject.put(fileType,"jpg");
             final String flash = "mFlash";
@@ -312,7 +332,9 @@ public class HerokuHistoriasService implements HistoriasService {
             requestHistoriaJsonObject.put(description,historia.getDescription());
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }// catch (FileNotFoundException e) {
+        //    e.printStackTrace();
+        //}
         return requestHistoriaJsonObject;
     }
 

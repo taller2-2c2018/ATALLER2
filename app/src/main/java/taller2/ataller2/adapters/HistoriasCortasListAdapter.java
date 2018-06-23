@@ -1,14 +1,26 @@
 package taller2.ataller2.adapters;
 
+import android.app.Dialog;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
+
+import com.zomato.photofilters.imageprocessors.Filter;
+import com.zomato.photofilters.imageprocessors.subfilters.BrightnessSubFilter;
+import com.zomato.photofilters.imageprocessors.subfilters.ContrastSubFilter;
+import com.zomato.photofilters.imageprocessors.subfilters.SaturationSubfilter;
 
 import java.util.List;
 
@@ -73,7 +85,30 @@ public class HistoriasCortasListAdapter extends RecyclerView.Adapter<HistoriasCo
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mHistoriasListListener.onHistoriaClicked(historia);
+                final Dialog dialog = new Dialog(v.getContext());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.dialog_historia_corta);
+                WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                Window window = dialog.getWindow();
+                window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                lp.copyFrom(window.getAttributes());
+                lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                window.setAttributes(lp);
+                window.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+
+                ImageView imagen = dialog.findViewById(R.id.img_corta);
+                imagen.setImageBitmap(historia.getPicture());
+
+                ImageView cancelButton = dialog.findViewById(R.id.button_cerrar);
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+                //mHistoriasListListener.onHistoriaCortaClicked(historia);
             }
         });
     }

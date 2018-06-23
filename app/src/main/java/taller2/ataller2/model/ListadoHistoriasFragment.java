@@ -48,7 +48,7 @@ public class ListadoHistoriasFragment extends Fragment implements Refresh{
     }
 
     public interface HistoriasCortasListListener {
-        void onHistoriaClicked(HistoriaCorta historia);
+        void onHistoriaCortaClicked(HistoriaCorta historia);
     }
 
     public interface UsersListListener {

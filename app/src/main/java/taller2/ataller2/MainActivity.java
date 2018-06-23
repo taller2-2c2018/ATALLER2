@@ -31,6 +31,8 @@ import taller2.ataller2.model.Notificacion;
 import taller2.ataller2.model.Perfil;
 import taller2.ataller2.model.PerfilFragment;
 import taller2.ataller2.model.Refresh;
+import taller2.ataller2.services.ServiceLocator;
+import taller2.ataller2.services.facebook.FacebookService;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener,
         ListadoAmistadesFragment.AmistadesListListener,
@@ -112,7 +114,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public void goMenu(){
         mViewPager.setCurrentItem(0);
     }
-    public void goAmistades(){ mViewPager.setCurrentItem(1); }
+    public void goAmistades(){
+        mViewPager.setCurrentItem(1);
+    }
     public void goNotif(){ mViewPager.setCurrentItem(2); }
     public void goChat(){ mViewPager.setCurrentItem(3); }
     public void goPerfil(){ mViewPager.setCurrentItem(4); }
