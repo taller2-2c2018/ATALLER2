@@ -1,6 +1,5 @@
 package taller2.ataller2.services;
 
-import android.accounts.NetworkErrorException;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
@@ -9,20 +8,11 @@ import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
-import android.widget.Toast;
-
-import com.facebook.AccessToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -37,10 +27,11 @@ import taller2.ataller2.networking.NetworkFragment;
 import taller2.ataller2.networking.NetworkObject;
 import taller2.ataller2.networking.NetworkResult;
 import taller2.ataller2.services.facebook.FacebookService;
-import taller2.ataller2.services.facebook.HistoriasService;
 
 public class HerokuHistoriasService implements HistoriasService {
 
+    private static final String REACTION = "https://application-server-tdp2.herokuapp.com/story/<story_id>/reaction";
+    private static final String COMMENT = "https://application-server-tdp2.herokuapp.com/story/<story_id>/comment";
     private static final String STORYS = "https://application-server-tdp2.herokuapp.com/story";
     private static final String AUTH_RESULT = "status";
     private static final String AUTH_DATA = "data";
@@ -172,6 +163,20 @@ public class HerokuHistoriasService implements HistoriasService {
         return true;
     }
 
+    @Override
+    public boolean actReaction(FragmentManager fragmentManager, Historia historia, EmotionType emotion) {
+        JSONObject result = postReactionJSON(fragmentManager,historia,emotion);
+        //TODO: chequear resultado
+        return true;
+    }
+
+    @Override
+    public boolean actCommet(FragmentManager fragmentManager, Historia historia, String comment) {
+        JSONObject result = postCommentJSON(fragmentManager,historia,comment);
+        //TODO: chequear resultado
+        return true;
+    }
+
     private JSONObject postHistoriasJSON( final FragmentManager fragmentManager, Historia historia) {
         final NetworkObject requestTokenObject = createHistoria(historia);
         final NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
@@ -217,54 +222,6 @@ public class HerokuHistoriasService implements HistoriasService {
             });
         }
         return resultado2;
-    }
-
-    private JSONArray getHistoriasJSON( final FragmentManager fragmentManager) {
-        final NetworkObject requestTokenObject = getHistoriasNetworkObject();
-        final NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
-        mDownloading = false;
-        resultado = null;
-        if (!mDownloading) {
-            mDownloading = true;
-            networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
-                @Override
-                public void onResponseReceived(NetworkResult result) {
-                    String asd = result.mResultValue;
-                    if (result.mException == null) {
-                        JSONObject resultToken = null;
-                        try{
-                            resultToken = new JSONObject(result.mResultValue);
-                            String status = resultToken.getString("status");
-                            if (status.equals("200")) {
-                                resultado = resultToken.getJSONArray("data");
-                            }
-                        }
-                        catch (Throwable t) {
-                            Log.e("My App", "Could not parse malformed JSON: \"" + result.mResultValue + "\"");
-                        }
-
-                    }
-                    mDownloading = false;
-                }
-
-                @Override
-                public NetworkInfo getActiveNetworkInfo(Context context) {
-                    ConnectivityManager connectivityManager =
-                            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-                    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-                    return networkInfo;
-                }
-
-                @Override
-                public void onProgressUpdate(int progressCode, int percentComplete) {}
-
-                @Override
-                public void onFinishDownloading() {
-                    mDownloading = false;
-                }
-            });
-        }
-        return resultado;
     }
 
     private NetworkObject createHistoria(Historia historia) {
@@ -338,6 +295,54 @@ public class HerokuHistoriasService implements HistoriasService {
         return requestHistoriaJsonObject;
     }
 
+    private JSONArray getHistoriasJSON( final FragmentManager fragmentManager) {
+        final NetworkObject requestTokenObject = getHistoriasNetworkObject();
+        final NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
+        mDownloading = false;
+        resultado = null;
+        if (!mDownloading) {
+            mDownloading = true;
+            networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
+                @Override
+                public void onResponseReceived(NetworkResult result) {
+                    String asd = result.mResultValue;
+                    if (result.mException == null) {
+                        JSONObject resultToken = null;
+                        try{
+                            resultToken = new JSONObject(result.mResultValue);
+                            String status = resultToken.getString("status");
+                            if (status.equals("200")) {
+                                resultado = resultToken.getJSONArray("data");
+                            }
+                        }
+                        catch (Throwable t) {
+                            Log.e("My App", "Could not parse malformed JSON: \"" + result.mResultValue + "\"");
+                        }
+
+                    }
+                    mDownloading = false;
+                }
+
+                @Override
+                public NetworkInfo getActiveNetworkInfo(Context context) {
+                    ConnectivityManager connectivityManager =
+                            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                    return networkInfo;
+                }
+
+                @Override
+                public void onProgressUpdate(int progressCode, int percentComplete) {}
+
+                @Override
+                public void onFinishDownloading() {
+                    mDownloading = false;
+                }
+            });
+        }
+        return resultado;
+    }
+
     private NetworkObject getHistoriasNetworkObject() {
         NetworkObject networkObject = new NetworkObject(STORYS, HttpMethodType.GET);
         //networkObject.setContentType("application/json");
@@ -345,5 +350,144 @@ public class HerokuHistoriasService implements HistoriasService {
         networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
         return networkObject;
     }
+
+    private JSONObject postReactionJSON( final FragmentManager fragmentManager, Historia historia, EmotionType emotion) {
+        final NetworkObject requestTokenObject = getReactionNetworkObject(historia,emotion);
+        final NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
+        resultado2 = null;
+        if (!mDownloading) {
+            mDownloading = true;
+            networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
+                @Override
+                public void onResponseReceived(NetworkResult result) {
+                    String asd = result.mResultValue;
+                    if (result.mException == null) {
+                        JSONObject resultToken = null;
+                        try{
+                            resultToken = new JSONObject(result.mResultValue);
+                            String status = resultToken.getString("status");
+                            if (status.equals("200")) {
+                                resultado2 = resultToken.getJSONObject("data");
+                            }
+                        }
+                        catch (Throwable t) {
+                            Log.e("My App", "Could not parse malformed JSON: \"" + result.mResultValue + "\"");
+                        }
+
+                    }
+                    mDownloading = false;
+                }
+
+                @Override
+                public NetworkInfo getActiveNetworkInfo(Context context) {
+                    ConnectivityManager connectivityManager =
+                            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                    return networkInfo;
+                }
+
+                @Override
+                public void onProgressUpdate(int progressCode, int percentComplete) {}
+
+                @Override
+                public void onFinishDownloading() {
+                    mDownloading = false;
+                }
+            });
+        }
+        return resultado2;
+    }
+
+    private NetworkObject getReactionNetworkObject(Historia historia,EmotionType emotion) {
+        String requestBody = crearReactionObject(emotion).toString();
+        NetworkObject networkObject = new NetworkObject(REACTION, HttpMethodType.POST, requestBody);
+        networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
+        networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
+        List<String> responseHeaders = new ArrayList<>();
+        responseHeaders.add(AUTH_RESULT);
+        networkObject.setResponseHeaders(responseHeaders);
+        return networkObject;
+    }
+
+    private JSONObject crearReactionObject( EmotionType emotion){
+        JSONObject requestHistoriaJsonObject = new JSONObject();
+        try {
+            final String reaction = "mReaction";
+            requestHistoriaJsonObject.put(reaction,emotion.getEmotionServer());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return requestHistoriaJsonObject;
+    }
+
+    private JSONObject postCommentJSON( final FragmentManager fragmentManager, Historia historia, String comment) {
+        final NetworkObject requestTokenObject = getCommentNetworkObject(historia, comment);
+        final NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
+        resultado2 = null;
+        if (!mDownloading) {
+            mDownloading = true;
+            networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
+                @Override
+                public void onResponseReceived(NetworkResult result) {
+                    String asd = result.mResultValue;
+                    if (result.mException == null) {
+                        JSONObject resultToken = null;
+                        try{
+                            resultToken = new JSONObject(result.mResultValue);
+                            String status = resultToken.getString("status");
+                            if (status.equals("200")) {
+                                resultado2 = resultToken.getJSONObject("data");
+                            }
+                        }
+                        catch (Throwable t) {
+                            Log.e("My App", "Could not parse malformed JSON: \"" + result.mResultValue + "\"");
+                        }
+
+                    }
+                    mDownloading = false;
+                }
+
+                @Override
+                public NetworkInfo getActiveNetworkInfo(Context context) {
+                    ConnectivityManager connectivityManager =
+                            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                    return networkInfo;
+                }
+
+                @Override
+                public void onProgressUpdate(int progressCode, int percentComplete) {}
+
+                @Override
+                public void onFinishDownloading() {
+                    mDownloading = false;
+                }
+            });
+        }
+        return resultado2;
+    }
+
+    private NetworkObject getCommentNetworkObject(Historia historia, String comment) {
+        String requestBody = crearCommentObject(comment).toString();
+        NetworkObject networkObject = new NetworkObject(REACTION, HttpMethodType.POST, requestBody);
+        networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
+        networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
+        List<String> responseHeaders = new ArrayList<>();
+        responseHeaders.add(AUTH_RESULT);
+        networkObject.setResponseHeaders(responseHeaders);
+        return networkObject;
+    }
+
+    private JSONObject crearCommentObject( String comment){
+        JSONObject requestHistoriaJsonObject = new JSONObject();
+        try {
+            final String reaction = "mComment";
+            requestHistoriaJsonObject.put(reaction,comment);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return requestHistoriaJsonObject;
+    }
+
 
 }

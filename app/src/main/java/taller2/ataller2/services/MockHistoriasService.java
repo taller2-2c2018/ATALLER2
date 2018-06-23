@@ -9,7 +9,6 @@ import java.util.List;
 
 import taller2.ataller2.model.Historia;
 import taller2.ataller2.model.HistoriaCorta;
-import taller2.ataller2.services.facebook.HistoriasService;
 import taller2.ataller2.R;
 
 public class MockHistoriasService implements HistoriasService {
@@ -100,5 +99,15 @@ public class MockHistoriasService implements HistoriasService {
     public boolean crearHistoria(FragmentManager fragmentManager, Historia historia) {
         mHistorias.add(historia);
         return true;
+    }
+
+    @Override
+    public boolean actReaction(FragmentManager fragmentManager, Historia historia, EmotionType emotion) {
+        return false;
+    }
+
+    @Override
+    public boolean actCommet(FragmentManager fragmentManager, Historia historia, String comment) {
+        return false;
     }
 }

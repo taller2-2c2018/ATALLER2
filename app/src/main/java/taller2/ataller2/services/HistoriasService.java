@@ -1,4 +1,4 @@
-package taller2.ataller2.services.facebook;
+package taller2.ataller2.services;
 
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -21,4 +21,6 @@ public interface HistoriasService extends CustomService {
     List<String> getUsers();
 
     boolean crearHistoria(FragmentManager fragmentManager, Historia historia);
+    boolean actReaction(FragmentManager fragmentManager, Historia historia, EmotionType emotion);
+    boolean actCommet(FragmentManager fragmentManager, Historia historia, String comment);
 }

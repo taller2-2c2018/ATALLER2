@@ -15,7 +15,7 @@ import taller2.ataller2.LoginActivity;
 import taller2.ataller2.adapters.HistoriasListAdapter;
 import taller2.ataller2.services.PerfilService;
 import taller2.ataller2.services.ServiceLocator;
-import taller2.ataller2.services.facebook.HistoriasService;
+import taller2.ataller2.services.HistoriasService;
 import taller2.ataller2.R;
 public class PerfilFragment extends Fragment implements Refresh{
 

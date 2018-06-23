@@ -21,7 +21,7 @@ import taller2.ataller2.adapters.HistoriasCortasListAdapter;
 import taller2.ataller2.adapters.HistoriasListAdapter;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.services.UsersService;
-import taller2.ataller2.services.facebook.HistoriasService;
+import taller2.ataller2.services.HistoriasService;
 import taller2.ataller2.R;
 
 public class ListadoHistoriasFragment extends Fragment implements Refresh{

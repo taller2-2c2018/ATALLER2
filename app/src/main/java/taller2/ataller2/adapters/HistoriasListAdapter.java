@@ -1,6 +1,9 @@
 package taller2.ataller2.adapters;
 
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.graphics.Bitmap;
+import android.provider.ContactsContract;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +18,9 @@ import java.util.List;
 import taller2.ataller2.model.Historia;
 import taller2.ataller2.model.ListadoHistoriasFragment;
 import taller2.ataller2.R;
+import taller2.ataller2.services.EmotionType;
+import taller2.ataller2.services.HistoriasService;
+import taller2.ataller2.services.ServiceLocator;
 
 public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdapter.HistoriasViewHolder>{
 
@@ -35,6 +41,10 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
         private final TextView mFecha;
         private final ImageView mPictureUser;
 
+        private final ImageView mMeGusta;
+        private final ImageView mNoMeGusta;
+        private final ImageView mMeDivierte;
+        private final ImageView mMeAburre;
 
         HistoriasViewHolder(View itemView) {
             super(itemView);
@@ -45,6 +55,11 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
             mDescripcion = (TextView) itemView.findViewById(R.id.textDescripcion);
             mUbicacion = (TextView) itemView.findViewById(R.id.textUbicacion);
             mFecha = (TextView) itemView.findViewById(R.id.textFechaHora);
+
+            mMeGusta = (ImageView) itemView.findViewById(R.id.me_gusta);
+            mNoMeGusta = (ImageView) itemView.findViewById(R.id.no_me_gusta);
+            mMeDivierte = (ImageView) itemView.findViewById(R.id.me_divierte);
+            mMeAburre = (ImageView) itemView.findViewById(R.id.me_aburre);
         }
     }
 
@@ -88,6 +103,37 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
                 mHistoriasListListener.onHistoriaClicked(historia);
             }
         });
+
+        holder.mMeGusta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EmotionType emotion = EmotionType.LIKE;
+                FragmentManager manager = ((Activity) v.getContext()).getFragmentManager();
+                ServiceLocator.get(HistoriasService.class).actReaction(manager, historia,emotion);
+            }
+        });
+
+        holder.mNoMeGusta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mHistoriasListListener.onHistoriaClicked(historia);
+            }
+        });
+
+        holder.mMeDivierte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mHistoriasListListener.onHistoriaClicked(historia);
+            }
+        });
+
+        holder.mMeAburre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mHistoriasListListener.onHistoriaClicked(historia);
+            }
+        });
+
     }
 
     @Override

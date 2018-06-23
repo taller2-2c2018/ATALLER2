@@ -92,6 +92,7 @@
                 android:layout_height="wrap_content">
                 <ImageView
                     android:clickable="true"
+                    android:id="@+id/me_gusta"
                     android:src="@drawable/face_like"
                     android:layout_width="30dp"
                     android:layout_height="30dp" />
@@ -102,6 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <ImageView
+                    android:id="@+id/no_me_gusta"
                     android:clickable="true"
                     android:src="@drawable/facebook_dont_like"
                     android:layout_width="30dp"
@@ -113,6 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <ImageView
+                    android:id="@+id/me_divierte"
                     android:clickable="true"
                     android:src="@drawable/divertido"
                     android:layout_width="30dp"
@@ -124,6 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <ImageView
+                    android:id="@+id/me_aburre"
                     android:clickable="true"
                     android:src="@drawable/aburre"
                     android:layout_width="30dp"
