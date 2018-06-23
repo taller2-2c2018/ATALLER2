@@ -78,20 +78,69 @@
             android:text="@string/txtHistoriaFechaHora" />
 
         <LinearLayout
+            android:layout_marginTop="10dp"
+            android:weightSum="12"
             android:orientation="horizontal"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageButton
-                android:src="@drawable/ic_sentiment_satisfied_black_18dp"
+
+            <LinearLayout
                 android:layout_weight="1"
+                android:gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <ImageButton
-                android:src="@drawable/ic_sms_black_18dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:clickable="true"
+                    android:src="@drawable/face_like"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+            </LinearLayout>
+            <LinearLayout
                 android:layout_weight="1"
+                android:gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:clickable="true"
+                    android:src="@drawable/facebook_dont_like"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:clickable="true"
+                    android:src="@drawable/divertido"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:clickable="true"
+                    android:src="@drawable/aburre"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="8"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:clickable="true"
+                    android:src="@drawable/ic_sms_black_18dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

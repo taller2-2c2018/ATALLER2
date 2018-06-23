@@ -34,18 +34,18 @@
       <file leaf-file-name="HerokuHistoriasService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-323">
-              <caret line="270" column="34" lean-forward="false" selection-start-line="270" selection-start-column="34" selection-end-line="270" selection-end-column="34" />
+            <state relative-caret-position="212">
+              <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
               <folding>
                 <element signature="method#updateHistoriasCortasData#0;class#HerokuHistoriasService#0" expanded="false" />
                 <element signature="method#getHistoriasCortas#0;class#HerokuHistoriasService#0" expanded="false" />
-                <element signature="e#5591#5592#0" expanded="true" />
-                <element signature="e#5635#5636#0" expanded="true" />
+                <element signature="e#5571#5572#0" expanded="true" />
+                <element signature="e#5615#5616#0" expanded="true" />
                 <element signature="method#getUsers#0;class#HerokuHistoriasService#0" expanded="false" />
-                <element signature="e#8149#8150#0" expanded="true" />
-                <element signature="e#8209#8210#0" expanded="true" />
-                <element signature="e#10254#10255#0" expanded="true" />
-                <element signature="e#10314#10315#0" expanded="true" />
+                <element signature="e#8129#8130#0" expanded="true" />
+                <element signature="e#8189#8190#0" expanded="true" />
+                <element signature="e#10234#10235#0" expanded="true" />
+                <element signature="e#10294#10295#0" expanded="true" />
                 <element signature="method#getHistoriasNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
               </folding>
             </state>
@@ -55,7 +55,7 @@
       <file leaf-file-name="ListadoHistoriasFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoHistoriasFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-434">
+            <state relative-caret-position="-285">
               <caret line="50" column="35" lean-forward="false" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="35" />
               <folding>
                 <element signature="method#refresh#0;class#ListadoHistoriasFragment#0" expanded="false" />
@@ -76,34 +76,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HistoriasCortasListAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/HistoriasCortasListAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="103" column="48" lean-forward="false" selection-start-line="103" selection-start-column="48" selection-end-line="103" selection-end-column="48" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#HistoriasCortasListAdapter#0;class#HistoriasCortasListAdapter#0" expanded="false" />
-                <element signature="class#HistoriasCortasViewHolder#0;class#HistoriasCortasListAdapter#0" expanded="false" />
-                <element signature="method#onCreateViewHolder#0;class#HistoriasCortasListAdapter#0" expanded="false" />
-                <element signature="e#3723#5139#0" expanded="true" />
-                <element signature="e#4817#5007#0" expanded="true" />
-                <element signature="e#5006#5007#0" expanded="true" />
-                <element signature="e#5138#5139#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dialog_historia_corta.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_historia_corta.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="33" lean-forward="false" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
+      <file leaf-file-name="layout_historia_larga.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_historia_larga.xml">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="174">
+              <caret line="132" column="40" lean-forward="false" selection-start-line="132" selection-start-column="40" selection-end-line="132" selection-end-column="40" />
               <folding />
             </state>
           </provider>
-          <provider editor-type-id="android-designer2">
+          <provider selected="true" editor-type-id="android-designer2">
             <state />
           </provider>
         </entry>
@@ -142,8 +123,8 @@
       <find>HistoriasCortasListListener</find>
       <find>Dialog dialog</find>
       <find>new Dialog</find>
-      <find>onHistoriaCortaClicked</find>
       <find>createHistoria</find>
+      <find>onHistoriaCortaClicked</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2174,10 +2155,11 @@
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoNotificacionesFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/PerfilFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoHistoriasFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/HistoriasCortasListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_historia_corta.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_historia_larga.xml" />
       </list>
     </option>
   </component>
@@ -2224,27 +2206,6 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="ataller2" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ATALLER2" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="ataller2" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ATALLER2" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="ataller2" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="networking" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ATALLER2" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="ataller2" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ATALLER2" type="1abcf292:AndroidViewProjectNode" />
@@ -2447,9 +2408,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2464,7 +2424,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2746,25 +2706,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-323">
-          <caret line="270" column="34" lean-forward="false" selection-start-line="270" selection-start-column="34" selection-end-line="270" selection-end-column="34" />
-          <folding>
-            <element signature="method#updateHistoriasCortasData#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#getHistoriasCortas#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="e#5591#5592#0" expanded="true" />
-            <element signature="e#5635#5636#0" expanded="true" />
-            <element signature="method#getUsers#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="e#8149#8150#0" expanded="true" />
-            <element signature="e#8209#8210#0" expanded="true" />
-            <element signature="e#10254#10255#0" expanded="true" />
-            <element signature="e#10314#10315#0" expanded="true" />
-            <element signature="method#getHistoriasNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoAmistadesFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -2797,28 +2738,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoHistoriasFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-434">
-          <caret line="50" column="35" lean-forward="false" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="35" />
-          <folding>
-            <element signature="method#refresh#0;class#ListadoHistoriasFragment#0" expanded="false" />
-            <element signature="class#HistoriasListListener#0;class#ListadoHistoriasFragment#0" expanded="false" />
-            <element signature="class#UsersListListener#0;class#ListadoHistoriasFragment#0" expanded="false" />
-            <element signature="method#ListadoHistoriasFragment#0;class#ListadoHistoriasFragment#0" expanded="false" />
-            <element signature="method#newInstance#0;class#ListadoHistoriasFragment#0" expanded="false" />
-            <element signature="method#onCreateView#0;class#ListadoHistoriasFragment#0" expanded="false" />
-            <element signature="method#onAttach#0;class#ListadoHistoriasFragment#0" expanded="false" />
-            <element signature="method#onDetach#0;class#ListadoHistoriasFragment#0" expanded="false" />
-            <element signature="method#getHistoriasService#0;class#ListadoHistoriasFragment#0" expanded="false" />
-            <element signature="method#setUpSearchView#0;class#ListadoHistoriasFragment#0" expanded="false" />
-            <element signature="method#setUpNuevaHistoriaView#0;class#ListadoHistoriasFragment#0" expanded="false" />
-            <element signature="method#enterUserPerfil#0;class#ListadoHistoriasFragment#0" expanded="false" />
-            <element signature="method#filterUsersByText#0;class#ListadoHistoriasFragment#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_filter.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-357">
@@ -2841,23 +2760,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/HistoriasCortasListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="103" column="48" lean-forward="false" selection-start-line="103" selection-start-column="48" selection-end-line="103" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#HistoriasCortasListAdapter#0;class#HistoriasCortasListAdapter#0" expanded="false" />
-            <element signature="class#HistoriasCortasViewHolder#0;class#HistoriasCortasListAdapter#0" expanded="false" />
-            <element signature="method#onCreateViewHolder#0;class#HistoriasCortasListAdapter#0" expanded="false" />
-            <element signature="e#3723#5139#0" expanded="true" />
-            <element signature="e#4817#5007#0" expanded="true" />
-            <element signature="e#5006#5007#0" expanded="true" />
-            <element signature="e#5138#5139#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_historia_corta.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -2866,6 +2768,101 @@
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/HistoriasCortasListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="103" column="48" lean-forward="false" selection-start-line="103" selection-start-column="48" selection-end-line="103" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="method#HistoriasCortasListAdapter#0;class#HistoriasCortasListAdapter#0" expanded="false" />
+            <element signature="class#HistoriasCortasViewHolder#0;class#HistoriasCortasListAdapter#0" expanded="false" />
+            <element signature="method#onCreateViewHolder#0;class#HistoriasCortasListAdapter#0" expanded="false" />
+            <element signature="e#3723#5139#0" expanded="false" />
+            <element signature="e#4817#5007#0" expanded="false" />
+            <element signature="e#5006#5007#0" expanded="false" />
+            <element signature="e#5138#5139#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_historias.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_exit_to_app.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/divertido.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
+          <folding>
+            <element signature="method#updateHistoriasCortasData#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#getHistoriasCortas#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="e#5571#5572#0" expanded="true" />
+            <element signature="e#5615#5616#0" expanded="true" />
+            <element signature="method#getUsers#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="e#8129#8130#0" expanded="true" />
+            <element signature="e#8189#8190#0" expanded="true" />
+            <element signature="e#10234#10235#0" expanded="true" />
+            <element signature="e#10294#10295#0" expanded="true" />
+            <element signature="method#getHistoriasNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_sms_black_18dp.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoHistoriasFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-285">
+          <caret line="50" column="35" lean-forward="false" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="35" />
+          <folding>
+            <element signature="method#refresh#0;class#ListadoHistoriasFragment#0" expanded="false" />
+            <element signature="class#HistoriasListListener#0;class#ListadoHistoriasFragment#0" expanded="false" />
+            <element signature="class#UsersListListener#0;class#ListadoHistoriasFragment#0" expanded="false" />
+            <element signature="method#ListadoHistoriasFragment#0;class#ListadoHistoriasFragment#0" expanded="false" />
+            <element signature="method#newInstance#0;class#ListadoHistoriasFragment#0" expanded="false" />
+            <element signature="method#onCreateView#0;class#ListadoHistoriasFragment#0" expanded="false" />
+            <element signature="method#onAttach#0;class#ListadoHistoriasFragment#0" expanded="false" />
+            <element signature="method#onDetach#0;class#ListadoHistoriasFragment#0" expanded="false" />
+            <element signature="method#getHistoriasService#0;class#ListadoHistoriasFragment#0" expanded="false" />
+            <element signature="method#setUpSearchView#0;class#ListadoHistoriasFragment#0" expanded="false" />
+            <element signature="method#setUpNuevaHistoriaView#0;class#ListadoHistoriasFragment#0" expanded="false" />
+            <element signature="method#enterUserPerfil#0;class#ListadoHistoriasFragment#0" expanded="false" />
+            <element signature="method#filterUsersByText#0;class#ListadoHistoriasFragment#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_historia_larga.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="132" column="40" lean-forward="false" selection-start-line="132" selection-start-column="40" selection-end-line="132" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
         <state />
       </provider>
     </entry>

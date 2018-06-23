@@ -92,7 +92,7 @@ public class HerokuHistoriasService implements HistoriasService {
         //TODO: desglozar las historias
 
 
-        /*
+
         Historia c1 = new Historia("Increible lo que sucedio...");
         Historia c2 = new Historia("Android funciona perfecto...");
 
@@ -113,7 +113,7 @@ public class HerokuHistoriasService implements HistoriasService {
 
         mHistorias.add(c1);
         mHistorias.add(c2);
-        */
+
 
     }
 
