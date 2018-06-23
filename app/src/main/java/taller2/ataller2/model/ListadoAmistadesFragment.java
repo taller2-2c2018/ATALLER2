@@ -13,9 +13,14 @@ import taller2.ataller2.adapters.AmistadesListAdapter;
 import taller2.ataller2.services.AmistadesService;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.R;
-public class ListadoAmistadesFragment extends Fragment {
+public class ListadoAmistadesFragment extends Fragment implements Refresh{
 
     private AmistadesListListener mAmistadesListListener;
+
+    @Override
+    public void refresh() {
+
+    }
 
 
     public interface AmistadesListListener {

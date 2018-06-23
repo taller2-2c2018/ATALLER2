@@ -13,9 +13,14 @@ import taller2.ataller2.adapters.NotificacionesListAdapter;
 import taller2.ataller2.services.NotificacionesService;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.R;
-public class ListadoNotificacionesFragment extends Fragment {
+public class ListadoNotificacionesFragment extends Fragment implements Refresh{
 
     private NotificacionesListListener mNotificacionesListListener;
+
+    @Override
+    public void refresh() {
+
+    }
 
 
     public interface NotificacionesListListener {

@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
 /*                if(UserName.equalsIgnoreCase("prueba") && Pwd.equals("prueba")){
                     Intent MainIntent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(MainIntent);
+
                     Toast.makeText(LoginActivity.this,"You are Sign in Successfuly.", Toast.LENGTH_LONG).show();
                 }else
                 {

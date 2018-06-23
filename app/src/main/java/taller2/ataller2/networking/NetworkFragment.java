@@ -33,7 +33,8 @@ public class NetworkFragment extends Fragment {
     private static final int CONNECT_TIMEOUT_MS = 3000;
     private static final int STREAM_MAX_SIZE = 4096;
 
-    private static final String AUTH_KEY_FIELD = "authorization";
+    private static final String AUTH_KEY_FIELD = "Authorization";
+    private static final String AUTH_KEY_ID = "facebookUserId";
 
     private static final String TAG = "NetworkFragment";
 
@@ -214,6 +215,7 @@ public class NetworkFragment extends Fragment {
                 AddRequestProperties(connection, networkObject);
 
                 connection.addRequestProperty(AUTH_KEY_FIELD, networkObject.getAuthToken());
+                connection.addRequestProperty(AUTH_KEY_ID,networkObject.getFacebookID());
 
                 // Timeout for reading InputStream
                 connection.setReadTimeout(READ_TIMEOUT_MS);

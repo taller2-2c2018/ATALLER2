@@ -24,7 +24,7 @@ import taller2.ataller2.services.UsersService;
 import taller2.ataller2.services.facebook.HistoriasService;
 import taller2.ataller2.R;
 
-public class ListadoHistoriasFragment extends Fragment {
+public class ListadoHistoriasFragment extends Fragment implements Refresh{
 
     private HistoriasListListener mHistoriasListListener;
     private HistoriasCortasListListener mHistoriasCortasListListener;
@@ -37,6 +37,11 @@ public class ListadoHistoriasFragment extends Fragment {
 
     private SearchView mSearchView;
 
+    @Override
+    public void refresh() {
+        HistoriasService historiasService = getHistoriasService();
+        mRecyclerView.setAdapter(new HistoriasListAdapter(historiasService.getHistorias(this.getActivity()), mHistoriasListListener));
+    }
 
     public interface HistoriasListListener {
         void onHistoriaClicked(Historia historia);
@@ -154,6 +159,7 @@ public class ListadoHistoriasFragment extends Fragment {
             loadUsers(filteredUsers, notifyNoneUsers);
         }
     }
+
     private void loadUsers(List<String> usuarios, boolean notifyNoneUsers) {
         //mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //mRecyclerView.setAdapter(new UserListAdapter(usuarios, mUsersListListener));
@@ -161,4 +167,5 @@ public class ListadoHistoriasFragment extends Fragment {
             Toast.makeText(getContext(), "No existen usuarios con ese nombre", Toast.LENGTH_LONG).show();
         }
     }
+
 }

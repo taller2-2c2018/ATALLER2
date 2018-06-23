@@ -30,6 +30,7 @@ import taller2.ataller2.model.ListadoNotificacionesFragment;
 import taller2.ataller2.model.Notificacion;
 import taller2.ataller2.model.Perfil;
 import taller2.ataller2.model.PerfilFragment;
+import taller2.ataller2.model.Refresh;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener,
         ListadoAmistadesFragment.AmistadesListListener,
@@ -108,7 +109,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     }
 
-    public void goMenu(){ mViewPager.setCurrentItem(0); }
+    public void goMenu(){
+        mViewPager.setCurrentItem(0);
+    }
     public void goAmistades(){ mViewPager.setCurrentItem(1); }
     public void goNotif(){ mViewPager.setCurrentItem(2); }
     public void goChat(){ mViewPager.setCurrentItem(3); }
@@ -231,6 +234,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        private Fragment fragment0 = null;
+        private Fragment fragment1 = null;
+        private Fragment fragment2 = null;
+        private Fragment fragment3 = null;
+        private Fragment fragment4 = null;
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);

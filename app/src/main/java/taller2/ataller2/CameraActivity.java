@@ -127,7 +127,6 @@ public class CameraActivity extends Activity {
         historia.setPicture(drawableToBitmap(ivPhoto.getDrawable()));
         historia.setDescription("muy buena foto");
         historia.setPictureUsr(drawableToBitmap(ivPhoto.getDrawable()));
-        Bitmap asd = historia.getPicture();
         getHistoriasService().crearHistoria(this.getFragmentManager(),historia);
     }
 

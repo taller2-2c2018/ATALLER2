@@ -13,8 +13,13 @@ import taller2.ataller2.adapters.ConversacionListAdapter;
 import taller2.ataller2.services.ConversacionService;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.R;
-public class ListadoConversacionesFragment extends Fragment {
+public class ListadoConversacionesFragment extends Fragment implements Refresh{
     private ListadoConversacionesFragment.ConversacionesListListener mConversacionesListListener;
+
+    @Override
+    public void refresh() {
+
+    }
 
 
     public interface ConversacionesListListener {

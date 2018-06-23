@@ -17,11 +17,16 @@ import taller2.ataller2.services.PerfilService;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.services.facebook.HistoriasService;
 import taller2.ataller2.R;
-public class PerfilFragment extends Fragment{
+public class PerfilFragment extends Fragment implements Refresh{
 
     private PerfilFragment.PerfilListener mPerfilListener;
     private RecyclerView mRecyclerView;
     private ListadoHistoriasFragment.HistoriasListListener mHistoriasListListener;
+
+    @Override
+    public void refresh() {
+
+    }
 
 
     public interface PerfilListener {

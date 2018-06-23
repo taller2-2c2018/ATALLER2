@@ -9,9 +9,11 @@ import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,7 +44,8 @@ public class HerokuHistoriasService implements HistoriasService {
     private static final String AUTH_DATA = "data";
     private boolean mDownloading = false;
     private String mAuthToken = null;
-    JSONObject resultado;
+    JSONArray resultado;
+    JSONObject resultado2;
     //private static Context context;
     private List<Historia> mHistorias;
     private List<HistoriaCorta> mHistoriasCortas;
@@ -54,11 +57,40 @@ public class HerokuHistoriasService implements HistoriasService {
 
     @Override
     public void updateHistoriasData(Activity activity) {
-        JSONObject historias = getHistoriasJSON(activity.getFragmentManager());
+        mHistorias = new ArrayList<>();
+        JSONArray historias = getHistoriasJSON(activity.getFragmentManager());
+        if (historias != null) {
+            for (int i = 0 ; i < historias.length(); i++) {
+                JSONObject obj = null;
+                try {
+                    obj = historias.getJSONObject(i);
+                    String title = obj.getString("mTitle");
+                    String desc = obj.getString("mDescription");
+                    String id = obj.getString("mFacebookUserId");
+                    String lat = obj.getString("mLatitude");
+                    String lng = obj.getString("mLongitude");
+                    int fileID = obj.getInt("mFileId");
+                    String fileType = obj.getString("mFileType");
+                    boolean hasFlash = obj.getBoolean("mFlash");
+                    String location = obj.getString("mLocation");
+
+                    Historia historia = new Historia(title);
+                    historia.setDescription(desc);
+                    historia.setUbicacion(location);
+                    Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
+                    historia.setPicture(icon);
+                    historia.setPictureUsr(icon);
+                    mHistorias.add(historia);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         //TODO: desglozar las historias
 
 
-        mHistorias = new ArrayList<>();
+
         Historia c1 = new Historia("Increible lo que sucedio...");
         Historia c2 = new Historia("Android funciona perfecto...");
 
@@ -79,6 +111,8 @@ public class HerokuHistoriasService implements HistoriasService {
 
         mHistorias.add(c1);
         mHistorias.add(c2);
+
+
     }
 
     @Override
@@ -136,10 +170,10 @@ public class HerokuHistoriasService implements HistoriasService {
         return true;
     }
 
-    private JSONObject postHistoriasJSON( final FragmentManager fragmentManager,Historia historia) {
+    private JSONObject postHistoriasJSON( final FragmentManager fragmentManager, Historia historia) {
         final NetworkObject requestTokenObject = createHistoria(historia);
         final NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
-        resultado = null;
+        resultado2 = null;
         if (!mDownloading) {
             mDownloading = true;
             networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
@@ -151,7 +185,7 @@ public class HerokuHistoriasService implements HistoriasService {
                             resultToken = new JSONObject(result.mResultValue);
                             String status = resultToken.getString("status");
                             if (status.equals("200")) {
-                                resultado = resultToken.getJSONObject("data");
+                                resultado2 = resultToken.getJSONObject("data");
                             }
                         }
                         catch (Throwable t) {
@@ -179,10 +213,10 @@ public class HerokuHistoriasService implements HistoriasService {
                 }
             });
         }
-        return resultado;
+        return resultado2;
     }
 
-    private JSONObject getHistoriasJSON( final FragmentManager fragmentManager) {
+    private JSONArray getHistoriasJSON( final FragmentManager fragmentManager) {
         final NetworkObject requestTokenObject = getHistoriasNetworkObject();
         final NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
         resultado = null;
@@ -198,7 +232,7 @@ public class HerokuHistoriasService implements HistoriasService {
                             resultToken = new JSONObject(result.mResultValue);
                             String status = resultToken.getString("status");
                             if (status.equals("200")) {
-                                resultado = resultToken.getJSONObject("data");
+                                resultado = resultToken.getJSONArray("data");
                             }
                         }
                         catch (Throwable t) {
@@ -261,7 +295,7 @@ public class HerokuHistoriasService implements HistoriasService {
                 e.printStackTrace();
             }
             final String file = "file";
-            requestHistoriaJsonObject.put(file, f.toURI());
+            requestHistoriaJsonObject.put(file, f);
             final String fileType = "mFileType";
             requestHistoriaJsonObject.put(fileType,"jpg");
             final String flash = "mFlash";
