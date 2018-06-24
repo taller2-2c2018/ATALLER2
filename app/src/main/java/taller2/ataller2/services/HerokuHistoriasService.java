@@ -30,14 +30,15 @@ import taller2.ataller2.services.facebook.FacebookService;
 
 public class HerokuHistoriasService implements HistoriasService {
 
-    private static final String REACTION = "https://application-server-tdp2.herokuapp.com/story/<story_id>/reaction";
-    private static final String COMMENT = "https://application-server-tdp2.herokuapp.com/story/<story_id>/comment";
+    private static final String REACTION = "https://application-server-tdp2.herokuapp.com/story/%s/reaction";
+    private static final String COMMENT = "https://application-server-tdp2.herokuapp.com/story/%s/comment";
     private static final String STORYS = "https://application-server-tdp2.herokuapp.com/story";
     private static final String AUTH_RESULT = "status";
     private static final String AUTH_DATA = "data";
     private boolean mDownloading = false;
     private String mAuthToken = null;
-    JSONArray resultado;
+    JSONArray resultado = null;
+    JSONArray resultadoHistorias = null;
     JSONObject resultado2;
     //private static Context context;
     private List<Historia> mHistorias;
@@ -49,17 +50,68 @@ public class HerokuHistoriasService implements HistoriasService {
     }
 
     @Override
-    public void updateHistoriasData(Activity activity) {
+    public void updateHistoriasData( Activity activity) {
+        final NetworkObject requestTokenObject = getHistoriasNetworkObject();
+        final NetworkFragment networkFragment = NetworkFragment.getInstance(activity.getFragmentManager(), requestTokenObject);
+        mDownloading = false;
+        resultado = null;
+        if (!mDownloading) {
+            mDownloading = true;
+            networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
+                @Override
+                public void onResponseReceived(NetworkResult result) {
+                    String asd = result.mResultValue;
+                    if (result.mException == null) {
+                        JSONObject resultToken = null;
+                        try{
+                            resultToken = new JSONObject(result.mResultValue);
+                            String status = resultToken.getString("status");
+                            if (status.equals("200")) {
+                                resultadoHistorias = resultToken.getJSONArray("data");
+                                updateHistorias();
+                            }
+                        }
+                        catch (Throwable t) {
+                            Log.e("My App", "Could not parse malformed JSON: \"" + result.mResultValue + "\"");
+                        }
+
+                    }
+                    mDownloading = false;
+                }
+
+                @Override
+                public NetworkInfo getActiveNetworkInfo(Context context) {
+                    ConnectivityManager connectivityManager =
+                            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                    return networkInfo;
+                }
+
+                @Override
+                public void onProgressUpdate(int progressCode, int percentComplete) {}
+
+                @Override
+                public void onFinishDownloading() {
+                    mDownloading = false;
+                }
+            });
+        }
+    }
+
+    public void updateHistorias() {
         mHistorias = new ArrayList<>();
-        JSONArray historias = getHistoriasJSON(activity.getFragmentManager());
-        if (historias != null) {
-            for (int i = 0 ; i < historias.length(); i++) {
+        //JSONArray historias = getHistoriasJSON(activity.getFragmentManager());
+
+        if (resultadoHistorias != null) {
+            for (int i = 0 ; i < resultadoHistorias.length(); i++) {
                 JSONObject obj = null;
                 try {
-                    obj = historias.getJSONObject(i);
+                    obj = resultadoHistorias.getJSONObject(i);
+
+                    String historiaID = obj.getString("mStoryId");
                     String title = obj.getString("mTitle");
                     String desc = obj.getString("mDescription");
-                    String id = obj.getString("mFacebookUserId");
+                    String userID = obj.getString("mFacebookUserId");
                     String lat = obj.getString("mLatitude");
                     String lng = obj.getString("mLongitude");
                     int fileID = obj.getInt("mFileId");
@@ -68,11 +120,15 @@ public class HerokuHistoriasService implements HistoriasService {
                     String location = obj.getString("mLocation");
 
                     Historia historia = new Historia(title);
+
+                    historia.setUserID(userID);
+                    historia.setID(historiaID);
                     historia.setDescription(desc);
                     historia.setUbicacion(location);
                     Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
                     historia.setPicture(icon);
                     historia.setPictureUsr(icon);
+
                     mHistorias.add(historia);
 
                 } catch (JSONException e) {
@@ -80,32 +136,6 @@ public class HerokuHistoriasService implements HistoriasService {
                 }
             }
         }
-        //TODO: desglozar las historias
-
-
-
-        Historia c1 = new Historia("Increible lo que sucedio...");
-        Historia c2 = new Historia("Android funciona perfecto...");
-
-        c1.setDescription("wow no te la puedo creer");
-        c2.setDescription("Esto es un lujo");
-
-        c1.setFecha("Facultad de Ing. Capital Federal.");
-        c2.setFecha("La Rural. Capital Federal");
-
-        c1.setUbicacion("12 de Abril de 2016");
-        c2.setUbicacion("14 de Marzo de 2018");
-
-        c1.setPicture(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.river4));
-        c2.setPicture(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.river4));
-
-        c1.setPictureUsr(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.diego));
-        c2.setPictureUsr(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.elche));
-
-        mHistorias.add(c1);
-        mHistorias.add(c2);
-
-
     }
 
     @Override
@@ -295,54 +325,6 @@ public class HerokuHistoriasService implements HistoriasService {
         return requestHistoriaJsonObject;
     }
 
-    private JSONArray getHistoriasJSON( final FragmentManager fragmentManager) {
-        final NetworkObject requestTokenObject = getHistoriasNetworkObject();
-        final NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
-        mDownloading = false;
-        resultado = null;
-        if (!mDownloading) {
-            mDownloading = true;
-            networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
-                @Override
-                public void onResponseReceived(NetworkResult result) {
-                    String asd = result.mResultValue;
-                    if (result.mException == null) {
-                        JSONObject resultToken = null;
-                        try{
-                            resultToken = new JSONObject(result.mResultValue);
-                            String status = resultToken.getString("status");
-                            if (status.equals("200")) {
-                                resultado = resultToken.getJSONArray("data");
-                            }
-                        }
-                        catch (Throwable t) {
-                            Log.e("My App", "Could not parse malformed JSON: \"" + result.mResultValue + "\"");
-                        }
-
-                    }
-                    mDownloading = false;
-                }
-
-                @Override
-                public NetworkInfo getActiveNetworkInfo(Context context) {
-                    ConnectivityManager connectivityManager =
-                            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-                    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-                    return networkInfo;
-                }
-
-                @Override
-                public void onProgressUpdate(int progressCode, int percentComplete) {}
-
-                @Override
-                public void onFinishDownloading() {
-                    mDownloading = false;
-                }
-            });
-        }
-        return resultado;
-    }
-
     private NetworkObject getHistoriasNetworkObject() {
         NetworkObject networkObject = new NetworkObject(STORYS, HttpMethodType.GET);
         //networkObject.setContentType("application/json");
@@ -400,7 +382,8 @@ public class HerokuHistoriasService implements HistoriasService {
 
     private NetworkObject getReactionNetworkObject(Historia historia,EmotionType emotion) {
         String requestBody = crearReactionObject(emotion).toString();
-        NetworkObject networkObject = new NetworkObject(REACTION, HttpMethodType.POST, requestBody);
+        String requestUri = String.format(REACTION, historia.getID());
+        NetworkObject networkObject = new NetworkObject(requestUri, HttpMethodType.POST, requestBody);
         networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
         networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
         List<String> responseHeaders = new ArrayList<>();
@@ -411,6 +394,7 @@ public class HerokuHistoriasService implements HistoriasService {
 
     private JSONObject crearReactionObject( EmotionType emotion){
         JSONObject requestHistoriaJsonObject = new JSONObject();
+
         try {
             final String reaction = "mReaction";
             requestHistoriaJsonObject.put(reaction,emotion.getEmotionServer());
@@ -469,7 +453,8 @@ public class HerokuHistoriasService implements HistoriasService {
 
     private NetworkObject getCommentNetworkObject(Historia historia, String comment) {
         String requestBody = crearCommentObject(comment).toString();
-        NetworkObject networkObject = new NetworkObject(REACTION, HttpMethodType.POST, requestBody);
+        String requestUri = String.format(COMMENT, historia.getID());
+        NetworkObject networkObject = new NetworkObject(requestUri, HttpMethodType.POST, requestBody);
         networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
         networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
         List<String> responseHeaders = new ArrayList<>();

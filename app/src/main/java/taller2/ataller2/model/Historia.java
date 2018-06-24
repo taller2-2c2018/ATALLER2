@@ -3,13 +3,15 @@ package taller2.ataller2.model;
 import android.graphics.Bitmap;
 public class Historia {
 
+    private String id = "";
     private String mTitulo = "";
     private String mDescription = "";
     private String mFecha = "";
     private String mUbicacion = "";
+    private String mUserID = "";
+
     private Bitmap mPicture;
     private Bitmap mPictureUser;
-
 
     public Historia(String titulo) {
         mTitulo = titulo;
@@ -58,4 +60,15 @@ public class Historia {
     public void setPicture(Bitmap picture) {
         this.mPicture = picture;
     }
+
+    public String getID() {return id;}
+
+    public void setID(String mID) {id = mID;}
+
+    public String getUserID() {return mUserID;}
+
+    public void setUserID(String mID) {mUserID = mID;}
+
+
+
 }

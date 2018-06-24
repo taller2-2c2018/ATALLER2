@@ -138,6 +138,9 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
 
     @Override
     public int getItemCount() {
+        if (mHistoria == null){
+            return 0;
+        }
         return mHistoria.size();
     }
 }

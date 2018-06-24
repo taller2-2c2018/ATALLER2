@@ -31,6 +31,7 @@ import taller2.ataller2.model.Notificacion;
 import taller2.ataller2.model.Perfil;
 import taller2.ataller2.model.PerfilFragment;
 import taller2.ataller2.model.Refresh;
+import taller2.ataller2.services.HistoriasService;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.services.facebook.FacebookService;
 
@@ -112,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     public void goMenu(){
+        ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
         mViewPager.setCurrentItem(0);
     }
     public void goAmistades(){
@@ -138,7 +140,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         if (id == R.id.buttonChat)              {goChat(); return true;}
         if (id == R.id.buttonNotificaciones)    {goNotif(); return true;}
         if (id == R.id.buttonAmigos)            {goAmistades(); return true;}
-        if (id == R.id.buttonMenu)              {goMenu(); return true;}
+        if (id == R.id.buttonMenu)              {
+            goMenu(); return true;
+        }
         if (id == R.id.buttonOptions)           {goPerfil(); return true;}
         //if (id == R.id.action_logout)           {exit(); return true;}
 
