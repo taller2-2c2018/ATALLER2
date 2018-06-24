@@ -36,8 +36,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_notifications_active_black_18dp"
-            android:layout_alignLeft="@+id/button2" />
+            android:src="@drawable/ic_notifications_active_black_18dp" />
 
         <ImageButton
             android:id="@+id/buttonChat"
@@ -46,8 +45,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_sms_black_18dp"
-            android:layout_alignLeft="@+id/button3"/>
+            android:src="@drawable/ic_sms_black_18dp" />
 
         <ImageButton
             android:id="@+id/buttonOptions"
@@ -56,7 +54,15 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_menu_black_18dp"
-            android:layout_alignLeft="@+id/button4"/>
+            android:src="@drawable/ic_menu_black_18dp" />
+
+        <ImageButton
+            android:id="@+id/buttonLocation"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:background="@android:color/transparent"
+            android:src="@drawable/location" />
 
 </LinearLayout>

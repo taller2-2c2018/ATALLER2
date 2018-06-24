@@ -8,6 +8,9 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.NonNull;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceIdService;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,7 +32,7 @@ import taller2.ataller2.networking.NetworkResult;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.services.facebook.FacebookService;
 
-public class FirebaseNotificationService implements NotificationService {
+public class FirebaseNotificationService extends FirebaseInstanceIdService implements NotificationService {
 
     private static final String URL_PUT_INSTANCE_ID = "http://34.237.197.99:9000/api/v1/mobile/users";
     private static final String TOKEN_HEADER_NAME = "appToken";
@@ -37,10 +40,35 @@ public class FirebaseNotificationService implements NotificationService {
     private static final int CONNECT_TIMEOUT_MS = 3000;
     private static final int STREAM_MAX_SIZE = 4096;
 
+    private String token = "";
+
     @Override
     public void scheduleSendInstanceId() {
 
     }
+
+    @Override
+    public String getToken() {
+        return token;
+    }
+
+    @Override
+    public void refreshToken() {
+        onTokenRefresh();
+    }
+
+    @Override
+    public void onTokenRefresh() {
+        // Get updated InstanceID token.
+        token = FirebaseInstanceId.getInstance().getToken();
+
+
+        // If you want to send messages to this application instance or
+        // manage this apps subscriptions on the server side, send the
+        // Instance ID token to your app server.
+        //sendRegistrationToServer(refreshedToken);
+    }
+
 
     @Override
     public void sendInstanceIdToken(String token, final SendInstanceIdCallback callback) {

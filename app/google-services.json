@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "740486043314",
+    "firebase_url": "https://taller2-199117.firebaseio.com",
+    "project_id": "taller2-199117",
+    "storage_bucket": "taller2-199117.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740486043314:android:b05863adef669bb6",
+        "android_client_info": {
+          "package_name": "taller2.ataller2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "740486043314-56ni1ak1og44uv2bpa4gv5kk2slucsqb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiO8kwPFxJqxS_bkfoSzX_THQR78qapX0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -35,6 +35,7 @@ public class NetworkFragment extends Fragment {
 
     private static final String AUTH_KEY_FIELD = "Authorization";
     private static final String AUTH_KEY_ID = "facebookUserId";
+    private static final String AUTH_KEY_FB_TOKEN = "firebaseId";
 
     private static final String TAG = "NetworkFragment";
 
@@ -216,6 +217,7 @@ public class NetworkFragment extends Fragment {
 
                 connection.addRequestProperty(AUTH_KEY_FIELD, networkObject.getAuthToken());
                 connection.addRequestProperty(AUTH_KEY_ID,networkObject.getFacebookID());
+                connection.addRequestProperty(AUTH_KEY_FB_TOKEN, networkObject.getFirebaseToken());
 
                 // Timeout for reading InputStream
                 connection.setReadTimeout(READ_TIMEOUT_MS);

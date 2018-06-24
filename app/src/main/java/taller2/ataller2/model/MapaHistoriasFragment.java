@@ -115,7 +115,7 @@ public class MapaHistoriasFragment extends Fragment implements OnMapReadyCallbac
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
-        mMapView = view.findViewById(R.id.commerce_map);
+            mMapView = view.findViewById(R.id.commerce_map);
         return view;
     }
 

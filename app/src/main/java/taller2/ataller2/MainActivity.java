@@ -27,6 +27,7 @@ import taller2.ataller2.model.ListadoAmistadesFragment;
 import taller2.ataller2.model.ListadoConversacionesFragment;
 import taller2.ataller2.model.ListadoHistoriasFragment;
 import taller2.ataller2.model.ListadoNotificacionesFragment;
+import taller2.ataller2.model.MapaHistoriasFragment;
 import taller2.ataller2.model.Notificacion;
 import taller2.ataller2.model.Perfil;
 import taller2.ataller2.model.PerfilFragment;
@@ -100,6 +101,14 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             }
         });
 
+        ImageButton b_location = findViewById( R.id.buttonLocation );
+        b_location.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                goLocation();
+            }
+        });
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public void goNotif(){ mViewPager.setCurrentItem(2); }
     public void goChat(){ mViewPager.setCurrentItem(3); }
     public void goPerfil(){ mViewPager.setCurrentItem(4); }
+    public void goLocation() { mViewPager.setCurrentItem(5); }
 
 
     @Override
@@ -140,10 +150,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         if (id == R.id.buttonChat)              {goChat(); return true;}
         if (id == R.id.buttonNotificaciones)    {goNotif(); return true;}
         if (id == R.id.buttonAmigos)            {goAmistades(); return true;}
-        if (id == R.id.buttonMenu)              {
-            goMenu(); return true;
-        }
+        if (id == R.id.buttonMenu)              { goMenu(); return true; }
         if (id == R.id.buttonOptions)           {goPerfil(); return true;}
+        if (id == R.id.buttonLocation)          { goLocation();return true;}
         //if (id == R.id.action_logout)           {exit(); return true;}
 
         //if (id == R.id.action_perfil)         {goPerfil(); return true; }
@@ -243,12 +252,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        private Fragment fragment0 = null;
-        private Fragment fragment1 = null;
-        private Fragment fragment2 = null;
-        private Fragment fragment3 = null;
-        private Fragment fragment4 = null;
-
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -268,6 +271,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                     return new ListadoConversacionesFragment();
                 case 4 :
                     return new PerfilFragment();
+                case 5:
+                    return new MapaHistoriasFragment();
             }
             return PlaceholderFragment.newInstance(position + 1);
         }
@@ -275,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 5;
+            return 6;
         }
 
     }

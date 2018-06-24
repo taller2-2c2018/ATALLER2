@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.JsonReader;
@@ -30,6 +31,11 @@ import taller2.ataller2.networking.NetworkFragment;
 import taller2.ataller2.networking.NetworkObject;
 import taller2.ataller2.networking.NetworkResult;
 import taller2.ataller2.R;
+import taller2.ataller2.services.NotificacionesService;
+import taller2.ataller2.services.ServiceLocator;
+import taller2.ataller2.services.location.LocationService;
+import taller2.ataller2.services.notifications.NotificationService;
+
 public class BaseFacebookService implements FacebookService {
 
     private static final String POST_REGISTER = "https://application-server-tdp2.herokuapp.com/user/register";
@@ -250,13 +256,17 @@ public class BaseFacebookService implements FacebookService {
     private JSONObject createRequestTokenJson(String userId) {
         JSONObject requestTokenJsonObject = new JSONObject();
         try {
-            String asd = AccessToken.getCurrentAccessToken().getUserId();
             String accessToken = AccessToken.getCurrentAccessToken().getToken();
             String userToken = accessToken;
             final String userIdField = "facebookUserId";
             requestTokenJsonObject.put(userIdField, userId);
             final String userTokenField = "facebookAuthToken";
             requestTokenJsonObject.put(userTokenField,userToken);
+
+            ServiceLocator.get(NotificationService.class).refreshToken();
+            String firebaseID = ServiceLocator.get(NotificationService.class).getToken();
+            final String userTokenIdFirebase = "firebaseId";
+            requestTokenJsonObject.put(userTokenIdFirebase,firebaseID);
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -24,6 +24,8 @@ public class NetworkObject implements Parcelable {
     private final String mUrl;
     private String mAuthToken;
     private String mFacebookID;
+    private String mFirebaseToken;
+
     private String mContentType;
 
     private HttpMethodType mHttpMethod;
@@ -33,6 +35,7 @@ public class NetworkObject implements Parcelable {
 
     public NetworkObject(String URL, HttpMethodType httpMethod) {
         this.mUrl = URL;
+        this.mFirebaseToken = "";
         this.mAuthToken = "";
         this.mFacebookID = "";
         this.mHttpMethod = httpMethod;
@@ -58,6 +61,10 @@ public class NetworkObject implements Parcelable {
         this.mAuthToken = authToken;
     }
 
+    public void setFirebaseToken(String firebaseToken) {
+        this.mAuthToken = firebaseToken;
+    }
+
     public void setFacebookID (String facebookID) {this.mFacebookID = facebookID; }
 
     public void setContentType (String contentType) {this.mContentType = contentType;}
@@ -67,6 +74,8 @@ public class NetworkObject implements Parcelable {
     }
 
     public String getFacebookID () {return this.mFacebookID; }
+
+    public String getFirebaseToken () {return this.mFirebaseToken; }
 
     public String getURL() {
         return mUrl;
@@ -114,6 +123,7 @@ public class NetworkObject implements Parcelable {
         //dest.writeString(mContentType);
         dest.writeString(mFacebookID);
         dest.writeString(mAuthToken);
+        dest.writeString(mFirebaseToken);
         dest.writeInt(mHttpMethod.getValue());
         dest.writeString(mPostData);
         dest.writeMap(mRequestProperties);
@@ -125,6 +135,7 @@ public class NetworkObject implements Parcelable {
         //mContentType = in.readString();
         mFacebookID = in.readString();
         mAuthToken = in.readString();
+        mFirebaseToken = in.readString();
         mHttpMethod = HttpMethodType.fromInteger(in.readInt());
         mPostData = in.readString();
         in.readMap(mRequestProperties, String.class.getClassLoader());

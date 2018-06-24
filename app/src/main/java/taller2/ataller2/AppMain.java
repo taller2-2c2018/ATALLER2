@@ -14,6 +14,10 @@ import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.services.facebook.BaseFacebookService;
 import taller2.ataller2.services.facebook.FacebookService;
 import taller2.ataller2.services.HistoriasService;
+import taller2.ataller2.services.location.LocationService;
+import taller2.ataller2.services.location.MapsLocationService;
+import taller2.ataller2.services.notifications.FirebaseNotificationService;
+import taller2.ataller2.services.notifications.NotificationService;
 
 public class AppMain extends Application {
 
@@ -32,6 +36,8 @@ public class AppMain extends Application {
         ServiceLocator.bindCustomServiceImplementation(HistoriasService.class, HerokuHistoriasService.class);
         ServiceLocator.bindCustomServiceImplementation(ConversacionService.class, MockConversacionService.class);
         ServiceLocator.bindCustomServiceImplementation(NotificacionesService.class, MockNotificacionService.class);
+        ServiceLocator.bindCustomServiceImplementation(NotificationService.class, FirebaseNotificationService.class);
+        ServiceLocator.bindCustomServiceImplementation(LocationService.class, MapsLocationService.class);
     }
 
 }
