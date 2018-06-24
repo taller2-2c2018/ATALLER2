@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Strings related to login -->
-    <string name="app_name">mi app</string>
+    <string name="app_name">Fiubook</string>
     <string name="prompt_email">Usuario</string>
     <string name="prompt_password">Contraseña</string>
     <string name="action_sign_in">Iniciar SESION</string>
@@ -30,6 +30,12 @@
     <string name="title_activity_mi_perfil"></string>
     <string name="large_text">Historias del usuario</string>
 
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="intent_data_request_id">extraRequestId</string>
+    <string name="intent_data_from_rate_notification">extraOpeningRating</string>
+
+
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBcxqsjbfUiEKT-Ifix9z_gvhRNJoiCZHE</string>
 
     <string name="nombreText">Fernando Nitz</string>
     <string name="txtHistoriaTitulo">Impresionante!!!</string>

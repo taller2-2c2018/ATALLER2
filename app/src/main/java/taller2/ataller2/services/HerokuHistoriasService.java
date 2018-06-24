@@ -60,9 +60,8 @@ public class HerokuHistoriasService implements HistoriasService {
             networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
                 @Override
                 public void onResponseReceived(NetworkResult result) {
-                    String asd = result.mResultValue;
                     if (result.mException == null) {
-                        JSONObject resultToken = null;
+                        JSONObject resultToken;
                         try{
                             resultToken = new JSONObject(result.mResultValue);
                             String status = resultToken.getString("status");
@@ -473,6 +472,5 @@ public class HerokuHistoriasService implements HistoriasService {
         }
         return requestHistoriaJsonObject;
     }
-
 
 }
