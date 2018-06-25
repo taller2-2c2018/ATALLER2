@@ -29,6 +29,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import taller2.ataller2.networking.DownloadCallback;
 import taller2.ataller2.networking.HttpMethodType;
 import taller2.ataller2.networking.NetworkObject;
@@ -43,6 +48,11 @@ public class FirebaseNotificationService extends FirebaseInstanceIdService imple
     private static final int READ_TIMEOUT_MS = 3000;
     private static final int CONNECT_TIMEOUT_MS = 3000;
     private static final int STREAM_MAX_SIZE = 4096;
+
+    public static final String FCM_MESSAGE_URL = "https://fcm.googleapis.com/fcm/send";
+    OkHttpClient mClient = new OkHttpClient();
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    private static final String SERVER_KEY = "AAAArGhoVrI:APA91bEeT0x5Tcpi7OtINPFZJOqnlPN5LqayFqSfN51TMyrpPfD14LyRxIgQBI5IsaOsAP6rHzssglmL9igme6NJY9DbnnXmHNEirXAevXBYO32om5KMO8hWvfIjA9DwHBi2DVRhaYVa-O0hhW8nB6wM6gzif-ZCQg";
 
     private String token = "";
 
@@ -291,13 +301,9 @@ public class FirebaseNotificationService extends FirebaseInstanceIdService imple
         }
     }
 
-
-
-/*
-    public static final String FCM_MESSAGE_URL = "https://fcm.googleapis.com/fcm/send";
-    OkHttpClient mClient = new OkHttpClient();
     @SuppressLint("StaticFieldLeak")
     public void sendMessage(final JSONArray recipients, final String title, final String body, final String icon, final String message) {
+
         new AsyncTask<String, String, String>() {
             @Override
             protected String doInBackground(String... params) {
@@ -330,7 +336,7 @@ public class FirebaseNotificationService extends FirebaseInstanceIdService imple
                     int success, failure;
                     success = resultJson.getInt("success");
                     failure = resultJson.getInt("failure");
-                    //Toast.makeText(getCurrentActivity, "Message Success: " + success + "Message Failed: " + failure, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getCurrentActivity(), "Message Success: " + success + "Message Failed: " + failure, Toast.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                     //Toast.makeText(getCurrentActivity(), "Message Failed, Unknown error occurred.", Toast.LENGTH_LONG).show();
@@ -349,6 +355,5 @@ public class FirebaseNotificationService extends FirebaseInstanceIdService imple
         Response response = mClient.newCall(request).execute();
         return response.body().string();
     }
-    */
 
 }

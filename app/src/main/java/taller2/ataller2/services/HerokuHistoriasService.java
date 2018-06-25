@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
 
@@ -25,11 +26,18 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import taller2.ataller2.R;
 import taller2.ataller2.model.Historia;
 import taller2.ataller2.model.HistoriaCorta;
@@ -201,30 +209,16 @@ public class HerokuHistoriasService implements HistoriasService {
 
     @Override
     public boolean crearHistoria( FragmentManager fragmentManager,Historia historia) {
-        mHistorias.add(historia);
+        /*mHistorias.add(historia);
         JSONObject result = postHistoriasJSON(fragmentManager,historia);
         //TODO: chequear resultado de la creacion
         return true;
+           */
 
-        /*
-        String url = "http://yourserver";
-        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
-                "yourfile");
-        try {
-            HttpClient httpclient = new DefaultHttpClient();
+        MiTarea asd = new MiTarea(historia);
+        asd.doInBackground();
 
-            HttpPost httppost = new HttpPost(url);
-
-            InputStreamEntity reqEntity = new InputStreamEntity(new FileInputStream(file), -1);
-            reqEntity.setContentType("binary/octet-stream");
-            reqEntity.setChunked(true); // Send in multiple parts if needed
-            httppost.setEntity(reqEntity);
-            HttpResponse response = httpclient.execute(httppost);
-
-        } catch (Exception e) {
-            // show error
-        }
-        return true;*/
+        return true;
     }
 
     @Override
@@ -321,17 +315,9 @@ public class HerokuHistoriasService implements HistoriasService {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //FileOutputStream fo = new FileOutputStream(f);
-/*
-            Bitmap bmp   = historia.getPicture();
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
-            bmp.recycle();
-*/
             // do something with byte[]
             final String file = "file";
-            requestHistoriaJsonObject.put(file, f);
+            requestHistoriaJsonObject.put(file, transformFileToByte(f));
             final String fileType = "mFileType";
             requestHistoriaJsonObject.put(fileType,"jpg");
             final String flash = "mFlash";
@@ -349,6 +335,9 @@ public class HerokuHistoriasService implements HistoriasService {
         } catch (JSONException e) {
             e.printStackTrace();
         }// catch (FileNotFoundException e) {
+        catch (IOException e) {
+            e.printStackTrace();
+        }
         //    e.printStackTrace();
         //}
         return requestHistoriaJsonObject;
@@ -504,6 +493,89 @@ public class HerokuHistoriasService implements HistoriasService {
             e.printStackTrace();
         }
         return requestHistoriaJsonObject;
+    }
+
+    public byte[] transformFileToByte(File file) throws IOException {
+
+        byte[] buffer = new byte[(int) file.length()];
+        InputStream ios = null;
+        try {
+            ios = new FileInputStream(file);
+            if (ios.read(buffer) == -1) {
+                throw new IOException(
+                        "EOF reached while trying to read the whole file");
+            }
+        } finally {
+            try {
+                if (ios != null)
+                    ios.close();
+            } catch (IOException e) {
+            }
+        }
+        return buffer;
+    }
+
+
+
+    private class MiTarea extends AsyncTask<String, Float, Integer> {
+
+        private Historia mHistoria;
+
+        public MiTarea(Historia historia) {
+            mHistoria = historia;
+        }
+
+        @Override
+        protected Integer doInBackground(String... strings) {
+            File f = new File(mContext.getCacheDir(), "hola");
+            try{
+                f.createNewFile();
+                Bitmap bitmap = mHistoria.getPicture();
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+                byte[] bitmapdata = bos.toByteArray();
+                FileOutputStream fos = new FileOutputStream(f);
+                fos.write(bitmapdata);
+                fos.flush();
+                fos.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            OkHttpClient client = new OkHttpClient();
+
+            RequestBody requestBody = new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("mFileType", "png")
+                    .addFormDataPart("mFlash", "false")
+
+                    .addFormDataPart("mTitle", "titulo")
+                    .addFormDataPart("mDescription", "descripcion android")
+                    .addFormDataPart("mPrivate", "false")
+                    .addFormDataPart("mlatitude", "12.25")
+                    .addFormDataPart("mLongitude", "12.25")
+                    .addFormDataPart("mPrivate", "false")
+                    .addFormDataPart("image", "logo-square.png",
+                            RequestBody.create( MediaType.parse("image/png"), f))
+                    .build();
+            Request request = new Request.Builder()
+                    .addHeader("facebookUserId", ServiceLocator.get(FacebookService.class).getFacebookID())
+                    .addHeader("Authentication", ServiceLocator.get(FacebookService.class).getAuthToken())
+                    .url("https://application-server-tdp2.herokuapp.com/story")
+                    .post(requestBody)
+                    .build();
+
+            try{
+                Response response = client.newCall(request).execute();
+                Response asd = response.networkResponse();
+            }
+            catch (IOException ex){
+
+            }
+            return 0;
+        }
     }
 
 }
