@@ -21,16 +21,20 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.HashMap;
+import java.util.List;
 
+import taller2.ataller2.services.HistoriasService;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.services.location.LocationService;
 
-public class MapaHistoriasFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
+public class MapaHistoriasFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener, Refresh{
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 10;
 
@@ -58,35 +62,29 @@ public class MapaHistoriasFragment extends Fragment implements OnMapReadyCallbac
 
     private void chargeMap (){
         mMap.clear();
+        enableMyLocationIfPermitted();
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         UiSettings uiSettings = mMap.getUiSettings();
-        //uiSettings.setZoomControlsEnabled(true);
+        uiSettings.setZoomControlsEnabled(true);
         uiSettings.setAllGesturesEnabled(true);
         uiSettings.setCompassEnabled(true);
-        enableMyLocationIfPermitted();
 
         //mCommercesFromMarkerMap.clear();
-    /*
-        List<Commerce> listaComercios = getCommercesService().getCommercesSortedBy(getActivity(), mSortCriteria);
+        List<Historia> historias = ServiceLocator.get(HistoriasService.class).getHistorias(getActivity());
 
-        for (Commerce commerce : listaComercios) {
-            double latitud = commerce.getLocation().getLatitud();
-            double longitud = commerce.getLocation().getLongitud();
+        for (Historia historia : historias) {
+            double latitud = Double.parseDouble(historia.getLatitud());
+            double longitud = Double.parseDouble(historia.getLongitud());
             LatLng location = new LatLng(latitud, longitud);
-            Marker marker = mMap.addMarker(new MarkerOptions().position(location).title(commerce.getShowableName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-            mCommercesFromMarkerMap.put(marker, commerce);
+            mMap.addMarker(new MarkerOptions().position(location).title("1").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
         }
 
-        */
         LocationService locationService = ServiceLocator.get(LocationService.class);
         LocationO mCurrentLocation = locationService.getLocation(getContext());
         LatLng location = new LatLng(mCurrentLocation.getLatitud(), mCurrentLocation.getLongitud());
         //mMap.addMarker(new MarkerOptions().position(location).title("Aquí estoy").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
         float zoomLevel = 16;
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, zoomLevel));
-        if (mMapView != null) {
-            mMapView.setVisibility(View.GONE);
-        }
         mMap.setOnInfoWindowClickListener(this);
         //mMap.setInfoWindowAdapter(new CommerceInfoWindowAdapter(LayoutInflater.from(getActivity()), mCommercesFromMarkerMap));
     }
@@ -115,7 +113,9 @@ public class MapaHistoriasFragment extends Fragment implements OnMapReadyCallbac
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
-            mMapView = view.findViewById(R.id.commerce_map);
+        mMapView = view.findViewById(R.id.commerce_map);
+
+        setUpMapView();
         return view;
     }
 
@@ -157,6 +157,11 @@ public class MapaHistoriasFragment extends Fragment implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        chargeMap();
+    }
+
+    @Override
+    public void refresh() {
         chargeMap();
     }
 }

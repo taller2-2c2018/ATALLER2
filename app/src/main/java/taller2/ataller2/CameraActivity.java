@@ -168,7 +168,7 @@ public class CameraActivity extends Activity {
         if (requestCode==PICK_IMAGE){
             Uri imageUri = data.getData();
             ivPhoto.setImageURI(imageUri);
-            ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
+            //ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
         }
 
     }

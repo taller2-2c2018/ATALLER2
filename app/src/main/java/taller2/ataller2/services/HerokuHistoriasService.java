@@ -7,12 +7,24 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Environment;
 import android.util.Log;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.InputStreamEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -27,6 +39,7 @@ import taller2.ataller2.networking.NetworkFragment;
 import taller2.ataller2.networking.NetworkObject;
 import taller2.ataller2.networking.NetworkResult;
 import taller2.ataller2.services.facebook.FacebookService;
+import taller2.ataller2.services.notifications.NotificationService;
 
 public class HerokuHistoriasService implements HistoriasService {
 
@@ -124,6 +137,8 @@ public class HerokuHistoriasService implements HistoriasService {
                     historia.setID(historiaID);
                     historia.setDescription(desc);
                     historia.setUbicacion(location);
+                    historia.setLatitud(lat);
+                    historia.setLongitud(lng);
                     Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
                     historia.setPicture(icon);
                     historia.setPictureUsr(icon);
@@ -190,6 +205,26 @@ public class HerokuHistoriasService implements HistoriasService {
         JSONObject result = postHistoriasJSON(fragmentManager,historia);
         //TODO: chequear resultado de la creacion
         return true;
+
+        /*
+        String url = "http://yourserver";
+        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
+                "yourfile");
+        try {
+            HttpClient httpclient = new DefaultHttpClient();
+
+            HttpPost httppost = new HttpPost(url);
+
+            InputStreamEntity reqEntity = new InputStreamEntity(new FileInputStream(file), -1);
+            reqEntity.setContentType("binary/octet-stream");
+            reqEntity.setChunked(true); // Send in multiple parts if needed
+            httppost.setEntity(reqEntity);
+            HttpResponse response = httpclient.execute(httppost);
+
+        } catch (Exception e) {
+            // show error
+        }
+        return true;*/
     }
 
     @Override
@@ -210,6 +245,7 @@ public class HerokuHistoriasService implements HistoriasService {
         final NetworkObject requestTokenObject = createHistoria(historia);
         final NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
         resultado2 = null;
+        mDownloading = false;
         if (!mDownloading) {
             mDownloading = true;
             networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
@@ -258,50 +294,44 @@ public class HerokuHistoriasService implements HistoriasService {
         NetworkObject networkObject = new NetworkObject(STORYS, HttpMethodType.POST, requestBody);
         networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
         networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
+        networkObject.setFirebaseToken(ServiceLocator.get(NotificationService.class).getToken());
         List<String> responseHeaders = new ArrayList<>();
         responseHeaders.add(AUTH_RESULT);
         networkObject.setResponseHeaders(responseHeaders);
+        networkObject.setMultipart();
         return networkObject;
     }
 
     private JSONObject createHistoriaObject(Historia historia) {
         JSONObject requestHistoriaJsonObject = new JSONObject();
         try {
-            //File f = new File(mContext.getCacheDir(), "hola");
-//            try{
-//                f.createNewFile();
-//                Bitmap bitmap = historia.getPicture();
-//                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-//                bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
-//                byte[] bitmapdata = bos.toByteArray();
-//                FileOutputStream fos = new FileOutputStream(f);
-//                fos.write(bitmapdata);
-//                fos.flush();
-//                fos.close();
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            FileOutputStream fo = new FileOutputStream(f);
-
-            Bitmap bmp   = historia.getPicture();
-            int size     = bmp.getRowBytes() * bmp.getHeight();
-            ByteBuffer b = ByteBuffer.allocate(size);
-
-            bmp.copyPixelsToBuffer(b);
-
-            byte[] bytes = new byte[size];
-
-            try {
-                b.get(bytes, 0, bytes.length);
-            } catch (BufferUnderflowException e) {
-                // always happens
+            File f = new File(mContext.getCacheDir(), "hola");
+            try{
+                f.createNewFile();
+                Bitmap bitmap = historia.getPicture();
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+                byte[] bitmapdata = bos.toByteArray();
+                FileOutputStream fos = new FileOutputStream(f);
+                fos.write(bitmapdata);
+                fos.flush();
+                fos.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
+            //FileOutputStream fo = new FileOutputStream(f);
+/*
+            Bitmap bmp   = historia.getPicture();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+            bmp.recycle();
+*/
             // do something with byte[]
             final String file = "file";
-            requestHistoriaJsonObject.put(file, b.array().toString());
+            requestHistoriaJsonObject.put(file, f);
             final String fileType = "mFileType";
             requestHistoriaJsonObject.put(fileType,"jpg");
             final String flash = "mFlash";
@@ -329,6 +359,7 @@ public class HerokuHistoriasService implements HistoriasService {
         //networkObject.setContentType("application/json");
         networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
         networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
+        //networkObject.setFirebaseToken(ServiceLocator.get(NotificationService.class).getToken());
         return networkObject;
     }
 
@@ -385,6 +416,7 @@ public class HerokuHistoriasService implements HistoriasService {
         NetworkObject networkObject = new NetworkObject(requestUri, HttpMethodType.POST, requestBody);
         networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
         networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
+        networkObject.setFirebaseToken(ServiceLocator.get(NotificationService.class).getToken());
         List<String> responseHeaders = new ArrayList<>();
         responseHeaders.add(AUTH_RESULT);
         networkObject.setResponseHeaders(responseHeaders);
@@ -456,6 +488,7 @@ public class HerokuHistoriasService implements HistoriasService {
         NetworkObject networkObject = new NetworkObject(requestUri, HttpMethodType.POST, requestBody);
         networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
         networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
+        networkObject.setFirebaseToken(ServiceLocator.get(NotificationService.class).getToken());
         List<String> responseHeaders = new ArrayList<>();
         responseHeaders.add(AUTH_RESULT);
         networkObject.setResponseHeaders(responseHeaders);

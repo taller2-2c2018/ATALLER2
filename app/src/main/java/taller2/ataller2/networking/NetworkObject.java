@@ -32,6 +32,8 @@ public class NetworkObject implements Parcelable {
     private String mPostData;
     private Map<String, String> mRequestProperties;
     private List<String> mResponseHeaders;
+    private boolean isMultipart = false;
+
 
     public NetworkObject(String URL, HttpMethodType httpMethod) {
         this.mUrl = URL;
@@ -62,7 +64,7 @@ public class NetworkObject implements Parcelable {
     }
 
     public void setFirebaseToken(String firebaseToken) {
-        this.mAuthToken = firebaseToken;
+        this.mFirebaseToken = firebaseToken;
     }
 
     public void setFacebookID (String facebookID) {this.mFacebookID = facebookID; }
@@ -88,6 +90,10 @@ public class NetworkObject implements Parcelable {
     public void setResponseHeaders(List<String> responseHeaders) {
         this.mResponseHeaders = responseHeaders;
     }
+
+    public void setMultipart () { isMultipart = true; }
+
+    public boolean isMultipart() { return isMultipart; }
 
     public String getHttpMethod() {
         switch (mHttpMethod) {

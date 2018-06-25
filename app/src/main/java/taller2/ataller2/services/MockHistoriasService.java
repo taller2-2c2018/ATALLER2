@@ -35,9 +35,6 @@ public class MockHistoriasService implements HistoriasService {
             c1.setFecha("Facultad de Ing. Capital Federal.");
             c2.setFecha("La Rural. Capital Federal");
 
-            c1.setUbicacion("12 de Abril de 2016");
-            c2.setUbicacion("14 de Marzo de 2018");
-
             c1.setPicture(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.river4));
             c2.setPicture(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.river4));
 

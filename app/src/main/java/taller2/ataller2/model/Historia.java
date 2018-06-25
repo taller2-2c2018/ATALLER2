@@ -7,7 +7,11 @@ public class Historia {
     private String mTitulo = "";
     private String mDescription = "";
     private String mFecha = "";
+
+    private String mLatitud = "";
+    private String mLongitud = "";
     private String mUbicacion = "";
+
     private String mUserID = "";
 
     private Bitmap mPicture;
@@ -45,13 +49,19 @@ public class Historia {
         this.mFecha = fecha;
     }
 
-    public String getUbicacion() {
-        return mUbicacion;
+    public String getLatitud() {
+        return mLatitud;
     }
 
-    public void setUbicacion(String ubicacion) {
-        this.mUbicacion = ubicacion;
+    public void setLatitud(String latitud) {
+        this.mLatitud = latitud;
     }
+
+    public String getLongitud() {
+        return mLongitud;
+    }
+
+    public void setLongitud(String longitud) { this.mLongitud = longitud; }
 
     public Bitmap getPicture() {
         return mPicture;
@@ -68,6 +78,10 @@ public class Historia {
     public String getUserID() {return mUserID;}
 
     public void setUserID(String mID) {mUserID = mID;}
+
+    public String getUbicacion() {return mUbicacion;}
+
+    public void setUbicacion(String ubicacion) {mUbicacion = ubicacion;}
 
 
 

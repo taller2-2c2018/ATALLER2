@@ -241,11 +241,20 @@ public class NetworkFragment extends Fragment {
                     // Send POST data.
                     publishProgress(DownloadCallback.Progress.DOWNLOADING);
                     if (networkObject.getPostData() != null) {
-                        connection.setRequestProperty("Content-Type", "application/json;charset=utf-8");
-                        DataOutputStream printout = new DataOutputStream(connection.getOutputStream());
-                        printout.write(networkObject.getPostData().getBytes("UTF-8"));
-                        printout.flush();
-                        printout.close();
+                        if (!networkObject.isMultipart()){
+                            connection.setRequestProperty("Content-Type", "application/json;charset=utf-8");
+                            DataOutputStream printout = new DataOutputStream(connection.getOutputStream());
+                            printout.write(networkObject.getPostData().getBytes("UTF-8"));
+                            printout.flush();
+                            printout.close();
+                        }
+                        else{
+                            connection.setRequestProperty("Content-Type", "multipart/form-data;charset=utf-8");
+                            DataOutputStream printout = new DataOutputStream(connection.getOutputStream());
+                            printout.write(networkObject.getPostData().getBytes("UTF-8"));
+                            printout.flush();
+                            printout.close();
+                        }
                     }
                 }
 
