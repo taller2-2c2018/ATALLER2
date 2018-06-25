@@ -8,7 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
-import com.facebook.AccessToken;
+//import com.facebook.AccessToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;

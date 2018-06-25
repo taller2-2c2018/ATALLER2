@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -209,16 +210,15 @@ public class HerokuHistoriasService implements HistoriasService {
 
     @Override
     public boolean crearHistoria( FragmentManager fragmentManager,Historia historia) {
-        /*mHistorias.add(historia);
+        mHistorias.add(historia);
         JSONObject result = postHistoriasJSON(fragmentManager,historia);
         //TODO: chequear resultado de la creacion
         return true;
-           */
 
-        MiTarea asd = new MiTarea(historia);
-        asd.doInBackground();
 
-        return true;
+        //MiTarea asd = new MiTarea(historia);
+        //asd.doInBackground();
+        //return true;
     }
 
     @Override
@@ -299,12 +299,12 @@ public class HerokuHistoriasService implements HistoriasService {
     private JSONObject createHistoriaObject(Historia historia) {
         JSONObject requestHistoriaJsonObject = new JSONObject();
         try {
-            File f = new File(mContext.getCacheDir(), "hola");
+            /*File f = new File(mContext.getCacheDir(), "hola");
             try{
                 f.createNewFile();
                 Bitmap bitmap = historia.getPicture();
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 0 , bos);
                 byte[] bitmapdata = bos.toByteArray();
                 FileOutputStream fos = new FileOutputStream(f);
                 fos.write(bitmapdata);
@@ -315,9 +315,18 @@ public class HerokuHistoriasService implements HistoriasService {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            */
+
+            Bitmap bmp = historia.getPicture();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+            bmp.recycle();
+            String str = new String(byteArray, StandardCharsets.UTF_8);
+
             // do something with byte[]
             final String file = "file";
-            requestHistoriaJsonObject.put(file, transformFileToByte(f));
+            requestHistoriaJsonObject.put(file, str);
             final String fileType = "mFileType";
             requestHistoriaJsonObject.put(fileType,"jpg");
             final String flash = "mFlash";
@@ -335,9 +344,7 @@ public class HerokuHistoriasService implements HistoriasService {
         } catch (JSONException e) {
             e.printStackTrace();
         }// catch (FileNotFoundException e) {
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+
         //    e.printStackTrace();
         //}
         return requestHistoriaJsonObject;
