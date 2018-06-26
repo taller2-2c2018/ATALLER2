@@ -1,6 +1,7 @@
 package taller2.ataller2.services;
 
 
+import android.app.Activity;
 import android.content.Context;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class MockPerfilService implements PerfilService {
     }
 
     @Override
-    public void updatePerfilData() {
+    public void updatePerfilData(Activity activity, String id) {
 
         mPerfiles = new ArrayList<>();
         Perfil c1 = new Perfil("Emanuel");
@@ -36,16 +37,15 @@ public class MockPerfilService implements PerfilService {
     }
 
     @Override
-    public List<Perfil> getPerfiles() {
-        if (mPerfiles == null) {
-            updatePerfilData();
-        }
-        return mPerfiles;
+    public Perfil getPerfil() {
+
+        return mPerfiles.get(0);
     }
 
     @Override
-    public Perfil getPerfil(int index) {
-        return mPerfiles.get(index);
+    public Perfil getMiPerfil() {
+
+        return mPerfiles.get(0);
     }
 
 }

@@ -71,6 +71,11 @@ public class MockHistoriasService implements HistoriasService {
     }
 
     @Override
+    public List<Historia> getMisHistorias(Activity activity) {
+        return null;
+    }
+
+    @Override
     public List<HistoriaCorta> getHistoriasCortas(Activity activity) {
         if (mHistoriasCortas == null) {
             updateHistoriasCortasData(activity);

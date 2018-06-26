@@ -33,6 +33,7 @@ import taller2.ataller2.model.Perfil;
 import taller2.ataller2.model.PerfilFragment;
 import taller2.ataller2.model.Refresh;
 import taller2.ataller2.services.HistoriasService;
+import taller2.ataller2.services.PerfilService;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.services.facebook.FacebookService;
 
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
+        //ServiceLocator.get(PerfilService.class).updatePerfilData(this,ServiceLocator.get(FacebookService.class).getFacebookID());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -85,13 +88,14 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             }
         });
 
+        /*
         ImageButton b_notif = findViewById( R.id.buttonNotificaciones );
         b_notif.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 goNotif();
             }
-        });
+        }); */
 
         ImageButton b_perfil = findViewById( R.id.buttonOptions );
         b_perfil.setOnClickListener(new View.OnClickListener(){
@@ -123,15 +127,16 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     public void goMenu(){
         ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
+        ServiceLocator.get(PerfilService.class).updatePerfilData(this,ServiceLocator.get(FacebookService.class).getFacebookID());
         mViewPager.setCurrentItem(0);
     }
     public void goAmistades(){
         mViewPager.setCurrentItem(1);
     }
-    public void goNotif(){ mViewPager.setCurrentItem(2); }
-    public void goChat(){ mViewPager.setCurrentItem(3); }
-    public void goPerfil(){ mViewPager.setCurrentItem(4); }
-    public void goLocation() { mViewPager.setCurrentItem(5); }
+    //public void goNotif(){ mViewPager.setCurrentItem(2); }
+    public void goChat(){ mViewPager.setCurrentItem(2); }
+    public void goPerfil(){ mViewPager.setCurrentItem(3); }
+    public void goLocation() { mViewPager.setCurrentItem(4); }
 
 
     @Override
@@ -148,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.buttonChat)              {goChat(); return true;}
-        if (id == R.id.buttonNotificaciones)    {goNotif(); return true;}
+        //if (id == R.id.buttonNotificaciones)    {goNotif(); return true;}
         if (id == R.id.buttonAmigos)            {goAmistades(); return true;}
         if (id == R.id.buttonMenu)              { goMenu(); return true; }
         if (id == R.id.buttonOptions)           {goPerfil(); return true;}
@@ -265,13 +270,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                     return new ListadoHistoriasFragment();
                 case 1 :
                     return new ListadoAmistadesFragment();
+                //case 2 :
+                //    return new ListadoNotificacionesFragment();
                 case 2 :
-                    return new ListadoNotificacionesFragment();
-                case 3 :
                     return new ListadoConversacionesFragment();
-                case 4 :
+                case 3 :
                     return new PerfilFragment();
-                case 5:
+                case 4:
                     return new MapaHistoriasFragment();
             }
             return PlaceholderFragment.newInstance(position + 1);
@@ -280,7 +285,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 6;
+            return 5;
         }
 
     }

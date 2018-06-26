@@ -187,6 +187,18 @@ public class HerokuHistoriasService implements HistoriasService {
     }
 
     @Override
+    public List<Historia> getMisHistorias(Activity activity) {
+        List<Historia> misHistorias = new ArrayList<>();
+        String myID = ServiceLocator.get(FacebookService.class).getFacebookID();
+        for (Historia historia:mHistorias){
+            if (historia.getUserID().equals(myID)){
+                misHistorias.add(historia);
+            }
+        }
+        return misHistorias;
+    }
+
+    @Override
     public List<HistoriaCorta> getHistoriasCortas(Activity activity) {
         if (mHistoriasCortas == null) {
             updateHistoriasCortasData(activity);
@@ -292,7 +304,7 @@ public class HerokuHistoriasService implements HistoriasService {
         List<String> responseHeaders = new ArrayList<>();
         responseHeaders.add(AUTH_RESULT);
         networkObject.setResponseHeaders(responseHeaders);
-        networkObject.setMultipart();
+        //networkObject.setMultipart();
         return networkObject;
     }
 
@@ -317,16 +329,16 @@ public class HerokuHistoriasService implements HistoriasService {
             }
             */
 
-            Bitmap bmp = historia.getPicture();
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
-            bmp.recycle();
-            String str = new String(byteArray, StandardCharsets.UTF_8);
+            //Bitmap bmp = historia.getPicture();
+            //ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            //bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            //byte[] byteArray = stream.toByteArray();
+            //bmp.recycle();
+            //String str = new String(byteArray, StandardCharsets.UTF_8);
 
             // do something with byte[]
             final String file = "file";
-            requestHistoriaJsonObject.put(file, str);
+            requestHistoriaJsonObject.put(file, "hola");
             final String fileType = "mFileType";
             requestHistoriaJsonObject.put(fileType,"jpg");
             final String flash = "mFlash";

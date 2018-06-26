@@ -15,6 +15,9 @@ public interface HistoriasService extends CustomService {
     void updateHistoriasCortasData(Activity activity);
 
     List<Historia> getHistorias(Activity activity);
+    List<Historia> getMisHistorias(Activity activity);
+
+
     List<HistoriaCorta> getHistoriasCortas(Activity activity);
 
     Historia getHistoria(int index);
