@@ -2,8 +2,10 @@ package taller2.ataller2.adapters;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.LocationManager;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
@@ -14,16 +16,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
+import taller2.ataller2.ConversationActivity;
 import taller2.ataller2.model.Conversacion;
 import taller2.ataller2.model.ListadoConversacionesFragment;
 import taller2.ataller2.model.Mensaje;
 import taller2.ataller2.R;
+import taller2.ataller2.services.ServiceLocator;
+import taller2.ataller2.services.notifications.NotificationService;
+
 public class ConversacionListAdapter extends RecyclerView.Adapter<ConversacionListAdapter.ConversacionesViewHolder>  {
 
     private final ListadoConversacionesFragment.ConversacionesListListener mConversacionesListListener;
@@ -80,46 +87,9 @@ public class ConversacionListAdapter extends RecyclerView.Adapter<ConversacionLi
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                /*
-                * mCalificationsDialog = new Dialog(getContext(), android.R.style.Theme_Holo_Light_Dialog);
-                mCalificationsDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                mCalificationsDialog.setContentView(R.layout.dialog_califications);
-                mCalificationsDialog.setCanceledOnTouchOutside(false);
-                mCalificationsDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                mCalificationsDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-                mCalificationsDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-
-                final EditText calificationEditText = mCalificationsDialog.findViewById(R.id.editText_califications);
-                calificationEditText.setText("");
-
-
-                LinearLayout ll = mCalificationsDialog.findViewById(R.id.puntuacion_comercio);
-                final ImageView e1 = ll.findViewById(R.id.estrella1);
-
-                e1.setClickable(true);
-
-                Button acceptButton = mCalificationsDialog.findViewById(R.id.button_accept_calification);
-                Button cancelButton = mCalificationsDialog.findViewById(R.id.button_cancel_calification);
-                acceptButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mCalificacion = calificationEditText.getText().toString();
-                        //updateCalificationsValue();
-                        mCalificationsDialog.dismiss();
-                    }
-                });
-                cancelButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mCalificationsDialog.dismiss();
-                    }
-                });
-
-                mCalificationsDialog.show();
-                * */
-
+                //Intent intent = new Intent().setClass(v.getContext(), ConversationActivity.class);
+                //Intent intent = new Intent(getActivity(), mFragmentFavorite.class);
+                //v.getContext().startActivity(intent);
 
                 List<Mensaje> msjs = conversacion.getMensajeria();
 
@@ -158,8 +128,17 @@ public class ConversacionListAdapter extends RecyclerView.Adapter<ConversacionLi
                     ll.addView(cv);
                 }
 
+                ImageView em = mConversacion.findViewById(R.id.enviar_mensaje);
+                em.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view){
+                        ServiceLocator.get(NotificationService.class).sendMessage();
+                    }
+                });
+
                 mConversacion.show();
             }
+
         });
     }
 

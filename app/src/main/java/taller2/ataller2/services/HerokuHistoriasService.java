@@ -120,7 +120,7 @@ public class HerokuHistoriasService implements HistoriasService {
     }
 
     public void updateHistorias() {
-        mHistorias = new ArrayList<>();
+        mHistorias = new ArrayList();
         //JSONArray historias = getHistoriasJSON(activity.getFragmentManager());
 
         if (resultadoHistorias != null) {
@@ -164,7 +164,7 @@ public class HerokuHistoriasService implements HistoriasService {
     @Override
     public void updateHistoriasCortasData(Activity activity) {
 
-        mHistoriasCortas = new ArrayList<>();
+        mHistoriasCortas = new ArrayList();
         HistoriaCorta c1 = new HistoriaCorta();
         HistoriaCorta c2 = new HistoriaCorta();
 
@@ -188,7 +188,7 @@ public class HerokuHistoriasService implements HistoriasService {
 
     @Override
     public List<Historia> getMisHistorias(Activity activity) {
-        List<Historia> misHistorias = new ArrayList<>();
+        List<Historia> misHistorias = new ArrayList();
         String myID = ServiceLocator.get(FacebookService.class).getFacebookID();
         for (Historia historia:mHistorias){
             if (historia.getUserID().equals(myID)){
@@ -213,7 +213,7 @@ public class HerokuHistoriasService implements HistoriasService {
 
     @Override
     public List<String> getUsers() {
-        List<String> usuarios = new ArrayList<>();
+        List<String> usuarios = new ArrayList();
         usuarios.add("Fernando Nitz");
         usuarios.add("Diego Maradona");
         usuarios.add("Lionel Messi");
@@ -301,7 +301,7 @@ public class HerokuHistoriasService implements HistoriasService {
         networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
         networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
         networkObject.setFirebaseToken(ServiceLocator.get(NotificationService.class).getToken());
-        List<String> responseHeaders = new ArrayList<>();
+        List<String> responseHeaders = new ArrayList();
         responseHeaders.add(AUTH_RESULT);
         networkObject.setResponseHeaders(responseHeaders);
         //networkObject.setMultipart();
@@ -425,7 +425,7 @@ public class HerokuHistoriasService implements HistoriasService {
         networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
         networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
         networkObject.setFirebaseToken(ServiceLocator.get(NotificationService.class).getToken());
-        List<String> responseHeaders = new ArrayList<>();
+        List<String> responseHeaders = new ArrayList();
         responseHeaders.add(AUTH_RESULT);
         networkObject.setResponseHeaders(responseHeaders);
         return networkObject;
@@ -497,7 +497,7 @@ public class HerokuHistoriasService implements HistoriasService {
         networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
         networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
         networkObject.setFirebaseToken(ServiceLocator.get(NotificationService.class).getToken());
-        List<String> responseHeaders = new ArrayList<>();
+        List<String> responseHeaders = new ArrayList();
         responseHeaders.add(AUTH_RESULT);
         networkObject.setResponseHeaders(responseHeaders);
         return networkObject;

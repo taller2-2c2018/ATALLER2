@@ -57,7 +57,6 @@ public class ListadoConversacionesFragment extends Fragment implements Refresh{
         return view;
     }
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

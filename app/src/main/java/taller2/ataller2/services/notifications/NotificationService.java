@@ -7,4 +7,5 @@ public interface NotificationService extends CustomService {
     void scheduleSendInstanceId();
     String getToken();
     void refreshToken();
+    void sendMessage();
 }

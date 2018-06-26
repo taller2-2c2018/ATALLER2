@@ -6,11 +6,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import taller2.ataller2.R;
 public class HistoriasAdaptor extends ListActivity {
 
     //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
-    ArrayList<String> listItems=new ArrayList<String>();
+    List<String> listItems=new ArrayList<String>();
 
     //DEFINING A STRING ADAPTER WHICH WILL HANDLE THE DATA OF THE LISTVIEW
     ArrayAdapter<String> adapter;

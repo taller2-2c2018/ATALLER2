@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -25,6 +26,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +36,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import taller2.ataller2.model.ChatMessage;
 import taller2.ataller2.networking.DownloadCallback;
 import taller2.ataller2.networking.HttpMethodType;
 import taller2.ataller2.networking.NetworkObject;
@@ -70,6 +73,8 @@ public class FirebaseNotificationService extends FirebaseInstanceIdService imple
     public void refreshToken() {
         onTokenRefresh();
     }
+
+
 
     @Override
     public void onTokenRefresh() {
@@ -187,7 +192,6 @@ public class FirebaseNotificationService extends FirebaseInstanceIdService imple
         @Override
         protected void onCancelled(NetworkResult result) {
         }
-
 
         private NetworkResult downloadUrl(NetworkObject networkObject) {
             InputStream stream = null;
@@ -354,6 +358,16 @@ public class FirebaseNotificationService extends FirebaseInstanceIdService imple
                 .build();
         Response response = mClient.newCall(request).execute();
         return response.body().string();
+    }
+
+    @Override
+    public void sendMessage() {
+        List<String> regIds = new ArrayList<>();
+        String id1 = "eF6om51CTM0:APA91bG9mMS9VcpjhgdUtLeBNGPq4Vor0lkU1s3fDfujY07p8QNowTcPLSmWCOLdY4c-6Tp7bMDk_C-e0_9EGV2ui5-6MLR2LDf_UYiiTGr_0HBzo3hligQoZpDRllOtBg-hjUbt9Idbf_vUnOrcTJbxig_GBVAJ_w";
+        regIds.add(id1);
+        JSONArray regArray = new JSONArray(regIds);
+        sendMessage(regArray,"hola","Como andas?","icono", "este es un mensaje de prueba");
+
     }
 
 }
