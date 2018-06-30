@@ -25,6 +25,7 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
     <string name="app_id_face">188344395278473</string>
+    <string name="facebook_application_id" translatable="false">188344395278473</string>
     <string name="fb_login_protocol_scheme">fb188344395278473</string>
 
     <string name="title_activity_mi_perfil"></string>

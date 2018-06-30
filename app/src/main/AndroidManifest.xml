@@ -74,7 +74,7 @@
                 android:resource="@xml/provider_paths"/>
         </provider>
         <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/app_id_face"/>
+            android:value="@string/facebook_application_id"/>
 
         <provider android:authorities="com.facebook.app.FacebookContentProvider188344395278473"
             tools:replace="android:authorities"

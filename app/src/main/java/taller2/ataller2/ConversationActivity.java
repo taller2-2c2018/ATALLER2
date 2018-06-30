@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/*
+
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseListOptions;
@@ -24,19 +24,19 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-*/
+
 
 import taller2.ataller2.model.ChatMessage;
 
 
 public class ConversationActivity extends AppCompatActivity {
     private static final int SIGN_IN_REQUEST_CODE = 99;
-    //private FirebaseListAdapter<ChatMessage> adapter;
+    private FirebaseListAdapter<ChatMessage> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
             // Start sign in/sign up activity
             startActivityForResult(
                     AuthUI.getInstance()
@@ -47,13 +47,13 @@ public class ConversationActivity extends AppCompatActivity {
         } else {
             // Load chat room contents
             displayChatMessages();
-        }*/
+        }
 
     }
 
     private void displayChatMessages() {
         ListView listOfMessages = (ListView)findViewById(R.id.list_of_messages);
-/*
+
         //Suppose you want to retrieve "chats" in your Firebase DB:
         Query query = FirebaseDatabase.getInstance().getReference().child("chats");
         //The error said the constructor expected FirebaseListOptions - here you create them:
@@ -76,15 +76,15 @@ public class ConversationActivity extends AppCompatActivity {
             }
         };
 
-        listOfMessages.setAdapter(adapter);*/
+        listOfMessages.setAdapter(adapter);
     }
-/*
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+        /*if(FirebaseAuth.getInstance().getCurrentUser() == null) {
             // Start sign in/sign up activity
             startActivityForResult(
                     AuthUI.getInstance()
@@ -104,7 +104,7 @@ public class ConversationActivity extends AppCompatActivity {
 
             // Load chat room contents
             displayChatMessages();
-        }
+        }*/
         FloatingActionButton fab =
                 (FloatingActionButton)findViewById(R.id.fab);
 
@@ -130,7 +130,7 @@ public class ConversationActivity extends AppCompatActivity {
         });
 
     }
-
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_firebase, menu);
@@ -155,5 +155,6 @@ public class ConversationActivity extends AppCompatActivity {
                     });
         }
         return true;
-    }*/
+    }
+    */
 }
