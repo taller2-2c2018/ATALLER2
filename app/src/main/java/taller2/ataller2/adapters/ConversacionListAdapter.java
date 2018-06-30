@@ -87,11 +87,11 @@ public class ConversacionListAdapter extends RecyclerView.Adapter<ConversacionLi
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent().setClass(v.getContext(), ConversationActivity.class);
+                Intent intent = new Intent().setClass(v.getContext(), ConversationActivity.class);
                 //Intent intent = new Intent(getActivity(), mFragmentFavorite.class);
-                //v.getContext().startActivity(intent);
+                v.getContext().startActivity(intent);
 
-                List<Mensaje> msjs = conversacion.getMensajeria();
+                /*List<Mensaje> msjs = conversacion.getMensajeria();
 
                 mConversacion = new Dialog(v.getContext(), android.R.style.Theme_Holo_Light_Dialog);
                 mConversacion.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -137,8 +137,8 @@ public class ConversacionListAdapter extends RecyclerView.Adapter<ConversacionLi
                 });
 
                 mConversacion.show();
+            */
             }
-
         });
     }
 

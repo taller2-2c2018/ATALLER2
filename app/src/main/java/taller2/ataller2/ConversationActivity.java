@@ -7,10 +7,12 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +38,9 @@ public class ConversationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.dialog_messages);
+
         if(FirebaseAuth.getInstance().getCurrentUser() == null) {
             // Start sign in/sign up activity
             startActivityForResult(
@@ -48,6 +53,29 @@ public class ConversationActivity extends AppCompatActivity {
             // Load chat room contents
             displayChatMessages();
         }
+        //FloatingActionButton fab =(FloatingActionButton)findViewById(R.id.fab);
+        ImageView fab = findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText input = (EditText)findViewById(R.id.input);
+
+                // Read the input field and push a new instance
+                // of ChatMessage to the Firebase database
+                FirebaseDatabase.getInstance()
+                        .getReference()
+                        .push()
+                        .setValue(new ChatMessage(input.getText().toString(),
+                                FirebaseAuth.getInstance()
+                                        .getCurrentUser()
+                                        .getDisplayName())
+                        );
+
+                // Clear the input
+                input.setText("");
+            }
+        });
 
     }
 
@@ -84,7 +112,7 @@ public class ConversationActivity extends AppCompatActivity {
                                     Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        /*if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
             // Start sign in/sign up activity
             startActivityForResult(
                     AuthUI.getInstance()
@@ -104,33 +132,10 @@ public class ConversationActivity extends AppCompatActivity {
 
             // Load chat room contents
             displayChatMessages();
-        }*/
-        FloatingActionButton fab =
-                (FloatingActionButton)findViewById(R.id.fab);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                EditText input = (EditText)findViewById(R.id.input);
-
-                // Read the input field and push a new instance
-                // of ChatMessage to the Firebase database
-                FirebaseDatabase.getInstance()
-                        .getReference()
-                        .push()
-                        .setValue(new ChatMessage(input.getText().toString(),
-                                FirebaseAuth.getInstance()
-                                        .getCurrentUser()
-                                        .getDisplayName())
-                        );
-
-                // Clear the input
-                input.setText("");
-            }
-        });
+        }
 
     }
-    /*
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_firebase, menu);
@@ -156,5 +161,5 @@ public class ConversationActivity extends AppCompatActivity {
         }
         return true;
     }
-    */
+
 }

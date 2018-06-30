@@ -12,29 +12,39 @@
     tools:context="taller2.ataller2.MainActivity">
 
     <android.support.design.widget.FloatingActionButton
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:src="@drawable/send_button"
-        android:id="@+id/fab"
+        android:id="@+id/fab2"
         android:tint="@android:color/white"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         app:fabSize="mini" />
 
+    <ImageView
+        android:clickable="true"
+        android:src="@drawable/send_button"
+        android:id="@+id/fab"
+        android:tint="@android:color/holo_red_light"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/fab"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@id/fab">
 
         <EditText
+            android:id="@+id/input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Input"
-            android:id="@+id/input"
-            />
+            android:hint="Input" />
     </android.support.design.widget.TextInputLayout>
 
     <ListView
