@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.util.Base64;
 import android.util.Log;
 
 import org.apache.http.HttpResponse;
@@ -56,6 +57,7 @@ public class HerokuHistoriasService implements HistoriasService {
     private static final String REACTION = "https://application-server-tdp2.herokuapp.com/story/%s/reaction";
     private static final String COMMENT = "https://application-server-tdp2.herokuapp.com/story/%s/comment";
     private static final String STORYS = "https://application-server-tdp2.herokuapp.com/story";
+    private static final String FILES = "https://application-server-tdp2.herokuapp.com/file/";
     private static final String AUTH_RESULT = "status";
     private static final String AUTH_DATA = "data";
     private boolean mDownloading = false;
@@ -66,6 +68,7 @@ public class HerokuHistoriasService implements HistoriasService {
     //private static Context context;
     private List<Historia> mHistorias;
     private List<HistoriaCorta> mHistoriasCortas;
+    private Activity contextActivity;
 
     private Context mContext;
     public HerokuHistoriasService(Context context){
@@ -74,6 +77,7 @@ public class HerokuHistoriasService implements HistoriasService {
 
     @Override
     public void updateHistoriasData( Activity activity) {
+        contextActivity = activity;
         final NetworkObject requestTokenObject = getHistoriasNetworkObject();
         final NetworkFragment networkFragment = NetworkFragment.getInstance(activity.getFragmentManager(), requestTokenObject);
         mDownloading = false;
@@ -138,12 +142,18 @@ public class HerokuHistoriasService implements HistoriasService {
                     String lat = obj.getString("mLatitude");
                     String lng = obj.getString("mLongitude");
                     int fileID = obj.getInt("mFileId");
+                    int fileProfileID = obj.getInt("mProfilePictureId");
                     String fileType = obj.getString("mFileType");
                     boolean isFlash = obj.getBoolean("mFlash");
                     String location = obj.getString("mLocation");
+                    JSONArray reactions = obj.getJSONArray("mReactions");
+                    JSONArray comentarios = obj.getJSONArray("mComments");
 
                     if (isFlash){
                         HistoriaCorta historia = new HistoriaCorta();
+
+                        getHistoriaCortaFile(historia,fileID);
+                        getHistoriaCortaFile(historia,fileProfileID);
 
                         Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
                         historia.setPicture(icon);
@@ -153,6 +163,9 @@ public class HerokuHistoriasService implements HistoriasService {
                     }
                     else{
                         Historia historia = new Historia(title);
+
+                        getHistoriaFile(historia,fileID);
+                        getHistoriaFile(historia,fileProfileID);
 
                         historia.setUserID(userID);
                         historia.setID(historiaID);
@@ -264,6 +277,110 @@ public class HerokuHistoriasService implements HistoriasService {
         JSONObject result = postCommentJSON(fragmentManager,historia,comment);
         //TODO: chequear resultado
         return true;
+    }
+
+    private void getHistoriaCortaFile (final HistoriaCorta historia, int id) {
+        final NetworkObject requestTokenObject = getHistoriaFileNetworkObject(id);
+        final NetworkFragment networkFragment = NetworkFragment.getInstance(contextActivity.getFragmentManager(), requestTokenObject);
+        mDownloading = false;
+        resultado = null;
+        if (!mDownloading) {
+            mDownloading = true;
+            networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
+                @Override
+                public void onResponseReceived(NetworkResult result) {
+                    if (result.mException == null) {
+                        JSONObject resultToken;
+                        try{
+                            resultToken = new JSONObject(result.mResultValue);
+                            String status = resultToken.getString("status");
+                            if (status.equals("200")) {
+                                String foto = resultToken.getString("mFile");
+                                historia.setPicture(StringToBitMap(foto));
+                            }
+                        }
+                        catch (Throwable t) {
+                            Log.e("My App", "Could not parse malformed JSON: \"" + result.mResultValue + "\"");
+                        }
+
+                    }
+                    mDownloading = false;
+                }
+
+                @Override
+                public NetworkInfo getActiveNetworkInfo(Context context) {
+                    ConnectivityManager connectivityManager =
+                            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                    return networkInfo;
+                }
+
+                @Override
+                public void onProgressUpdate(int progressCode, int percentComplete) {}
+
+                @Override
+                public void onFinishDownloading() {
+                    mDownloading = false;
+                }
+            });
+        }
+    }
+
+    private void getHistoriaFile (final Historia historia, int id) {
+        final NetworkObject requestTokenObject = getHistoriaFileNetworkObject(id);
+        final NetworkFragment networkFragment = NetworkFragment.getInstance(contextActivity.getFragmentManager(), requestTokenObject);
+        mDownloading = false;
+        resultado = null;
+        if (!mDownloading) {
+            mDownloading = true;
+            networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
+                @Override
+                public void onResponseReceived(NetworkResult result) {
+                    if (result.mException == null) {
+                        JSONObject resultToken;
+                        try{
+                            resultToken = new JSONObject(result.mResultValue);
+                            String status = resultToken.getString("status");
+                            if (status.equals("200")) {
+                                String foto = resultToken.getString("mFile");
+                                historia.setPicture(StringToBitMap(foto));
+                            }
+                        }
+                        catch (Throwable t) {
+                            Log.e("My App", "Could not parse malformed JSON: \"" + result.mResultValue + "\"");
+                        }
+
+                    }
+                    mDownloading = false;
+                }
+
+                @Override
+                public NetworkInfo getActiveNetworkInfo(Context context) {
+                    ConnectivityManager connectivityManager =
+                            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                    return networkInfo;
+                }
+
+                @Override
+                public void onProgressUpdate(int progressCode, int percentComplete) {}
+
+                @Override
+                public void onFinishDownloading() {
+                    mDownloading = false;
+                }
+            });
+        }
+    }
+
+    private NetworkObject getHistoriaFileNetworkObject (int id){
+        String url = FILES + String.valueOf(id);
+        NetworkObject networkObject = new NetworkObject(url, HttpMethodType.GET);
+        //networkObject.setContentType("application/json");
+        networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
+        networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
+        //networkObject.setFirebaseToken(ServiceLocator.get(NotificationService.class).getToken());
+        return networkObject;
     }
 
     private JSONObject postHistoriasCortaJSON( final FragmentManager fragmentManager, HistoriaCorta historia) {
@@ -409,16 +526,10 @@ public class HerokuHistoriasService implements HistoriasService {
             }
             */
 
-            //Bitmap bmp = historia.getPicture();
-            //ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            //bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            //byte[] byteArray = stream.toByteArray();
-            //bmp.recycle();
-            //String str = new String(byteArray, StandardCharsets.UTF_8);
 
             // do something with byte[]
             final String file = "file";
-            requestHistoriaJsonObject.put(file, "hola");
+            requestHistoriaJsonObject.put(file, BitMapToString(historia.getPicture()));
             final String fileType = "mFileType";
             requestHistoriaJsonObject.put(fileType,"jpg");
             final String flash = "mFlash";
@@ -618,87 +729,30 @@ public class HerokuHistoriasService implements HistoriasService {
         return requestHistoriaJsonObject;
     }
 
-    public byte[] transformFileToByte(File file) throws IOException {
-
-        byte[] buffer = new byte[(int) file.length()];
-        InputStream ios = null;
+    private Bitmap StringToBitMap(String encodedString){
         try {
-            ios = new FileInputStream(file);
-            if (ios.read(buffer) == -1) {
-                throw new IOException(
-                        "EOF reached while trying to read the whole file");
-            }
-        } finally {
-            try {
-                if (ios != null)
-                    ios.close();
-            } catch (IOException e) {
-            }
-        }
-        return buffer;
-    }
-
-
-
-    private class MiTarea extends AsyncTask<String, Float, Integer> {
-
-        private Historia mHistoria;
-
-        public MiTarea(Historia historia) {
-            mHistoria = historia;
-        }
-
-        @Override
-        protected Integer doInBackground(String... strings) {
-            File f = new File(mContext.getCacheDir(), "hola");
-            try{
-                f.createNewFile();
-                Bitmap bitmap = mHistoria.getPicture();
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
-                byte[] bitmapdata = bos.toByteArray();
-                FileOutputStream fos = new FileOutputStream(f);
-                fos.write(bitmapdata);
-                fos.flush();
-                fos.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            OkHttpClient client = new OkHttpClient();
-
-            RequestBody requestBody = new MultipartBody.Builder()
-                    .setType(MultipartBody.FORM)
-                    .addFormDataPart("mFileType", "png")
-                    .addFormDataPart("mFlash", "false")
-
-                    .addFormDataPart("mTitle", "titulo")
-                    .addFormDataPart("mDescription", "descripcion android")
-                    .addFormDataPart("mPrivate", "false")
-                    .addFormDataPart("mlatitude", "12.25")
-                    .addFormDataPart("mLongitude", "12.25")
-                    .addFormDataPart("mPrivate", "false")
-                    .addFormDataPart("image", "logo-square.png",
-                            RequestBody.create( MediaType.parse("image/png"), f))
-                    .build();
-            Request request = new Request.Builder()
-                    .addHeader("facebookUserId", ServiceLocator.get(FacebookService.class).getFacebookID())
-                    .addHeader("Authentication", ServiceLocator.get(FacebookService.class).getAuthToken())
-                    .url("https://application-server-tdp2.herokuapp.com/story")
-                    .post(requestBody)
-                    .build();
-
-            try{
-                Response response = client.newCall(request).execute();
-                Response asd = response.networkResponse();
-            }
-            catch (IOException ex){
-
-            }
-            return 0;
+            byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap=BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
         }
     }
 
+    private String BitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp=Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
+    }
+
+    private String BitMapToString2(Bitmap bitmap){
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        bitmap.recycle();
+        return new String(byteArray, StandardCharsets.UTF_8);
+    }
 }

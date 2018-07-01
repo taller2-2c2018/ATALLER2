@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Firebase" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="412118ba-4d1e-4b8c-ae26-b1f6795e29d8" name="Default" comment="" />
@@ -47,45 +47,57 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ConversationActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/ConversationActivity.java">
+      <file leaf-file-name="HerokuHistoriasService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="180" column="0" lean-forward="false" selection-start-line="180" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
+            <state relative-caret-position="374">
+              <caret line="72" column="29" lean-forward="true" selection-start-line="72" selection-start-column="29" selection-end-line="72" selection-end-column="29" />
               <folding>
-                <element signature="method#onActivityResult#0;class#ConversationActivity#0" expanded="false" />
-                <element signature="method#onCreateOptionsMenu#0;class#ConversationActivity#0" expanded="false" />
-                <element signature="method#onOptionsItemSelected#0;class#ConversationActivity#0" expanded="false" />
-                <element signature="method#onStart#0;class#ConversationActivity#0" expanded="false" />
-                <element signature="method#onStop#0;class#ConversationActivity#0" expanded="false" />
+                <element signature="method#updateHistoriasData#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#updateHistorias#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#updateHistoriasCortasData#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#getHistorias#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#getMisHistorias#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#getHistoriasCortas#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#getUsers#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#crearHistoria#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#crearHistoriaCorta#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#actReaction#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#actCommet#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#getHistoriaCortaFile#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="e#12885#12886#0" expanded="true" />
+                <element signature="e#12945#12946#0" expanded="true" />
+                <element signature="method#getHistoriaFile#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="e#14991#14992#0" expanded="true" />
+                <element signature="e#15051#15052#0" expanded="true" />
+                <element signature="method#getHistoriaFileNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#postHistoriasCortaJSON#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#postHistoriasJSON#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#createHistoria#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#createHistoriaCorta#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#createHistoriaObject#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#createHistoriaCortaObject#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#getHistoriasNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#postReactionJSON#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#getReactionNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#crearReactionObject#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#postCommentJSON#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#getCommentNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#crearCommentObject#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#StringToBitMap#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#BitMapToString#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#BitMapToString2#0;class#HerokuHistoriasService#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ComentsListAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/ComentsListAdapter.java">
+      <file leaf-file-name="NetworkResult.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/networking/NetworkResult.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="11" column="31" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="31" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#505#506#0" expanded="true" />
-                <element signature="e#547#548#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HistoriasListAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/HistoriasListAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1819">
-              <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
-              <folding>
-                <element signature="e#5308#5492#0" expanded="true" />
-                <element signature="e#5491#5492#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="170">
+              <caret line="14" column="18" lean-forward="false" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -130,6 +142,9 @@
       <find>PerfilL</find>
       <find>historias_perfil_local</find>
       <find>ComentsListAdapter</find>
+      <find>postHistoriasCortaJSON</find>
+      <find>getHistoriasNetworkObject</find>
+      <find>FILES</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2212,8 +2227,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/Historia.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/HistoriasListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/ComentsListAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/ConversationActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java" />
       </list>
     </option>
   </component>
@@ -2269,36 +2284,7 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="ataller2" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="adapters" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ATALLER2" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="ataller2" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="networking" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ATALLER2" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="ataller2" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ATALLER2" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="ATALLER2" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="ATALLER2" type="1abcf292:AndroidViewProjectNode" />
-              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
             </path>
           </expand>
           <select />
@@ -2311,7 +2297,7 @@
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../como-hoy-app" />
-    <property name="device.picker.selection" value="T039707QYY" />
+    <property name="device.picker.selection" value="ZY322D3W63" />
     <property name="sync.plugin.last.upgrade.timestamp" value="1529956126578" />
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
@@ -2582,25 +2568,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java</url>
-          <line>652</line>
-          <properties />
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java</url>
-          <line>694</line>
-          <properties />
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java</url>
-          <line>412</line>
-          <properties />
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java</url>
-          <line>419</line>
+          <line>530</line>
           <properties />
           <option name="timeStamp" value="34" />
         </line-breakpoint>
@@ -2647,18 +2615,6 @@
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/CameraActivity.java</url>
-          <line>126</line>
-          <properties />
-          <option name="timeStamp" value="71" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/CameraActivity.java</url>
-          <line>133</line>
-          <properties />
-          <option name="timeStamp" value="72" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/ConversationActivity.java</url>
           <line>87</line>
           <properties />
@@ -2676,23 +2632,30 @@
           <properties />
           <option name="timeStamp" value="77" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java</url>
+          <line>211</line>
+          <properties />
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java</url>
+          <line>239</line>
+          <properties />
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java</url>
+          <line>253</line>
+          <properties />
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="79" />
+      <option name="time" value="87" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/notifications/FirebaseNotificationService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="591">
@@ -2923,26 +2886,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/CameraActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
-          <folding>
-            <element signature="e#3260#3438#0" expanded="false" />
-            <element signature="e#3437#3438#0" expanded="false" />
-            <element signature="e#3550#3717#0" expanded="false" />
-            <element signature="e#3716#3717#0" expanded="false" />
-            <element signature="method#getOutputMediaFile#0;class#CameraActivity#0" expanded="false" />
-            <element signature="method#openGallery#0;class#CameraActivity#0" expanded="false" />
-            <element signature="method#onActivityResult#0;class#CameraActivity#0" expanded="false" />
-            <element signature="method#openDialogFilters#0;class#CameraActivity#0" expanded="false" />
-            <element signature="method#drawableToBitmap#0;class#CameraActivity#0" expanded="false" />
-            <element signature="method#redimensionarImagenMaximo#0;class#CameraActivity#0" expanded="false" />
-            <element signature="method#getHistoriasService#0;class#CameraActivity#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/HistoriaCorta.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -3108,51 +3051,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/HistoriasListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1819">
-          <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
-          <folding>
-            <element signature="e#5308#5492#0" expanded="true" />
-            <element signature="e#5491#5492#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="168" column="0" lean-forward="false" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
-          <folding>
-            <element signature="method#updateHistoriasData#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#actReaction#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#actCommet#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#getHistoriasNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#postReactionJSON#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#getReactionNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#crearReactionObject#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#postCommentJSON#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#getCommentNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#crearCommentObject#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#transformFileToByte#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="class#MiTarea#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#doInBackground#0;class#MiTarea#0;class#HerokuHistoriasService#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/ComentsListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="11" column="31" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#505#506#0" expanded="true" />
-            <element signature="e#547#548#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/message.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -3174,6 +3072,99 @@
             <element signature="method#onOptionsItemSelected#0;class#ConversationActivity#0" expanded="false" />
             <element signature="method#onStart#0;class#ConversationActivity#0" expanded="false" />
             <element signature="method#onStop#0;class#ConversationActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/CameraActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="123" column="36" lean-forward="false" selection-start-line="123" selection-start-column="36" selection-end-line="123" selection-end-column="36" />
+          <folding>
+            <element signature="method#onCreate#0;class#CameraActivity#0" expanded="false" />
+            <element signature="method#publicarHistoria#0;class#CameraActivity#0" expanded="false" />
+            <element signature="method#openTakeFoto#0;class#CameraActivity#0" expanded="false" />
+            <element signature="method#getOutputMediaFile#0;class#CameraActivity#0" expanded="false" />
+            <element signature="method#openGallery#0;class#CameraActivity#0" expanded="false" />
+            <element signature="method#onActivityResult#0;class#CameraActivity#0" expanded="false" />
+            <element signature="method#openDialogFilters#0;class#CameraActivity#0" expanded="false" />
+            <element signature="method#drawableToBitmap#0;class#CameraActivity#0" expanded="false" />
+            <element signature="method#redimensionarImagenMaximo#0;class#CameraActivity#0" expanded="false" />
+            <element signature="method#getHistoriasService#0;class#CameraActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/ComentsListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="11" column="31" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#505#506#0" expanded="false" />
+            <element signature="e#547#548#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/HistoriasListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1819">
+          <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
+          <folding>
+            <element signature="e#5308#5492#0" expanded="false" />
+            <element signature="e#5491#5492#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/networking/NetworkResult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="14" column="18" lean-forward="false" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="72" column="29" lean-forward="true" selection-start-line="72" selection-start-column="29" selection-end-line="72" selection-end-column="29" />
+          <folding>
+            <element signature="method#updateHistoriasData#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#updateHistorias#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#updateHistoriasCortasData#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#getHistorias#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#getMisHistorias#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#getHistoriasCortas#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#getUsers#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#crearHistoria#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#crearHistoriaCorta#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#actReaction#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#actCommet#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#getHistoriaCortaFile#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="e#12885#12886#0" expanded="true" />
+            <element signature="e#12945#12946#0" expanded="true" />
+            <element signature="method#getHistoriaFile#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="e#14991#14992#0" expanded="true" />
+            <element signature="e#15051#15052#0" expanded="true" />
+            <element signature="method#getHistoriaFileNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#postHistoriasCortaJSON#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#postHistoriasJSON#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#createHistoria#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#createHistoriaCorta#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#createHistoriaObject#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#createHistoriaCortaObject#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#getHistoriasNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#postReactionJSON#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#getReactionNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#crearReactionObject#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#postCommentJSON#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#getCommentNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#crearCommentObject#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#StringToBitMap#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#BitMapToString#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#BitMapToString2#0;class#HerokuHistoriasService#0" expanded="false" />
           </folding>
         </state>
       </provider>
