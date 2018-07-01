@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import taller2.ataller2.model.Historia;
+import taller2.ataller2.model.HistoriaCorta;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.services.HistoriasService;
 
@@ -59,6 +61,8 @@ public class CameraActivity extends Activity {
     private ImageView ivPhoto;
 
     private TextView tv;
+
+    private CheckBox cb;
 
     private File myFilesDir;
 
@@ -113,14 +117,28 @@ public class CameraActivity extends Activity {
             }
         });
 
+        cb = (CheckBox) this.findViewById(R.id.checkBox);
+
     }
 
     private void publicarHistoria() {
-        Historia historia = new Historia(tv.getText().toString());
-        historia.setPicture(drawableToBitmap(ivPhoto.getDrawable()));
-        historia.setDescription("muy buena foto");
-        historia.setPictureUsr(drawableToBitmap(ivPhoto.getDrawable()));
-        getHistoriasService().crearHistoria(this.getFragmentManager(),historia);
+        boolean checked = cb.isChecked();
+        if (checked){
+            HistoriaCorta historia = new HistoriaCorta();
+            historia.setPicture(drawableToBitmap(ivPhoto.getDrawable()));
+            historia.setPictureUsr(drawableToBitmap(ivPhoto.getDrawable()));
+            getHistoriasService().crearHistoriaCorta(this.getFragmentManager(),historia);
+        }
+        else{
+
+            Historia historia = new Historia(tv.getText().toString());
+            historia.setPicture(drawableToBitmap(ivPhoto.getDrawable()));
+            historia.setDescription("muy buena foto");
+            historia.setPictureUsr(drawableToBitmap(ivPhoto.getDrawable()));
+            getHistoriasService().crearHistoria(this.getFragmentManager(),historia);
+        }
+
+
     }
 
     private void openTakeFoto(Context context){

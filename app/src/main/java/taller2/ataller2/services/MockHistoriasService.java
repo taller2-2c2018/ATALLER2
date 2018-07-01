@@ -104,6 +104,11 @@ public class MockHistoriasService implements HistoriasService {
     }
 
     @Override
+    public boolean crearHistoriaCorta(FragmentManager fragmentManager, HistoriaCorta historia) {
+        return false;
+    }
+
+    @Override
     public boolean actReaction(FragmentManager fragmentManager, Historia historia, EmotionType emotion) {
         return false;
     }

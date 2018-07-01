@@ -24,6 +24,7 @@ public interface HistoriasService extends CustomService {
     List<String> getUsers();
 
     boolean crearHistoria(FragmentManager fragmentManager, Historia historia);
+    boolean crearHistoriaCorta(FragmentManager fragmentManager, HistoriaCorta historia);
     boolean actReaction(FragmentManager fragmentManager, Historia historia, EmotionType emotion);
     boolean actCommet(FragmentManager fragmentManager, Historia historia, String comment);
 }

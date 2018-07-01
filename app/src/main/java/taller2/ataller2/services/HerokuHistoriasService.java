@@ -121,6 +121,7 @@ public class HerokuHistoriasService implements HistoriasService {
 
     public void updateHistorias() {
         mHistorias = new ArrayList();
+        mHistoriasCortas = new ArrayList();
         //JSONArray historias = getHistoriasJSON(activity.getFragmentManager());
 
         if (resultadoHistorias != null) {
@@ -137,22 +138,33 @@ public class HerokuHistoriasService implements HistoriasService {
                     String lng = obj.getString("mLongitude");
                     int fileID = obj.getInt("mFileId");
                     String fileType = obj.getString("mFileType");
-                    boolean hasFlash = obj.getBoolean("mFlash");
+                    boolean isFlash = obj.getBoolean("mFlash");
                     String location = obj.getString("mLocation");
 
-                    Historia historia = new Historia(title);
+                    if (isFlash){
+                        HistoriaCorta historia = new HistoriaCorta();
 
-                    historia.setUserID(userID);
-                    historia.setID(historiaID);
-                    historia.setDescription(desc);
-                    historia.setUbicacion(location);
-                    historia.setLatitud(lat);
-                    historia.setLongitud(lng);
-                    Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
-                    historia.setPicture(icon);
-                    historia.setPictureUsr(icon);
+                        Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
+                        historia.setPicture(icon);
+                        historia.setPictureUsr(icon);
 
-                    mHistorias.add(historia);
+                        mHistoriasCortas.add(historia);
+                    }
+                    else{
+                        Historia historia = new Historia(title);
+
+                        historia.setUserID(userID);
+                        historia.setID(historiaID);
+                        historia.setDescription(desc);
+                        historia.setUbicacion(location);
+                        historia.setLatitud(lat);
+                        historia.setLongitud(lng);
+                        Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
+                        historia.setPicture(icon);
+                        historia.setPictureUsr(icon);
+
+                        mHistorias.add(historia);
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -164,7 +176,7 @@ public class HerokuHistoriasService implements HistoriasService {
     @Override
     public void updateHistoriasCortasData(Activity activity) {
 
-        mHistoriasCortas = new ArrayList();
+/*        mHistoriasCortas = new ArrayList();
         HistoriaCorta c1 = new HistoriaCorta();
         HistoriaCorta c2 = new HistoriaCorta();
 
@@ -175,7 +187,7 @@ public class HerokuHistoriasService implements HistoriasService {
         c2.setPictureUsr(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.elche));
 
         mHistoriasCortas.add(c1);
-        mHistoriasCortas.add(c2);
+        mHistoriasCortas.add(c2);*/
     }
 
     @Override
@@ -226,11 +238,14 @@ public class HerokuHistoriasService implements HistoriasService {
         JSONObject result = postHistoriasJSON(fragmentManager,historia);
         //TODO: chequear resultado de la creacion
         return true;
+    }
 
-
-        //MiTarea asd = new MiTarea(historia);
-        //asd.doInBackground();
-        //return true;
+    @Override
+    public boolean crearHistoriaCorta(FragmentManager fragmentManager, HistoriaCorta historia) {
+        mHistoriasCortas.add(historia);
+        JSONObject result = postHistoriasCortaJSON(fragmentManager,historia);
+        //TODO: chequear resultado de la creacion
+        return true;
     }
 
     @Override
@@ -245,6 +260,54 @@ public class HerokuHistoriasService implements HistoriasService {
         JSONObject result = postCommentJSON(fragmentManager,historia,comment);
         //TODO: chequear resultado
         return true;
+    }
+
+    private JSONObject postHistoriasCortaJSON( final FragmentManager fragmentManager, HistoriaCorta historia) {
+        final NetworkObject requestTokenObject = createHistoriaCorta(historia);
+        final NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
+        resultado2 = null;
+        mDownloading = false;
+        if (!mDownloading) {
+            mDownloading = true;
+            networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
+                @Override
+                public void onResponseReceived(NetworkResult result) {
+                    String asd = result.mResultValue;
+                    if (result.mException == null) {
+                        JSONObject resultToken = null;
+                        try{
+                            resultToken = new JSONObject(result.mResultValue);
+                            String status = resultToken.getString("status");
+                            if (status.equals("200")) {
+                                resultado2 = resultToken.getJSONObject("data");
+                            }
+                        }
+                        catch (Throwable t) {
+                            Log.e("My App", "Could not parse malformed JSON: \"" + result.mResultValue + "\"");
+                        }
+
+                    }
+                    mDownloading = false;
+                }
+
+                @Override
+                public NetworkInfo getActiveNetworkInfo(Context context) {
+                    ConnectivityManager connectivityManager =
+                            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                    return networkInfo;
+                }
+
+                @Override
+                public void onProgressUpdate(int progressCode, int percentComplete) {}
+
+                @Override
+                public void onFinishDownloading() {
+                    mDownloading = false;
+                }
+            });
+        }
+        return resultado2;
     }
 
     private JSONObject postHistoriasJSON( final FragmentManager fragmentManager, Historia historia) {
@@ -308,6 +371,19 @@ public class HerokuHistoriasService implements HistoriasService {
         return networkObject;
     }
 
+    private NetworkObject createHistoriaCorta(HistoriaCorta historia) {
+        String requestBody = createHistoriaCortaObject(historia).toString();
+        NetworkObject networkObject = new NetworkObject(STORYS, HttpMethodType.POST, requestBody);
+        networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
+        networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
+        networkObject.setFirebaseToken(ServiceLocator.get(NotificationService.class).getToken());
+        List<String> responseHeaders = new ArrayList();
+        responseHeaders.add(AUTH_RESULT);
+        networkObject.setResponseHeaders(responseHeaders);
+        //networkObject.setMultipart();
+        return networkObject;
+    }
+
     private JSONObject createHistoriaObject(Historia historia) {
         JSONObject requestHistoriaJsonObject = new JSONObject();
         try {
@@ -353,6 +429,30 @@ public class HerokuHistoriasService implements HistoriasService {
             requestHistoriaJsonObject.put(title,historia.getmTitulo());
             final String description = "mDescription";
             requestHistoriaJsonObject.put(description,historia.getDescription());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }// catch (FileNotFoundException e) {
+
+        //    e.printStackTrace();
+        //}
+        return requestHistoriaJsonObject;
+    }
+
+    private JSONObject createHistoriaCortaObject(HistoriaCorta historia) {
+        JSONObject requestHistoriaJsonObject = new JSONObject();
+        try {
+            final String file = "file";
+            requestHistoriaJsonObject.put(file, "hola");
+            final String fileType = "mFileType";
+            requestHistoriaJsonObject.put(fileType,"jpg");
+            final String flash = "mFlash";
+            requestHistoriaJsonObject.put(flash, true);
+            final String privado = "mPrivate";
+            requestHistoriaJsonObject.put(privado,false);
+            final String latitude = "mLatitude";
+            requestHistoriaJsonObject.put(latitude, "20.00");
+            final String logitude = "mLongitude";
+            requestHistoriaJsonObject.put(logitude,"21.00");
         } catch (JSONException e) {
             e.printStackTrace();
         }// catch (FileNotFoundException e) {
