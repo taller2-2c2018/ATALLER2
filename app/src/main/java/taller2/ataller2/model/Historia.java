@@ -1,6 +1,9 @@
 package taller2.ataller2.model;
 
 import android.graphics.Bitmap;
+
+import java.util.List;
+
 public class Historia {
 
     private String id = "";
@@ -16,6 +19,8 @@ public class Historia {
 
     private Bitmap mPicture;
     private Bitmap mPictureUser;
+
+    private List<Comentario> mComentarios;
 
     public Historia(String titulo) {
         mTitulo = titulo;
@@ -83,6 +88,8 @@ public class Historia {
 
     public void setUbicacion(String ubicacion) {mUbicacion = ubicacion;}
 
+    public void setComentarios (List<Comentario> comentarios) {mComentarios = comentarios;}
 
+    public List <Comentario> getComentarios () {return mComentarios;}
 
 }

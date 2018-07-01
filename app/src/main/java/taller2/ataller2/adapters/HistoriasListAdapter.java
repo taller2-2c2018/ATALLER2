@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.provider.ContactsContract;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +46,7 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
         private final ImageView mNoMeGusta;
         private final ImageView mMeDivierte;
         private final ImageView mMeAburre;
+        private final RecyclerView mRecyclerView;
 
         HistoriasViewHolder(View itemView) {
             super(itemView);
@@ -60,6 +62,9 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
             mNoMeGusta = (ImageView) itemView.findViewById(R.id.no_me_gusta);
             mMeDivierte = (ImageView) itemView.findViewById(R.id.me_divierte);
             mMeAburre = (ImageView) itemView.findViewById(R.id.me_aburre);
+
+            mRecyclerView = itemView.findViewById(R.id.comentarios_historia);
+
         }
     }
 
@@ -133,6 +138,9 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
                 mHistoriasListListener.onHistoriaClicked(historia);
             }
         });
+
+        holder.mRecyclerView.setLayoutManager(new LinearLayoutManager((Activity)(holder.mRecyclerView.getContext())));
+        holder.mRecyclerView.setAdapter(new ComentsListAdapter(historia.getComentarios()));
 
     }
 

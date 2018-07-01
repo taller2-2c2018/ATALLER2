@@ -63,8 +63,10 @@ public class ConversationActivity extends AppCompatActivity {
 
                 // Read the input field and push a new instance
                 // of ChatMessage to the Firebase database
-                FirebaseDatabase.getInstance()
+                FirebaseDatabase
+                        .getInstance()
                         .getReference()
+                        .child("chats")
                         .push()
                         .setValue(new ChatMessage(input.getText().toString(),
                                 FirebaseAuth.getInstance()
@@ -84,6 +86,7 @@ public class ConversationActivity extends AppCompatActivity {
 
         //Suppose you want to retrieve "chats" in your Firebase DB:
         Query query = FirebaseDatabase.getInstance().getReference().child("chats");
+        //query = FirebaseDatabase.getInstance().getReference();
         //The error said the constructor expected FirebaseListOptions - here you create them:
         FirebaseListOptions<ChatMessage> options = new FirebaseListOptions.Builder<ChatMessage>()
                 .setQuery(query, ChatMessage.class)
@@ -160,6 +163,18 @@ public class ConversationActivity extends AppCompatActivity {
                     });
         }
         return true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 
 }

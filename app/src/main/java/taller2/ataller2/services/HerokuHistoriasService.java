@@ -40,6 +40,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import taller2.ataller2.R;
+import taller2.ataller2.model.Comentario;
 import taller2.ataller2.model.Historia;
 import taller2.ataller2.model.HistoriaCorta;
 import taller2.ataller2.networking.DownloadCallback;
@@ -162,6 +163,9 @@ public class HerokuHistoriasService implements HistoriasService {
                         Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
                         historia.setPicture(icon);
                         historia.setPictureUsr(icon);
+
+                        List<Comentario> lista = new ArrayList();
+                        historia.setComentarios(lista);
 
                         mHistorias.add(historia);
                     }
