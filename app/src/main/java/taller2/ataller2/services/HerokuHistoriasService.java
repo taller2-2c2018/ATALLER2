@@ -50,6 +50,7 @@ import taller2.ataller2.networking.NetworkFragment;
 import taller2.ataller2.networking.NetworkObject;
 import taller2.ataller2.networking.NetworkResult;
 import taller2.ataller2.services.facebook.FacebookService;
+import taller2.ataller2.services.location.LocationService;
 import taller2.ataller2.services.notifications.NotificationService;
 
 public class HerokuHistoriasService implements HistoriasService {
@@ -153,7 +154,7 @@ public class HerokuHistoriasService implements HistoriasService {
                         HistoriaCorta historia = new HistoriaCorta();
 
                         getHistoriaCortaFile(historia,fileID);
-                        getHistoriaCortaFile(historia,fileProfileID);
+//                        getHistoriaCortaFile(historia,fileProfileID);
 
                         Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
                         historia.setPicture(icon);
@@ -165,7 +166,7 @@ public class HerokuHistoriasService implements HistoriasService {
                         Historia historia = new Historia(title);
 
                         getHistoriaFile(historia,fileID);
-                        getHistoriaFile(historia,fileProfileID);
+                        //getHistoriaFile(historia,fileProfileID);
 
                         historia.setUserID(userID);
                         historia.setID(historiaID);
@@ -178,8 +179,23 @@ public class HerokuHistoriasService implements HistoriasService {
                         historia.setPictureUsr(icon);
 
                         List<Comentario> lista = new ArrayList();
-                        historia.setComentarios(lista);
 
+                        if (comentarios != null) {
+                            for (int j = 0 ; j < comentarios.length(); j++) {
+                                JSONObject obj2 = null;
+                                try {
+                                    Comentario comentario = new Comentario();
+                                    obj2 = comentarios.getJSONObject(j);
+                                    comentario.setComentario(obj2.getString("mComment"));
+                                    comentario.setHorario(obj2.getString("mDate"));
+                                    comentario.setNombre(obj2.getString("mFacebookUserId"));
+                                    lista.add(comentario);
+                                }
+                                catch (Exception ex){ }
+                            }
+                        }
+
+                        historia.setComentarios(lista);
                         mHistorias.add(historia);
                     }
 
@@ -295,8 +311,9 @@ public class HerokuHistoriasService implements HistoriasService {
                             resultToken = new JSONObject(result.mResultValue);
                             String status = resultToken.getString("status");
                             if (status.equals("200")) {
-                                String foto = resultToken.getString("mFile");
-                                historia.setPicture(StringToBitMap(foto));
+                                JSONObject data = resultToken.getJSONObject("data");
+                                //String foto = data.getString("mFile");
+                                historia.setPicture(StringToBitMap(data.getString("mFile")));
                             }
                         }
                         catch (Throwable t) {
@@ -342,8 +359,9 @@ public class HerokuHistoriasService implements HistoriasService {
                             resultToken = new JSONObject(result.mResultValue);
                             String status = resultToken.getString("status");
                             if (status.equals("200")) {
-                                String foto = resultToken.getString("mFile");
-                                historia.setPicture(StringToBitMap(foto));
+                                JSONObject data = resultToken.getJSONObject("data");
+                                //String foto = data.getString("mFile");
+                                historia.setPicture(StringToBitMap(data.getString("mFile")));
                             }
                         }
                         catch (Throwable t) {
@@ -508,28 +526,9 @@ public class HerokuHistoriasService implements HistoriasService {
     private JSONObject createHistoriaObject(Historia historia) {
         JSONObject requestHistoriaJsonObject = new JSONObject();
         try {
-            /*File f = new File(mContext.getCacheDir(), "hola");
-            try{
-                f.createNewFile();
-                Bitmap bitmap = historia.getPicture();
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 0 , bos);
-                byte[] bitmapdata = bos.toByteArray();
-                FileOutputStream fos = new FileOutputStream(f);
-                fos.write(bitmapdata);
-                fos.flush();
-                fos.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            */
-
-
-            // do something with byte[]
             final String file = "file";
             requestHistoriaJsonObject.put(file, BitMapToString(historia.getPicture()));
+            //requestHistoriaJsonObject.put(file,"hola");
             final String fileType = "mFileType";
             requestHistoriaJsonObject.put(fileType,"jpg");
             final String flash = "mFlash";
@@ -537,19 +536,16 @@ public class HerokuHistoriasService implements HistoriasService {
             final String privado = "mPrivate";
             requestHistoriaJsonObject.put(privado,false);
             final String latitude = "mLatitude";
-            requestHistoriaJsonObject.put(latitude, "20.00");
+            requestHistoriaJsonObject.put(latitude, String.valueOf(ServiceLocator.get(LocationService.class).getLocation(mContext).getLatitude()));
             final String logitude = "mLongitude";
-            requestHistoriaJsonObject.put(logitude,"21.00");
+            requestHistoriaJsonObject.put(logitude,String.valueOf(ServiceLocator.get(LocationService.class).getLocation(mContext).getLongitude()));
             final String title = "mTitle";
             requestHistoriaJsonObject.put(title,historia.getmTitulo());
             final String description = "mDescription";
             requestHistoriaJsonObject.put(description,historia.getDescription());
         } catch (JSONException e) {
             e.printStackTrace();
-        }// catch (FileNotFoundException e) {
-
-        //    e.printStackTrace();
-        //}
+        }
         return requestHistoriaJsonObject;
     }
 
@@ -557,7 +553,7 @@ public class HerokuHistoriasService implements HistoriasService {
         JSONObject requestHistoriaJsonObject = new JSONObject();
         try {
             final String file = "file";
-            requestHistoriaJsonObject.put(file, "hola");
+            requestHistoriaJsonObject.put(file, BitMapToString(historia.getPicture()));
             final String fileType = "mFileType";
             requestHistoriaJsonObject.put(fileType,"jpg");
             final String flash = "mFlash";
@@ -565,15 +561,12 @@ public class HerokuHistoriasService implements HistoriasService {
             final String privado = "mPrivate";
             requestHistoriaJsonObject.put(privado,false);
             final String latitude = "mLatitude";
-            requestHistoriaJsonObject.put(latitude, "20.00");
+            requestHistoriaJsonObject.put(latitude, String.valueOf(ServiceLocator.get(LocationService.class).getLocation(mContext).getLatitude()));
             final String logitude = "mLongitude";
-            requestHistoriaJsonObject.put(logitude,"21.00");
+            requestHistoriaJsonObject.put(logitude,String.valueOf(ServiceLocator.get(LocationService.class).getLocation(mContext).getLongitude()));
         } catch (JSONException e) {
             e.printStackTrace();
-        }// catch (FileNotFoundException e) {
-
-        //    e.printStackTrace();
-        //}
+        }
         return requestHistoriaJsonObject;
     }
 
