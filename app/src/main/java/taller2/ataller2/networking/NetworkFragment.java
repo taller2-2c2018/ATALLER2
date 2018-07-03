@@ -58,15 +58,15 @@ public class NetworkFragment extends Fragment {
         sNetworkObject = networkObject;
         NetworkFragment networkFragment = (NetworkFragment) fragmentManager.findFragmentByTag(NetworkFragment.TAG);
 
-        if (networkFragment == null) {
-            networkFragment = new NetworkFragment();
-            Bundle args = new Bundle();
-            args.putParcelable(DATA_OBJECT, networkObject);
-            networkFragment.setArguments(args);
-            fragmentManager.beginTransaction().add(networkFragment, TAG).commit();
-        } else {
-            updateFragmentNetworkObject(networkFragment, networkObject);
-        }
+        //if (networkFragment == null) {
+        networkFragment = new NetworkFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(DATA_OBJECT, networkObject);
+        networkFragment.setArguments(args);
+        fragmentManager.beginTransaction().add(networkFragment, TAG).commit();
+        //} else {
+        //    updateFragmentNetworkObject(networkFragment, networkObject);
+        //}
         // execute immediately
         fragmentManager.executePendingTransactions();
 

@@ -54,7 +54,7 @@ public class PerfilFragment extends Fragment implements Refresh{
                              Bundle savedInstanceState) {
 
         //View view = container.getChildAt(0);
-        View view = inflater.inflate(R.layout.activity_mi_perfil, container, false);
+        View view = inflater.inflate(R.layout.perfil, container, false);
 
         Perfil perfil = ServiceLocator.get(PerfilService.class).getMiPerfil();
         ImageView iv = view.findViewById(R.id.imageViewPerfil);
