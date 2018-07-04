@@ -40,6 +40,10 @@ public class BaseFacebookService implements FacebookService {
 
     private static final String POST_REGISTER = "https://application-server-tdp2.herokuapp.com/user/register";
     private static final String POST_AUTHENTICATE = "https://application-server-tdp2.herokuapp.com/user/authenticate";
+
+    private static final String POST_GET_NAME_ONE = "https://graph.facebook.com/v3.0/";
+    private static final String POST_GET_NAME_TWO = "?fields=name&access_token=";
+
     private static final String AUTH_RESULT = "status";
     private static final String AUTH_DATA = "data";
     private static final String AUTH_TOKEN = "token";
@@ -48,6 +52,7 @@ public class BaseFacebookService implements FacebookService {
     private boolean mDownloading = false;
     private String mAuthToken = null;
     private String mFacebookID = null;
+    private String mName = null;
 
     public BaseFacebookService() {
         mCallbackManager = CallbackManager.Factory.create();
@@ -68,6 +73,15 @@ public class BaseFacebookService implements FacebookService {
         }
         return mFacebookID;
     }
+
+    @Override
+    public String getName() {
+        if (mName == null) {
+            return "";
+        }
+        return mName;
+    }
+
 
     @Override
     public boolean isLoggedIn() {
@@ -200,6 +214,9 @@ public class BaseFacebookService implements FacebookService {
                             JSONObject data = resultToken.getJSONObject("data");
                             mFacebookID = userId;
                             mAuthToken = data.getString("token");
+
+                            getName(fragmentManager,userId,AccessToken.getCurrentAccessToken().getToken());
+
                         }
                         catch (Throwable t) {
                             Log.e("My App", "Could not parse malformed JSON: \"" + result.mResultValue + "\"");
@@ -280,4 +297,56 @@ public class BaseFacebookService implements FacebookService {
         }
         return mCallbackManager;
     }
+
+    private void getName(final FragmentManager fragmentManager, String id, String token) {
+        NetworkObject requestTokenObject = getNameTokenObject(id,token);
+        NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
+        mDownloading = false;
+        if (!mDownloading) {
+            mDownloading = true;
+            networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
+                @Override
+                public void onResponseReceived(NetworkResult result) {
+                    if (result.mException == null) {
+                        JSONObject resultToken;
+                        try{
+                            resultToken = new JSONObject(result.mResultValue);
+                            mName = resultToken.getString("name");
+                        }
+                        catch (Exception ex){
+                        }
+                    }
+                    mDownloading = false;
+                }
+
+                @Override
+                public NetworkInfo getActiveNetworkInfo(Context context) {
+                    ConnectivityManager connectivityManager =
+                            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                    return networkInfo;
+                }
+
+                @Override
+                public void onProgressUpdate(int progressCode, int percentComplete) {}
+
+                @Override
+                public void onFinishDownloading() {
+                    mDownloading = false;
+                }
+            });
+        }
+    }
+
+    private NetworkObject getNameTokenObject(String id, String token) {
+        String url = POST_GET_NAME_ONE + id + POST_GET_NAME_TWO + token;
+        NetworkObject networkObject = new NetworkObject(url, HttpMethodType.GET);
+        List<String> responseHeaders = new ArrayList();
+        responseHeaders.add("name");
+        responseHeaders.add("id");
+        networkObject.setResponseHeaders(responseHeaders);
+        return networkObject;
+    }
+
+
 }

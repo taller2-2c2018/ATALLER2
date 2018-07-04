@@ -38,7 +38,7 @@
 
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBcxqsjbfUiEKT-Ifix9z_gvhRNJoiCZHE</string>
 
-    <string name="nombreText">Fernando Nitz</string>
+    <string name="nombreText"> </string>
     <string name="txtHistoriaTitulo">Impresionante!!!</string>
     <string name="txtHistoriaDescripcion">Muy bueno, super recomendable, excelente atencion</string>
     <string name="txtHistoriaUbicacion">Facultad de Ing. Capital Federal.</string>

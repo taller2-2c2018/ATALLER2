@@ -3,6 +3,7 @@ package taller2.ataller2.services;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,11 @@ public class MockPerfilService implements PerfilService {
         //c1.setPicture(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.pizzaprueba2));
         //c2.setPicture(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.images));
         mPerfiles.add(c1);
+    }
+
+    @Override
+    public void updateFoto(Activity activity, Bitmap bitmap) {
+
     }
 
     @Override

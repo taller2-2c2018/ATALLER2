@@ -1,7 +1,11 @@
 package taller2.ataller2.model;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.LocationManager;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -14,17 +18,27 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
+
 import taller2.ataller2.LoginActivity;
 import taller2.ataller2.adapters.HistoriasListAdapter;
 import taller2.ataller2.services.PerfilService;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.services.HistoriasService;
 import taller2.ataller2.R;
+import taller2.ataller2.services.facebook.FacebookService;
+
 public class PerfilFragment extends Fragment implements Refresh{
+
+    private static int PICK_IMAGE = 2;
 
     private PerfilFragment.PerfilListener mPerfilListener;
     private RecyclerView mRecyclerView;
     private ListadoHistoriasFragment.HistoriasListListener mHistoriasListListener;
+
+    private Perfil perfil;
+    private ImageView iv;
+    private TextView nombre;
 
     @Override
     public void refresh() {
@@ -56,9 +70,9 @@ public class PerfilFragment extends Fragment implements Refresh{
         //View view = container.getChildAt(0);
         View view = inflater.inflate(R.layout.perfil, container, false);
 
-        Perfil perfil = ServiceLocator.get(PerfilService.class).getMiPerfil();
-        ImageView iv = view.findViewById(R.id.imageViewPerfil);
-        TextView nombre = view.findViewById(R.id.textNombre);
+        perfil = ServiceLocator.get(PerfilService.class).getMiPerfil();
+        iv = view.findViewById(R.id.imageViewPerfil);
+        nombre = view.findViewById(R.id.textNombre);
 
         if (perfil == null){
             iv.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.default_img));
@@ -66,8 +80,7 @@ public class PerfilFragment extends Fragment implements Refresh{
         }
         else{
             iv.setImageBitmap(perfil.getPicture());
-            String aasd = perfil.getNombre();
-            nombre.setText(perfil.getNombre());
+            nombre.setText(ServiceLocator.get(FacebookService.class).getName());
         }
 
         mRecyclerView = view.findViewById(R.id.historias_perfil_local);
@@ -76,7 +89,6 @@ public class PerfilFragment extends Fragment implements Refresh{
         mRecyclerView.setAdapter(new HistoriasListAdapter(historiasService.getMisHistorias(this.getActivity()), mHistoriasListListener));
 
         AppCompatButton exit = view.findViewById(R.id.salir_app);
-
         exit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -84,7 +96,30 @@ public class PerfilFragment extends Fragment implements Refresh{
             }
         });
 
+        AppCompatButton subir = view.findViewById(R.id.subir_foto_perfil);
+        subir.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                startActivityForResult(gallery, PICK_IMAGE);
+            }
+        });
+
         return view;
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==PICK_IMAGE){
+            Uri imageUri = data.getData();
+            iv.setImageURI(imageUri);
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getActivity().getContentResolver(), imageUri);
+                ServiceLocator.get(PerfilService.class).updateFoto(this.getActivity(), bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void exit(){
@@ -95,6 +130,7 @@ public class PerfilFragment extends Fragment implements Refresh{
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        //nombre.setText(ServiceLocator.get(FacebookService.class).getName());
         if (context instanceof PerfilFragment.PerfilListener) {
             mPerfilListener = (PerfilFragment.PerfilListener) context;
         } else {

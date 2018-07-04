@@ -24,10 +24,12 @@ import taller2.ataller2.networking.NetworkFragment;
 import taller2.ataller2.networking.NetworkObject;
 import taller2.ataller2.networking.NetworkResult;
 import taller2.ataller2.services.facebook.FacebookService;
+import taller2.ataller2.services.notifications.NotificationService;
 
 public class HerokuPerfilService implements PerfilService {
 
     private static final String PERFIL = "https://application-server-tdp2.herokuapp.com/user/profile/";
+    private static final String PERFIL_FOTO = "https://application-server-tdp2.herokuapp.com/user/profilePicture";
 
     private boolean mDownloading = false;
     private List<Perfil> mPerfiles;
@@ -132,7 +134,65 @@ public class HerokuPerfilService implements PerfilService {
         NetworkObject networkObject = new NetworkObject(url, HttpMethodType.GET);
         networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
         networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
-        //networkObject.setFirebaseToken(ServiceLocator.get(NotificationService.class).getToken());
+        networkObject.setFirebaseToken(ServiceLocator.get(NotificationService.class).getToken());
         return networkObject;
     }
+
+
+
+    @Override
+    public void updateFoto(Activity activity, Bitmap bitmap) {
+        final NetworkObject requestTokenObject = updateFotoNetworkObject();
+        final NetworkFragment networkFragment = NetworkFragment.getInstance(activity.getFragmentManager(), requestTokenObject);
+        mDownloading = false;
+        if (!mDownloading) {
+            mDownloading = true;
+            networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
+                @Override
+                public void onResponseReceived(NetworkResult result) {
+                    if (result.mException == null) {
+                        JSONObject resultToken;
+                        try{
+                            resultToken = new JSONObject(result.mResultValue);
+                            String status = resultToken.getString("status");
+                            if (status.equals("200")) {
+                                resultadoPerfil = resultToken.getJSONObject("data");
+                                updatePerfil();
+                            }
+                        }
+                        catch (Throwable t) {
+                            Log.e("My App", "Could not parse malformed JSON: \"" + result.mResultValue + "\"");
+                        }
+
+                    }
+                    mDownloading = false;
+                }
+
+                @Override
+                public NetworkInfo getActiveNetworkInfo(Context context) {
+                    ConnectivityManager connectivityManager =
+                            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                    return networkInfo;
+                }
+
+                @Override
+                public void onProgressUpdate(int progressCode, int percentComplete) {}
+
+                @Override
+                public void onFinishDownloading() {
+                    mDownloading = false;
+                }
+            });
+        }
+    }
+
+    private NetworkObject updateFotoNetworkObject() {
+        NetworkObject networkObject = new NetworkObject(PERFIL_FOTO, HttpMethodType.POST);
+        networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
+        networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
+        networkObject.setFirebaseToken(ServiceLocator.get(NotificationService.class).getToken());
+        return networkObject;
+    }
+
 }
