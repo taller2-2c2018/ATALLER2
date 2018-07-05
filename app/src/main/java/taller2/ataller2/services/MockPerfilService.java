@@ -43,6 +43,11 @@ public class MockPerfilService implements PerfilService {
     }
 
     @Override
+    public void solicitarAmistad(Activity activity, String id) {
+
+    }
+
+    @Override
     public Perfil getPerfil() {
 
         return mPerfiles.get(0);

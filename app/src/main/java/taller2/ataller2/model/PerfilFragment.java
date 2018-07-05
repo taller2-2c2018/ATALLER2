@@ -105,6 +105,8 @@ public class PerfilFragment extends Fragment implements Refresh{
             }
         });
 
+
+
         return view;
     }
 

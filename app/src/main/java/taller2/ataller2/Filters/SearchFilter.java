@@ -3,6 +3,8 @@ package taller2.ataller2.Filters;
 import java.util.ArrayList;
 import java.util.List;
 
+import taller2.ataller2.model.Perfil;
+
 public class SearchFilter implements Filter {
     String nombreUserFiltro;
 
@@ -20,6 +22,11 @@ public class SearchFilter implements Filter {
             }
         }
         return filteredList;
+    }
+
+    @Override
+    public List<Perfil> applyUser(List<Perfil> commerceList) {
+        return null;
     }
 
 }

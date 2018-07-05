@@ -16,6 +16,7 @@ public class Historia {
     private String mUbicacion = "";
 
     private String mUserID = "";
+    private String nombre = "";
 
     private Bitmap mPicture;
     private Bitmap mPictureUser;
@@ -89,6 +90,10 @@ public class Historia {
     public void setUbicacion(String ubicacion) {mUbicacion = ubicacion;}
 
     public void setComentarios (List<Comentario> comentarios) {mComentarios = comentarios;}
+
+    public void setNombre (String nom) {nombre = nom;}
+
+    public String getNombre () {return nombre;}
 
     public List <Comentario> getComentarios () {return mComentarios;}
 

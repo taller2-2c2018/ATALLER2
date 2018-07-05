@@ -31,6 +31,7 @@ import taller2.ataller2.model.MapaHistoriasFragment;
 import taller2.ataller2.model.Notificacion;
 import taller2.ataller2.model.Perfil;
 import taller2.ataller2.model.PerfilFragment;
+import taller2.ataller2.services.AmistadesService;
 import taller2.ataller2.services.HistoriasService;
 import taller2.ataller2.services.PerfilService;
 import taller2.ataller2.services.ServiceLocator;
@@ -121,12 +122,14 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 //         .setAction("Action", null).show();
             }
         });
-
+        ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
+        ServiceLocator.get(PerfilService.class).updatePerfilData(this,ServiceLocator.get(FacebookService.class).getFacebookID());
+        ServiceLocator.get(AmistadesService.class).getAmistades(this);
+        ServiceLocator.get(AmistadesService.class).getAllUsers(this);
     }
 
     public void goMenu(){
-        ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
-        ServiceLocator.get(PerfilService.class).updatePerfilData(this,ServiceLocator.get(FacebookService.class).getFacebookID());
+
         mViewPager.setCurrentItem(0);
     }
     public void goAmistades(){

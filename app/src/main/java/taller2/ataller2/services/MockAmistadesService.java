@@ -1,5 +1,7 @@
 package taller2.ataller2.services;
 
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 
@@ -8,6 +10,8 @@ import java.util.List;
 
 import taller2.ataller2.model.Amistad;
 import taller2.ataller2.R;
+import taller2.ataller2.model.Perfil;
+
 public class MockAmistadesService implements AmistadesService {
 
     //private static Context context;
@@ -40,5 +44,30 @@ public class MockAmistadesService implements AmistadesService {
     @Override
     public Amistad getAmistad(int index) {
         return mAmistades.get(index);
+    }
+
+    @Override
+    public void getAmistades(Activity activity) {
+
+    }
+
+    @Override
+    public void rechazarAmistad(Activity activity, Amistad amistad) {
+
+    }
+
+    @Override
+    public void aceptarAmistad(Activity activity, Amistad amistad) {
+
+    }
+
+    @Override
+    public void getAllUsers(Activity activity) {
+
+    }
+
+    @Override
+    public List<Perfil> processAllUsers() {
+        return null;
     }
 }

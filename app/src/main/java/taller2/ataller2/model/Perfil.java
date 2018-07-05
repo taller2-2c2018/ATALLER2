@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Perfil {
 
+    private String id = "";
     private String mNombre = "";
     private String mDescription = "";
     private Bitmap mPicture;
@@ -69,4 +70,11 @@ public class Perfil {
 
     public void setAmigos(List<List<String>> amigos) {mAmigos = amigos;}
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
 }

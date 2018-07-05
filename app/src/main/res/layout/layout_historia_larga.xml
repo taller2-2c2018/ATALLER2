@@ -27,7 +27,8 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp" />
             <TextView
-                android:text="Fernando Nitz"
+                android:clickable="true"
+                android:text="Usuario"
                 android:textSize="26dp"
                 android:textStyle="bold"
                 android:id="@+id/nombreUsuarioHistoria"

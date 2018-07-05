@@ -150,11 +150,14 @@ public class HerokuHistoriasService implements HistoriasService {
                     JSONArray reactions = obj.getJSONArray("mReactions");
                     JSONArray comentarios = obj.getJSONArray("mComments");
 
+                    String nom = obj.getString("mFirstName");
+                    String ape = obj.getString("mLastName");
+
                     if (isFlash){
                         HistoriaCorta historia = new HistoriaCorta();
 
-                        getHistoriaCortaFile(historia,fileID);
-//                        getHistoriaCortaFile(historia,fileProfileID);
+                        getHistoriaCortaFile(historia,fileID,1);
+                        getHistoriaCortaFile(historia,fileProfileID,2);
 
                         Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
                         historia.setPicture(icon);
@@ -165,9 +168,9 @@ public class HerokuHistoriasService implements HistoriasService {
                     else{
                         Historia historia = new Historia(title);
 
-                        getHistoriaFile(historia,fileID);
-                        //getHistoriaFile(historia,fileProfileID);
-
+                        getHistoriaFile(historia,fileID,1);
+                        getHistoriaFile(historia,fileProfileID,2);
+                        historia.setNombre(nom + " " + ape );
                         historia.setUserID(userID);
                         historia.setID(historiaID);
                         historia.setDescription(desc);
@@ -244,6 +247,17 @@ public class HerokuHistoriasService implements HistoriasService {
     }
 
     @Override
+    public List<Historia> getMisHistorias(Activity activity, String id) {
+        List<Historia> misHistorias = new ArrayList();
+        for (Historia historia:mHistorias){
+            if (historia.getUserID().equals(id)){
+                misHistorias.add(historia);
+            }
+        }
+        return misHistorias;
+    }
+
+    @Override
     public List<HistoriaCorta> getHistoriasCortas(Activity activity) {
         if (mHistoriasCortas == null) {
             updateHistoriasCortasData(activity);
@@ -295,7 +309,7 @@ public class HerokuHistoriasService implements HistoriasService {
         return true;
     }
 
-    private void getHistoriaCortaFile (final HistoriaCorta historia, int id) {
+    private void getHistoriaCortaFile (final HistoriaCorta historia, int id,final int pos) {
         final NetworkObject requestTokenObject = getHistoriaFileNetworkObject(id);
         final NetworkFragment networkFragment = NetworkFragment.getInstance(contextActivity.getFragmentManager(), requestTokenObject);
         mDownloading = false;
@@ -313,7 +327,12 @@ public class HerokuHistoriasService implements HistoriasService {
                             if (status.equals("200")) {
                                 JSONObject data = resultToken.getJSONObject("data");
                                 //String foto = data.getString("mFile");
-                                historia.setPicture(StringToBitMap(data.getString("mFile")));
+                                if (pos == 1) {
+                                    historia.setPicture(StringToBitMap(data.getString("mFile")));
+                                }
+                                else{
+                                    historia.setPictureUsr(StringToBitMap(data.getString("mFile")));
+                                }
                             }
                         }
                         catch (Throwable t) {
@@ -343,7 +362,7 @@ public class HerokuHistoriasService implements HistoriasService {
         }
     }
 
-    private void getHistoriaFile (final Historia historia, int id) {
+    private void getHistoriaFile (final Historia historia, int id, final int pos) {
         final NetworkObject requestTokenObject = getHistoriaFileNetworkObject(id);
         final NetworkFragment networkFragment = NetworkFragment.getInstance(contextActivity.getFragmentManager(), requestTokenObject);
         mDownloading = false;
@@ -361,7 +380,12 @@ public class HerokuHistoriasService implements HistoriasService {
                             if (status.equals("200")) {
                                 JSONObject data = resultToken.getJSONObject("data");
                                 //String foto = data.getString("mFile");
-                                historia.setPicture(StringToBitMap(data.getString("mFile")));
+                                if (pos == 1){
+                                    historia.setPicture(StringToBitMap(data.getString("mFile")));
+                                }
+                                else{
+                                    historia.setPictureUsr(StringToBitMap(data.getString("mFile")));
+                                }
                             }
                         }
                         catch (Throwable t) {

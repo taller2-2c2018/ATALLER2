@@ -11,12 +11,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Toast;
 import java.util.List;
 
 import taller2.ataller2.CameraActivity;
 import taller2.ataller2.Filters.SearchFilter;
+import taller2.ataller2.SearchActivity;
 import taller2.ataller2.adapters.HistoriasCortasListAdapter;
 import taller2.ataller2.adapters.HistoriasListAdapter;
 import taller2.ataller2.services.ServiceLocator;
@@ -35,7 +37,7 @@ public class ListadoHistoriasFragment extends Fragment implements Refresh{
     private RecyclerView mRecyclerView;
     private RecyclerView mRecyclerViewCortas;
 
-    private SearchView mSearchView;
+    private ImageView mSearchView;
 
     @Override
     public void refresh() {
@@ -73,9 +75,19 @@ public class ListadoHistoriasFragment extends Fragment implements Refresh{
                              Bundle savedInstanceState) {
 
         //View view = container.getChildAt(0);
-        View view = inflater.inflate(R.layout.fragment_historias_recientes, container, false);
+        View view = inflater.inflate(R.layout.fragment_historias_recientes2, container, false);
 
-        mSearchView = view.findViewById(R.id.searchViewList);
+        mSearchView = view.findViewById(R.id.search);
+        mSearchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         mButtonNuevaHistoriaView = view.findViewById(R.id.buttonIngresaHistoria);
 
         mRecyclerView = view.findViewById(R.id.listHistoriasRecientes);
@@ -91,7 +103,6 @@ public class ListadoHistoriasFragment extends Fragment implements Refresh{
         mRecyclerViewCortas.setLayoutManager(layoutManager);
 
         setUpNuevaHistoriaView();
-        setUpSearchView();
         return view;
     }
 
@@ -120,21 +131,6 @@ public class ListadoHistoriasFragment extends Fragment implements Refresh{
         return ServiceLocator.get(UsersService.class);
     }
 
-    private void setUpSearchView() {
-        mSearchView.setOnQueryTextListener( new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                filterUsersByText(newText, false);
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                filterUsersByText(query, true);
-                return true;
-            }
-        });
-    }
 
     private void setUpNuevaHistoriaView() {
         mButtonNuevaHistoriaView.setOnClickListener(new View.OnClickListener() {
