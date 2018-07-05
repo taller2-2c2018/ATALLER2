@@ -31,7 +31,6 @@ import taller2.ataller2.model.MapaHistoriasFragment;
 import taller2.ataller2.model.Notificacion;
 import taller2.ataller2.model.Perfil;
 import taller2.ataller2.model.PerfilFragment;
-import taller2.ataller2.model.Refresh;
 import taller2.ataller2.services.HistoriasService;
 import taller2.ataller2.services.PerfilService;
 import taller2.ataller2.services.ServiceLocator;
@@ -251,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         }
     }
     public void pantallaPPAL(){
-        Intent intent = new Intent(this, MiPerfilActivity.class);
+        Intent intent = new Intent(this, PerfilActivity.class);
         startActivity(intent);
     }
 

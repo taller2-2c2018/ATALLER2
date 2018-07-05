@@ -113,7 +113,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MiPerfilActivity"
+            android:name=".PerfilActivity"
             android:label=" "
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter android:order="1">

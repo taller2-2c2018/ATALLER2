@@ -96,7 +96,7 @@ public class PerfilFragment extends Fragment implements Refresh{
             }
         });
 
-        AppCompatButton subir = view.findViewById(R.id.subir_foto_perfil);
+        ImageView subir = view.findViewById(R.id.subir_foto_perfil);
         subir.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){

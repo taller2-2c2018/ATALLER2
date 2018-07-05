@@ -139,6 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <ImageView
+                    android:id="@+id/comentario_ly"
                     android:clickable="true"
                     android:src="@drawable/ic_sms_black_18dp"
                     android:layout_width="30dp"
@@ -146,12 +147,45 @@
             </LinearLayout>
 
         </LinearLayout>
+
         <android.support.v7.widget.RecyclerView
-            android:visibility="visible"
+            android:visibility="gone"
             android:id="@+id/comentarios_historia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </android.support.v7.widget.RecyclerView>
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ingreso_comentario"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:clickable="true"
+                android:src="@drawable/send_button"
+                android:id="@+id/fab_comentario"
+                android:tint="@android:color/holo_red_light"
+                android:layout_alignParentEnd="true"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_comentario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@id/fab_comentario">
+
+                <EditText
+                    android:id="@+id/input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ingrese un comentario" />
+            </android.support.design.widget.TextInputLayout>
+
+        </RelativeLayout>
+
 
     </LinearLayout>
 

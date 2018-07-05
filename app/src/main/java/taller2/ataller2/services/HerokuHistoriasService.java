@@ -594,7 +594,7 @@ public class HerokuHistoriasService implements HistoriasService {
                         try{
                             resultToken = new JSONObject(result.mResultValue);
                             String status = resultToken.getString("status");
-                            if (status.equals("200")) {
+                            if (status.equals("201")) {
                                 resultado2 = resultToken.getJSONObject("data");
                             }
                         }

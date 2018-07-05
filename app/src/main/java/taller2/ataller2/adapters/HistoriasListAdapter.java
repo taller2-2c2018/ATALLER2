@@ -1,9 +1,11 @@
 package taller2.ataller2.adapters;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.graphics.Bitmap;
 import android.provider.ContactsContract;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +13,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -46,7 +50,11 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
         private final ImageView mNoMeGusta;
         private final ImageView mMeDivierte;
         private final ImageView mMeAburre;
+        private final ImageView mComentario;
         private final RecyclerView mRecyclerView;
+        private final RelativeLayout mRelativeLayout;
+        private final EditText mInputComentario;
+        private final ImageView mSendComentario;
 
         HistoriasViewHolder(View itemView) {
             super(itemView);
@@ -62,8 +70,12 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
             mNoMeGusta = (ImageView) itemView.findViewById(R.id.no_me_gusta);
             mMeDivierte = (ImageView) itemView.findViewById(R.id.me_divierte);
             mMeAburre = (ImageView) itemView.findViewById(R.id.me_aburre);
-
+            mComentario = (ImageView) itemView.findViewById(R.id.comentario_ly);
             mRecyclerView = itemView.findViewById(R.id.comentarios_historia);
+            mRelativeLayout = itemView.findViewById(R.id.ingreso_comentario);
+
+            mInputComentario = itemView.findViewById(R.id.input);
+            mSendComentario = itemView.findViewById(R.id.fab_comentario);
 
         }
     }
@@ -82,7 +94,7 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
 
 
     @Override
-    public void onBindViewHolder(HistoriasViewHolder holder, int position) {
+    public void onBindViewHolder(final HistoriasViewHolder holder, int position) {
         final Historia historia = mHistoria.get(position);
 
         Bitmap originalBitmap = historia.getPictureUsr();
@@ -101,6 +113,9 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
         holder.mDescripcion.setText(historia.getDescription());
         holder.mFecha.setText(historia.getFecha());
         holder.mUbicacion.setText(historia.getUbicacion());
+
+        holder.mRecyclerView.setLayoutManager(new LinearLayoutManager((Activity)(holder.mRecyclerView.getContext())));
+        holder.mRecyclerView.setAdapter(new ComentsListAdapter(historia.getComentarios()));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,26 +136,55 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
         holder.mNoMeGusta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mHistoriasListListener.onHistoriaClicked(historia);
+                EmotionType emotion = EmotionType.DONT_LIKE;
+                FragmentManager manager = ((Activity) v.getContext()).getFragmentManager();
+                ServiceLocator.get(HistoriasService.class).actReaction(manager, historia,emotion);
+
             }
         });
 
         holder.mMeDivierte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mHistoriasListListener.onHistoriaClicked(historia);
+                EmotionType emotion = EmotionType.FUN;
+                FragmentManager manager = ((Activity) v.getContext()).getFragmentManager();
+                ServiceLocator.get(HistoriasService.class).actReaction(manager, historia,emotion);
             }
         });
 
         holder.mMeAburre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mHistoriasListListener.onHistoriaClicked(historia);
+                EmotionType emotion = EmotionType.BORE;
+                FragmentManager manager = ((Activity) v.getContext()).getFragmentManager();
+                ServiceLocator.get(HistoriasService.class).actReaction(manager, historia,emotion);
             }
         });
 
-        holder.mRecyclerView.setLayoutManager(new LinearLayoutManager((Activity)(holder.mRecyclerView.getContext())));
-        holder.mRecyclerView.setAdapter(new ComentsListAdapter(historia.getComentarios()));
+        holder.mComentario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (View.VISIBLE == holder.mRecyclerView.getVisibility()){
+                    holder.mRecyclerView.setVisibility(View.GONE);
+                    holder.mRelativeLayout.setVisibility(View.GONE);
+                }
+                else{
+                    holder.mRecyclerView.setVisibility(View.VISIBLE);
+                    holder.mRelativeLayout.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
+
+        holder.mSendComentario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String comentario = holder.mInputComentario.getText().toString();
+                FragmentManager manager = ((Activity) v.getContext()).getFragmentManager();
+                ServiceLocator.get(HistoriasService.class).actCommet(manager, historia,comentario);
+
+            }
+        });
 
     }
 
