@@ -143,7 +143,12 @@ public class HerokuHistoriasService implements HistoriasService {
                     String lat = obj.getString("mLatitude");
                     String lng = obj.getString("mLongitude");
                     int fileID = obj.getInt("mFileId");
-                    int fileProfileID = obj.getInt("mProfilePictureId");
+                    int fileProfileID = -1;
+                    try {
+                       fileProfileID = obj.getInt("mProfilePictureId");
+                    }
+                    catch (Exception ex){
+                    }
                     String fileType = obj.getString("mFileType");
                     boolean isFlash = obj.getBoolean("mFlash");
                     String location = obj.getString("mLocation");

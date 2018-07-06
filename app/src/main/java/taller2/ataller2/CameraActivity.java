@@ -28,6 +28,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.zomato.photofilters.imageprocessors.Filter;
 import com.zomato.photofilters.imageprocessors.subfilters.BrightnessSubFilter;
@@ -52,13 +53,18 @@ public class CameraActivity extends Activity {
 
     private static int TAKE_IMAGE = 1;
     private static int PICK_IMAGE = 2;
+    private static int PICK_VIDEO = 3;
 
-    private Button btn_hacerfoto;
-    private Button btm_publicar;
-    private Button btn_subirfoto;
+    private ImageView btn_hacerfoto;
+    private ImageView btm_publicar;
+    private ImageView btn_subirfoto;
+    private ImageView btn_subirvideo;
 
     private ImageView btn_editar;
     private ImageView ivPhoto;
+    private VideoView vvVideo;
+
+    private Uri uriVideo;
 
     private TextView tv;
 
@@ -72,11 +78,15 @@ public class CameraActivity extends Activity {
     int valueContraste = 0;
     int valueSaturacion = 0;
 
+    boolean videoOn = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_crear_historia_larga);
+
         ivPhoto = (ImageView) findViewById(R.id.imgMostrar);
+        vvVideo = findViewById(R.id.videoMostrar);
 
         tv = (TextView) findViewById(R.id.text_input_historia);
 
@@ -84,27 +94,49 @@ public class CameraActivity extends Activity {
         System.out.println (myFilesDir);
         myFilesDir.mkdirs();
 
-        btn_hacerfoto = (Button) this.findViewById(R.id.btn_camara);
+        btn_hacerfoto = (ImageView) this.findViewById(R.id.btn_camara);
         btn_hacerfoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                vvVideo.setVisibility(View.GONE);
+                ivPhoto.setVisibility(View.VISIBLE);
                 openTakeFoto(v.getContext());
+                videoOn = false;
             }
         });
 
-        btn_subirfoto = (Button) this.findViewById(R.id.btn_subir_foto);
+        btn_subirfoto = (ImageView) this.findViewById(R.id.btn_subir_foto);
         btn_subirfoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                vvVideo.setVisibility(View.GONE);
+                ivPhoto.setVisibility(View.VISIBLE);
                 openGallery();
+                videoOn = false;
             }
         });
 
-        btm_publicar = (Button) this.findViewById(R.id.button5);
+        btn_subirvideo = (ImageView) this.findViewById(R.id.btn_subir_video);
+        btn_subirvideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vvVideo.setVisibility(View.VISIBLE);
+                ivPhoto.setVisibility(View.GONE);
+                openGalleryVideo();
+                videoOn = true;
+            }
+        });
+
+        btm_publicar = (ImageView) this.findViewById(R.id.button5);
         btm_publicar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                publicarHistoria();
+                if (videoOn){
+                    publicarHistoriaVideo();
+                }
+                else{
+                    publicarHistoria();
+                }
                 finish();
             }
         });
@@ -137,9 +169,16 @@ public class CameraActivity extends Activity {
             historia.setPictureUsr(drawableToBitmap(ivPhoto.getDrawable()));
             getHistoriasService().crearHistoria(this.getFragmentManager(),historia);
         }
-
+    }
+    private void publicarHistoriaVideo() {
+        Historia historia = new Historia(tv.getText().toString());
+        historia.setVideo(uriVideo);
+        historia.setDescription("muy buena foto");
+        historia.setPictureUsr(drawableToBitmap(ivPhoto.getDrawable()));
+       // getHistoriasService().crearHistoria(this.getFragmentManager(),historia);
 
     }
+
 
     private void openTakeFoto(Context context){
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
@@ -173,6 +212,12 @@ public class CameraActivity extends Activity {
         startActivityForResult(gallery, PICK_IMAGE);
     }
 
+    private void openGalleryVideo(){
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Video.Media.INTERNAL_CONTENT_URI);
+        //gallery.setType("video/*, image/*");
+        startActivityForResult(gallery, PICK_VIDEO);
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==TAKE_IMAGE){
@@ -186,6 +231,19 @@ public class CameraActivity extends Activity {
         if (requestCode==PICK_IMAGE){
             Uri imageUri = data.getData();
             ivPhoto.setImageURI(imageUri);
+            //ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
+        }
+
+        if (requestCode==PICK_VIDEO){
+
+            Uri uri = data.getData();
+            uriVideo = uri;
+            try{
+                vvVideo.setVideoURI(uri);
+                vvVideo.start();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
             //ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
         }
 

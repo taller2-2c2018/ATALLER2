@@ -11,6 +11,7 @@ public interface PerfilService extends CustomService{
     void updateFoto(Activity activity, Bitmap bitmap);
     void solicitarAmistad(Activity activity, String id);
 
+    List<String> getAmigos();
     Perfil getMiPerfil();
     Perfil getPerfil();
 }

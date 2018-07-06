@@ -10,8 +10,7 @@ public class Conversacion {
     private int mCantMsjSinLeer = 0;
     private List<Mensaje> mMensajeria = new ArrayList();
 
-    public Conversacion(String nombreConver) {
-        mNombreConver = nombreConver;
+    public Conversacion() {
     }
 
     public String getNombreConver() {

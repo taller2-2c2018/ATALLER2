@@ -48,6 +48,11 @@ public class MockPerfilService implements PerfilService {
     }
 
     @Override
+    public List<String> getAmigos() {
+        return null;
+    }
+
+    @Override
     public Perfil getPerfil() {
 
         return mPerfiles.get(0);

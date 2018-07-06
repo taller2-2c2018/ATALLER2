@@ -164,7 +164,7 @@ public class BaseFacebookService implements FacebookService {
             networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
                 @Override
                 public void onResponseReceived(NetworkResult result) {
-                    /*if (result.mException == null) {
+                    if (result.mException == null) {
                         mAuthToken = result.mResponseHeaders.get(AUTH_RESULT);
                         if (mAuthToken == null) {
                             loginCallback.onError("El usuario falló al ser autenticado");
@@ -176,7 +176,7 @@ public class BaseFacebookService implements FacebookService {
                         loginCallback.onError("El usuario falló al ser autenticado");
                     }
                     mDownloading = false;
-                    */
+
                     loginCallback.onSuccess();
                 }
 

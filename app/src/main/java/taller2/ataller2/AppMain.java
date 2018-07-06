@@ -7,6 +7,7 @@ import taller2.ataller2.model.Perfil;
 import taller2.ataller2.services.AmistadesService;
 import taller2.ataller2.services.ConversacionService;
 import taller2.ataller2.services.HerokuAmistadesService;
+import taller2.ataller2.services.HerokuConversacionService;
 import taller2.ataller2.services.HerokuHistoriasService;
 import taller2.ataller2.services.HerokuPerfilService;
 import taller2.ataller2.services.MockAmistadesService;
@@ -35,9 +36,8 @@ public class AppMain extends Application {
 
     private void bindServices(Context applicationContext) {
         ServiceLocator.init(applicationContext);
-        ServiceLocator.bindCustomServiceImplementation(ConversacionService.class, MockConversacionService.class);
         //ServiceLocator.bindCustomServiceImplementation(NotificacionesService.class, MockNotificacionService.class);
-
+        ServiceLocator.bindCustomServiceImplementation(ConversacionService.class, HerokuConversacionService.class);
         ServiceLocator.bindCustomServiceImplementation(AmistadesService.class, HerokuAmistadesService.class);
         ServiceLocator.bindCustomServiceImplementation(FacebookService.class, BaseFacebookService.class);
         ServiceLocator.bindCustomServiceImplementation(PerfilService.class, HerokuPerfilService.class);

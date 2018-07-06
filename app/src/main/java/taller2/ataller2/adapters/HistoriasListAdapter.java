@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import java.util.List;
 
@@ -46,6 +47,7 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
     public static class HistoriasViewHolder extends RecyclerView.ViewHolder {
         private final View mView;
         private final ImageView mPicture;
+        private final VideoView mVideo;
         private final TextView mTitulo;
         private final TextView mDescripcion;
         private final TextView mUbicacion;
@@ -68,7 +70,10 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
             super(itemView);
             mView = itemView;
             mPictureUser = (ImageView) itemView.findViewById(R.id.imgUsuarioHistoria);
+
             mPicture = (ImageView) itemView.findViewById(R.id.imageHistoria);
+            mVideo = itemView.findViewById(R.id.videoHistoria);
+
             mTitulo = (TextView) itemView.findViewById(R.id.textTitulo);
             mDescripcion = (TextView) itemView.findViewById(R.id.textDescripcion);
             mUbicacion = (TextView) itemView.findViewById(R.id.textUbicacion);

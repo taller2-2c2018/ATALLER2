@@ -1,6 +1,7 @@
 package taller2.ataller2.model;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 
 import java.util.List;
 
@@ -20,6 +21,8 @@ public class Historia {
 
     private Bitmap mPicture;
     private Bitmap mPictureUser;
+
+    private Uri mVideo;
 
     private List<Comentario> mComentarios;
 
@@ -94,6 +97,10 @@ public class Historia {
     public void setNombre (String nom) {nombre = nom;}
 
     public String getNombre () {return nombre;}
+
+    public Uri getVideo(){return mVideo; }
+
+    public void setVideo(Uri uri) {mVideo = uri;}
 
     public List <Comentario> getComentarios () {return mComentarios;}
 

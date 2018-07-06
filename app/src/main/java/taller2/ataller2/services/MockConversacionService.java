@@ -1,5 +1,6 @@
 package taller2.ataller2.services;
 
+import android.app.Activity;
 import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +19,11 @@ public class MockConversacionService implements ConversacionService {
     }
 
     @Override
-    public void updateConversacionData() {
+    public void updateConversacionData(Activity activity) {
 
         mConversaciones = new ArrayList<>();
-        Conversacion c1 = new Conversacion("Agustin Pollo");
-        Conversacion c2 = new Conversacion("El Diego");
+        Conversacion c1 = new Conversacion();
+        Conversacion c2 = new Conversacion();
 
         c1.setCantMsjSinLeer(3);
 
@@ -54,9 +55,9 @@ public class MockConversacionService implements ConversacionService {
     }
 
     @Override
-    public List<Conversacion> getConversaciones() {
+    public List<Conversacion> getConversaciones(Activity activity) {
         if (mConversaciones == null) {
-            updateConversacionData();
+            updateConversacionData(activity);
         }
         return mConversaciones;
     }

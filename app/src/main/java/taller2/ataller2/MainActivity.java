@@ -2,6 +2,7 @@ package taller2.ataller2;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         b_menu.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                view.setBackgroundColor(Color.BLUE);
                 goMenu();
             }
         });

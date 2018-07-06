@@ -14,6 +14,7 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -46,12 +47,13 @@ public class HerokuPerfilService implements PerfilService {
     private Context mContext;
     private Perfil mPerfil;
     private Perfil mMiPerfil;
+    private List<String> idAmigos;
+
     JSONObject resultadoPerfil = null;
 
     public HerokuPerfilService(Context context) {
         mContext = context;
     }
-
 
     @Override
     public Perfil getPerfil() {
@@ -78,6 +80,18 @@ public class HerokuPerfilService implements PerfilService {
                 String fileType = resultadoPerfil.getString("mFileTypeProfilePicture");
                 JSONArray amigos = resultadoPerfil.getJSONArray("mFriendshipList");
 
+                idAmigos = new ArrayList();
+                for (int i = 0 ; i < amigos.length(); i++) {
+                    String obj = null;
+                    try {
+                        obj = amigos.getString(i);
+                        if (!estaAdentro(idAmigos,obj)){
+                            idAmigos.add(obj);
+                        }
+                    }
+                    catch (Exception ex){ }
+                }
+
                 mMiPerfil = new Perfil(nombre + " " + apellido );
                 Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
                 mMiPerfil.setPicture(icon);
@@ -88,11 +102,23 @@ public class HerokuPerfilService implements PerfilService {
                 mMiPerfil.setMail(mail);
                 mMiPerfil.setSexo(sexo);
 
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private boolean estaAdentro(List<String> lista,String  buscado){
+        String id = ServiceLocator.get(FacebookService.class).getFacebookID();
+        if (id.equals(buscado)){
+            return true;
+        }
+        for (String elem : lista){
+            if (elem.equals(buscado)){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -243,6 +269,11 @@ public class HerokuPerfilService implements PerfilService {
                 }
             });
         }
+    }
+
+    @Override
+    public List<String> getAmigos() {
+        return idAmigos;
     }
 
     private NetworkObject solicitarAmistadNetworkObject(String id) {

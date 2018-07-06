@@ -52,7 +52,7 @@ public class ListadoConversacionesFragment extends Fragment implements Refresh{
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             ConversacionService conversacionService = getConversacionesService();
-            recyclerView.setAdapter(new ConversacionListAdapter(conversacionService.getConversaciones(), mConversacionesListListener));
+            recyclerView.setAdapter(new ConversacionListAdapter(conversacionService.getConversaciones(getActivity()), mConversacionesListListener));
         }
         return view;
     }
