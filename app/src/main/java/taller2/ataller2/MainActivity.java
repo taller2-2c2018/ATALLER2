@@ -4,6 +4,7 @@ package taller2.ataller2;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -20,6 +21,9 @@ import android.view.ViewGroup;
 
 import android.widget.ImageButton;
 import android.widget.SearchView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import taller2.ataller2.model.Amistad;
 import taller2.ataller2.model.Conversacion;
@@ -45,89 +49,45 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         ListadoNotificacionesFragment.NotificacionesListListener,
         PerfilFragment.PerfilListener{
 
-    private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+    private TabLayout mTabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
-        //ServiceLocator.get(PerfilService.class).updatePerfilData(this,ServiceLocator.get(FacebookService.class).getFacebookID());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager = findViewById(R.id.container);
+        setupViewPager(mViewPager);
 
-        ImageButton b_menu = findViewById( R.id.buttonMenu );
-        b_menu.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                view.setBackgroundColor(Color.BLUE);
-                goMenu();
-            }
-        });
+        mTabLayout = findViewById(R.id.tabs);
+        mTabLayout.setupWithViewPager(mViewPager);
 
-        ImageButton b_chat = findViewById( R.id.buttonChat );
-        b_chat.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                goChat();
-            }
-        });
+        mTabLayout.getTabAt(0).setIcon(R.drawable.ic_home);
+        mTabLayout.getTabAt(1).setIcon(R.drawable.ic_group_add_black_18dp);
+        mTabLayout.getTabAt(2).setIcon(R.drawable.ic_sms_black_18dp);
+        mTabLayout.getTabAt(3).setIcon(R.drawable.user_perfil);
+        mTabLayout.getTabAt(4).setIcon(R.drawable.location);
 
-        ImageButton b_amigos = findViewById( R.id.buttonAmigos );
-        b_amigos.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                goAmistades();
-            }
-        });
+//        ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
+//        ServiceLocator.get(PerfilService.class).updatePerfilData(this,ServiceLocator.get(FacebookService.class).getFacebookID());
+//        ServiceLocator.get(AmistadesService.class).getAmistades(this);
+//        ServiceLocator.get(AmistadesService.class).getAllUsers(this);
+    }
 
-        /*
-        ImageButton b_notif = findViewById( R.id.buttonNotificaciones );
-        b_notif.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                goNotif();
-            }
-        }); */
-
-        ImageButton b_perfil = findViewById( R.id.buttonOptions );
-        b_perfil.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                goPerfil();
-            }
-        });
-
-        ImageButton b_location = findViewById( R.id.buttonLocation );
-        b_location.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                goLocation();
-            }
-        });
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //         .setAction("Action", null).show();
-            }
-        });
-        ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
-        ServiceLocator.get(PerfilService.class).updatePerfilData(this,ServiceLocator.get(FacebookService.class).getFacebookID());
-        ServiceLocator.get(AmistadesService.class).getAmistades(this);
-        ServiceLocator.get(AmistadesService.class).getAllUsers(this);
+    private void setupViewPager(ViewPager viewPager) {
+        viewPager.setOffscreenPageLimit(2);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new ListadoHistoriasFragment(), "Inicio");
+        adapter.addFragment(new ListadoAmistadesFragment(), "Amigos");
+        adapter.addFragment(new ListadoConversacionesFragment(), "Chats");
+        adapter.addFragment(new PerfilFragment(), "Perfil");
+        adapter.addFragment(new MapaHistoriasFragment(), "Mapa");
+        viewPager.setAdapter(adapter);
     }
 
     public void goMenu(){
@@ -214,83 +174,32 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
 
-        public PlaceholderFragment() {
-        }
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-            final View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            ImageButton b_menu = (ImageButton) rootView.findViewById(R.id.buttonMenu);
-            b_menu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    v.setVisibility(View.GONE);
-                }
-            });
-            return rootView;
-
-        }
-    }
-    public void pantallaPPAL(){
-        Intent intent = new Intent(this, PerfilActivity.class);
-        startActivity(intent);
-    }
-
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
         }
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            switch(position) {
-                case 0 :
-                    return new ListadoHistoriasFragment();
-                case 1 :
-                    return new ListadoAmistadesFragment();
-                //case 2 :
-                //    return new ListadoNotificacionesFragment();
-                case 2 :
-                    return new ListadoConversacionesFragment();
-                case 3 :
-                    return new PerfilFragment();
-                case 4:
-                    return new MapaHistoriasFragment();
-            }
-            return PlaceholderFragment.newInstance(position + 1);
+            return mFragmentList.get(position);
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 5;
+            return mFragmentList.size();
         }
 
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 }
