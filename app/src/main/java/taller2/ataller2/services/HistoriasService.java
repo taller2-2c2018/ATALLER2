@@ -11,8 +11,7 @@ import taller2.ataller2.services.CustomService;
 
 public interface HistoriasService extends CustomService {
 
-    void updateHistoriasData(Activity activity);
-    void updateHistoriasCortasData(Activity activity);
+    void updateHistoriasData(Activity activity, OnCallback callback);
 
     List<Historia> getHistorias(Activity activity);
     List<Historia> getMisHistorias(Activity activity);

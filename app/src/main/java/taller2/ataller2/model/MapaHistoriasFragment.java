@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import taller2.ataller2.services.HistoriasService;
+import taller2.ataller2.services.OnCallback;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.services.location.LocationService;
 

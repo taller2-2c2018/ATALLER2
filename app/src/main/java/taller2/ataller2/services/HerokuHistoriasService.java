@@ -78,7 +78,7 @@ public class HerokuHistoriasService implements HistoriasService {
     }
 
     @Override
-    public void updateHistoriasData( Activity activity) {
+    public void updateHistoriasData(Activity activity, final OnCallback callback) {
         contextActivity = activity;
         final NetworkObject requestTokenObject = getHistoriasNetworkObject();
         final NetworkFragment networkFragment = NetworkFragment.getInstance(activity.getFragmentManager(), requestTokenObject);
@@ -97,6 +97,7 @@ public class HerokuHistoriasService implements HistoriasService {
                             if (status.equals("200")) {
                                 resultadoHistorias = resultToken.getJSONArray("data");
                                 updateHistorias();
+                                callback.onFinish();
                             }
                         }
                         catch (Throwable t) {
@@ -116,7 +117,9 @@ public class HerokuHistoriasService implements HistoriasService {
                 }
 
                 @Override
-                public void onProgressUpdate(int progressCode, int percentComplete) {}
+                public void onProgressUpdate(int progressCode, int percentComplete) {
+
+                }
 
                 @Override
                 public void onFinishDownloading() {
@@ -233,28 +236,9 @@ public class HerokuHistoriasService implements HistoriasService {
         }
     }
 
-    @Override
-    public void updateHistoriasCortasData(Activity activity) {
-
-/*        mHistoriasCortas = new ArrayList();
-        HistoriaCorta c1 = new HistoriaCorta();
-        HistoriaCorta c2 = new HistoriaCorta();
-
-        c1.setPicture(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.river4));
-        c2.setPicture(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.river4));
-
-        c1.setPictureUsr(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.diego));
-        c2.setPictureUsr(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.elche));
-
-        mHistoriasCortas.add(c1);
-        mHistoriasCortas.add(c2);*/
-    }
 
     @Override
     public List<Historia> getHistorias(Activity activity) {
-        if (mHistorias == null) {
-            updateHistoriasData(activity);
-        }
         return mHistorias;
     }
 
@@ -283,9 +267,6 @@ public class HerokuHistoriasService implements HistoriasService {
 
     @Override
     public List<HistoriaCorta> getHistoriasCortas(Activity activity) {
-        if (mHistoriasCortas == null) {
-            updateHistoriasCortasData(activity);
-        }
         return mHistoriasCortas;
     }
 

@@ -23,7 +23,7 @@ public class MockHistoriasService implements HistoriasService {
     }
 
     @Override
-    public void updateHistoriasData(Activity activity) {
+    public void updateHistoriasData(Activity activity, OnCallback callback) {
         if (mHistorias == null){
             mHistorias = new ArrayList<>();
             Historia c1 = new Historia("Increible lo que sucedio...");
@@ -47,6 +47,10 @@ public class MockHistoriasService implements HistoriasService {
     }
 
     @Override
+    public List<Historia> getHistorias(Activity activity) {
+        return null;
+    }
+
     public void updateHistoriasCortasData(Activity activity) {
         mHistoriasCortas = new ArrayList<>();
         HistoriaCorta c1 = new HistoriaCorta();
@@ -60,14 +64,6 @@ public class MockHistoriasService implements HistoriasService {
 
         mHistoriasCortas.add(c1);
         mHistoriasCortas.add(c2);
-    }
-
-    @Override
-    public List<Historia> getHistorias(Activity activity) {
-        if (mHistorias == null) {
-            updateHistoriasData(activity);
-        }
-        return mHistorias;
     }
 
     @Override

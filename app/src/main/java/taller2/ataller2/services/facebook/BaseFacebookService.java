@@ -91,7 +91,7 @@ public class BaseFacebookService implements FacebookService {
     @Override
     public void loginWithAccesToken(Activity activity, LoginCallback loginCalback) {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        //registerToken(loginCalback, activity.getFragmentManager(), accessToken.getUserId());
+        //registerToken(activity.getFragmentManager(), accessToken.getUserId());
         requestAuthToken(loginCalback, activity.getFragmentManager(), accessToken.getUserId());
     }
 
@@ -156,28 +156,16 @@ public class BaseFacebookService implements FacebookService {
         return facebookCallback;
     }
 
-    private void registerToken(final LoginCallback loginCallback, final FragmentManager fragmentManager, String userId) {
+    private void registerToken( final FragmentManager fragmentManager, String userId) {
         NetworkObject requestTokenObject = createRegistrationTokenObject(userId);
         NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
+        mDownloading = false;
         if (!mDownloading) {
             mDownloading = true;
             networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
                 @Override
                 public void onResponseReceived(NetworkResult result) {
-                    if (result.mException == null) {
-                        mAuthToken = result.mResponseHeaders.get(AUTH_RESULT);
-                        if (mAuthToken == null) {
-                            loginCallback.onError("El usuario falló al ser autenticado");
-                            mAuthToken = "";
-                        } else {
-                            loginCallback.onSuccess();
-                        }
-                    } else {
-                        loginCallback.onError("El usuario falló al ser autenticado");
-                    }
                     mDownloading = false;
-
-                    loginCallback.onSuccess();
                 }
 
                 @Override

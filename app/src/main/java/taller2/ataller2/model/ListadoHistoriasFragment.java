@@ -1,5 +1,6 @@
 package taller2.ataller2.model;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.Toast;
 import java.util.List;
@@ -21,12 +24,13 @@ import taller2.ataller2.Filters.SearchFilter;
 import taller2.ataller2.SearchActivity;
 import taller2.ataller2.adapters.HistoriasCortasListAdapter;
 import taller2.ataller2.adapters.HistoriasListAdapter;
+import taller2.ataller2.services.OnCallback;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.services.UsersService;
 import taller2.ataller2.services.HistoriasService;
 import taller2.ataller2.R;
 
-public class ListadoHistoriasFragment extends Fragment implements Refresh{
+public class ListadoHistoriasFragment extends Fragment{
 
     private HistoriasListListener mHistoriasListListener;
     private HistoriasCortasListListener mHistoriasCortasListListener;
@@ -36,13 +40,8 @@ public class ListadoHistoriasFragment extends Fragment implements Refresh{
 
     private RecyclerView mRecyclerView;
     private RecyclerView mRecyclerViewCortas;
-
-
-    @Override
-    public void refresh() {
-        HistoriasService historiasService = getHistoriasService();
-        mRecyclerView.setAdapter(new HistoriasListAdapter(historiasService.getHistorias(this.getActivity()), mHistoriasListListener));
-    }
+    private ProgressBar mLoadingHistorias;
+    private ScrollView mScrollHistoria;
 
     public interface HistoriasListListener {
         void onHistoriaClicked(Historia historia);
@@ -73,22 +72,44 @@ public class ListadoHistoriasFragment extends Fragment implements Refresh{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
         //View view = container.getChildAt(0);
         View view = inflater.inflate(R.layout.fragment_historias_recientes2, container, false);
 
         mButtonNuevaHistoriaView = view.findViewById(R.id.buttonIngresaHistoria);
 
+        mLoadingHistorias = view.findViewById(R.id.progressBar_historias);
+
+        mScrollHistoria = view.findViewById(R.id.scroll_historias);
+
+        showLoadingHistorias(true);
         mRecyclerView = view.findViewById(R.id.listHistoriasRecientes);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        HistoriasService historiasService = getHistoriasService();
-        mRecyclerView.setAdapter(new HistoriasListAdapter(historiasService.getHistorias(this.getActivity()), mHistoriasListListener));
-
         mRecyclerViewCortas = view.findViewById(R.id.listHistoriasCortasRecientes);
         mRecyclerViewCortas.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerViewCortas.setAdapter(new HistoriasCortasListAdapter(historiasService.getHistoriasCortas(this.getActivity()), mHistoriasCortasListListener));
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(),1);
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        mRecyclerViewCortas.setLayoutManager(layoutManager);
+
+        HistoriasService historiasService = getHistoriasService();
+        historiasService.updateHistoriasData(this.getActivity(),new OnCallback() {
+            @Override
+            public void onFinish() {
+                showLoadingHistorias(false);
+
+
+                HistoriasService historiasService = getHistoriasService();
+                mRecyclerView.setAdapter(new HistoriasListAdapter(historiasService.
+                        getHistorias(getActivity()), mHistoriasListListener));
+                mRecyclerViewCortas.setAdapter(new HistoriasCortasListAdapter(historiasService.
+                        getHistoriasCortas(getActivity()), mHistoriasCortasListListener));
+                GridLayoutManager layoutManager = new GridLayoutManager(getContext(),1);
+                layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                mRecyclerViewCortas.setLayoutManager(layoutManager);
+
+
+            }
+        });
+
+
+
 
         setUpNuevaHistoriaView();
         return view;
@@ -152,4 +173,9 @@ public class ListadoHistoriasFragment extends Fragment implements Refresh{
         }
     }
 
+    private void showLoadingHistorias(boolean loading) {
+        mLoadingHistorias.setVisibility(loading ? View.VISIBLE : View.GONE);
+        mScrollHistoria.setVisibility(loading ? View.GONE : View.VISIBLE);
+        mButtonNuevaHistoriaView.setVisibility(loading ? View.GONE : View.VISIBLE);
+    }
 }
