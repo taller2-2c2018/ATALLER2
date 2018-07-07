@@ -44,6 +44,7 @@ import taller2.ataller2.R;
 import taller2.ataller2.model.Comentario;
 import taller2.ataller2.model.Historia;
 import taller2.ataller2.model.HistoriaCorta;
+import taller2.ataller2.model.Reaccion;
 import taller2.ataller2.networking.DownloadCallback;
 import taller2.ataller2.networking.HttpMethodType;
 import taller2.ataller2.networking.NetworkFragment;
@@ -187,6 +188,7 @@ public class HerokuHistoriasService implements HistoriasService {
                         historia.setPictureUsr(icon);
 
                         List<Comentario> lista = new ArrayList();
+                        List<Reaccion> listaReacciones = new ArrayList();
 
                         if (comentarios != null) {
                             for (int j = 0 ; j < comentarios.length(); j++) {
@@ -202,8 +204,25 @@ public class HerokuHistoriasService implements HistoriasService {
                                 catch (Exception ex){ }
                             }
                         }
+                        if (reactions != null) {
+                            for (int j = 0 ; j < reactions.length(); j++) {
+                                JSONObject obj2 = null;
+                                try {
+                                    obj2 = reactions.getJSONObject(j);
+                                    String emocion = obj2.getString("mReaction");
+                                    String user = obj2.getString("mFacebookUserId");
+                                    EmotionType emotionType = EmotionType.LIKE;
+                                    emotionType.setEmotionServer(emocion);
+                                    Reaccion reaccion = new Reaccion(emotionType,user);
+                                    listaReacciones.add(reaccion);
+                                }
+                                catch (Exception ex){ }
+                            }
+                        }
+
 
                         historia.setComentarios(lista);
+                        historia.setReacciones(listaReacciones);
                         mHistorias.add(historia);
                     }
 

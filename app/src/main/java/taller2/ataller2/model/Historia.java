@@ -5,6 +5,10 @@ import android.net.Uri;
 
 import java.util.List;
 
+import taller2.ataller2.services.EmotionType;
+import taller2.ataller2.services.ServiceLocator;
+import taller2.ataller2.services.facebook.FacebookService;
+
 public class Historia {
 
     private String id = "";
@@ -25,6 +29,14 @@ public class Historia {
     private Uri mVideo;
 
     private List<Comentario> mComentarios;
+
+    private List<Reaccion> mReacciones;
+
+    private int cantMeGusta = 0;
+    private int cantNoMeGusta = 0;
+    private int cantMeAburre = 0;
+    private int cantMeDivierte = 0;
+    private Reaccion miReaccion = null;
 
     public Historia(String titulo) {
         mTitulo = titulo;
@@ -94,6 +106,81 @@ public class Historia {
 
     public void setComentarios (List<Comentario> comentarios) {mComentarios = comentarios;}
 
+    public void setReacciones (List<Reaccion> reacciones) {
+        mReacciones = reacciones;
+        for (Reaccion reaccion : reacciones){
+            switch (reaccion.getEmocion().getValue()){
+                case 0:
+                    cantMeGusta += 1;
+                    break;
+                case 1:
+                    cantNoMeGusta += 1;
+                    break;
+                case 2:
+                    cantMeDivierte += 1;
+                    break;
+                case 3:
+                    cantMeAburre += 1;
+                    break;
+            }
+            if (reaccion.getAutor().equals(ServiceLocator.get(FacebookService.class).getFacebookID())){
+                miReaccion = reaccion;
+            }
+        }
+    }
+
+    public void setMiReaccion(EmotionType emocion){
+        if (miReaccion != null && miReaccion.getEmocion().getValue() == emocion.getValue() ){
+            miReaccion = null;
+            switch (emocion.getValue()){
+                case 0:
+                    cantMeGusta -= 1;
+                    break;
+                case 1:
+                    cantNoMeGusta -= 1;
+                    break;
+                case 2:
+                    cantMeDivierte -= 1;
+                    break;
+                case 3:
+                    cantMeAburre -= 1;
+                    break;
+            }
+        } else {
+            if (miReaccion != null){
+                switch (miReaccion.getEmocion().getValue()){
+                    case 0:
+                        cantMeGusta -= 1;
+                        break;
+                    case 1:
+                        cantNoMeGusta -= 1;
+                        break;
+                    case 2:
+                        cantMeDivierte -= 1;
+                        break;
+                    case 3:
+                        cantMeAburre -= 1;
+                        break;
+                }
+            }
+            switch (emocion.getValue()){
+                case 0:
+                    cantMeGusta += 1;
+                    break;
+                case 1:
+                    cantNoMeGusta += 1;
+                    break;
+                case 2:
+                    cantMeDivierte += 1;
+                    break;
+                case 3:
+                    cantMeAburre += 1;
+                    break;
+            }
+            miReaccion = new Reaccion(emocion, ServiceLocator.get(FacebookService.class).getFacebookID());
+        }
+    }
+
     public void setNombre (String nom) {nombre = nom;}
 
     public String getNombre () {return nombre;}
@@ -104,4 +191,25 @@ public class Historia {
 
     public List <Comentario> getComentarios () {return mComentarios;}
 
+    public List <Reaccion> getReacciones () {return mReacciones;}
+
+    public Reaccion getMiReaccion() {
+        return miReaccion;
+    }
+
+    public int getCantMeAburre() {
+        return cantMeAburre;
+    }
+
+    public int getCantMeGusta() {
+        return cantMeGusta;
+    }
+
+    public int getCantNoMeGusta() {
+        return cantNoMeGusta;
+    }
+
+    public int getCantMeDivierte() {
+        return cantMeDivierte;
+    }
 }

@@ -1,14 +1,18 @@
 package taller2.ataller2.model;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import taller2.ataller2.SearchActivity;
 import taller2.ataller2.adapters.AmistadesListAdapter;
 import taller2.ataller2.services.AmistadesService;
 import taller2.ataller2.services.ServiceLocator;
@@ -16,6 +20,7 @@ import taller2.ataller2.R;
 public class ListadoAmistadesFragment extends Fragment implements Refresh{
 
     private AmistadesListListener mAmistadesListListener;
+    private FloatingActionButton mSearchView;
 
     @Override
     public void refresh() {
@@ -46,6 +51,16 @@ public class ListadoAmistadesFragment extends Fragment implements Refresh{
 
         //View view = container.getChildAt(0);
         View view = inflater.inflate(R.layout.fragment_amistades_nuevas, container, false);
+
+        mSearchView = view.findViewById(R.id.search);
+        mSearchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // Set the adapter
         if (view instanceof RecyclerView) {

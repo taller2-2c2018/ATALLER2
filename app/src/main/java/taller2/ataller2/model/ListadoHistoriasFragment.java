@@ -37,7 +37,6 @@ public class ListadoHistoriasFragment extends Fragment implements Refresh{
     private RecyclerView mRecyclerView;
     private RecyclerView mRecyclerViewCortas;
 
-    private ImageView mSearchView;
 
     @Override
     public void refresh() {
@@ -76,17 +75,6 @@ public class ListadoHistoriasFragment extends Fragment implements Refresh{
 
         //View view = container.getChildAt(0);
         View view = inflater.inflate(R.layout.fragment_historias_recientes2, container, false);
-
-        mSearchView = view.findViewById(R.id.search);
-        mSearchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), SearchActivity.class);
-                startActivity(intent);
-            }
-        });
-
 
         mButtonNuevaHistoriaView = view.findViewById(R.id.buttonIngresaHistoria);
 

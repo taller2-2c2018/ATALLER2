@@ -9,10 +9,12 @@
     <color name="purpura">#800080</color>
     <color name="rojo">#ff4400</color>
     <color name="naranjon">#ff6600</color>
+    <color name="grison">#c7c7c7</color>
     <color name="amarillo">#ffe600</color>
     <color name="azul">#0138ff</color>
     <color name="verde">#5bed16</color>
     <color name="celeste">#02ddf5</color>
+    <color name="celestito">#6c96c9</color>
     <color name="verde_py">#fd00ffbb</color>
     <color name="blanco">#fdffffff</color>
 </resources>

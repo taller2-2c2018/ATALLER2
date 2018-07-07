@@ -94,65 +94,61 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <LinearLayout
+            <ImageView
+                android:id="@+id/me_gusta"
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_image_blanco"
+                android:clickable="true"
+                android:gravity="center"
+                android:padding="3dp"
+                android:src="@drawable/face_like" />
+
+            <ImageView
+                android:background="@drawable/rounded_image_blanco"
+                android:id="@+id/no_me_gusta"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:clickable="true"
-                    android:id="@+id/me_gusta"
-                    android:src="@drawable/face_like"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
-            </LinearLayout>
-            <LinearLayout
+                android:padding="3dp"
+                android:clickable="true"
+                android:src="@drawable/facebook_dont_like" />
+
+            <ImageView
+                android:background="@drawable/rounded_image_blanco"
+                android:id="@+id/me_divierte"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/no_me_gusta"
-                    android:clickable="true"
-                    android:src="@drawable/facebook_dont_like"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
-            </LinearLayout>
-            <LinearLayout
+                android:padding="3dp"
+                android:clickable="true"
+                android:src="@drawable/divertido" />
+
+            <ImageView
+                android:background="@drawable/rounded_image_blanco"
+                android:id="@+id/me_aburre"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/me_divierte"
-                    android:clickable="true"
-                    android:src="@drawable/divertido"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/me_aburre"
-                    android:clickable="true"
-                    android:src="@drawable/aburre"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_weight="8"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/comentario_ly"
-                    android:clickable="true"
-                    android:src="@drawable/ic_sms_black_18dp"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
+                android:padding="3dp"
+                android:clickable="true"
+                android:src="@drawable/aburre" />
+
+        <LinearLayout
+            android:layout_weight="8"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/comentario_ly"
+                android:clickable="true"
+                android:src="@drawable/ic_sms_black_18dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
             </LinearLayout>
 
         </LinearLayout>

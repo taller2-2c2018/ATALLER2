@@ -6,7 +6,7 @@ public enum EmotionType {
     FUN(2),
     BORE(3);
 
-    private final int value;
+    private int value;
 
     EmotionType(int value){
         this.value = value;
@@ -28,6 +28,17 @@ public enum EmotionType {
                 return "me aburre";
         }
         return "me gusta";
+    }
+
+    public void setEmotionServer (String reaccion) {
+        if(reaccion.equals("me gusta"))
+                this.value = 0;
+        else if(reaccion.equals("no me gusta"))
+                this.value = 1;
+        else if(reaccion.equals("me divierte"))
+                this.value = 2;
+        else if(reaccion.equals("me aburre"))
+                this.value = 3;
     }
 
     public static taller2.ataller2.services.EmotionType fromInteger(int x) {

@@ -3,6 +3,7 @@ package taller2.ataller2.adapters;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.FaceDetector;
@@ -19,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import java.util.List;
@@ -28,6 +30,7 @@ import taller2.ataller2.model.Historia;
 import taller2.ataller2.model.ListadoHistoriasFragment;
 import taller2.ataller2.R;
 import taller2.ataller2.model.Perfil;
+import taller2.ataller2.model.Reaccion;
 import taller2.ataller2.services.EmotionType;
 import taller2.ataller2.services.HistoriasService;
 import taller2.ataller2.services.ServiceLocator;
@@ -144,6 +147,7 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
                 EmotionType emotion = EmotionType.LIKE;
                 FragmentManager manager = ((Activity) v.getContext()).getFragmentManager();
                 ServiceLocator.get(HistoriasService.class).actReaction(manager, historia,emotion);
+                setReactionBackgrounds(emotion, historia, v.getContext(), holder);
             }
         });
 
@@ -153,7 +157,7 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
                 EmotionType emotion = EmotionType.DONT_LIKE;
                 FragmentManager manager = ((Activity) v.getContext()).getFragmentManager();
                 ServiceLocator.get(HistoriasService.class).actReaction(manager, historia,emotion);
-
+                setReactionBackgrounds(emotion, historia, v.getContext(), holder);
             }
         });
 
@@ -163,6 +167,7 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
                 EmotionType emotion = EmotionType.FUN;
                 FragmentManager manager = ((Activity) v.getContext()).getFragmentManager();
                 ServiceLocator.get(HistoriasService.class).actReaction(manager, historia,emotion);
+                setReactionBackgrounds(emotion, historia, v.getContext(), holder);
             }
         });
 
@@ -172,6 +177,7 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
                 EmotionType emotion = EmotionType.BORE;
                 FragmentManager manager = ((Activity) v.getContext()).getFragmentManager();
                 ServiceLocator.get(HistoriasService.class).actReaction(manager, historia,emotion);
+                setReactionBackgrounds(emotion, historia, v.getContext(), holder);
             }
         });
 
@@ -212,6 +218,34 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
         });
 
     }
+
+    private void setReactionBackgrounds(EmotionType emocion, Historia historia, Context context, HistoriasViewHolder holder){
+        holder.mNoMeGusta.setBackground(context.getDrawable(R.drawable.rounded_image_blanco));
+        holder.mMeDivierte.setBackground(context.getDrawable(R.drawable.rounded_image_blanco));
+        holder.mMeAburre.setBackground(context.getDrawable(R.drawable.rounded_image_blanco));
+        holder.mMeGusta.setBackground(context.getDrawable(R.drawable.rounded_image_blanco));
+
+        historia.setMiReaccion(emocion);
+        Reaccion miReaccion = historia.getMiReaccion();
+
+        if (miReaccion != null){
+            switch (miReaccion.getEmocion().getValue()){
+                case 0:
+                    holder.mMeGusta.setBackground(context.getDrawable(R.drawable.rounded_image));
+                    break;
+                case 1:
+                    holder.mNoMeGusta.setBackground(context.getDrawable(R.drawable.rounded_image));
+                    break;
+                case 2:
+                    holder.mMeDivierte.setBackground(context.getDrawable(R.drawable.rounded_image));
+                    break;
+                case 3:
+                    holder.mMeAburre.setBackground(context.getDrawable(R.drawable.rounded_image));
+                    break;
+            }
+        }
+    }
+
 
     @Override
     public int getItemCount() {

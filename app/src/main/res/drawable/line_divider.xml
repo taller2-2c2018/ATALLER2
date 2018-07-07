@@ -8,7 +8,7 @@
         <!-- width: altura de la línea -->
         <stroke
             android:width="2dp"
-            android:color="#ff0000" />
+            android:color="#ffb1ad" />
 
         <!-- altura del drawable, siempre debe ser superior al width anterior -->
         <size android:height="3dp" />

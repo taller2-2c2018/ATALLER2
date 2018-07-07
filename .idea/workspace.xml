@@ -47,73 +47,154 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/MainActivity.java">
+      <file leaf-file-name="BaseFacebookService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/BaseFacebookService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="84" column="67" lean-forward="false" selection-start-line="84" selection-start-column="67" selection-end-line="84" selection-end-column="67" />
+            <state relative-caret-position="258">
+              <caret line="214" column="0" lean-forward="false" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="layout_historia_larga.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_historia_larga.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4">
+              <caret line="138" column="49" lean-forward="false" selection-start-line="138" selection-start-column="49" selection-end-line="138" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HerokuHistoriasService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="411">
+              <caret line="161" column="0" lean-forward="false" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
               <folding>
-                <element signature="e#6812#6813#0" expanded="true" />
-                <element signature="e#6850#6851#0" expanded="true" />
+                <element signature="method#updateHistoriasData#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#updateHistoriasCortasData#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#getHistoriasCortas#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#getUsers#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#crearHistoria#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#crearHistoriaCorta#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#actReaction#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#actCommet#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#getHistoriaCortaFile#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#postHistoriasCortaJSON#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#postHistoriasJSON#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#createHistoriaCorta#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#createHistoriaObject#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#createHistoriaCortaObject#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#getHistoriasNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#postReactionJSON#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#getReactionNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#crearReactionObject#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#postCommentJSON#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#onResponseReceived#0;class#31769:33392" expanded="false" />
+                <element signature="method#getActiveNetworkInfo#0;class#31769:33392" expanded="false" />
+                <element signature="method#getCommentNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#crearCommentObject#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#StringToBitMap#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#BitMapToString#0;class#HerokuHistoriasService#0" expanded="false" />
+                <element signature="method#BitMapToString2#0;class#HerokuHistoriasService#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fragment_main.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml">
+      <file leaf-file-name="HistoriasListAdapter.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/HistoriasListAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-149">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="3063">
+              <caret line="243" column="26" lean-forward="false" selection-start-line="243" selection-start-column="26" selection-end-line="243" selection-end-column="26" />
+              <folding>
+                <element signature="e#6149#6333#0" expanded="true" />
+                <element signature="e#6332#6333#0" expanded="true" />
+                <element signature="e#6380#6826#0" expanded="true" />
+                <element signature="e#6825#6826#0" expanded="true" />
+                <element signature="e#6875#7326#0" expanded="true" />
+                <element signature="e#7325#7326#0" expanded="true" />
+                <element signature="e#7376#7821#0" expanded="true" />
+                <element signature="e#7820#7821#0" expanded="true" />
+                <element signature="e#7869#8315#0" expanded="true" />
+                <element signature="e#8314#8315#0" expanded="true" />
+                <element signature="e#8365#8893#0" expanded="true" />
+                <element signature="e#8892#8893#0" expanded="true" />
+                <element signature="e#8947#9338#0" expanded="true" />
+                <element signature="e#9337#9338#0" expanded="true" />
+                <element signature="e#9438#9816#0" expanded="true" />
+                <element signature="e#9815#9816#0" expanded="true" />
+              </folding>
             </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fragment_historias_recientes2.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_historias_recientes2.xml">
+      <file leaf-file-name="View.java" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/android/view/View.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="33" lean-forward="false" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="20" column="52" lean-forward="false" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="styles.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="17" lean-forward="false" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
+            <state relative-caret-position="105">
+              <caret line="10571" column="0" lean-forward="false" selection-start-line="10571" selection-start-column="0" selection-end-line="10571" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dimens.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
+      <file leaf-file-name="Historia.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/Historia.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+            <state relative-caret-position="-1026">
+              <caret line="123" column="26" lean-forward="false" selection-start-line="123" selection-start-column="26" selection-end-line="123" selection-end-column="26" />
+              <folding>
+                <element signature="e#5287#5288#0" expanded="true" />
+                <element signature="e#5320#5321#0" expanded="true" />
+                <element signature="e#5356#5357#0" expanded="true" />
+                <element signature="e#5391#5392#0" expanded="true" />
+                <element signature="e#5426#5427#0" expanded="true" />
+                <element signature="e#5460#5461#0" expanded="true" />
+                <element signature="e#5497#5498#0" expanded="true" />
+                <element signature="e#5533#5534#0" expanded="true" />
+                <element signature="e#5571#5572#0" expanded="true" />
+                <element signature="e#5608#5609#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Reaccion.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/Reaccion.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="11" lean-forward="false" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+              <folding>
+                <element signature="e#310#311#0" expanded="true" />
+                <element signature="e#338#339#0" expanded="true" />
+                <element signature="e#377#378#0" expanded="true" />
+                <element signature="e#407#408#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="colors.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HerokuConversacionService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuConversacionService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -124,18 +205,14 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="resourceFile" />
         <option value="layoutResourceFile" />
+        <option value="resourceFile" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>PerfilAc</find>
-      <find>new Intent</find>
-      <find>nombreUsuarioHistoria</find>
-      <find>getHistoriasService</find>
       <find>updatePerfil</find>
       <find>resultado</find>
       <find>updatePerfilData</find>
@@ -162,6 +239,10 @@
       <find>PlaceholderFragment</find>
       <find>TEXT</find>
       <find>mTabTextSize</find>
+      <find>R.drawable.rounded_image</find>
+      <find>setBackground</find>
+      <find>HistoriasService.class</find>
+      <find>EmotionType</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2203,27 +2284,16 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/ConversationActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/Comentario.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/networking/NetworkFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_mi_perfil.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/content_mi_perfil.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/MiPerfilActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/networking/NetworkResult.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/FacebookService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_primary.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HistoriasService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockHistoriasService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/PerfilFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/Amistad.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/AmistadesListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_historias_recientes2.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/user_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_users.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/AmistadesService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockAmistadesService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoHistoriasFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/Filters/Filter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/Filters/SearchFilter.java" />
@@ -2242,18 +2312,29 @@
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockPerfilService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/AppMain.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuPerfilService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_historia_larga.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/HistoriasListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_crear_historia_larga.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/Historia.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/CameraActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuConversacionService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/BaseFacebookService.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/line_divider.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_historias_recientes2.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_amistades_nuevas.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoAmistadesFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoHistoriasFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/rounded_image.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable-v24/rounded_image2.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_historia_larga.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/Reaccion.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/EmotionType.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/HistoriasListAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/Historia.java" />
       </list>
     </option>
   </component>
@@ -2302,19 +2383,34 @@
             <path>
               <item name="ATALLER2" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="ataller2" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="adapters" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ATALLER2" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="ataller2" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ATALLER2" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="ataller2" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ATALLER2" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
             </path>
             <path>
               <item name="ATALLER2" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="ATALLER2" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="xml" type="ddeffd01:AndroidResFolderTypeNode" />
+              <item name="drawable" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
           </expand>
           <select />
@@ -2336,12 +2432,13 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/workspace2/ATALLER2/app/src/main/java/taller2/ataller2/services/HerokuPerfilService.java" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\workspace2\ATALLER2\app\src\main\res\drawable" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\workspace2\ATALLER2\app\src\main\res\drawable-v24" />
       <recent name="C:\workspace2\ATALLER2\app\src\main\res\drawable" />
       <recent name="C:\workspace2\ATALLER2\app\src\main\res\layout" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\workspace2\ATALLER2\app\src\main\res\drawable" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -2555,7 +2652,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5131579" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39967105" sideWeight="0.49546143" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39967105" sideWeight="0.49546143" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2645,19 +2742,19 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java</url>
-          <line>288</line>
+          <line>307</line>
           <properties />
           <option name="timeStamp" value="86" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java</url>
-          <line>433</line>
+          <line>452</line>
           <properties />
           <option name="timeStamp" value="103" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java</url>
-          <line>691</line>
+          <line>710</line>
           <properties />
           <option name="timeStamp" value="132" />
         </line-breakpoint>
@@ -2698,40 +2795,16 @@
           <option name="timeStamp" value="170" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java</url>
-          <line>160</line>
-          <properties />
-          <option name="timeStamp" value="171" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java</url>
-          <line>128</line>
-          <properties />
-          <option name="timeStamp" value="172" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/BaseFacebookService.java</url>
-          <line>214</line>
-          <properties />
-          <option name="timeStamp" value="177" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/BaseFacebookService.java</url>
           <line>159</line>
           <properties />
           <option name="timeStamp" value="178" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/BaseFacebookService.java</url>
-          <line>202</line>
+          <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/HistoriasListAdapter.java</url>
+          <line>146</line>
           <properties />
-          <option name="timeStamp" value="179" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuConversacionService.java</url>
-          <line>40</line>
-          <properties />
-          <option name="timeStamp" value="180" />
+          <option name="timeStamp" value="184" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/PerfilActivity.java</url>
@@ -2740,7 +2813,7 @@
           <option name="timeStamp" value="133" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="181" />
+      <option name="time" value="185" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2754,112 +2827,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/user_layout.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="18" column="45" lean-forward="true" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockAmistadesService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="526">
-          <caret line="65" column="8" lean-forward="false" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="157" column="41" lean-forward="false" selection-start-line="157" selection-start-column="41" selection-end-line="157" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/MapaHistoriasFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1853">
-          <caret line="146" column="0" lean-forward="false" selection-start-line="146" selection-start-column="0" selection-end-line="152" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/AmistadesService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="21" column="17" lean-forward="false" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoNotificacionesFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="54" column="139" lean-forward="false" selection-start-line="51" selection-start-column="9" selection-end-line="54" selection-end-column="139" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/LocationO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_historias_recientes.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_users.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="26" column="38" lean-forward="false" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/Filters/Filter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="26" lean-forward="false" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/Filters/SearchFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="28" column="8" lean-forward="false" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="20" />
-          <folding>
-            <element signature="e#772#773#0" expanded="false" />
-            <element signature="e#799#800#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/Filters/UserFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="33" column="37" lean-forward="false" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/SearchActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="373">
@@ -2874,6 +2841,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
           <caret line="77" column="8" lean-forward="false" selection-start-line="77" selection-start-column="8" selection-end-line="77" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2892,6 +2860,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
           <caret line="46" column="93" lean-forward="true" selection-start-line="46" selection-start-column="93" selection-end-line="46" selection-end-column="93" />
+          <folding>
+            <element signature="e#2078#2448#0" expanded="false" />
+            <element signature="e#2447#2448#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2907,6 +2879,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="13" column="26" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2914,6 +2887,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="24" column="43" lean-forward="false" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2941,17 +2915,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_historia_larga.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="64" column="39" lean-forward="false" selection-start-line="64" selection-start-column="39" selection-end-line="64" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoConversacionesFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="479">
@@ -2964,6 +2927,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
           <caret line="51" column="8" lean-forward="false" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="20" />
+          <folding>
+            <element signature="e#1221#1222#0" expanded="false" />
+            <element signature="e#1248#1249#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2971,6 +2938,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="10" column="58" lean-forward="false" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2978,6 +2946,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="13" column="4" lean-forward="false" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2985,47 +2954,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="597">
           <caret line="67" column="90" lean-forward="true" selection-start-line="67" selection-start-column="90" selection-end-line="67" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/Historia.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="99" column="0" lean-forward="false" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/CameraActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-66">
-          <caret line="185" column="45" lean-forward="false" selection-start-line="185" selection-start-column="27" selection-end-line="185" selection-end-column="45" />
-          <folding>
-            <element signature="e#2986#3284#0" expanded="false" />
-            <element signature="e#3283#3284#0" expanded="false" />
-            <element signature="e#3405#3688#0" expanded="false" />
-            <element signature="e#3687#3688#0" expanded="false" />
-            <element signature="e#3812#4099#0" expanded="false" />
-            <element signature="e#4098#4099#0" expanded="false" />
-            <element signature="e#4211#4526#0" expanded="false" />
-            <element signature="e#4525#4526#0" expanded="false" />
-            <element signature="e#4638#4805#0" expanded="false" />
-            <element signature="e#4804#4805#0" expanded="false" />
-            <element signature="e#9956#10947#0" expanded="false" />
-            <element signature="e#10946#10947#0" expanded="false" />
-            <element signature="e#10990#11140#0" expanded="false" />
-            <element signature="e#11139#11140#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/HistoriasListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1326">
-          <caret line="113" column="54" lean-forward="false" selection-start-line="113" selection-start-column="41" selection-end-line="113" selection-end-column="54" />
-          <folding>
-            <element signature="e#6048#6232#0" expanded="false" />
-            <element signature="e#6231#6232#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3044,22 +2973,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="9" lean-forward="false" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuConversacionService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/BaseFacebookService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2958">
-          <caret line="214" column="0" lean-forward="false" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3088,41 +3001,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="160" column="0" lean-forward="false" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
-          <folding>
-            <element signature="method#updateHistoriasData#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#updateHistoriasCortasData#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#getHistoriasCortas#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#getUsers#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#crearHistoria#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#crearHistoriaCorta#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#actReaction#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#actCommet#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#getHistoriaCortaFile#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#postHistoriasCortaJSON#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#postHistoriasJSON#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#createHistoriaCorta#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#createHistoriaObject#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#createHistoriaCortaObject#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#getHistoriasNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#postReactionJSON#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#getReactionNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#crearReactionObject#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#postCommentJSON#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#onResponseReceived#0;class#30676:32299" expanded="false" />
-            <element signature="method#getActiveNetworkInfo#0;class#30676:32299" expanded="false" />
-            <element signature="method#getCommentNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#crearCommentObject#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#StringToBitMap#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#BitMapToString#0;class#HerokuHistoriasService#0" expanded="false" />
-            <element signature="method#BitMapToString2#0;class#HerokuHistoriasService#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/ConversationActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="118">
@@ -3141,22 +3019,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="96" column="35" lean-forward="false" selection-start-line="96" selection-start-column="35" selection-end-line="96" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/AppMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="39" column="95" lean-forward="false" selection-start-line="39" selection-start-column="95" selection-end-line="39" selection-end-column="95" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoHistoriasFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-10">
-          <caret line="59" column="11" lean-forward="false" selection-start-line="59" selection-start-column="11" selection-end-line="59" selection-end-column="11" />
           <folding />
         </state>
       </provider>
@@ -3182,17 +3044,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-149">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/appcompat-v7/27.0.2/4ae031a24f432a35efae0d609731c5a34e65696c/appcompat-v7-27.0.2-sources.jar!/android/support/v7/app/AppCompatActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
@@ -3212,34 +3063,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_historias_recientes2.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="33" lean-forward="false" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="20" column="52" lean-forward="false" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
@@ -3250,13 +3079,291 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="52" lean-forward="false" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="8" lean-forward="false" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/line_divider.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="33" lean-forward="false" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_amistades_nuevas.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="24" column="55" lean-forward="false" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoAmistadesFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="60" column="38" lean-forward="false" selection-start-line="60" selection-start-column="38" selection-end-line="60" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/HistoriasAdaptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="84" column="67" lean-forward="false" selection-start-line="84" selection-start-column="67" selection-end-line="84" selection-end-column="67" />
+        <state relative-caret-position="390">
+          <caret line="84" column="46" lean-forward="true" selection-start-line="84" selection-start-column="46" selection-end-line="84" selection-end-column="46" />
           <folding>
-            <element signature="e#6812#6813#0" expanded="true" />
-            <element signature="e#6850#6851#0" expanded="true" />
+            <element signature="e#6812#6813#0" expanded="false" />
+            <element signature="e#6850#6851#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoHistoriasFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_historias_recientes2.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#780#813#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/rounded_image.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="50" lean-forward="false" selection-start-line="3" selection-start-column="50" selection-end-line="3" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/rounded_image_blanco.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="47" lean-forward="false" selection-start-line="3" selection-start-column="47" selection-end-line="3" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/java/util/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="110" column="17" lean-forward="false" selection-start-line="110" selection-start-column="17" selection-end-line="110" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_historia_larga.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4">
+          <caret line="138" column="49" lean-forward="false" selection-start-line="138" selection-start-column="49" selection-end-line="138" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/EmotionType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="27" column="35" lean-forward="true" selection-start-line="20" selection-start-column="11" selection-end-line="27" selection-end-column="35" />
+          <folding>
+            <element signature="e#169#170#0" expanded="false" />
+            <element signature="e#203#204#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/CameraActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="784">
+          <caret line="343" column="15" lean-forward="false" selection-start-line="343" selection-start-column="15" selection-end-line="343" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/AppMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="41" column="65" lean-forward="false" selection-start-line="41" selection-start-column="65" selection-end-line="41" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/FacebookService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/BaseFacebookService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="214" column="0" lean-forward="false" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuConversacionService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/Reaccion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="11" lean-forward="false" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+          <folding>
+            <element signature="e#310#311#0" expanded="true" />
+            <element signature="e#338#339#0" expanded="true" />
+            <element signature="e#377#378#0" expanded="true" />
+            <element signature="e#407#408#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-27/android/view/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="10571" column="0" lean-forward="false" selection-start-line="10571" selection-start-column="0" selection-end-line="10571" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuHistoriasService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="161" column="0" lean-forward="false" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
+          <folding>
+            <element signature="method#updateHistoriasData#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#updateHistoriasCortasData#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#getHistoriasCortas#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#getUsers#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#crearHistoria#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#crearHistoriaCorta#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#actReaction#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#actCommet#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#getHistoriaCortaFile#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#postHistoriasCortaJSON#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#postHistoriasJSON#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#createHistoriaCorta#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#createHistoriaObject#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#createHistoriaCortaObject#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#getHistoriasNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#postReactionJSON#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#getReactionNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#crearReactionObject#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#postCommentJSON#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#onResponseReceived#0;class#31769:33392" expanded="false" />
+            <element signature="method#getActiveNetworkInfo#0;class#31769:33392" expanded="false" />
+            <element signature="method#getCommentNetworkObject#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#crearCommentObject#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#StringToBitMap#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#BitMapToString#0;class#HerokuHistoriasService#0" expanded="false" />
+            <element signature="method#BitMapToString2#0;class#HerokuHistoriasService#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/Historia.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1026">
+          <caret line="123" column="26" lean-forward="false" selection-start-line="123" selection-start-column="26" selection-end-line="123" selection-end-column="26" />
+          <folding>
+            <element signature="e#5287#5288#0" expanded="true" />
+            <element signature="e#5320#5321#0" expanded="true" />
+            <element signature="e#5356#5357#0" expanded="true" />
+            <element signature="e#5391#5392#0" expanded="true" />
+            <element signature="e#5426#5427#0" expanded="true" />
+            <element signature="e#5460#5461#0" expanded="true" />
+            <element signature="e#5497#5498#0" expanded="true" />
+            <element signature="e#5533#5534#0" expanded="true" />
+            <element signature="e#5571#5572#0" expanded="true" />
+            <element signature="e#5608#5609#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/HistoriasListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3063">
+          <caret line="243" column="26" lean-forward="false" selection-start-line="243" selection-start-column="26" selection-end-line="243" selection-end-column="26" />
+          <folding>
+            <element signature="e#6149#6333#0" expanded="true" />
+            <element signature="e#6332#6333#0" expanded="true" />
+            <element signature="e#6380#6826#0" expanded="true" />
+            <element signature="e#6825#6826#0" expanded="true" />
+            <element signature="e#6875#7326#0" expanded="true" />
+            <element signature="e#7325#7326#0" expanded="true" />
+            <element signature="e#7376#7821#0" expanded="true" />
+            <element signature="e#7820#7821#0" expanded="true" />
+            <element signature="e#7869#8315#0" expanded="true" />
+            <element signature="e#8314#8315#0" expanded="true" />
+            <element signature="e#8365#8893#0" expanded="true" />
+            <element signature="e#8892#8893#0" expanded="true" />
+            <element signature="e#8947#9338#0" expanded="true" />
+            <element signature="e#9337#9338#0" expanded="true" />
+            <element signature="e#9438#9816#0" expanded="true" />
+            <element signature="e#9815#9816#0" expanded="true" />
           </folding>
         </state>
       </provider>
