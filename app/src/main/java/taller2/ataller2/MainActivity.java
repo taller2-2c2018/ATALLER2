@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 //        ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
 //        ServiceLocator.get(PerfilService.class).updatePerfilData(this,ServiceLocator.get(FacebookService.class).getFacebookID());
 //        ServiceLocator.get(AmistadesService.class).getAmistades(this);
-//        ServiceLocator.get(AmistadesService.class).getAllUsers(this);
+//
     }
 
     private void setupViewPager(ViewPager viewPager) {

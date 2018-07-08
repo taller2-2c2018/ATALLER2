@@ -305,14 +305,17 @@ public class HerokuAmistadesService implements AmistadesService {
                     int mProfilePictureId = -1;
                     try {
                         mProfilePictureId = obj.getInt("mProfilePictureId");
-                    }catch (Exception ex){ }
+                    }catch (Exception ex )
+                    {
+                        mProfilePictureId = -1;
+                    }
                     Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
 
                     Perfil perfil = new Perfil(mFirstName + " " + mLastName);
                     perfil.setId(mFacebookUserId);
                     perfil.setPicture(icon);
                     if (mProfilePictureId != -1){
-                        getHistoriaFile(perfil, mProfilePictureId);
+                        //getHistoriaFile(perfil, mProfilePictureId);
                     }
 
                     perfiles.add(perfil);
@@ -326,7 +329,7 @@ public class HerokuAmistadesService implements AmistadesService {
     }
 
     @Override
-    public void getAllUsers( final Activity activity) {
+    public void getAllUsers(final Activity activity, final OnCallback callback) {
         final NetworkObject requestTokenObject = getAllUsersNetworkObject();
         final NetworkFragment networkFragment = NetworkFragment.getInstance(activity.getFragmentManager(), requestTokenObject);
         mDownloading = false;
@@ -343,6 +346,7 @@ public class HerokuAmistadesService implements AmistadesService {
                             if (status.equals("200")) {
                                 allUsers = resultToken.getJSONArray("data");
                                 processAllUsers();
+                                callback.onFinish();
                             }
                         }
                         catch (Throwable t) {
