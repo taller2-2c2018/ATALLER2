@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Firebase" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="412118ba-4d1e-4b8c-ae26-b1f6795e29d8" name="Default" comment="" />
@@ -50,18 +50,47 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
+            <state relative-caret-position="-1496">
               <caret line="86" column="39" lean-forward="false" selection-start-line="86" selection-start-column="39" selection-end-line="86" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PerfilFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ListadoHistoriasFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoHistoriasFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="84">
+              <caret line="76" column="67" lean-forward="false" selection-start-line="76" selection-start-column="67" selection-end-line="76" selection-end-column="67" />
+              <folding>
+                <element signature="method#getHistoriasService#0;class#ListadoHistoriasFragment#0" expanded="false" />
+                <element signature="method#setUpNuevaHistoriaView#0;class#ListadoHistoriasFragment#0" expanded="false" />
+                <element signature="method#enterUserPerfil#0;class#ListadoHistoriasFragment#0" expanded="false" />
+                <element signature="method#filterUsersByText#0;class#ListadoHistoriasFragment#0" expanded="false" />
+                <element signature="method#loadUsers#0;class#ListadoHistoriasFragment#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_historias_recientes2.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_historias_recientes2.xml">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="40" column="41" lean-forward="false" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer2">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PerfilFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/PerfilFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="175" column="34" lean-forward="false" selection-start-line="175" selection-start-column="17" selection-end-line="175" selection-end-column="34" />
+            <state relative-caret-position="2014">
+              <caret line="171" column="42" lean-forward="false" selection-start-line="171" selection-start-column="26" selection-end-line="171" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -2207,7 +2236,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/MapaHistoriasFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockHistoriasService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/BaseFacebookService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_historias_recientes2.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/AmistadesService.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_users.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockAmistadesService.java" />
@@ -2219,6 +2247,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuPerfilService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockPerfilService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/PerfilFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_historias_recientes2.xml" />
       </list>
     </option>
   </component>
@@ -2499,6 +2528,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.48789713" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2516,7 +2546,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22012103" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Build" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30592105" sideWeight="0.49394855" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30592105" sideWeight="0.49394855" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.4868421" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -3211,21 +3241,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_historias_recientes2.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/PerfilFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-302">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="21" selection-end-column="52" />
+        <state relative-caret-position="2014">
+          <caret line="171" column="42" lean-forward="false" selection-start-line="171" selection-start-column="26" selection-end-line="171" selection-end-column="42" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1496">
+          <caret line="86" column="39" lean-forward="false" selection-start-line="86" selection-start-column="39" selection-end-line="86" selection-end-column="39" />
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoHistoriasFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="84" column="33" lean-forward="false" selection-start-line="84" selection-start-column="29" selection-end-line="84" selection-end-column="33" />
+        <state relative-caret-position="84">
+          <caret line="76" column="67" lean-forward="false" selection-start-line="76" selection-start-column="67" selection-end-line="76" selection-end-column="67" />
           <folding>
             <element signature="method#getHistoriasService#0;class#ListadoHistoriasFragment#0" expanded="false" />
             <element signature="method#setUpNuevaHistoriaView#0;class#ListadoHistoriasFragment#0" expanded="false" />
@@ -3236,20 +3271,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="86" column="39" lean-forward="false" selection-start-line="86" selection-start-column="39" selection-end-line="86" selection-end-column="39" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_historias_recientes2.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="40" column="41" lean-forward="false" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="41" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/PerfilFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="175" column="34" lean-forward="false" selection-start-line="175" selection-start-column="17" selection-end-line="175" selection-end-column="34" />
-          <folding />
-        </state>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
   </component>
