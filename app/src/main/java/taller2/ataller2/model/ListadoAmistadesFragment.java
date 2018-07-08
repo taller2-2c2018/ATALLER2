@@ -10,17 +10,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.TextView;
 
+import java.util.List;
+
+import taller2.ataller2.R;
 import taller2.ataller2.SearchActivity;
 import taller2.ataller2.adapters.AmistadesListAdapter;
 import taller2.ataller2.services.AmistadesService;
 import taller2.ataller2.services.ServiceLocator;
-import taller2.ataller2.R;
 public class ListadoAmistadesFragment extends Fragment implements Refresh{
 
     private AmistadesListListener mAmistadesListListener;
     private FloatingActionButton mSearchView;
+    private TextView mNoHayAmigosView;
 
     @Override
     public void refresh() {
@@ -62,12 +65,16 @@ public class ListadoAmistadesFragment extends Fragment implements Refresh{
             }
         });
 
+        AmistadesService amistadesService = getAmistadesService();
+        List<Amistad> amistades = amistadesService.getAmistades();
+        mNoHayAmigosView = view.findViewById(R.id.textNoHayAmigos);
+        mNoHayAmigosView.setVisibility(amistades.isEmpty() ? View.VISIBLE : View.GONE);
+
         // Set the adapter
         if (view instanceof RecyclerView) {
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            AmistadesService amistadesService = getAmistadesService();
-            recyclerView.setAdapter(new AmistadesListAdapter(amistadesService.getAmistades(), mAmistadesListListener));
+            recyclerView.setAdapter(new AmistadesListAdapter(amistades, mAmistadesListListener));
         }
         return view;
     }
