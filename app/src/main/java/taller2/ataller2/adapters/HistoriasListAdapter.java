@@ -217,6 +217,24 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
             }
         });
 
+        if (historia.getMiReaccion() != null){
+            switch (historia.getMiReaccion().getEmocion().getValue()){
+                case 0:
+                    holder.mMeGusta.setBackground( holder.mMeGusta.getContext().getDrawable(R.drawable.rounded_image));
+                    break;
+                case 1:
+                    holder.mNoMeGusta.setBackground(holder.mNoMeGusta.getContext().getDrawable(R.drawable.rounded_image));
+                    break;
+                case 2:
+                    holder.mMeDivierte.setBackground(holder.mMeDivierte.getContext().getDrawable(R.drawable.rounded_image));
+                    break;
+                case 3:
+                    holder.mMeAburre.setBackground(holder.mMeAburre.getContext().getDrawable(R.drawable.rounded_image));
+                    break;
+            }
+
+        }
+
     }
 
     private void setReactionBackgrounds(EmotionType emocion, Historia historia, Context context, HistoriasViewHolder holder){

@@ -37,7 +37,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+
+    <android.support.v4.widget.NestedScrollView
         android:id="@+id/scroll_historias"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -50,9 +51,9 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -61,18 +62,22 @@
                 android:layout_marginTop="10dp"
                 android:src="@drawable/line_divider" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/listHistoriasCortasRecientes"
-                android:name="com.example.fernandon.android_client.TALLER2.ListadoFragmentHistorias"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                app:layoutManager="LinearLayoutManager"
-                tools:context="com.example.fernandon.android_client.TALLER2.model.ListadoHistoriasFragment"
-                tools:listitem="@layout/layout_historia_corta_imagen">
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/listHistoriasCortasRecientes"
+                    android:name="com.example.fernandon.android_client.TALLER2.ListadoFragmentHistorias"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    app:layoutManager="LinearLayoutManager"
+                    tools:context="com.example.fernandon.android_client.TALLER2.model.ListadoHistoriasFragment"
+                    tools:listitem="@layout/layout_historia_corta_imagen">
 
-            </android.support.v7.widget.RecyclerView>
+                </android.support.v7.widget.RecyclerView>
+            </ScrollView>
 
             <ImageView
                 android:layout_width="match_parent"
@@ -81,18 +86,23 @@
                 android:layout_marginTop="10dp"
                 android:src="@drawable/line_divider" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/listHistoriasRecientes"
-                android:name="com.example.fernandon.android_client.TALLER2.ListadoFragmentHistorias"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="LinearLayoutManager"
-                tools:context="com.example.fernandon.android_client.TALLER2.model.ListadoHistoriasFragment"
-                tools:listitem="@layout/layout_historia_larga">
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/listHistoriasRecientes"
+                    android:name="com.example.fernandon.android_client.TALLER2.ListadoFragmentHistorias"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="LinearLayoutManager"
+                    tools:context="com.example.fernandon.android_client.TALLER2.model.ListadoHistoriasFragment"
+                    tools:listitem="@layout/layout_historia_larga">
 
-            </android.support.v7.widget.RecyclerView>
+                </android.support.v7.widget.RecyclerView>
+            </ScrollView>
 
         </LinearLayout>
-    </ScrollView>
+
+    </android.support.v4.widget.NestedScrollView>
 
 </android.support.constraint.ConstraintLayout>
