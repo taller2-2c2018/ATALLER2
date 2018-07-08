@@ -47,11 +47,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ListadoHistoriasFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ListadoConversacionesFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoConversacionesFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="546">
+              <caret line="75" column="32" lean-forward="true" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="32" />
+              <folding>
+                <element signature="e#2155#2565#0" expanded="true" />
+                <element signature="e#2564#2565#0" expanded="true" />
+                <element signature="e#3340#3341#0" expanded="true" />
+                <element signature="e#3402#3403#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ListadoHistoriasFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoHistoriasFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="44" column="28" lean-forward="false" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
+            <state relative-caret-position="1342">
+              <caret line="176" column="0" lean-forward="false" selection-start-line="176" selection-start-column="0" selection-end-line="180" selection-end-column="5" />
               <folding>
                 <element signature="method#getHistoriasService#0;class#ListadoHistoriasFragment#0" expanded="false" />
                 <element signature="method#setUpNuevaHistoriaView#0;class#ListadoHistoriasFragment#0" expanded="false" />
@@ -63,23 +78,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fragment_historias_recientes2.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_historias_recientes2.xml">
+      <file leaf-file-name="HerokuConversacionService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuConversacionService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="55">
-              <caret line="53" column="41" lean-forward="false" selection-start-line="53" selection-start-column="41" selection-end-line="53" selection-end-column="41" />
-              <folding>
-                <element signature="e#341#945#0" expanded="false" />
-                <element signature="e#951#1616#0" expanded="false" />
-                <element signature="e#2296#2566#0" expanded="false" />
-                <element signature="e#2714#3451#0" expanded="false" />
-                <element signature="e#3491#3761#0" expanded="false" />
-                <element signature="e#3909#4526#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="296">
+              <caret line="44" column="55" lean-forward="false" selection-start-line="44" selection-start-column="43" selection-end-line="44" selection-end-column="55" />
+              <folding />
             </state>
           </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
+        </entry>
+      </file>
+      <file leaf-file-name="HerokuPerfilService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuPerfilService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="67" column="28" lean-forward="false" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="28" />
+              <folding>
+                <element signature="method#updateFoto#0;class#HerokuPerfilService#0" expanded="false" />
+                <element signature="e#11248#11249#0" expanded="true" />
+                <element signature="e#11279#11280#0" expanded="true" />
+                <element signature="method#updateFotoNetworkObject#0;class#HerokuPerfilService#0" expanded="false" />
+                <element signature="method#updateFotoObject#0;class#HerokuPerfilService#0" expanded="false" />
+                <element signature="method#BitMapToString#0;class#HerokuPerfilService#0" expanded="false" />
+                <element signature="method#StringToBitMap#0;class#HerokuPerfilService#0" expanded="false" />
+              </folding>
+            </state>
           </provider>
         </entry>
       </file>
@@ -97,10 +120,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mPerfilListListenerºº</find>
-      <find>getAllUsers</find>
-      <find>/user/list</find>
-      <find>mButtonNuevaHistoriaView</find>
       <find>new inte</find>
       <find>PerfilAct</find>
       <find>process</find>
@@ -127,6 +146,10 @@
       <find>showLoadingPerfil</find>
       <find>updatePerfilData</find>
       <find>case 0:</find>
+      <find>getAmigos</find>
+      <find>getConversaciones</find>
+      <find>idAmigos</find>
+      <find>updatePerfil</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2168,7 +2191,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/user_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/Filters/Filter.java" />
@@ -2180,7 +2202,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/Conversacion.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/ConversacionService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockConversacionService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoConversacionesFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/AppMain.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_crear_historia_larga.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/CameraActivity.java" />
@@ -2213,12 +2234,14 @@
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/perfil.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/PerfilService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuPerfilService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockPerfilService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/PerfilFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/HistoriasListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_historias_recientes2.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoHistoriasFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_conversaciones_recientes.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoConversacionesFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuPerfilService.java" />
       </list>
     </option>
   </component>
@@ -2274,7 +2297,20 @@
             <path>
               <item name="ATALLER2" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="ataller2" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ATALLER2" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="ATALLER2" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
           </expand>
           <select />
@@ -2686,30 +2722,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/design/27.0.2/94d41fc2899844b127c66f2b8ad8a0afa3eb2469/design-27.0.2-sources.jar!/android/support/design/widget/TabLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="260" column="40" lean-forward="false" selection-start-line="260" selection-start-column="31" selection-end-line="260" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="17" lean-forward="false" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -2836,14 +2848,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuConversacionService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -3143,28 +3147,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/PerfilFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2014">
-          <caret line="171" column="42" lean-forward="false" selection-start-line="171" selection-start-column="26" selection-end-line="171" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuPerfilService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="141" column="52" lean-forward="false" selection-start-line="141" selection-start-column="52" selection-end-line="141" selection-end-column="52" />
-          <folding>
-            <element signature="method#updateFoto#0;class#HerokuPerfilService#0" expanded="false" />
-            <element signature="method#updateFotoNetworkObject#0;class#HerokuPerfilService#0" expanded="false" />
-            <element signature="method#updateFotoObject#0;class#HerokuPerfilService#0" expanded="false" />
-            <element signature="method#BitMapToString#0;class#HerokuPerfilService#0" expanded="false" />
-            <element signature="method#StringToBitMap#0;class#HerokuPerfilService#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/HistoriasListAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
@@ -3205,10 +3187,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/PerfilFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="171" column="42" lean-forward="false" selection-start-line="171" selection-start-column="26" selection-end-line="171" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_conversaciones_recientes.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="51" lean-forward="false" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_historias_recientes2.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="53" column="41" lean-forward="false" selection-start-line="53" selection-start-column="41" selection-end-line="53" selection-end-column="41" />
+        <state relative-caret-position="136">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="21" selection-end-column="52" />
           <folding>
             <element signature="e#341#945#0" expanded="false" />
             <element signature="e#951#1616#0" expanded="false" />
@@ -3223,16 +3224,61 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockConversacionService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-52">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuPerfilService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="67" column="28" lean-forward="false" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="28" />
+          <folding>
+            <element signature="method#updateFoto#0;class#HerokuPerfilService#0" expanded="false" />
+            <element signature="e#11248#11249#0" expanded="true" />
+            <element signature="e#11279#11280#0" expanded="true" />
+            <element signature="method#updateFotoNetworkObject#0;class#HerokuPerfilService#0" expanded="false" />
+            <element signature="method#updateFotoObject#0;class#HerokuPerfilService#0" expanded="false" />
+            <element signature="method#BitMapToString#0;class#HerokuPerfilService#0" expanded="false" />
+            <element signature="method#StringToBitMap#0;class#HerokuPerfilService#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuConversacionService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="44" column="55" lean-forward="false" selection-start-line="44" selection-start-column="43" selection-end-line="44" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoHistoriasFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="44" column="28" lean-forward="false" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
+        <state relative-caret-position="1342">
+          <caret line="176" column="0" lean-forward="false" selection-start-line="176" selection-start-column="0" selection-end-line="180" selection-end-column="5" />
           <folding>
             <element signature="method#getHistoriasService#0;class#ListadoHistoriasFragment#0" expanded="false" />
             <element signature="method#setUpNuevaHistoriaView#0;class#ListadoHistoriasFragment#0" expanded="false" />
             <element signature="method#enterUserPerfil#0;class#ListadoHistoriasFragment#0" expanded="false" />
             <element signature="method#filterUsersByText#0;class#ListadoHistoriasFragment#0" expanded="false" />
             <element signature="method#loadUsers#0;class#ListadoHistoriasFragment#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoConversacionesFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="75" column="32" lean-forward="true" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="32" />
+          <folding>
+            <element signature="e#2155#2565#0" expanded="true" />
+            <element signature="e#2564#2565#0" expanded="true" />
+            <element signature="e#3340#3341#0" expanded="true" />
+            <element signature="e#3402#3403#0" expanded="true" />
           </folding>
         </state>
       </provider>

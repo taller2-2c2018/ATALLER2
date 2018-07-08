@@ -96,7 +96,7 @@ public class HerokuPerfilService implements PerfilService {
                 Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
                 mMiPerfil.setPicture(icon);
 
-                getPerfilFile(activity, mMiPerfil, fotoID);
+                //getPerfilFile(activity, mMiPerfil, fotoID);
 
                 mMiPerfil.setFechaNacimiento(fechaNacimiento);
                 mMiPerfil.setMail(mail);
