@@ -132,7 +132,7 @@ public class BaseFacebookService implements FacebookService {
                 Log.i("LoginActivity", "Login to facebook");
 
                 String userId = loginResult.getAccessToken().getUserId();
-                requestAuthToken(loginCallback, fragmentManager, userId);
+                registerToken(loginCallback, fragmentManager, userId);
             }
 
             @Override
