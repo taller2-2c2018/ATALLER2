@@ -25,7 +25,7 @@ public class MockPerfilService implements PerfilService {
     }
 
     @Override
-    public void updatePerfilData(Activity activity, String id) {
+    public void updatePerfilData(Activity activity, String id, OnCallback callback) {
 
         mPerfiles = new ArrayList<>();
         Perfil c1 = new Perfil("Emanuel");

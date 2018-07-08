@@ -73,8 +73,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         mTabLayout.getTabAt(3).setIcon(R.drawable.user_perfil);
         mTabLayout.getTabAt(4).setIcon(R.drawable.location);
 
-//        ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
-//        ServiceLocator.get(PerfilService.class).updatePerfilData(this,ServiceLocator.get(FacebookService.class).getFacebookID());
+//
 //        ServiceLocator.get(AmistadesService.class).getAmistades(this);
 //
     }

@@ -46,7 +46,44 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="322">
+              <caret line="86" column="39" lean-forward="false" selection-start-line="86" selection-start-column="39" selection-end-line="86" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PerfilFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/PerfilFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="347">
+              <caret line="175" column="34" lean-forward="false" selection-start-line="175" selection-start-column="17" selection-end-line="175" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HerokuPerfilService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuPerfilService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="697">
+              <caret line="141" column="52" lean-forward="false" selection-start-line="141" selection-start-column="52" selection-end-line="141" selection-end-column="52" />
+              <folding>
+                <element signature="method#updateFoto#0;class#HerokuPerfilService#0" expanded="false" />
+                <element signature="method#updateFotoNetworkObject#0;class#HerokuPerfilService#0" expanded="false" />
+                <element signature="method#updateFotoObject#0;class#HerokuPerfilService#0" expanded="false" />
+                <element signature="method#BitMapToString#0;class#HerokuPerfilService#0" expanded="false" />
+                <element signature="method#StringToBitMap#0;class#HerokuPerfilService#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -60,9 +97,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fragment_historias_rec</find>
-      <find>mSearchView</find>
-      <find>intent</find>
       <find>filterUsersByText</find>
       <find>mPerfilListListenerºº</find>
       <find>getAllUsers</find>
@@ -90,6 +124,9 @@
       <find>Toast</find>
       <find>me gusta</find>
       <find>miReaccion</find>
+      <find>updateHistoriasData</find>
+      <find>updatePerfilData</find>
+      <find>showLoadingPerfil</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2131,7 +2168,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/AmistadesListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/user_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
@@ -2140,16 +2176,12 @@
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/Filters/UserFilter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/Perfil.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/adapters/UserLisAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/perfil.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/PerfilActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/PerfilService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/Conversacion.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/ConversacionService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockConversacionService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoConversacionesFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockPerfilService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/AppMain.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuPerfilService.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_crear_historia_larga.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/CameraActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuConversacionService.java" />
@@ -2176,12 +2208,17 @@
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockHistoriasService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/BaseFacebookService.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_historias_recientes2.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/AmistadesService.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_users.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockAmistadesService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/SearchActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuAmistadesService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/perfil.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/PerfilService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuPerfilService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockPerfilService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/PerfilFragment.java" />
       </list>
     </option>
   </component>
@@ -2479,13 +2516,13 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22012103" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30592105" sideWeight="0.49394855" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Build" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30592105" sideWeight="0.49394855" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.4868421" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5131579" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39967105" sideWeight="0.49546143" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39967105" sideWeight="0.49546143" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2593,13 +2630,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/PerfilFragment.java</url>
-          <line>114</line>
+          <line>132</line>
           <properties />
           <option name="timeStamp" value="146" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuPerfilService.java</url>
-          <line>236</line>
+          <line>237</line>
           <properties />
           <option name="timeStamp" value="154" />
         </line-breakpoint>
@@ -2673,49 +2710,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/notifications/SendInstanceIdCallback.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="9" lean-forward="false" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/ConversationActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="109" column="0" lean-forward="false" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
-          <folding>
-            <element signature="method#onActivityResult#0;class#ConversationActivity#0" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#ConversationActivity#0" expanded="false" />
-            <element signature="method#onOptionsItemSelected#0;class#ConversationActivity#0" expanded="false" />
-            <element signature="method#onStart#0;class#ConversationActivity#0" expanded="false" />
-            <element signature="method#onStop#0;class#ConversationActivity#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_primary.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="65" column="43" lean-forward="false" selection-start-line="65" selection-start-column="35" selection-end-line="65" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/location.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/user_perfil.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/appcompat-v7/27.0.2/4ae031a24f432a35efae0d609731c5a34e65696c/appcompat-v7-27.0.2-sources.jar!/android/support/v7/app/AppCompatActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
@@ -3064,17 +3058,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_historias_recientes2.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="21" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/facebook/BaseFacebookService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
@@ -3083,7 +3066,7 @@
             <element signature="method#getAuthToken#0;class#BaseFacebookService#0" expanded="false" />
             <element signature="method#getFacebookID#0;class#BaseFacebookService#0" expanded="false" />
             <element signature="method#getName#0;class#BaseFacebookService#0" expanded="false" />
-            <element signature="e#2791#2792#0" expanded="true" />
+            <element signature="e#2791#2792#0" expanded="false" />
             <element signature="method#loginWithAccesToken#0;class#BaseFacebookService#0" expanded="false" />
             <element signature="method#initializeLoginButton#0;class#BaseFacebookService#0" expanded="false" />
             <element signature="method#initializeLoginButton#1;class#BaseFacebookService#0" expanded="false" />
@@ -3141,8 +3124,8 @@
         <state relative-caret-position="181">
           <caret line="668" column="0" lean-forward="false" selection-start-line="668" selection-start-column="0" selection-end-line="668" selection-end-column="0" />
           <folding>
-            <element signature="e#26324#26325#0" expanded="true" />
-            <element signature="e#26374#26375#0" expanded="true" />
+            <element signature="e#26324#26325#0" expanded="false" />
+            <element signature="e#26374#26375#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3152,8 +3135,8 @@
         <state relative-caret-position="424">
           <caret line="51" column="89" lean-forward="false" selection-start-line="51" selection-start-column="89" selection-end-line="51" selection-end-column="89" />
           <folding>
-            <element signature="e#1814#2146#0" expanded="true" />
-            <element signature="e#2145#2146#0" expanded="true" />
+            <element signature="e#1814#2146#0" expanded="false" />
+            <element signature="e#2145#2146#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3185,17 +3168,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/MockPerfilService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="84" column="46" lean-forward="false" selection-start-line="84" selection-start-column="46" selection-end-line="84" selection-end-column="46" />
+        <state relative-caret-position="153">
+          <caret line="27" column="82" lean-forward="false" selection-start-line="27" selection-start-column="82" selection-end-line="27" selection-end-column="82" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/PerfilService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="9" column="75" lean-forward="false" selection-start-line="9" selection-start-column="75" selection-end-line="9" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/perfil.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="23" column="36" lean-forward="false" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="36" />
+          <folding>
+            <element signature="e#2436#2456#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/services/HerokuPerfilService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="141" column="52" lean-forward="false" selection-start-line="141" selection-start-column="52" selection-end-line="141" selection-end-column="52" />
+          <folding>
+            <element signature="method#updateFoto#0;class#HerokuPerfilService#0" expanded="false" />
+            <element signature="method#updateFotoNetworkObject#0;class#HerokuPerfilService#0" expanded="false" />
+            <element signature="method#updateFotoObject#0;class#HerokuPerfilService#0" expanded="false" />
+            <element signature="method#BitMapToString#0;class#HerokuPerfilService#0" expanded="false" />
+            <element signature="method#StringToBitMap#0;class#HerokuPerfilService#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_historias_recientes2.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-302">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="21" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/ListadoHistoriasFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
+        <state relative-caret-position="220">
           <caret line="84" column="33" lean-forward="false" selection-start-line="84" selection-start-column="29" selection-end-line="84" selection-end-column="33" />
           <folding>
             <element signature="method#getHistoriasService#0;class#ListadoHistoriasFragment#0" expanded="false" />
@@ -3204,6 +3233,22 @@
             <element signature="method#filterUsersByText#0;class#ListadoHistoriasFragment#0" expanded="false" />
             <element signature="method#loadUsers#0;class#ListadoHistoriasFragment#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="86" column="39" lean-forward="false" selection-start-line="86" selection-start-column="39" selection-end-line="86" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/taller2/ataller2/model/PerfilFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="175" column="34" lean-forward="false" selection-start-line="175" selection-start-column="17" selection-end-line="175" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>

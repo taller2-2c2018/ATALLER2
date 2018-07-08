@@ -122,7 +122,7 @@ public class HerokuPerfilService implements PerfilService {
     }
 
     @Override
-    public void updatePerfilData(final Activity activity, String id) {
+    public void updatePerfilData(final Activity activity, String id, final OnCallback callback) {
         final NetworkObject requestTokenObject = getPerfilNetworkObject(id);
         final NetworkFragment networkFragment = NetworkFragment.getInstance(activity.getFragmentManager(), requestTokenObject);
         mDownloading = false;
@@ -139,6 +139,7 @@ public class HerokuPerfilService implements PerfilService {
                             if (status.equals("200")) {
                                 resultadoPerfil = resultToken.getJSONObject("data");
                                 updatePerfil(activity);
+                                callback.onFinish();
                             }
                         }
                         catch (Throwable t) {
