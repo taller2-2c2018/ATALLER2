@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -41,7 +42,7 @@ public class ListadoHistoriasFragment extends Fragment{
     private RecyclerView mRecyclerView;
     private RecyclerView mRecyclerViewCortas;
     private ProgressBar mLoadingHistorias;
-    private ScrollView mScrollHistoria;
+    private NestedScrollView mScrollHistoria;
 
     public interface HistoriasListListener {
         void onHistoriaClicked(Historia historia);

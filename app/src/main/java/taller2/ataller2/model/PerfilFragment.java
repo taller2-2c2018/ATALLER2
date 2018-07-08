@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -16,12 +17,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.io.IOException;
 
 import taller2.ataller2.LoginActivity;
 import taller2.ataller2.adapters.HistoriasListAdapter;
+import taller2.ataller2.services.OnCallback;
 import taller2.ataller2.services.PerfilService;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.services.HistoriasService;
@@ -39,6 +42,9 @@ public class PerfilFragment extends Fragment implements Refresh{
     private Perfil perfil;
     private ImageView iv;
     private TextView nombre;
+
+    private ProgressBar mProgressBar;
+    private ConstraintLayout mConstraintLayout;
 
     @Override
     public void refresh() {
@@ -70,23 +76,37 @@ public class PerfilFragment extends Fragment implements Refresh{
         //View view = container.getChildAt(0);
         View view = inflater.inflate(R.layout.perfil, container, false);
 
-        perfil = ServiceLocator.get(PerfilService.class).getMiPerfil();
+        mProgressBar = view.findViewById(R.id.progressBar_perfil);
+        mConstraintLayout = view.findViewById(R.id.perfil_view);
+
+        showLoadingPerfil(true);
+
         iv = view.findViewById(R.id.imageViewPerfil);
         nombre = view.findViewById(R.id.textNombre);
-
-        if (perfil == null){
-            iv.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.default_img));
-            nombre.setText("");
-        }
-        else{
-            iv.setImageBitmap(perfil.getPicture());
-            nombre.setText(ServiceLocator.get(FacebookService.class).getName());
-        }
-
         mRecyclerView = view.findViewById(R.id.historias_perfil_local);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        HistoriasService historiasService = getHistoriasService();
-        mRecyclerView.setAdapter(new HistoriasListAdapter(historiasService.getMisHistorias(this.getActivity()), mHistoriasListListener));
+
+        ServiceLocator.get(PerfilService.class).
+                updatePerfilData(this.getActivity(),
+                                    ServiceLocator.get(FacebookService.class).getFacebookID(),
+                                    new OnCallback(){
+                                        @Override
+                                        public void onFinish() {
+                                            perfil = ServiceLocator.get(PerfilService.class).getMiPerfil();
+                                            if (perfil == null){
+                                                iv.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.default_img));
+                                                nombre.setText("");
+                                            }
+                                            else{
+                                                iv.setImageBitmap(perfil.getPicture());
+                                                nombre.setText(ServiceLocator.get(FacebookService.class).getName());
+                                            }
+                                            HistoriasService historiasService = getHistoriasService();
+                                            mRecyclerView.setAdapter(new HistoriasListAdapter(historiasService.getMisHistorias(getActivity()), mHistoriasListListener));
+                                            showLoadingPerfil(false);
+                                        }
+                                    }
+                );
 
         AppCompatButton exit = view.findViewById(R.id.salir_app);
         exit.setOnClickListener(new View.OnClickListener(){
@@ -104,8 +124,6 @@ public class PerfilFragment extends Fragment implements Refresh{
                 startActivityForResult(gallery, PICK_IMAGE);
             }
         });
-
-
 
         return view;
     }
@@ -153,5 +171,10 @@ public class PerfilFragment extends Fragment implements Refresh{
 
     private PerfilService getPerfilService() {
         return ServiceLocator.get(PerfilService.class);
+    }
+
+    private void showLoadingPerfil(boolean loading) {
+        mProgressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
+        mConstraintLayout.setVisibility(loading ? View.GONE : View.VISIBLE);
     }
 }

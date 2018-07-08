@@ -1,6 +1,7 @@
 package taller2.ataller2.model;
 
 import android.content.Context;
+import android.media.FaceDetector;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,13 +9,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import taller2.ataller2.adapters.ConversacionListAdapter;
 import taller2.ataller2.services.ConversacionService;
+import taller2.ataller2.services.OnCallback;
+import taller2.ataller2.services.PerfilService;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.R;
+import taller2.ataller2.services.facebook.FacebookService;
+
 public class ListadoConversacionesFragment extends Fragment implements Refresh{
     private ListadoConversacionesFragment.ConversacionesListListener mConversacionesListListener;
+
+    private RecyclerView mRecycleView;
+    private ProgressBar mProgressBar;
 
     @Override
     public void refresh() {
@@ -22,10 +31,6 @@ public class ListadoConversacionesFragment extends Fragment implements Refresh{
     }
 
 
-    public interface ConversacionesListListener {
-        void onConversacionClickedRechazar(Conversacion conversacion);
-        void onConversacionClickedAceptar(Conversacion conversacion);
-    }
 
     public ListadoConversacionesFragment() {
     }
@@ -46,14 +51,23 @@ public class ListadoConversacionesFragment extends Fragment implements Refresh{
 
         //View view = container.getChildAt(0);
         View view = inflater.inflate(R.layout.fragment_conversaciones_recientes, container, false);
+        mRecycleView = view.findViewById(R.id.listConversacionesRecientes);
+        mRecycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mProgressBar = view.findViewById(R.id.progressBar_conversaciones);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            ConversacionService conversacionService = getConversacionesService();
-            recyclerView.setAdapter(new ConversacionListAdapter(conversacionService.getConversaciones(getActivity()), mConversacionesListListener));
-        }
+        showLoadingHistorias(true);
+
+        PerfilService perfilService = getPerfilesService();
+        perfilService.updatePerfilData(this.getActivity(), ServiceLocator.get(FacebookService.class).getFacebookID(), new OnCallback() {
+            @Override
+            public void onFinish() {
+                ConversacionService conversacionService = getConversacionesService();
+                mRecycleView.setAdapter(
+                        new ConversacionListAdapter(conversacionService.getConversaciones(getActivity()), mConversacionesListListener));
+                showLoadingHistorias(false);
+            }
+        });
+
         return view;
     }
 
@@ -77,4 +91,18 @@ public class ListadoConversacionesFragment extends Fragment implements Refresh{
     private ConversacionService getConversacionesService() {
         return ServiceLocator.get(ConversacionService.class);
     }
+    private PerfilService getPerfilesService() {
+        return ServiceLocator.get(PerfilService.class);
+    }
+
+    public interface ConversacionesListListener {
+        void onConversacionClickedRechazar(Conversacion conversacion);
+        void onConversacionClickedAceptar(Conversacion conversacion);
+    }
+
+    private void showLoadingHistorias(boolean loading) {
+        mProgressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
+        mRecycleView.setVisibility(loading ? View.GONE : View.VISIBLE);
+    }
+
 }

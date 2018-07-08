@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -16,8 +19,10 @@ import taller2.ataller2.adapters.NotificacionesListAdapter;
 import taller2.ataller2.adapters.UserLisAdapter;
 import taller2.ataller2.model.Perfil;
 import taller2.ataller2.model.PerfilFragment;
+import taller2.ataller2.networking.DownloadCallback;
 import taller2.ataller2.services.AmistadesService;
 import taller2.ataller2.services.NotificacionesService;
+import taller2.ataller2.services.OnCallback;
 import taller2.ataller2.services.ServiceLocator;
 
 
@@ -26,20 +31,29 @@ public class SearchActivity extends AppCompatActivity {
     private SearchView mSearchView;
     private PerfilFragment.PerfilListener mPerfilListListener;
     private RecyclerView recyclerView;
+    private ScrollView mScrollView;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
 
+        mProgressBar = findViewById(R.id.progressBar_all_users);
+        mScrollView = findViewById(R.id.users_list);
         mSearchView = findViewById(R.id.search_user);
-        setUpSearchView();
-
+        showLoadingAllUsers(true);
         recyclerView = findViewById(R.id.listUsers);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        List<Perfil> lista = ServiceLocator.get(AmistadesService.class).processAllUsers();
-        recyclerView.setAdapter(new UserLisAdapter(lista, mPerfilListListener));
+        setUpSearchView();
+        ServiceLocator.get(AmistadesService.class).getAllUsers(this, new OnCallback(){
+            @Override
+            public void onFinish() {
+                List<Perfil> lista = ServiceLocator.get(AmistadesService.class).processAllUsers();
+                recyclerView.setAdapter(new UserLisAdapter(lista, mPerfilListListener));
+                showLoadingAllUsers(false);
+            }
+        });
     }
 
     private void setUpSearchView() {
@@ -76,5 +90,9 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-
+    private void showLoadingAllUsers(boolean loading) {
+        mProgressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
+        mScrollView.setVisibility(loading ? View.GONE : View.VISIBLE);
+        mSearchView.setVisibility(loading ? View.GONE : View.VISIBLE);
+    }
 }
