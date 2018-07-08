@@ -55,6 +55,11 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
         private final ImageView mNoMeGusta;
         private final ImageView mMeDivierte;
         private final ImageView mMeAburre;
+
+        private final TextView mMeGustaCount;
+        private final TextView mNoMeGustaCount;
+        private final TextView mMeDivierteCount;
+        private final TextView mMeAburreCount;
         private final ImageView mComentario;
         private final RecyclerView mRecyclerView;
         private final RelativeLayout mRelativeLayout;
@@ -86,6 +91,10 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
             mInputComentario = itemView.findViewById(R.id.input);
             mSendComentario = itemView.findViewById(R.id.fab_comentario);
 
+            mMeGustaCount = (TextView) itemView.findViewById(R.id.me_gusta_count);
+            mNoMeGustaCount = (TextView) itemView.findViewById(R.id.no_me_gusta_count);
+            mMeDivierteCount = (TextView) itemView.findViewById(R.id.me_divierte_count);
+            mMeAburreCount = (TextView) itemView.findViewById(R.id.me_aburre_count);
         }
     }
 
@@ -140,6 +149,8 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
                 FragmentManager manager = ((Activity) v.getContext()).getFragmentManager();
                 ServiceLocator.get(HistoriasService.class).actReaction(manager, historia,emotion);
                 setReactionBackgrounds(emotion, historia, v.getContext(), holder);
+                setReactionCount(historia, holder);
+
             }
         });
 
@@ -150,6 +161,7 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
                 FragmentManager manager = ((Activity) v.getContext()).getFragmentManager();
                 ServiceLocator.get(HistoriasService.class).actReaction(manager, historia,emotion);
                 setReactionBackgrounds(emotion, historia, v.getContext(), holder);
+                setReactionCount(historia, holder);
             }
         });
 
@@ -160,6 +172,7 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
                 FragmentManager manager = ((Activity) v.getContext()).getFragmentManager();
                 ServiceLocator.get(HistoriasService.class).actReaction(manager, historia,emotion);
                 setReactionBackgrounds(emotion, historia, v.getContext(), holder);
+                setReactionCount(historia, holder);
             }
         });
 
@@ -170,6 +183,7 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
                 FragmentManager manager = ((Activity) v.getContext()).getFragmentManager();
                 ServiceLocator.get(HistoriasService.class).actReaction(manager, historia,emotion);
                 setReactionBackgrounds(emotion, historia, v.getContext(), holder);
+                setReactionCount(historia, holder);
             }
         });
 
@@ -227,6 +241,7 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
 
         }
 
+        setReactionCount(historia, holder);
     }
 
     private void setReactionBackgrounds(EmotionType emocion, Historia historia, Context context, HistoriasViewHolder holder){
@@ -257,6 +272,14 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
             }
         }
     }
+
+    private void setReactionCount(Historia historia, HistoriasViewHolder holder){
+        holder.mMeGustaCount.setText(String.valueOf(historia.getCantMeGusta()));
+        holder.mNoMeGustaCount.setText(String.valueOf(historia.getCantNoMeGusta()));
+        holder.mMeDivierteCount.setText(String.valueOf(historia.getCantMeDivierte()));
+        holder.mMeAburreCount.setText(String.valueOf(historia.getCantMeAburre()));
+    }
+
 
 
     @Override

@@ -1,7 +1,6 @@
 package taller2.ataller2.model;
 
 import android.content.Context;
-import android.media.FaceDetector;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,13 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import java.util.List;
+
+import taller2.ataller2.R;
 import taller2.ataller2.adapters.ConversacionListAdapter;
 import taller2.ataller2.services.ConversacionService;
 import taller2.ataller2.services.OnCallback;
 import taller2.ataller2.services.PerfilService;
 import taller2.ataller2.services.ServiceLocator;
-import taller2.ataller2.R;
 import taller2.ataller2.services.facebook.FacebookService;
 
 public class ListadoConversacionesFragment extends Fragment implements Refresh{
@@ -24,6 +26,7 @@ public class ListadoConversacionesFragment extends Fragment implements Refresh{
 
     private RecyclerView mRecycleView;
     private ProgressBar mProgressBar;
+    private TextView mTextNoHayConversaciones;
 
     @Override
     public void refresh() {
@@ -65,6 +68,9 @@ public class ListadoConversacionesFragment extends Fragment implements Refresh{
                 mRecycleView.setAdapter(
                         new ConversacionListAdapter(conversacionService.getConversaciones(getActivity()), mConversacionesListListener));
                 showLoadingHistorias(false);
+                List<Conversacion> conversaciones = conversacionService.getConversaciones(getActivity());
+                mTextNoHayConversaciones = mRecycleView.findViewById(R.id.textNoHayAmigos);
+                mTextNoHayConversaciones.setVisibility(conversaciones.isEmpty() ? View.VISIBLE : View.GONE);
             }
         });
 
