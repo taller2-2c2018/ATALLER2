@@ -5,10 +5,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
-import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.JsonReader;
 import android.util.Log;
 
 import com.facebook.AccessToken;
@@ -18,22 +16,19 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import taller2.ataller2.R;
 import taller2.ataller2.networking.DownloadCallback;
 import taller2.ataller2.networking.HttpMethodType;
 import taller2.ataller2.networking.NetworkFragment;
 import taller2.ataller2.networking.NetworkObject;
 import taller2.ataller2.networking.NetworkResult;
-import taller2.ataller2.R;
-import taller2.ataller2.services.NotificacionesService;
 import taller2.ataller2.services.ServiceLocator;
-import taller2.ataller2.services.location.LocationService;
 import taller2.ataller2.services.notifications.NotificationService;
 
 public class BaseFacebookService implements FacebookService {
@@ -89,10 +84,9 @@ public class BaseFacebookService implements FacebookService {
     }
 
     @Override
-    public void loginWithAccesToken(Activity activity, LoginCallback loginCalback) {
+    public void loginWithAccesToken(Activity activity, LoginCallback loginCallback) {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        //registerToken(activity.getFragmentManager(), accessToken.getUserId());
-        requestAuthToken(loginCalback, activity.getFragmentManager(), accessToken.getUserId());
+        registerToken(loginCallback, activity.getFragmentManager(), accessToken.getUserId());
     }
 
     @Override
@@ -156,7 +150,7 @@ public class BaseFacebookService implements FacebookService {
         return facebookCallback;
     }
 
-    private void registerToken( final FragmentManager fragmentManager, String userId) {
+    private void registerToken(final LoginCallback loginCallback, final FragmentManager fragmentManager, final String userId) {
         NetworkObject requestTokenObject = createRegistrationTokenObject(userId);
         NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
         mDownloading = false;
@@ -166,6 +160,7 @@ public class BaseFacebookService implements FacebookService {
                 @Override
                 public void onResponseReceived(NetworkResult result) {
                     mDownloading = false;
+                    requestAuthToken(loginCallback, fragmentManager, userId);
                 }
 
                 @Override
