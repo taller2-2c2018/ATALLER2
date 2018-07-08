@@ -7,39 +7,18 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
-import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.InputStreamEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.BufferUnderflowException;
-import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 import taller2.ataller2.R;
 import taller2.ataller2.model.Comentario;
 import taller2.ataller2.model.Historia;
@@ -214,8 +193,7 @@ public class HerokuHistoriasService implements HistoriasService {
                                     obj2 = reactions.getJSONObject(j);
                                     String emocion = obj2.getString("mReaction");
                                     String user = obj2.getString("mFacebookUserId");
-                                    EmotionType emotionType = EmotionType.LIKE;
-                                    emotionType.setEmotionServer(emocion);
+                                    EmotionType emotionType  = EmotionType.getEmotionValueByString(emocion);
                                     Reaccion reaccion = new Reaccion(emotionType,user);
                                     listaReacciones.add(reaccion);
                                 }

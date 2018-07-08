@@ -1,14 +1,10 @@
 package taller2.ataller2.adapters;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.FaceDetector;
-import android.provider.ContactsContract;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,22 +16,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import java.util.List;
 
 import taller2.ataller2.PerfilActivity;
+import taller2.ataller2.R;
 import taller2.ataller2.model.Historia;
 import taller2.ataller2.model.ListadoHistoriasFragment;
-import taller2.ataller2.R;
-import taller2.ataller2.model.Perfil;
 import taller2.ataller2.model.Reaccion;
 import taller2.ataller2.services.EmotionType;
 import taller2.ataller2.services.HistoriasService;
 import taller2.ataller2.services.ServiceLocator;
-import taller2.ataller2.services.facebook.FacebookService;
-import taller2.ataller2.services.location.LocationService;
 
 public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdapter.HistoriasViewHolder>{
 
@@ -259,6 +251,8 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
                     break;
                 case 3:
                     holder.mMeAburre.setBackground(context.getDrawable(R.drawable.rounded_image));
+                    break;
+                default:
                     break;
             }
         }

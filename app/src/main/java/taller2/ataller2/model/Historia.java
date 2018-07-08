@@ -122,6 +122,8 @@ public class Historia {
                 case 3:
                     cantMeAburre += 1;
                     break;
+                default:
+                    break;
             }
             if (reaccion.getAutor().equals(ServiceLocator.get(FacebookService.class).getFacebookID())){
                 miReaccion = reaccion;
@@ -145,6 +147,8 @@ public class Historia {
                 case 3:
                     cantMeAburre -= 1;
                     break;
+                default:
+                    break;
             }
         } else {
             if (miReaccion != null){
@@ -161,6 +165,8 @@ public class Historia {
                     case 3:
                         cantMeAburre -= 1;
                         break;
+                    default:
+                        break;
                 }
             }
             switch (emocion.getValue()){
@@ -175,6 +181,8 @@ public class Historia {
                     break;
                 case 3:
                     cantMeAburre += 1;
+                    break;
+                default:
                     break;
             }
             miReaccion = new Reaccion(emocion, ServiceLocator.get(FacebookService.class).getFacebookID());

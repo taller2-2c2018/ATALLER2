@@ -4,9 +4,10 @@ public enum EmotionType {
     LIKE(0),
     DONT_LIKE(1),
     FUN(2),
-    BORE(3);
+    BORE(3),
+    UNDEFINED(-1);
 
-    private int value;
+    final private int value;
 
     EmotionType(int value){
         this.value = value;
@@ -26,19 +27,21 @@ public enum EmotionType {
                 return "me divierte";
             case 3:
                 return "me aburre";
+            default:
+                return "undefined";
         }
-        return "me gusta";
     }
 
-    public void setEmotionServer (String reaccion) {
+    public static EmotionType getEmotionValueByString(String reaccion){
         if(reaccion.equals("me gusta"))
-                this.value = 0;
+            return EmotionType.LIKE;
         else if(reaccion.equals("no me gusta"))
-                this.value = 1;
+            return EmotionType.DONT_LIKE;
         else if(reaccion.equals("me divierte"))
-                this.value = 2;
+            return EmotionType.FUN;
         else if(reaccion.equals("me aburre"))
-                this.value = 3;
+            return EmotionType.BORE;
+        return EmotionType.UNDEFINED;
     }
 
     public static taller2.ataller2.services.EmotionType fromInteger(int x) {
@@ -51,7 +54,8 @@ public enum EmotionType {
                 return EmotionType.FUN;
             case 3:
                 return EmotionType.BORE;
+            default:
+                return EmotionType.UNDEFINED;
         }
-        return EmotionType.LIKE;
     }
 }
