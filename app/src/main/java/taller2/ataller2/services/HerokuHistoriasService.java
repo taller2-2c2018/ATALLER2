@@ -2,22 +2,37 @@ package taller2.ataller2.services;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import taller2.ataller2.R;
 import taller2.ataller2.model.Comentario;
@@ -50,8 +65,12 @@ public class HerokuHistoriasService implements HistoriasService {
     private List<Historia> mHistorias;
     private List<HistoriaCorta> mHistoriasCortas;
     private Activity contextActivity;
-
     private Context mContext;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
+
+
+
     public HerokuHistoriasService(Context context){
         mContext = context;
     }
@@ -754,5 +773,100 @@ public class HerokuHistoriasService implements HistoriasService {
         byte[] byteArray = stream.toByteArray();
         bitmap.recycle();
         return new String(byteArray, StandardCharsets.UTF_8);
+    }
+
+
+    private void uploadImage(final Context context, Uri filePath) {
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
+        if(filePath != null)
+        {
+            final ProgressDialog progressDialog = new ProgressDialog(context);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+
+            StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
+            ref.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+                            Toast.makeText(context, "Uploaded", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(context, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                    .getTotalByteCount());
+                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                        }
+                    });
+        }
+    }
+
+    @Override
+    public void uploadImageFromMemory(ImageView imageView){
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+        StorageReference storageRef = storage.getReference();
+        StorageReference mountainsRef = storageRef.child("foto.jpg");
+
+        // Get the data from an ImageView as bytes
+        imageView.setDrawingCacheEnabled(true);
+        imageView.buildDrawingCache();
+        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = mountainsRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                // ...
+            }
+        });
+        }
+
+    private void uploadImageFromDataStorage(){
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+        StorageReference storageRef = storage.getReference();
+        StorageReference mountainsRef = storageRef.child("mountains.jpg");
+        StorageReference mountainImagesRef = storageRef.child("images/mountains.jpg");
+
+
+        Uri file = Uri.fromFile(new File("path/to/images/rivers.jpg"));
+        StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
+        UploadTask uploadTask = riversRef.putFile(file);
+
+        // Register observers to listen for when the download is done or if it fails
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                // ...
+            }
+        });
     }
 }

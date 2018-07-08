@@ -159,7 +159,9 @@ public class CameraActivity extends Activity {
             HistoriaCorta historia = new HistoriaCorta();
             historia.setPicture(drawableToBitmap(ivPhoto.getDrawable()));
             historia.setPictureUsr(drawableToBitmap(ivPhoto.getDrawable()));
-            getHistoriasService().crearHistoriaCorta(this.getFragmentManager(),historia);
+            //getHistoriasService().crearHistoriaCorta(this.getFragmentManager(),historia);
+
+            ServiceLocator.get(HistoriasService.class).uploadImageFromMemory(ivPhoto);
         }
         else{
 
@@ -167,7 +169,9 @@ public class CameraActivity extends Activity {
             historia.setPicture(drawableToBitmap(ivPhoto.getDrawable()));
             historia.setDescription("muy buena foto");
             historia.setPictureUsr(drawableToBitmap(ivPhoto.getDrawable()));
-            getHistoriasService().crearHistoria(this.getFragmentManager(),historia);
+            //getHistoriasService().crearHistoria(this.getFragmentManager(),historia);
+
+            ServiceLocator.get(HistoriasService.class).uploadImageFromMemory(ivPhoto);
         }
     }
     private void publicarHistoriaVideo() {

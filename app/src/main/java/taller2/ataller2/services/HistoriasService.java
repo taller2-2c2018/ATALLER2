@@ -2,12 +2,12 @@ package taller2.ataller2.services;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.widget.ImageView;
 
 import java.util.List;
 
 import taller2.ataller2.model.Historia;
 import taller2.ataller2.model.HistoriaCorta;
-import taller2.ataller2.services.CustomService;
 
 public interface HistoriasService extends CustomService {
 
@@ -26,4 +26,6 @@ public interface HistoriasService extends CustomService {
     boolean crearHistoriaCorta(FragmentManager fragmentManager, HistoriaCorta historia);
     boolean actReaction(FragmentManager fragmentManager, Historia historia, EmotionType emotion);
     boolean actCommet(FragmentManager fragmentManager, Historia historia, String comment);
+
+    void uploadImageFromMemory(ImageView imageView);
 }
