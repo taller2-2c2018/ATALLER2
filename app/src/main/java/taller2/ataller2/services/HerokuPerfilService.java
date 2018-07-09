@@ -1,11 +1,9 @@
 package taller2.ataller2.services;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.FaceDetector;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Base64;
@@ -14,15 +12,12 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONStringer;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import taller2.ataller2.R;
-import taller2.ataller2.model.Historia;
-import taller2.ataller2.model.HistoriaCorta;
 import taller2.ataller2.model.Perfil;
 import taller2.ataller2.networking.DownloadCallback;
 import taller2.ataller2.networking.HttpMethodType;
@@ -30,7 +25,6 @@ import taller2.ataller2.networking.NetworkFragment;
 import taller2.ataller2.networking.NetworkObject;
 import taller2.ataller2.networking.NetworkResult;
 import taller2.ataller2.services.facebook.FacebookService;
-import taller2.ataller2.services.location.LocationService;
 import taller2.ataller2.services.notifications.NotificationService;
 
 public class HerokuPerfilService implements PerfilService {
@@ -74,8 +68,18 @@ public class HerokuPerfilService implements PerfilService {
                 String nombre = resultadoPerfil.getString("mFirstName");
                 String apellido = resultadoPerfil.getString("mLastName");
                 String fechaNacimiento = resultadoPerfil.getString("mBirthDate");
+                if (resultadoPerfil.getString("mBirthDate") == null) {
+                    fechaNacimiento = "";
+                }
                 String mail = resultadoPerfil.getString("mEmail");
+                if (resultadoPerfil.getString("mEmail") == null) {
+                    mail = "";
+                }
                 String sexo = resultadoPerfil.getString("mSex");
+                if (resultadoPerfil.getString("mSex") == null) {
+                    sexo = "";
+                }
+
                 int fotoID = resultadoPerfil.getInt("mProfilePictureId");
                 String fileType = resultadoPerfil.getString("mFileTypeProfilePicture");
                 JSONArray amigos = resultadoPerfil.getJSONArray("mFriendshipList");
@@ -347,7 +351,7 @@ public class HerokuPerfilService implements PerfilService {
         }
     }
 
-    private void getPerfilFile (Activity activity, final Perfil perfil, int id) {
+    private void  getPerfilFile (Activity activity, final Perfil perfil, int id) {
         final NetworkObject requestTokenObject = getPerfilFileNetworkObject(id);
         final NetworkFragment networkFragment =  NetworkFragment.getInstance(activity.getFragmentManager(), requestTokenObject);
         mDownloading = false;

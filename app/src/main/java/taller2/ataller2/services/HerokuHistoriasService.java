@@ -818,14 +818,14 @@ public class HerokuHistoriasService implements HistoriasService {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         StorageReference storageRef = storage.getReference();
-        StorageReference mountainsRef = storageRef.child("foto.jpg");
+        StorageReference mountainsRef = storageRef.child("foto2.jpg");
 
         // Get the data from an ImageView as bytes
         imageView.setDrawingCacheEnabled(true);
         imageView.buildDrawingCache();
         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
         byte[] data = baos.toByteArray();
 
         UploadTask uploadTask = mountainsRef.putBytes(data);
@@ -833,12 +833,14 @@ public class HerokuHistoriasService implements HistoriasService {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle unsuccessful uploads
+                int as = 2;
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                 // ...
+                int as = 1;
             }
         });
         }

@@ -174,6 +174,7 @@ public class CameraActivity extends Activity {
             ServiceLocator.get(HistoriasService.class).uploadImageFromMemory(ivPhoto);
         }
     }
+
     private void publicarHistoriaVideo() {
         Historia historia = new Historia(tv.getText().toString());
         historia.setVideo(uriVideo);
@@ -182,7 +183,6 @@ public class CameraActivity extends Activity {
        // getHistoriasService().crearHistoria(this.getFragmentManager(),historia);
 
     }
-
 
     private void openTakeFoto(Context context){
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
