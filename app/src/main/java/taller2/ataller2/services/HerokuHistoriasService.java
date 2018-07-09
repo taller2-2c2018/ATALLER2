@@ -283,17 +283,17 @@ public class HerokuHistoriasService implements HistoriasService {
     }
 
     @Override
-    public boolean crearHistoria( FragmentManager fragmentManager,Historia historia) {
+    public boolean crearHistoria( FragmentManager fragmentManager,Historia historia, OnCallback callback) {
         mHistorias.add(historia);
-        JSONObject result = postHistoriasJSON(fragmentManager,historia);
+        JSONObject result = postHistoriasJSON(fragmentManager,historia,callback);
         //TODO: chequear resultado de la creacion
         return true;
     }
 
     @Override
-    public boolean crearHistoriaCorta(FragmentManager fragmentManager, HistoriaCorta historia) {
+    public boolean crearHistoriaCorta(FragmentManager fragmentManager, HistoriaCorta historia, OnCallback callback) {
         mHistoriasCortas.add(historia);
-        JSONObject result = postHistoriasCortaJSON(fragmentManager,historia);
+        JSONObject result = postHistoriasCortaJSON(fragmentManager,historia,callback);
         //TODO: chequear resultado de la creacion
         return true;
     }
@@ -428,7 +428,7 @@ public class HerokuHistoriasService implements HistoriasService {
         return networkObject;
     }
 
-    private JSONObject postHistoriasCortaJSON( final FragmentManager fragmentManager, HistoriaCorta historia) {
+    private JSONObject postHistoriasCortaJSON( final FragmentManager fragmentManager, HistoriaCorta historia, final OnCallback callback) {
         final NetworkObject requestTokenObject = createHistoriaCorta(historia);
         final NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
         resultado2 = null;
@@ -454,6 +454,7 @@ public class HerokuHistoriasService implements HistoriasService {
 
                     }
                     mDownloading = false;
+                    callback.onFinish();
                 }
 
                 @Override
@@ -476,9 +477,10 @@ public class HerokuHistoriasService implements HistoriasService {
         return resultado2;
     }
 
-    private JSONObject postHistoriasJSON( final FragmentManager fragmentManager, Historia historia) {
+    private JSONObject postHistoriasJSON( final FragmentManager fragmentManager, Historia historia,final OnCallback callback) {
         final NetworkObject requestTokenObject = createHistoria(historia);
         final NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
+
         resultado2 = null;
         mDownloading = false;
         if (!mDownloading) {
@@ -502,6 +504,7 @@ public class HerokuHistoriasService implements HistoriasService {
 
                     }
                     mDownloading = false;
+                    callback.onFinish();
                 }
 
                 @Override
@@ -838,14 +841,11 @@ public class HerokuHistoriasService implements HistoriasService {
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
-                int as = 2;
+                // TODO: mensaje de error de creacion de historia
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
                 Uri downloadUri = taskSnapshot.getDownloadUrl();
                 callback.onFinish(downloadUri);
             }

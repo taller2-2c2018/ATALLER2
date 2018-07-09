@@ -101,13 +101,13 @@ public class MockHistoriasService implements HistoriasService {
     }
 
     @Override
-    public boolean crearHistoria(FragmentManager fragmentManager, Historia historia) {
+    public boolean crearHistoria(FragmentManager fragmentManager, Historia historia, OnCallback callback) {
         mHistorias.add(historia);
         return true;
     }
 
     @Override
-    public boolean crearHistoriaCorta(FragmentManager fragmentManager, HistoriaCorta historia) {
+    public boolean crearHistoriaCorta(FragmentManager fragmentManager, HistoriaCorta historia, OnCallback callback) {
         return false;
     }
 

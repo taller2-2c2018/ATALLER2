@@ -28,6 +28,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.zomato.photofilters.imageprocessors.Filter;
@@ -41,6 +42,7 @@ import java.util.Date;
 
 import taller2.ataller2.model.Historia;
 import taller2.ataller2.model.HistoriaCorta;
+import taller2.ataller2.services.OnCallback;
 import taller2.ataller2.services.OnCallbackImageUpload;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.services.HistoriasService;
@@ -133,12 +135,23 @@ public class CameraActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (videoOn){
-                    publicarHistoriaVideo();
+                    publicarHistoriaVideo(new OnCallback(){
+                        @Override
+                        public void onFinish() {
+                            finish();
+                            Toast.makeText(CameraActivity.this,"Su historia se ha subido satisfactoriamente", Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
                 else{
-                    publicarHistoria();
+                    publicarHistoria(new OnCallback() {
+                        @Override
+                        public void onFinish() {
+                            finish();
+                            Toast.makeText(CameraActivity.this,"Su historia se ha subido satisfactoriamente", Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
-                finish();
             }
         });
 
@@ -154,7 +167,7 @@ public class CameraActivity extends Activity {
 
     }
 
-    private void publicarHistoria() {
+    private void publicarHistoria(final OnCallback callback ) {
         boolean checked = cb.isChecked();
         if (checked){
             final HistoriaCorta historia = new HistoriaCorta();
@@ -165,12 +178,11 @@ public class CameraActivity extends Activity {
                 @Override
                 public void onFinish(Uri uri) {
                     historia.setUri(uri);
-                    getHistoriasService().crearHistoriaCorta(getFragmentManager(),historia);
+                    getHistoriasService().crearHistoriaCorta(getFragmentManager(),historia,callback);
                 }
             });
         }
         else{
-
             final Historia historia = new Historia(tv.getText().toString());
             historia.setPicture(drawableToBitmap(ivPhoto.getDrawable()));
             historia.setDescription("muy buena foto");
@@ -180,13 +192,13 @@ public class CameraActivity extends Activity {
                 @Override
                 public void onFinish(Uri uri) {
                     historia.setUri(uri);
-                    getHistoriasService().crearHistoria(getFragmentManager(),historia);
+                    getHistoriasService().crearHistoria(getFragmentManager(),historia, callback);
                 }
             });
         }
     }
 
-    private void publicarHistoriaVideo() {
+    private void publicarHistoriaVideo(OnCallback callback) {
         Historia historia = new Historia(tv.getText().toString());
         historia.setVideo(uriVideo);
         historia.setDescription("muy buena foto");
