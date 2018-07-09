@@ -75,12 +75,6 @@ public class HerokuAmistadesService implements AmistadesService {
                     String requester = obj.getString("requester");
                     String target = obj.getString("target");
                     String message = obj.getString("message");
-                    int mProfilePictureId = -1;
-                    try{
-                        mProfilePictureId = obj.getInt("mProfilePictureId");
-                    }
-                    catch (Exception ex){
-                    }
 
                     String mFirstName = obj.getString("mFirstName");
                     String mLastName = obj.getString("mLastName");
@@ -89,10 +83,6 @@ public class HerokuAmistadesService implements AmistadesService {
                     amistad.setDescription(message);
                     Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
                     amistad.setPicture(icon);
-
-                    if (mProfilePictureId != -1) {
-                        getHistoriaFile(amistad,mProfilePictureId);
-                    }
 
                     amistad.setId(id);
                     amistad.setRequester(requester);
@@ -302,6 +292,7 @@ public class HerokuAmistadesService implements AmistadesService {
                     String mFirebaseId = obj.getString("mFirebaseId");
                     String mFirstName = obj.getString("mFirstName");
                     String mLastName = obj.getString("mLastName");
+                    String picture = obj.getString("mProfilePicture");
                     int mProfilePictureId = -1;
                     try {
                         mProfilePictureId = obj.getInt("mProfilePictureId");
@@ -309,11 +300,10 @@ public class HerokuAmistadesService implements AmistadesService {
                     {
                         mProfilePictureId = -1;
                     }
-                    Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
 
                     Perfil perfil = new Perfil(mFirstName + " " + mLastName);
                     perfil.setId(mFacebookUserId);
-                    perfil.setPicture(icon);
+                    perfil.setPicture(picture);
                     if (mProfilePictureId != -1){
                         //getHistoriaFile(perfil, mProfilePictureId);
                     }
@@ -385,134 +375,4 @@ public class HerokuAmistadesService implements AmistadesService {
         networkObject.setResponseHeaders(responseHeaders);
         return networkObject;
     }
-
-    private void getHistoriaFile (final Amistad amistad, int id) {
-        final NetworkObject requestTokenObject = getHistoriaFileNetworkObject(id);
-        final NetworkFragment networkFragment = NetworkFragment.getInstance(contextActivity.getFragmentManager(), requestTokenObject);
-        mDownloading = false;
-        resultado = null;
-        if (!mDownloading) {
-            mDownloading = true;
-            networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
-                @Override
-                public void onResponseReceived(NetworkResult result) {
-                    if (result.mException == null) {
-                        JSONObject resultToken;
-                        try{
-                            resultToken = new JSONObject(result.mResultValue);
-                            String status = resultToken.getString("status");
-                            if (status.equals("200")) {
-                                JSONObject data = resultToken.getJSONObject("data");
-                                //String foto = data.getString("mFile");
-                                amistad.setPicture(StringToBitMap(data.getString("mFile")));
-
-                            }
-                        }
-                        catch (Throwable t) {
-                            Log.e("My App", "Could not parse malformed JSON: \"" + result.mResultValue + "\"");
-                        }
-
-                    }
-                    mDownloading = false;
-                }
-
-                @Override
-                public NetworkInfo getActiveNetworkInfo(Context context) {
-                    ConnectivityManager connectivityManager =
-                            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-                    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-                    return networkInfo;
-                }
-
-                @Override
-                public void onProgressUpdate(int progressCode, int percentComplete) {}
-
-                @Override
-                public void onFinishDownloading() {
-                    mDownloading = false;
-                }
-            });
-        }
-    }
-
-    private void getHistoriaFile (final Perfil perfil, int id) {
-        final NetworkObject requestTokenObject = getHistoriaFileNetworkObject(id);
-        final NetworkFragment networkFragment = NetworkFragment.getInstance(contextActivity.getFragmentManager(), requestTokenObject);
-        mDownloading = false;
-        resultado = null;
-        if (!mDownloading) {
-            mDownloading = true;
-            networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
-                @Override
-                public void onResponseReceived(NetworkResult result) {
-                    if (result.mException == null) {
-                        JSONObject resultToken;
-                        try{
-                            resultToken = new JSONObject(result.mResultValue);
-                            String status = resultToken.getString("status");
-                            if (status.equals("200")) {
-                                JSONObject data = resultToken.getJSONObject("data");
-                                //String foto = data.getString("mFile");
-                                perfil.setPicture(StringToBitMap(data.getString("mFile")));
-
-                            }
-                        }
-                        catch (Throwable t) {
-                            Log.e("My App", "Could not parse malformed JSON: \"" + result.mResultValue + "\"");
-                        }
-
-                    }
-                    mDownloading = false;
-                }
-
-                @Override
-                public NetworkInfo getActiveNetworkInfo(Context context) {
-                    ConnectivityManager connectivityManager =
-                            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-                    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-                    return networkInfo;
-                }
-
-                @Override
-                public void onProgressUpdate(int progressCode, int percentComplete) {}
-
-                @Override
-                public void onFinishDownloading() {
-                    mDownloading = false;
-                }
-            });
-        }
-    }
-
-
-    private NetworkObject getHistoriaFileNetworkObject (int id){
-        String url = FILES + String.valueOf(id);
-        NetworkObject networkObject = new NetworkObject(url, HttpMethodType.GET);
-        //networkObject.setContentType("application/json");
-        networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
-        networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
-        //networkObject.setFirebaseToken(ServiceLocator.get(NotificationService.class).getToken());
-        return networkObject;
-    }
-
-    private Bitmap StringToBitMap(String encodedString){
-        try {
-            byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
-            Bitmap bitmap=BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            return bitmap;
-        } catch(Exception e) {
-            e.getMessage();
-            return null;
-        }
-    }
-
-    private String BitMapToString(Bitmap bitmap){
-        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
-        byte [] b=baos.toByteArray();
-        String temp=Base64.encodeToString(b, Base64.DEFAULT);
-        return temp;
-    }
-
-
 }

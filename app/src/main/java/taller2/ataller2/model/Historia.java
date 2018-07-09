@@ -24,7 +24,7 @@ public class Historia {
     private String nombre = "";
 
     private Bitmap mPicture;
-    private Bitmap mPictureUser;
+    private String mPictureUser;
 
     private String mStringUri;
 
@@ -54,9 +54,9 @@ public class Historia {
         this.mTitulo = titulo;
     }
 
-    public void setPictureUsr(Bitmap picture){ this.mPictureUser = picture;}
+    public void setPictureUsr(String picture){ this.mPictureUser = picture;}
 
-    public Bitmap getPictureUsr() {return this.mPictureUser;}
+    public String getPictureUsr() {return this.mPictureUser;}
 
     public String getDescription() {
         return mDescription;

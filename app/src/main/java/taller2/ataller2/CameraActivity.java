@@ -196,7 +196,6 @@ public class CameraActivity extends Activity {
             final Historia historia = new Historia(tv.getText().toString());
             historia.setPicture(drawableToBitmap(ivPhoto.getDrawable()));
             historia.setDescription("muy buena foto");
-            historia.setPictureUsr(drawableToBitmap(ivPhoto.getDrawable()));
 
             ServiceLocator.get(HistoriasService.class).uploadImageFromMemory(ivPhoto, new OnCallbackImageUpload() {
                 @Override
@@ -212,7 +211,6 @@ public class CameraActivity extends Activity {
         Historia historia = new Historia(tv.getText().toString());
         historia.setVideo(uriVideo);
         historia.setDescription("muy buena foto");
-        historia.setPictureUsr(drawableToBitmap(ivPhoto.getDrawable()));
        // getHistoriasService().crearHistoria(this.getFragmentManager(),historia);
 
     }

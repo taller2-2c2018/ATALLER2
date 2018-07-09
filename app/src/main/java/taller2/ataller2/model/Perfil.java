@@ -8,7 +8,7 @@ public class Perfil {
     private String id = "";
     private String mNombre = "";
     private String mDescription = "";
-    private Bitmap mPicture;
+    private String mPicture;
     private String mFechaNacimiento = "";
     private String mMail = "";
     private String mSexo = "";
@@ -34,11 +34,11 @@ public class Perfil {
         this.mDescription = description;
     }
 
-    public Bitmap getPicture() {
+    public String getPicture() {
         return mPicture;
     }
 
-    public void setPicture(Bitmap picture) {
+    public void setPicture(String picture) {
         this.mPicture = picture;
     }
 

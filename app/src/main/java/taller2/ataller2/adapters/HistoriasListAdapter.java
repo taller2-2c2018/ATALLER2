@@ -121,21 +121,8 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
     public void onBindViewHolder(final HistoriasViewHolder holder, int position) {
         final Historia historia = mHistoria.get(position);
 
-        Bitmap originalBitmap = historia.getPictureUsr();
-        if (originalBitmap.getWidth() > originalBitmap.getHeight()){
-            originalBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getHeight(), originalBitmap.getHeight());
-        }else if (originalBitmap.getWidth() < originalBitmap.getHeight()) {
-            originalBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getWidth());
-        }
-        RoundedBitmapDrawable roundedDrawable = RoundedBitmapDrawableFactory.create(
-                holder.mView.getContext().getResources(), originalBitmap);
-        roundedDrawable.setCornerRadius(originalBitmap.getHeight());
-
-        holder.mPictureUser.setImageDrawable(roundedDrawable);
-        holder.mPicture.setImageBitmap(historia.getPicture());
-
         Picasso picasso = ServiceLocator.get(PicassoService.class).getPicasso();
-        picasso.load(historia.getStringUri()).fit().transform(new CircleTransform()).error(R.drawable.no_image).placeholder(R.drawable.progress_animation).into(holder.mPictureUser);
+        picasso.load(historia.getPictureUsr()).fit().transform(new CircleTransform()).error(R.drawable.no_image).placeholder(R.drawable.progress_animation).into(holder.mPictureUser);
         picasso.load(historia.getStringUri()).fit().centerCrop().placeholder(R.drawable.progress_animation).error(R.drawable.no_image).into(holder.mPicture);
 
         holder.mTitulo.setText(historia.getmTitulo());
