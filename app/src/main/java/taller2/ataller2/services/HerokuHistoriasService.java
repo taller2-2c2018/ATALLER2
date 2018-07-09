@@ -182,7 +182,7 @@ public class HerokuHistoriasService implements HistoriasService {
                                     comentario.setHorario(obj2.getString("mDate"));
                                     String nombre = obj2.getString("mFirstName");
                                     String apellido = obj2.getString("mLastName");
-                                    comentario.setNombre(nom + " " + ape);
+                                    comentario.setNombre(nombre + " " + apellido);
                                     lista.add(comentario);
                                 }
                                 catch (Exception ex){ }
