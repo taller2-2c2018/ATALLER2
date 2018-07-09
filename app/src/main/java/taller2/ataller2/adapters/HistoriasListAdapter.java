@@ -22,12 +22,14 @@ import java.util.List;
 
 import taller2.ataller2.PerfilActivity;
 import taller2.ataller2.R;
+import taller2.ataller2.model.Comentario;
 import taller2.ataller2.model.Historia;
 import taller2.ataller2.model.ListadoHistoriasFragment;
 import taller2.ataller2.model.Reaccion;
 import taller2.ataller2.services.EmotionType;
 import taller2.ataller2.services.HistoriasService;
 import taller2.ataller2.services.ServiceLocator;
+import taller2.ataller2.services.facebook.FacebookService;
 
 public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdapter.HistoriasViewHolder>{
 
@@ -206,9 +208,15 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
             @Override
             public void onClick(View v) {
                 String comentario = holder.mInputComentario.getText().toString();
+                holder.mInputComentario.setText("");
+                Comentario nuevo = new Comentario();
+                nuevo.setComentario(comentario);
+                nuevo.setNombre(ServiceLocator.get(FacebookService.class).getName());
+                List<Comentario> comentarios = historia.getComentarios();
+                comentarios.add(nuevo);
+                holder.mRecyclerView.setAdapter(new ComentsListAdapter(comentarios));
                 FragmentManager manager = ((Activity) v.getContext()).getFragmentManager();
                 ServiceLocator.get(HistoriasService.class).actCommet(manager, historia,comentario);
-
             }
         });
 
