@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.util.Base64;
 import android.util.Log;
 
@@ -183,8 +184,8 @@ public class HerokuPerfilService implements PerfilService {
     }
 
     @Override
-    public void updateFoto(final Activity activity, Bitmap bitmap) {
-        final NetworkObject requestTokenObject = updateFotoNetworkObject(bitmap);
+    public void updateFoto(final Activity activity, Uri uri) {
+        final NetworkObject requestTokenObject = updateFotoNetworkObject(uri);
         final NetworkFragment networkFragment = NetworkFragment.getInstance(activity.getFragmentManager(), requestTokenObject);
         mDownloading = false;
         if (!mDownloading) {
@@ -307,8 +308,8 @@ public class HerokuPerfilService implements PerfilService {
         return requestHistoriaJsonObject;
     }
 
-    private NetworkObject updateFotoNetworkObject(Bitmap bitmap) {
-        String requestBody = updateFotoObject(bitmap).toString();
+    private NetworkObject updateFotoNetworkObject(Uri uri) {
+        String requestBody = updateFotoObject(uri).toString();
         NetworkObject networkObject = new NetworkObject(PERFIL_FOTO, HttpMethodType.POST, requestBody);
         networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
         networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
@@ -319,11 +320,11 @@ public class HerokuPerfilService implements PerfilService {
         return networkObject;
     }
 
-    private JSONObject updateFotoObject(Bitmap bitmap) {
+    private JSONObject updateFotoObject(Uri uri) {
         JSONObject requestHistoriaJsonObject = new JSONObject();
         try {
             final String file = "file";
-            requestHistoriaJsonObject.put(file, BitMapToString(bitmap));
+            requestHistoriaJsonObject.put(file, uri.toString());
             final String fileType = "mFileType";
             requestHistoriaJsonObject.put(fileType,"jpg");
         } catch (JSONException e) {
