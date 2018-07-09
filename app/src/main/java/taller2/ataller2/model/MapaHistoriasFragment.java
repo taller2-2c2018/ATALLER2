@@ -72,27 +72,29 @@ public class MapaHistoriasFragment extends Fragment implements OnMapReadyCallbac
 
         //mCommercesFromMarkerMap.clear();
         List<Historia> historias = ServiceLocator.get(HistoriasService.class).getHistorias(getActivity());
-
-        for (Historia historia : historias) {
-            double latitud = 0;
-            double longitud = 0;
-            if (historia.getLatitud() != "" && historia.getLongitud() != ""){
-                latitud = Double.parseDouble(historia.getLatitud());
-                longitud = Double.parseDouble(historia.getLongitud());
+        if (historias == null){
+            for (Historia historia : historias) {
+                double latitud = 0;
+                double longitud = 0;
+                if (historia.getLatitud() != "" && historia.getLongitud() != ""){
+                    latitud = Double.parseDouble(historia.getLatitud());
+                    longitud = Double.parseDouble(historia.getLongitud());
+                }
+                LatLng location = new LatLng(latitud, longitud);
+                mMap.addMarker(new MarkerOptions().position(location).title("1").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
             }
-            LatLng location = new LatLng(latitud, longitud);
-            mMap.addMarker(new MarkerOptions().position(location).title("1").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-        }
 
-        LocationService locationService = ServiceLocator.get(LocationService.class);
-        LocationO mCurrentLocation = locationService.getLocation(getContext());
-        LatLng location = new LatLng(mCurrentLocation.getLatitud(), mCurrentLocation.getLongitud());
-        //mMap.addMarker(new MarkerOptions().position(location).title("Aquí estoy").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-        float zoomLevel = 16;
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, zoomLevel));
-        mMap.setOnInfoWindowClickListener(this);
-        //mMap.setInfoWindowAdapter(new CommerceInfoWindowAdapter(LayoutInflater.from(getActivity()), mCommercesFromMarkerMap));
-    }
+            LocationService locationService = ServiceLocator.get(LocationService.class);
+            LocationO mCurrentLocation = locationService.getLocation(getContext());
+            LatLng location = new LatLng(mCurrentLocation.getLatitud(), mCurrentLocation.getLongitud());
+            //mMap.addMarker(new MarkerOptions().position(location).title("Aquí estoy").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+            float zoomLevel = 16;
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, zoomLevel));
+            mMap.setOnInfoWindowClickListener(this);
+            //mMap.setInfoWindowAdapter(new CommerceInfoWindowAdapter(LayoutInflater.from(getActivity()), mCommercesFromMarkerMap));
+
+        }
+   }
 
     private void enableMyLocationIfPermitted() {
         final int LOCATION_PERMISSION_REQUEST_CODE = 1;
