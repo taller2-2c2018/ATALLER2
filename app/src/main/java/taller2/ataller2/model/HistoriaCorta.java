@@ -1,11 +1,13 @@
 package taller2.ataller2.model;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 
 public class HistoriaCorta {
 
     private Bitmap mPicture;
     private Bitmap mPictureUser;
+    private Uri mUri;
 
 
     public HistoriaCorta() {
@@ -22,5 +24,13 @@ public class HistoriaCorta {
 
     public void setPicture(Bitmap picture) {
         this.mPicture = picture;
+    }
+
+    public void setUri(Uri mUri) {
+        this.mUri = mUri;
+    }
+
+    public Uri getUri() {
+        return mUri;
     }
 }

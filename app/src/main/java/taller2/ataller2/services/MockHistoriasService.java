@@ -122,7 +122,7 @@ public class MockHistoriasService implements HistoriasService {
     }
 
     @Override
-    public void uploadImageFromMemory(ImageView imageView) {
+    public void uploadImageFromMemory(ImageView imageView, OnCallbackImageUpload callback) {
 
     }
 }

@@ -38,6 +38,8 @@ public class Historia {
     private int cantMeDivierte = 0;
     private Reaccion miReaccion = null;
 
+    private Uri mUri;
+
     public Historia(String titulo) {
         mTitulo = titulo;
     }
@@ -219,5 +221,13 @@ public class Historia {
 
     public int getCantMeDivierte() {
         return cantMeDivierte;
+    }
+
+    public void setUri(Uri mUri) {
+        this.mUri = mUri;
+    }
+
+    public Uri getUri() {
+        return mUri;
     }
 }

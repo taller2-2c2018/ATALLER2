@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -553,7 +554,9 @@ public class HerokuHistoriasService implements HistoriasService {
         JSONObject requestHistoriaJsonObject = new JSONObject();
         try {
             final String file = "file";
-            requestHistoriaJsonObject.put(file, BitMapToString(historia.getPicture()));
+            //requestHistoriaJsonObject.put(file, BitMapToString(historia.getPicture()));
+            String asd = historia.getUri().toString();
+            requestHistoriaJsonObject.put(file, historia.getUri().toString());
             //requestHistoriaJsonObject.put(file,"hola");
             final String fileType = "mFileType";
             requestHistoriaJsonObject.put(fileType,"jpg");
@@ -579,7 +582,8 @@ public class HerokuHistoriasService implements HistoriasService {
         JSONObject requestHistoriaJsonObject = new JSONObject();
         try {
             final String file = "file";
-            requestHistoriaJsonObject.put(file, BitMapToString(historia.getPicture()));
+            //requestHistoriaJsonObject.put(file, BitMapToString(historia.getPicture()));
+            requestHistoriaJsonObject.put(file, historia.getUri().toString());
             final String fileType = "mFileType";
             requestHistoriaJsonObject.put(fileType,"jpg");
             final String flash = "mFlash";
@@ -814,7 +818,7 @@ public class HerokuHistoriasService implements HistoriasService {
     }
 
     @Override
-    public void uploadImageFromMemory(ImageView imageView){
+    public void uploadImageFromMemory(ImageView imageView, final OnCallbackImageUpload callback){
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         StorageReference storageRef = storage.getReference();
@@ -842,7 +846,8 @@ public class HerokuHistoriasService implements HistoriasService {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                 // ...
-                int as = 1;
+                Uri downloadUri = taskSnapshot.getDownloadUrl();
+                callback.onFinish(downloadUri);
             }
         });
         }

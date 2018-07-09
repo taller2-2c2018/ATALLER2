@@ -41,6 +41,7 @@ import java.util.Date;
 
 import taller2.ataller2.model.Historia;
 import taller2.ataller2.model.HistoriaCorta;
+import taller2.ataller2.services.OnCallbackImageUpload;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.services.HistoriasService;
 
@@ -156,22 +157,32 @@ public class CameraActivity extends Activity {
     private void publicarHistoria() {
         boolean checked = cb.isChecked();
         if (checked){
-            HistoriaCorta historia = new HistoriaCorta();
+            final HistoriaCorta historia = new HistoriaCorta();
             historia.setPicture(drawableToBitmap(ivPhoto.getDrawable()));
             historia.setPictureUsr(drawableToBitmap(ivPhoto.getDrawable()));
-            //getHistoriasService().crearHistoriaCorta(this.getFragmentManager(),historia);
 
-            ServiceLocator.get(HistoriasService.class).uploadImageFromMemory(ivPhoto);
+            ServiceLocator.get(HistoriasService.class).uploadImageFromMemory(ivPhoto, new OnCallbackImageUpload() {
+                @Override
+                public void onFinish(Uri uri) {
+                    historia.setUri(uri);
+                    getHistoriasService().crearHistoriaCorta(getFragmentManager(),historia);
+                }
+            });
         }
         else{
 
-            Historia historia = new Historia(tv.getText().toString());
+            final Historia historia = new Historia(tv.getText().toString());
             historia.setPicture(drawableToBitmap(ivPhoto.getDrawable()));
             historia.setDescription("muy buena foto");
             historia.setPictureUsr(drawableToBitmap(ivPhoto.getDrawable()));
-            //getHistoriasService().crearHistoria(this.getFragmentManager(),historia);
 
-            ServiceLocator.get(HistoriasService.class).uploadImageFromMemory(ivPhoto);
+            ServiceLocator.get(HistoriasService.class).uploadImageFromMemory(ivPhoto, new OnCallbackImageUpload() {
+                @Override
+                public void onFinish(Uri uri) {
+                    historia.setUri(uri);
+                    getHistoriasService().crearHistoria(getFragmentManager(),historia);
+                }
+            });
         }
     }
 

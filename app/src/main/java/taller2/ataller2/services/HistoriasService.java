@@ -27,5 +27,6 @@ public interface HistoriasService extends CustomService {
     boolean actReaction(FragmentManager fragmentManager, Historia historia, EmotionType emotion);
     boolean actCommet(FragmentManager fragmentManager, Historia historia, String comment);
 
-    void uploadImageFromMemory(ImageView imageView);
+    void uploadImageFromMemory(ImageView imageView, OnCallbackImageUpload callback);
+
 }
