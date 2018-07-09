@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.widget.ImageView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,13 +101,13 @@ public class MockHistoriasService implements HistoriasService {
     }
 
     @Override
-    public boolean crearHistoria(FragmentManager fragmentManager, Historia historia) {
+    public boolean crearHistoria(FragmentManager fragmentManager, Historia historia, OnCallback callback) {
         mHistorias.add(historia);
         return true;
     }
 
     @Override
-    public boolean crearHistoriaCorta(FragmentManager fragmentManager, HistoriaCorta historia) {
+    public boolean crearHistoriaCorta(FragmentManager fragmentManager, HistoriaCorta historia, OnCallback callback) {
         return false;
     }
 
@@ -117,5 +119,10 @@ public class MockHistoriasService implements HistoriasService {
     @Override
     public boolean actCommet(FragmentManager fragmentManager, Historia historia, String comment) {
         return false;
+    }
+
+    @Override
+    public void uploadImageFromMemory(ImageView imageView, OnCallbackImageUpload callback) {
+
     }
 }

@@ -22,6 +22,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,12 +52,23 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         ListadoNotificacionesFragment.NotificacionesListListener,
         PerfilFragment.PerfilListener{
 
+    private static final int SIGN_IN_REQUEST_CODE = 99;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+            // Start sign in/sign up activity
+            startActivityForResult(
+                    AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .build(),
+                    SIGN_IN_REQUEST_CODE
+            );
+        }
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

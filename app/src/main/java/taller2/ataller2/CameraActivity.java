@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -26,8 +27,10 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.zomato.photofilters.imageprocessors.Filter;
@@ -41,6 +44,8 @@ import java.util.Date;
 
 import taller2.ataller2.model.Historia;
 import taller2.ataller2.model.HistoriaCorta;
+import taller2.ataller2.services.OnCallback;
+import taller2.ataller2.services.OnCallbackImageUpload;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.services.HistoriasService;
 
@@ -64,6 +69,9 @@ public class CameraActivity extends Activity {
     private ImageView ivPhoto;
     private VideoView vvVideo;
 
+    private ProgressBar mProgressBar;
+    private ConstraintLayout mConstraintLayout;
+
     private Uri uriVideo;
 
     private TextView tv;
@@ -84,6 +92,9 @@ public class CameraActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_crear_historia_larga);
+
+        mConstraintLayout = findViewById(R.id.constraint_layout_subir_historias);
+        mProgressBar = findViewById(R.id.progressBar_crear_historia);
 
         ivPhoto = (ImageView) findViewById(R.id.imgMostrar);
         vvVideo = findViewById(R.id.videoMostrar);
@@ -132,12 +143,25 @@ public class CameraActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (videoOn){
-                    publicarHistoriaVideo();
+                    ponerLoading();
+                    publicarHistoriaVideo(new OnCallback(){
+                        @Override
+                        public void onFinish() {
+                            finish();
+                            Toast.makeText(CameraActivity.this,"Su historia se ha subido satisfactoriamente", Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
                 else{
-                    publicarHistoria();
+                    ponerLoading();
+                    publicarHistoria(new OnCallback() {
+                        @Override
+                        public void onFinish() {
+                            finish();
+                            Toast.makeText(CameraActivity.this,"Su historia se ha subido satisfactoriamente", Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
-                finish();
             }
         });
 
@@ -153,24 +177,38 @@ public class CameraActivity extends Activity {
 
     }
 
-    private void publicarHistoria() {
+    private void publicarHistoria(final OnCallback callback ) {
         boolean checked = cb.isChecked();
         if (checked){
-            HistoriaCorta historia = new HistoriaCorta();
+            final HistoriaCorta historia = new HistoriaCorta();
             historia.setPicture(drawableToBitmap(ivPhoto.getDrawable()));
             historia.setPictureUsr(drawableToBitmap(ivPhoto.getDrawable()));
-            getHistoriasService().crearHistoriaCorta(this.getFragmentManager(),historia);
+
+            ServiceLocator.get(HistoriasService.class).uploadImageFromMemory(ivPhoto, new OnCallbackImageUpload() {
+                @Override
+                public void onFinish(Uri uri) {
+                    historia.setUri(uri);
+                    getHistoriasService().crearHistoriaCorta(getFragmentManager(),historia,callback);
+                }
+            });
         }
         else{
-
-            Historia historia = new Historia(tv.getText().toString());
+            final Historia historia = new Historia(tv.getText().toString());
             historia.setPicture(drawableToBitmap(ivPhoto.getDrawable()));
             historia.setDescription("muy buena foto");
             historia.setPictureUsr(drawableToBitmap(ivPhoto.getDrawable()));
-            getHistoriasService().crearHistoria(this.getFragmentManager(),historia);
+
+            ServiceLocator.get(HistoriasService.class).uploadImageFromMemory(ivPhoto, new OnCallbackImageUpload() {
+                @Override
+                public void onFinish(Uri uri) {
+                    historia.setUri(uri);
+                    getHistoriasService().crearHistoria(getFragmentManager(),historia, callback);
+                }
+            });
         }
     }
-    private void publicarHistoriaVideo() {
+
+    private void publicarHistoriaVideo(OnCallback callback) {
         Historia historia = new Historia(tv.getText().toString());
         historia.setVideo(uriVideo);
         historia.setDescription("muy buena foto");
@@ -178,7 +216,6 @@ public class CameraActivity extends Activity {
        // getHistoriasService().crearHistoria(this.getFragmentManager(),historia);
 
     }
-
 
     private void openTakeFoto(Context context){
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
@@ -342,6 +379,11 @@ public class CameraActivity extends Activity {
 
     private HistoriasService getHistoriasService() {
         return ServiceLocator.get(HistoriasService.class);
+    }
+
+    private void ponerLoading(){
+        mConstraintLayout.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.VISIBLE);
     }
 
 }

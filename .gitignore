@@ -1,5 +1,5 @@
 # Gradle generated files
-.gradle/
+.gradle*
 
 # User-specific configurations
 .idea/libraries/

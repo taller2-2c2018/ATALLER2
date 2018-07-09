@@ -15,6 +15,7 @@ import taller2.ataller2.services.MockConversacionService;
 import taller2.ataller2.services.MockNotificacionService;
 import taller2.ataller2.services.NotificacionesService;
 import taller2.ataller2.services.PerfilService;
+import taller2.ataller2.services.Picasso.PicassoService;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.services.facebook.BaseFacebookService;
 import taller2.ataller2.services.facebook.FacebookService;
@@ -37,6 +38,7 @@ public class AppMain extends Application {
     private void bindServices(Context applicationContext) {
         ServiceLocator.init(applicationContext);
         //ServiceLocator.bindCustomServiceImplementation(NotificacionesService.class, MockNotificacionService.class);
+        ServiceLocator.bindCustomServiceImplementation(PicassoService.class, PicassoService.class);
         ServiceLocator.bindCustomServiceImplementation(ConversacionService.class, HerokuConversacionService.class);
         ServiceLocator.bindCustomServiceImplementation(AmistadesService.class, HerokuAmistadesService.class);
         ServiceLocator.bindCustomServiceImplementation(FacebookService.class, BaseFacebookService.class);

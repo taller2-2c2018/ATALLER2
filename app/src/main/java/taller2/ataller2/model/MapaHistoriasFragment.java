@@ -74,8 +74,12 @@ public class MapaHistoriasFragment extends Fragment implements OnMapReadyCallbac
         List<Historia> historias = ServiceLocator.get(HistoriasService.class).getHistorias(getActivity());
 
         for (Historia historia : historias) {
-            double latitud = Double.parseDouble(historia.getLatitud());
-            double longitud = Double.parseDouble(historia.getLongitud());
+            double latitud = 0;
+            double longitud = 0;
+            if (historia.getLatitud() != "" && historia.getLongitud() != ""){
+                latitud = Double.parseDouble(historia.getLatitud());
+                longitud = Double.parseDouble(historia.getLongitud());
+            }
             LatLng location = new LatLng(latitud, longitud);
             mMap.addMarker(new MarkerOptions().position(location).title("1").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
         }

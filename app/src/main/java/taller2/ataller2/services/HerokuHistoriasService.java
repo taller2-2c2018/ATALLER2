@@ -2,22 +2,38 @@ package taller2.ataller2.services;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import taller2.ataller2.R;
 import taller2.ataller2.model.Comentario;
@@ -50,8 +66,12 @@ public class HerokuHistoriasService implements HistoriasService {
     private List<Historia> mHistorias;
     private List<HistoriaCorta> mHistoriasCortas;
     private Activity contextActivity;
-
     private Context mContext;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
+
+
+
     public HerokuHistoriasService(Context context){
         mContext = context;
     }
@@ -125,7 +145,7 @@ public class HerokuHistoriasService implements HistoriasService {
                     String userID = obj.getString("mFacebookUserId");
                     String lat = obj.getString("mLatitude");
                     String lng = obj.getString("mLongitude");
-                    int fileID = obj.getInt("mFileId");
+                    String file = obj.getString("mFile");
                     int fileProfileID = -1;
                     try {
                        fileProfileID = obj.getInt("mProfilePictureId");
@@ -143,21 +163,15 @@ public class HerokuHistoriasService implements HistoriasService {
 
                     if (isFlash){
                         HistoriaCorta historia = new HistoriaCorta();
-
-                        getHistoriaCortaFile(historia,fileID,1);
-                        getHistoriaCortaFile(historia,fileProfileID,2);
-
+                        historia.setStringUri(file);
+                        mHistoriasCortas.add(historia);
                         Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
                         historia.setPicture(icon);
                         historia.setPictureUsr(icon);
-
-                        mHistoriasCortas.add(historia);
                     }
                     else{
                         Historia historia = new Historia(title);
-
-                        getHistoriaFile(historia,fileID,1);
-                        getHistoriaFile(historia,fileProfileID,2);
+                        historia.setStringUri(file);
                         historia.setNombre(nom + " " + ape );
                         historia.setUserID(userID);
                         historia.setID(historiaID);
@@ -265,17 +279,17 @@ public class HerokuHistoriasService implements HistoriasService {
     }
 
     @Override
-    public boolean crearHistoria( FragmentManager fragmentManager,Historia historia) {
+    public boolean crearHistoria( FragmentManager fragmentManager,Historia historia, OnCallback callback) {
         mHistorias.add(historia);
-        JSONObject result = postHistoriasJSON(fragmentManager,historia);
+        JSONObject result = postHistoriasJSON(fragmentManager,historia,callback);
         //TODO: chequear resultado de la creacion
         return true;
     }
 
     @Override
-    public boolean crearHistoriaCorta(FragmentManager fragmentManager, HistoriaCorta historia) {
+    public boolean crearHistoriaCorta(FragmentManager fragmentManager, HistoriaCorta historia, OnCallback callback) {
         mHistoriasCortas.add(historia);
-        JSONObject result = postHistoriasCortaJSON(fragmentManager,historia);
+        JSONObject result = postHistoriasCortaJSON(fragmentManager,historia,callback);
         //TODO: chequear resultado de la creacion
         return true;
     }
@@ -410,7 +424,7 @@ public class HerokuHistoriasService implements HistoriasService {
         return networkObject;
     }
 
-    private JSONObject postHistoriasCortaJSON( final FragmentManager fragmentManager, HistoriaCorta historia) {
+    private JSONObject postHistoriasCortaJSON( final FragmentManager fragmentManager, HistoriaCorta historia, final OnCallback callback) {
         final NetworkObject requestTokenObject = createHistoriaCorta(historia);
         final NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
         resultado2 = null;
@@ -436,6 +450,7 @@ public class HerokuHistoriasService implements HistoriasService {
 
                     }
                     mDownloading = false;
+                    callback.onFinish();
                 }
 
                 @Override
@@ -458,9 +473,10 @@ public class HerokuHistoriasService implements HistoriasService {
         return resultado2;
     }
 
-    private JSONObject postHistoriasJSON( final FragmentManager fragmentManager, Historia historia) {
+    private JSONObject postHistoriasJSON( final FragmentManager fragmentManager, Historia historia,final OnCallback callback) {
         final NetworkObject requestTokenObject = createHistoria(historia);
         final NetworkFragment networkFragment = NetworkFragment.getInstance(fragmentManager, requestTokenObject);
+
         resultado2 = null;
         mDownloading = false;
         if (!mDownloading) {
@@ -484,6 +500,7 @@ public class HerokuHistoriasService implements HistoriasService {
 
                     }
                     mDownloading = false;
+                    callback.onFinish();
                 }
 
                 @Override
@@ -536,7 +553,9 @@ public class HerokuHistoriasService implements HistoriasService {
         JSONObject requestHistoriaJsonObject = new JSONObject();
         try {
             final String file = "file";
-            requestHistoriaJsonObject.put(file, BitMapToString(historia.getPicture()));
+            //requestHistoriaJsonObject.put(file, BitMapToString(historia.getPicture()));
+            String asd = historia.getUri().toString();
+            requestHistoriaJsonObject.put(file, historia.getUri().toString());
             //requestHistoriaJsonObject.put(file,"hola");
             final String fileType = "mFileType";
             requestHistoriaJsonObject.put(fileType,"jpg");
@@ -562,7 +581,8 @@ public class HerokuHistoriasService implements HistoriasService {
         JSONObject requestHistoriaJsonObject = new JSONObject();
         try {
             final String file = "file";
-            requestHistoriaJsonObject.put(file, BitMapToString(historia.getPicture()));
+            //requestHistoriaJsonObject.put(file, BitMapToString(historia.getPicture()));
+            requestHistoriaJsonObject.put(file, historia.getUri().toString());
             final String fileType = "mFileType";
             requestHistoriaJsonObject.put(fileType,"jpg");
             final String flash = "mFlash";
@@ -756,5 +776,102 @@ public class HerokuHistoriasService implements HistoriasService {
         byte[] byteArray = stream.toByteArray();
         bitmap.recycle();
         return new String(byteArray, StandardCharsets.UTF_8);
+    }
+
+
+    private void uploadImage(final Context context, Uri filePath) {
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
+        if(filePath != null)
+        {
+            final ProgressDialog progressDialog = new ProgressDialog(context);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+
+            StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
+            ref.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+                            Toast.makeText(context, "Uploaded", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(context, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                    .getTotalByteCount());
+                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                        }
+                    });
+        }
+    }
+
+    @Override
+    public void uploadImageFromMemory(ImageView imageView, final OnCallbackImageUpload callback){
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+        StorageReference storageRef = storage.getReference();
+        String uniqueID = UUID.randomUUID().toString();
+        uniqueID = uniqueID + ".jpg";
+        StorageReference mountainsRef = storageRef.child(uniqueID);
+
+        // Get the data from an ImageView as bytes
+        imageView.setDrawingCacheEnabled(true);
+        imageView.buildDrawingCache();
+        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = mountainsRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // TODO: mensaje de error de creacion de historia
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Uri downloadUri = taskSnapshot.getDownloadUrl();
+                callback.onFinish(downloadUri);
+            }
+        });
+        }
+
+    private void uploadImageFromDataStorage(){
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+        StorageReference storageRef = storage.getReference();
+        StorageReference mountainsRef = storageRef.child("mountains.jpg");
+        StorageReference mountainImagesRef = storageRef.child("images/mountains.jpg");
+
+
+        Uri file = Uri.fromFile(new File("path/to/images/rivers.jpg"));
+        StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
+        UploadTask uploadTask = riversRef.putFile(file);
+
+        // Register observers to listen for when the download is done or if it fails
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                // ...
+            }
+        });
     }
 }

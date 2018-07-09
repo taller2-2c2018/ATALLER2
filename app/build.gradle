@@ -34,6 +34,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:11.6.2'
     implementation 'com.google.firebase:firebase-messaging:11.6.2'
     implementation 'com.firebaseui:firebase-ui:3.1.2'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     implementation 'com.google.android.gms:play-services-maps:11.6.2'
     implementation "com.google.android.gms:play-services-gcm:11.6.2"

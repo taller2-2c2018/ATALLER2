@@ -18,6 +18,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import taller2.ataller2.PerfilActivity;
@@ -28,6 +30,8 @@ import taller2.ataller2.model.ListadoHistoriasFragment;
 import taller2.ataller2.model.Reaccion;
 import taller2.ataller2.services.EmotionType;
 import taller2.ataller2.services.HistoriasService;
+import taller2.ataller2.services.Picasso.CircleTransform;
+import taller2.ataller2.services.Picasso.PicassoService;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.services.facebook.FacebookService;
 
@@ -129,6 +133,11 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
 
         holder.mPictureUser.setImageDrawable(roundedDrawable);
         holder.mPicture.setImageBitmap(historia.getPicture());
+
+        Picasso picasso = ServiceLocator.get(PicassoService.class).getPicasso();
+        picasso.load(historia.getStringUri()).fit().transform(new CircleTransform()).error(R.drawable.no_image).placeholder(R.drawable.progress_animation).into(holder.mPictureUser);
+        picasso.load(historia.getStringUri()).fit().centerCrop().placeholder(R.drawable.progress_animation).error(R.drawable.no_image).into(holder.mPicture);
+
         holder.mTitulo.setText(historia.getmTitulo());
         holder.mDescripcion.setText(historia.getDescription());
         holder.mFecha.setText(historia.getFecha());

@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.zomato.photofilters.imageprocessors.Filter;
 import com.zomato.photofilters.imageprocessors.subfilters.BrightnessSubFilter;
 import com.zomato.photofilters.imageprocessors.subfilters.ContrastSubFilter;
@@ -28,6 +29,9 @@ import taller2.ataller2.R;
 import taller2.ataller2.model.Historia;
 import taller2.ataller2.model.HistoriaCorta;
 import taller2.ataller2.model.ListadoHistoriasFragment;
+import taller2.ataller2.services.Picasso.CircleTransform;
+import taller2.ataller2.services.Picasso.PicassoService;
+import taller2.ataller2.services.ServiceLocator;
 
 public class HistoriasCortasListAdapter extends RecyclerView.Adapter<HistoriasCortasListAdapter.HistoriasCortasViewHolder>{
 
@@ -75,12 +79,8 @@ public class HistoriasCortasListAdapter extends RecyclerView.Adapter<HistoriasCo
         }else if (originalBitmap.getWidth() < originalBitmap.getHeight()) {
             originalBitmap = Bitmap.createBitmap(originalBitmap, 0, 0, originalBitmap.getWidth(), originalBitmap.getWidth());
         }
-        RoundedBitmapDrawable roundedDrawable = RoundedBitmapDrawableFactory.create(
-                holder.mView.getContext().getResources(), originalBitmap);
-        roundedDrawable.setCornerRadius(originalBitmap.getHeight());
-
-        holder.mPictureUser.setImageDrawable(roundedDrawable);
-        //holder.mPicture.setImageBitmap(historia.getPicture());
+        final Picasso picasso = ServiceLocator.get(PicassoService.class).getPicasso();
+        picasso.load(historia.getStringUri()).fit().transform(new CircleTransform()).error(R.drawable.no_image).placeholder(R.drawable.progress_animation).into(holder.mPictureUser);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +98,7 @@ public class HistoriasCortasListAdapter extends RecyclerView.Adapter<HistoriasCo
                 window.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
                 ImageView imagen = dialog.findViewById(R.id.img_corta);
-                imagen.setImageBitmap(historia.getPicture());
+                picasso.load(historia.getStringUri()).fit().centerCrop().placeholder(R.drawable.progress_animation).error(R.drawable.no_image).into(imagen);
 
                 ImageView cancelButton = dialog.findViewById(R.id.button_cerrar);
                 cancelButton.setOnClickListener(new View.OnClickListener() {
