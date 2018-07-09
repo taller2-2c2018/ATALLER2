@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.util.Base64;
 import android.util.Log;
 
@@ -80,8 +81,8 @@ public class HerokuPerfilService implements PerfilService {
                     sexo = "";
                 }
 
-                int fotoID = resultadoPerfil.getInt("mProfilePictureId");
                 String fileType = resultadoPerfil.getString("mFileTypeProfilePicture");
+                String picture = resultadoPerfil.getString("mProfilePicture");
                 JSONArray amigos = resultadoPerfil.getJSONArray("mFriendshipList");
 
                 idAmigos = new ArrayList();
@@ -97,8 +98,7 @@ public class HerokuPerfilService implements PerfilService {
                 }
 
                 mMiPerfil = new Perfil(nombre + " " + apellido );
-                Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
-                mMiPerfil.setPicture(icon);
+                mMiPerfil.setPicture(picture);
 
                 //getPerfilFile(activity, mMiPerfil, fotoID);
 
@@ -183,8 +183,8 @@ public class HerokuPerfilService implements PerfilService {
     }
 
     @Override
-    public void updateFoto(final Activity activity, Bitmap bitmap) {
-        final NetworkObject requestTokenObject = updateFotoNetworkObject(bitmap);
+    public void updateFoto(final Activity activity, Uri uri) {
+        final NetworkObject requestTokenObject = updateFotoNetworkObject(uri);
         final NetworkFragment networkFragment = NetworkFragment.getInstance(activity.getFragmentManager(), requestTokenObject);
         mDownloading = false;
         if (!mDownloading) {
@@ -307,8 +307,8 @@ public class HerokuPerfilService implements PerfilService {
         return requestHistoriaJsonObject;
     }
 
-    private NetworkObject updateFotoNetworkObject(Bitmap bitmap) {
-        String requestBody = updateFotoObject(bitmap).toString();
+    private NetworkObject updateFotoNetworkObject(Uri uri) {
+        String requestBody = updateFotoObject(uri).toString();
         NetworkObject networkObject = new NetworkObject(PERFIL_FOTO, HttpMethodType.POST, requestBody);
         networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
         networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
@@ -319,11 +319,11 @@ public class HerokuPerfilService implements PerfilService {
         return networkObject;
     }
 
-    private JSONObject updateFotoObject(Bitmap bitmap) {
+    private JSONObject updateFotoObject(Uri uri) {
         JSONObject requestHistoriaJsonObject = new JSONObject();
         try {
             final String file = "file";
-            requestHistoriaJsonObject.put(file, BitMapToString(bitmap));
+            requestHistoriaJsonObject.put(file, uri.toString());
             final String fileType = "mFileType";
             requestHistoriaJsonObject.put(fileType,"jpg");
         } catch (JSONException e) {
@@ -331,85 +331,4 @@ public class HerokuPerfilService implements PerfilService {
         }
         return requestHistoriaJsonObject;
     }
-
-    private String BitMapToString(Bitmap bitmap){
-        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
-        byte [] b=baos.toByteArray();
-        String temp= Base64.encodeToString(b, Base64.DEFAULT);
-        return temp;
-    }
-
-    private Bitmap StringToBitMap(String encodedString){
-        try {
-            byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
-            Bitmap bitmap=BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            return bitmap;
-        } catch(Exception e) {
-            e.getMessage();
-            return null;
-        }
-    }
-
-    private void  getPerfilFile (Activity activity, final Perfil perfil, int id) {
-        final NetworkObject requestTokenObject = getPerfilFileNetworkObject(id);
-        final NetworkFragment networkFragment =  NetworkFragment.getInstance(activity.getFragmentManager(), requestTokenObject);
-        mDownloading = false;
-        if (!mDownloading) {
-            mDownloading = true;
-            networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
-                @Override
-                public void onResponseReceived(NetworkResult result) {
-                    if (result.mException == null) {
-                        JSONObject resultToken;
-                        try{
-                            resultToken = new JSONObject(result.mResultValue);
-                            String status = resultToken.getString("status");
-                            if (status.equals("200")) {
-                                JSONObject data = resultToken.getJSONObject("data");
-                                //String foto = data.getString("mFile");
-                                perfil.setPicture(StringToBitMap(data.getString("mFile")));
-
-                            }
-                        }
-                        catch (Throwable t) {
-                            Log.e("My App", "Could not parse malformed JSON: \"" + result.mResultValue + "\"");
-                        }
-
-                    }
-                    mDownloading = false;
-                }
-
-                @Override
-                public NetworkInfo getActiveNetworkInfo(Context context) {
-                    ConnectivityManager connectivityManager =
-                            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-                    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-                    return networkInfo;
-                }
-
-                @Override
-                public void onProgressUpdate(int progressCode, int percentComplete) {}
-
-                @Override
-                public void onFinishDownloading() {
-                    mDownloading = false;
-                }
-            });
-        }
-    }
-
-    private NetworkObject getPerfilFileNetworkObject (int id){
-        String url = FILES + String.valueOf(id);
-        NetworkObject networkObject = new NetworkObject(url, HttpMethodType.GET);
-        //networkObject.setContentType("application/json");
-        networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
-        networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
-        //networkObject.setFirebaseToken(ServiceLocator.get(NotificationService.class).getToken());
-        return networkObject;
-    }
-
-
-
-
 }

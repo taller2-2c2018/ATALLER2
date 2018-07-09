@@ -20,12 +20,17 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.IOException;
+import java.net.URL;
 
 import taller2.ataller2.LoginActivity;
 import taller2.ataller2.adapters.HistoriasListAdapter;
 import taller2.ataller2.services.OnCallback;
+import taller2.ataller2.services.OnCallbackImageUpload;
 import taller2.ataller2.services.PerfilService;
+import taller2.ataller2.services.Picasso.PicassoService;
 import taller2.ataller2.services.ServiceLocator;
 import taller2.ataller2.services.HistoriasService;
 import taller2.ataller2.R;
@@ -98,7 +103,8 @@ public class PerfilFragment extends Fragment implements Refresh{
                                                 nombre.setText("");
                                             }
                                             else{
-                                                iv.setImageBitmap(perfil.getPicture());
+                                                Picasso picasso = ServiceLocator.get(PicassoService.class).getPicasso();
+                                                picasso.load(perfil.getPicture()).fit().centerCrop().placeholder(R.drawable.progress_animation).error(R.drawable.no_image).into(iv);
                                                 nombre.setText(ServiceLocator.get(FacebookService.class).getName());
                                             }
                                             HistoriasService historiasService = getHistoriasService();
@@ -133,12 +139,13 @@ public class PerfilFragment extends Fragment implements Refresh{
         if (requestCode==PICK_IMAGE){
             Uri imageUri = data.getData();
             iv.setImageURI(imageUri);
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getActivity().getContentResolver(), imageUri);
-                ServiceLocator.get(PerfilService.class).updateFoto(this.getActivity(), bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            ServiceLocator.get(HistoriasService.class).uploadImageFromMemory(iv, new OnCallbackImageUpload() {
+                @Override
+                public void onFinish(Uri uri) {
+                    ServiceLocator.get(PerfilService.class).updateFoto(getActivity(), uri);
+                }
+            });
+
         }
     }
 

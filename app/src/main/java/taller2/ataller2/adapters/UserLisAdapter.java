@@ -8,12 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import taller2.ataller2.PerfilActivity;
 import taller2.ataller2.R;
 import taller2.ataller2.model.Perfil;
 import taller2.ataller2.model.PerfilFragment;
+import taller2.ataller2.services.Picasso.PicassoService;
+import taller2.ataller2.services.ServiceLocator;
 
 public class UserLisAdapter extends RecyclerView.Adapter<UserLisAdapter.UserViewHolder>{
 
@@ -53,7 +57,8 @@ public class UserLisAdapter extends RecyclerView.Adapter<UserLisAdapter.UserView
     @Override
     public void onBindViewHolder(UserLisAdapter.UserViewHolder holder, int position) {
         final Perfil perfil = mPerfiles.get(position);
-        holder.mPicture.setImageBitmap(perfil.getPicture());
+        Picasso picasso = ServiceLocator.get(PicassoService.class).getPicasso();
+        picasso.load(perfil.getPicture()).fit().centerCrop().placeholder(R.drawable.progress_animation).error(R.drawable.no_image).into(holder.mPicture);
         holder.mName.setText(perfil.getNombre());
 
 

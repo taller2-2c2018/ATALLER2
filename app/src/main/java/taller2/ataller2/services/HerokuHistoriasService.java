@@ -146,12 +146,7 @@ public class HerokuHistoriasService implements HistoriasService {
                     String lat = obj.getString("mLatitude");
                     String lng = obj.getString("mLongitude");
                     String file = obj.getString("mFile");
-                    int fileProfileID = -1;
-                    try {
-                       fileProfileID = obj.getInt("mProfilePictureId");
-                    }
-                    catch (Exception ex){
-                    }
+                    String userPicture = obj.getString("mProfilePicture");
                     String fileType = obj.getString("mFileType");
                     boolean isFlash = obj.getBoolean("mFlash");
                     String location = obj.getString("mLocation");
@@ -179,9 +174,7 @@ public class HerokuHistoriasService implements HistoriasService {
                         historia.setUbicacion(location);
                         historia.setLatitud(lat);
                         historia.setLongitud(lng);
-                        Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
-                        historia.setPicture(icon);
-                        historia.setPictureUsr(icon);
+                        historia.setPictureUsr(userPicture);
 
                         List<Comentario> lista = new ArrayList();
                         List<Reaccion> listaReacciones = new ArrayList();
@@ -306,122 +299,6 @@ public class HerokuHistoriasService implements HistoriasService {
         JSONObject result = postCommentJSON(fragmentManager,historia,comment);
         //TODO: chequear resultado
         return true;
-    }
-
-    private void getHistoriaCortaFile (final HistoriaCorta historia, int id,final int pos) {
-        final NetworkObject requestTokenObject = getHistoriaFileNetworkObject(id);
-        final NetworkFragment networkFragment = NetworkFragment.getInstance(contextActivity.getFragmentManager(), requestTokenObject);
-        mDownloading = false;
-        resultado = null;
-        if (!mDownloading) {
-            mDownloading = true;
-            networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
-                @Override
-                public void onResponseReceived(NetworkResult result) {
-                    if (result.mException == null) {
-                        JSONObject resultToken;
-                        try{
-                            resultToken = new JSONObject(result.mResultValue);
-                            String status = resultToken.getString("status");
-                            if (status.equals("200")) {
-                                JSONObject data = resultToken.getJSONObject("data");
-                                //String foto = data.getString("mFile");
-                                if (pos == 1) {
-                                    historia.setPicture(StringToBitMap(data.getString("mFile")));
-                                }
-                                else{
-                                    historia.setPictureUsr(StringToBitMap(data.getString("mFile")));
-                                }
-                            }
-                        }
-                        catch (Throwable t) {
-                            Log.e("My App", "Could not parse malformed JSON: \"" + result.mResultValue + "\"");
-                        }
-
-                    }
-                    mDownloading = false;
-                }
-
-                @Override
-                public NetworkInfo getActiveNetworkInfo(Context context) {
-                    ConnectivityManager connectivityManager =
-                            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-                    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-                    return networkInfo;
-                }
-
-                @Override
-                public void onProgressUpdate(int progressCode, int percentComplete) {}
-
-                @Override
-                public void onFinishDownloading() {
-                    mDownloading = false;
-                }
-            });
-        }
-    }
-
-    private void getHistoriaFile (final Historia historia, int id, final int pos) {
-        final NetworkObject requestTokenObject = getHistoriaFileNetworkObject(id);
-        final NetworkFragment networkFragment = NetworkFragment.getInstance(contextActivity.getFragmentManager(), requestTokenObject);
-        mDownloading = false;
-        resultado = null;
-        if (!mDownloading) {
-            mDownloading = true;
-            networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
-                @Override
-                public void onResponseReceived(NetworkResult result) {
-                    if (result.mException == null) {
-                        JSONObject resultToken;
-                        try{
-                            resultToken = new JSONObject(result.mResultValue);
-                            String status = resultToken.getString("status");
-                            if (status.equals("200")) {
-                                JSONObject data = resultToken.getJSONObject("data");
-                                //String foto = data.getString("mFile");
-                                if (pos == 1){
-                                    historia.setPicture(StringToBitMap(data.getString("mFile")));
-                                }
-                                else{
-                                    historia.setPictureUsr(StringToBitMap(data.getString("mFile")));
-                                }
-                            }
-                        }
-                        catch (Throwable t) {
-                            Log.e("My App", "Could not parse malformed JSON: \"" + result.mResultValue + "\"");
-                        }
-
-                    }
-                    mDownloading = false;
-                }
-
-                @Override
-                public NetworkInfo getActiveNetworkInfo(Context context) {
-                    ConnectivityManager connectivityManager =
-                            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-                    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-                    return networkInfo;
-                }
-
-                @Override
-                public void onProgressUpdate(int progressCode, int percentComplete) {}
-
-                @Override
-                public void onFinishDownloading() {
-                    mDownloading = false;
-                }
-            });
-        }
-    }
-
-    private NetworkObject getHistoriaFileNetworkObject (int id){
-        String url = FILES + String.valueOf(id);
-        NetworkObject networkObject = new NetworkObject(url, HttpMethodType.GET);
-        //networkObject.setContentType("application/json");
-        networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
-        networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
-        //networkObject.setFirebaseToken(ServiceLocator.get(NotificationService.class).getToken());
-        return networkObject;
     }
 
     private JSONObject postHistoriasCortaJSON( final FragmentManager fragmentManager, HistoriaCorta historia, final OnCallback callback) {
@@ -751,71 +628,6 @@ public class HerokuHistoriasService implements HistoriasService {
         return requestHistoriaJsonObject;
     }
 
-    private Bitmap StringToBitMap(String encodedString){
-        try {
-            byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
-            Bitmap bitmap=BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            return bitmap;
-        } catch(Exception e) {
-            e.getMessage();
-            return null;
-        }
-    }
-
-    private String BitMapToString(Bitmap bitmap){
-        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
-        byte [] b=baos.toByteArray();
-        String temp=Base64.encodeToString(b, Base64.DEFAULT);
-        return temp;
-    }
-
-    private String BitMapToString2(Bitmap bitmap){
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-        bitmap.recycle();
-        return new String(byteArray, StandardCharsets.UTF_8);
-    }
-
-
-    private void uploadImage(final Context context, Uri filePath) {
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
-
-        if(filePath != null)
-        {
-            final ProgressDialog progressDialog = new ProgressDialog(context);
-            progressDialog.setTitle("Uploading...");
-            progressDialog.show();
-
-            StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
-            ref.putFile(filePath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressDialog.dismiss();
-                            Toast.makeText(context, "Uploaded", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressDialog.dismiss();
-                            Toast.makeText(context, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
-                                    .getTotalByteCount());
-                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
-                        }
-                    });
-        }
-    }
-
     @Override
     public void uploadImageFromMemory(ImageView imageView, final OnCallbackImageUpload callback){
         storage = FirebaseStorage.getInstance();
@@ -847,31 +659,4 @@ public class HerokuHistoriasService implements HistoriasService {
             }
         });
         }
-
-    private void uploadImageFromDataStorage(){
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
-        StorageReference storageRef = storage.getReference();
-        StorageReference mountainsRef = storageRef.child("mountains.jpg");
-        StorageReference mountainImagesRef = storageRef.child("images/mountains.jpg");
-
-
-        Uri file = Uri.fromFile(new File("path/to/images/rivers.jpg"));
-        StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
-        UploadTask uploadTask = riversRef.putFile(file);
-
-        // Register observers to listen for when the download is done or if it fails
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
-            }
-        });
-    }
 }

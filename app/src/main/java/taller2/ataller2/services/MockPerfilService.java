@@ -4,6 +4,7 @@ package taller2.ataller2.services;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.Uri;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class MockPerfilService implements PerfilService {
     }
 
     @Override
-    public void updateFoto(Activity activity, Bitmap bitmap) {
+    public void updateFoto(Activity activity, Uri uri) {
 
     }
 

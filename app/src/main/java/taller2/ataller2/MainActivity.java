@@ -2,9 +2,12 @@ package taller2.ataller2;
 
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -53,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         PerfilFragment.PerfilListener{
 
     private static final int SIGN_IN_REQUEST_CODE = 99;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
 
@@ -69,6 +74,17 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                     SIGN_IN_REQUEST_CODE
             );
         }
+
+
+        if (ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
+                            android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_PERMISSION_REQUEST_CODE);
+        }
+
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
