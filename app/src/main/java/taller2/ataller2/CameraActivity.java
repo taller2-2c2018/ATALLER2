@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -26,6 +27,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,6 +69,9 @@ public class CameraActivity extends Activity {
     private ImageView ivPhoto;
     private VideoView vvVideo;
 
+    private ProgressBar mProgressBar;
+    private ConstraintLayout mConstraintLayout;
+
     private Uri uriVideo;
 
     private TextView tv;
@@ -87,6 +92,9 @@ public class CameraActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_crear_historia_larga);
+
+        mConstraintLayout = findViewById(R.id.constraint_layout_subir_historias);
+        mProgressBar = findViewById(R.id.progressBar_crear_historia);
 
         ivPhoto = (ImageView) findViewById(R.id.imgMostrar);
         vvVideo = findViewById(R.id.videoMostrar);
@@ -135,6 +143,7 @@ public class CameraActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (videoOn){
+                    ponerLoading();
                     publicarHistoriaVideo(new OnCallback(){
                         @Override
                         public void onFinish() {
@@ -144,6 +153,7 @@ public class CameraActivity extends Activity {
                     });
                 }
                 else{
+                    ponerLoading();
                     publicarHistoria(new OnCallback() {
                         @Override
                         public void onFinish() {
@@ -369,6 +379,11 @@ public class CameraActivity extends Activity {
 
     private HistoriasService getHistoriasService() {
         return ServiceLocator.get(HistoriasService.class);
+    }
+
+    private void ponerLoading(){
+        mConstraintLayout.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.VISIBLE);
     }
 
 }
