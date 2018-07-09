@@ -26,6 +26,8 @@ public class Historia {
     private Bitmap mPicture;
     private Bitmap mPictureUser;
 
+    private String mStringUri;
+
     private Uri mVideo;
 
     private List<Comentario> mComentarios;
@@ -229,5 +231,13 @@ public class Historia {
 
     public Uri getUri() {
         return mUri;
+    }
+
+    public void setStringUri(String mStringUri) {
+        this.mStringUri = mStringUri;
+    }
+
+    public String getStringUri() {
+        return mStringUri;
     }
 }

@@ -145,7 +145,7 @@ public class HerokuHistoriasService implements HistoriasService {
                     String userID = obj.getString("mFacebookUserId");
                     String lat = obj.getString("mLatitude");
                     String lng = obj.getString("mLongitude");
-                    int fileID = obj.getInt("mFileId");
+                    String file = obj.getString("mFile");
                     int fileProfileID = -1;
                     try {
                        fileProfileID = obj.getInt("mProfilePictureId");
@@ -163,21 +163,15 @@ public class HerokuHistoriasService implements HistoriasService {
 
                     if (isFlash){
                         HistoriaCorta historia = new HistoriaCorta();
-
-                        getHistoriaCortaFile(historia,fileID,1);
-                        getHistoriaCortaFile(historia,fileProfileID,2);
-
+                        historia.setStringUri(file);
+                        mHistoriasCortas.add(historia);
                         Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
                         historia.setPicture(icon);
                         historia.setPictureUsr(icon);
-
-                        mHistoriasCortas.add(historia);
                     }
                     else{
                         Historia historia = new Historia(title);
-
-                        getHistoriaFile(historia,fileID,1);
-                        getHistoriaFile(historia,fileProfileID,2);
+                        historia.setStringUri(file);
                         historia.setNombre(nom + " " + ape );
                         historia.setUserID(userID);
                         historia.setID(historiaID);

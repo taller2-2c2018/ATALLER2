@@ -8,7 +8,7 @@ public class HistoriaCorta {
     private Bitmap mPicture;
     private Bitmap mPictureUser;
     private Uri mUri;
-
+    private String mStringUri;
 
     public HistoriaCorta() {
 
@@ -32,5 +32,13 @@ public class HistoriaCorta {
 
     public Uri getUri() {
         return mUri;
+    }
+
+    public void setStringUri(String mStringUri) {
+        this.mStringUri = mStringUri;
+    }
+
+    public String getStringUri() {
+        return mStringUri;
     }
 }
