@@ -818,7 +818,9 @@ public class HerokuHistoriasService implements HistoriasService {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         StorageReference storageRef = storage.getReference();
-        StorageReference mountainsRef = storageRef.child("foto2.jpg");
+        String uniqueID = UUID.randomUUID().toString();
+        uniqueID = uniqueID + ".jpg";
+        StorageReference mountainsRef = storageRef.child(uniqueID);
 
         // Get the data from an ImageView as bytes
         imageView.setDrawingCacheEnabled(true);
