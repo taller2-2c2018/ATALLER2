@@ -180,7 +180,9 @@ public class HerokuHistoriasService implements HistoriasService {
                                     obj2 = comentarios.getJSONObject(j);
                                     comentario.setComentario(obj2.getString("mComment"));
                                     comentario.setHorario(obj2.getString("mDate"));
-                                    comentario.setNombre(obj2.getString("mFacebookUserId"));
+                                    String nombre = obj2.getString("mFirstName");
+                                    String apellido = obj2.getString("mLastName");
+                                    comentario.setNombre(nom + " " + ape);
                                     lista.add(comentario);
                                 }
                                 catch (Exception ex){ }
