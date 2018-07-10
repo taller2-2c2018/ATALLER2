@@ -274,32 +274,37 @@ public class CameraActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==TAKE_IMAGE){
             try {
-                ivPhoto.setImageURI(file);
-                subioMultimedia = true;
+                if(file != null){
+                    ivPhoto.setImageURI(file);
+                    subioMultimedia = true;
+                }
             }
             catch(Exception e){
                 e.printStackTrace();
             }
         }
         if (requestCode==PICK_IMAGE){
-            Uri imageUri = data.getData();
-            ivPhoto.setImageURI(imageUri);
-            subioMultimedia = true;
-            //ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
+            if(data != null) {
+                Uri imageUri = data.getData();
+                ivPhoto.setImageURI(imageUri);
+                subioMultimedia = true;
+                //ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
+            }
         }
 
         if (requestCode==PICK_VIDEO){
-
-            Uri uri = data.getData();
-            uriVideo = uri;
-            try{
-                vvVideo.setVideoURI(uri);
-                vvVideo.start();
-                subioMultimedia = true;
-            }catch(Exception e){
-                e.printStackTrace();
+            if(data != null) {
+                Uri uri = data.getData();
+                uriVideo = uri;
+                try {
+                    vvVideo.setVideoURI(uri);
+                    vvVideo.start();
+                    subioMultimedia = true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
             }
-            //ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
         }
 
     }
