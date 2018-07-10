@@ -218,7 +218,7 @@ public class CameraActivity extends Activity {
     private void publicarHistoriaVideo(final OnCallback callback) {
         final Historia historia = new Historia(tv.getText().toString());
         historia.setVideo(uriVideo);
-        historia.setDescription("muy buena foto");
+        historia.setDescription(descripcionView.getText().toString());
        // getHistoriasService().crearHistoria(this.getFragmentManager(),historia);
         ServiceLocator.get(HistoriasService.class).uploadVideoFromMemory(vvVideo, new OnCallbackImageUpload() {
             @Override

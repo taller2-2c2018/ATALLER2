@@ -128,7 +128,7 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
         if (historia.getType().equals("mp3")){
             Uri uri = Uri.parse(historia.getStringUri());
             holder.mVideo.setVideoURI(uri);
-            holder.mVideo.start();
+//            holder.mVideo.start();
             holder.mVideo.setVisibility(View.VISIBLE);
             holder.mPicture.setVisibility(View.GONE);
             holder.mVideo.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {

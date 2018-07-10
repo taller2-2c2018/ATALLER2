@@ -29,9 +29,9 @@ import java.util.Map;
  * https://developer.android.com/training/basics/network-ops/connecting.html#HeadlessFragment
  */
 public class NetworkFragment extends Fragment {
-    private static final int READ_TIMEOUT_MS = 3000;
-    private static final int CONNECT_TIMEOUT_MS = 10000;
-    private static final int STREAM_MAX_SIZE = 4096;
+    private static final int READ_TIMEOUT_MS = 10000;
+    private static final int CONNECT_TIMEOUT_MS = 15000;
+    private static final int STREAM_MAX_SIZE = 8192;
 
     private static final String AUTH_KEY_FIELD = "Authorization";
     private static final String AUTH_KEY_ID = "facebookUserId";
