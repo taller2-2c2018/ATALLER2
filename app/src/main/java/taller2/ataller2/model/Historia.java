@@ -28,6 +28,8 @@ public class Historia {
 
     private String mStringUri;
 
+    private String mType;
+
     private Uri mVideo;
 
     private List<Comentario> mComentarios;
@@ -41,6 +43,8 @@ public class Historia {
     private Reaccion miReaccion = null;
 
     private Uri mUri;
+
+    private boolean tieneVideo = false;
 
     public Historia(String titulo) {
         mTitulo = titulo;
@@ -239,5 +243,19 @@ public class Historia {
 
     public String getStringUri() {
         return mStringUri;
+    }
+
+    public void setTieneVideo(boolean tieneVideo) {
+        this.tieneVideo = tieneVideo;
+    }
+
+    public boolean getTieneVideo () {return tieneVideo;}
+
+    public void setType(String mType) {
+        this.mType = mType;
+    }
+
+    public String getType() {
+        return mType;
     }
 }
