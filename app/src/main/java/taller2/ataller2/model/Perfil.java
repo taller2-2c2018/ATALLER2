@@ -12,7 +12,7 @@ public class Perfil {
     private String mFechaNacimiento = "";
     private String mMail = "";
     private String mSexo = "";
-    private List<List<String>> mAmigos = null;
+    private List<String> mAmigos = null;
 
     public Perfil(String nombre) {
         mNombre = nombre;
@@ -66,9 +66,9 @@ public class Perfil {
         return mFechaNacimiento;
     }
 
-    public List<List<String>> getAmigos() {return mAmigos;}
+    public List<String> getAmigos() {return mAmigos;}
 
-    public void setAmigos(List<List<String>> amigos) {mAmigos = amigos;}
+    public void setAmigos(List<String> amigos) {mAmigos = amigos;}
 
     public void setId(String id) {
         this.id = id;
