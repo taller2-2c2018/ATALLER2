@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.LinearLayoutManager;
@@ -120,11 +121,20 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
     @Override
     public void onBindViewHolder(final HistoriasViewHolder holder, int position) {
         final Historia historia = mHistoria.get(position);
-
         Picasso picasso = ServiceLocator.get(PicassoService.class).getPicasso();
         picasso.load(historia.getPictureUsr()).fit().transform(new CircleTransform()).error(R.drawable.no_image).placeholder(R.drawable.progress_animation).into(holder.mPictureUser);
-        picasso.load(historia.getStringUri()).fit().centerCrop().placeholder(R.drawable.progress_animation).error(R.drawable.no_image).into(holder.mPicture);
-
+        if (historia.getType().equals("mp3")){
+            Uri uri = Uri.parse(historia.getStringUri());
+            holder.mVideo.setVideoURI(uri);
+            holder.mVideo.start();
+            holder.mVideo.setVisibility(View.VISIBLE);
+            holder.mPicture.setVisibility(View.GONE);
+        }
+        else{
+            picasso.load(historia.getStringUri()).fit().centerCrop().placeholder(R.drawable.progress_animation).error(R.drawable.no_image).into(holder.mPicture);
+            holder.mVideo.setVisibility(View.GONE);
+            holder.mPicture.setVisibility(View.VISIBLE);
+        }
         holder.mTitulo.setText(historia.getmTitulo());
         holder.mDescripcion.setText(historia.getDescription());
         holder.mFecha.setText(historia.getFecha());

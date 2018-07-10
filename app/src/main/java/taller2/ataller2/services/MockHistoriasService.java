@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
+import android.widget.VideoView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,6 +113,11 @@ public class MockHistoriasService implements HistoriasService {
 
     @Override
     public void uploadImageFromMemory(ImageView imageView, OnCallbackImageUpload callback) {
+
+    }
+
+    @Override
+    public void uploadVideoFromMemory(VideoView videoView, OnCallbackImageUpload callback) {
 
     }
 }

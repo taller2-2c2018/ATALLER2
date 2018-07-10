@@ -3,6 +3,7 @@ package taller2.ataller2.services;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.widget.ImageView;
+import android.widget.VideoView;
 
 import java.util.List;
 
@@ -28,5 +29,6 @@ public interface HistoriasService extends CustomService {
     boolean actCommet(FragmentManager fragmentManager, Historia historia, String comment);
 
     void uploadImageFromMemory(ImageView imageView, OnCallbackImageUpload callback);
+    void uploadVideoFromMemory(VideoView videoView, OnCallbackImageUpload callback);
 
 }

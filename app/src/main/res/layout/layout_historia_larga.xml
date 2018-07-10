@@ -58,7 +58,7 @@
             android:id="@+id/videoHistoria"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_alignStart="@+id/textDescripcion"
+            android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal" />
 
         <ImageView
@@ -66,7 +66,6 @@
             android:id="@+id/imageHistoria"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_alignStart="@+id/textDescripcion"
             android:gravity="center_horizontal"
             app:srcCompat="@drawable/river4" />
 
