@@ -14,7 +14,7 @@ public interface AmistadesService extends CustomService {
     void updateAmistadesData();
     List<Amistad> getAmistades();
     Amistad getAmistad(int index);
-    void getAmistades(Activity activity);
+    void getAmistades(Activity activity, OnCallback callback);
 
     void rechazarAmistad(Activity activity, Amistad amistad);
     void aceptarAmistad(Activity activity, Amistad amistad);

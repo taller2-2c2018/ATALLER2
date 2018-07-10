@@ -12,18 +12,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import taller2.ataller2.R;
 import taller2.ataller2.SearchActivity;
 import taller2.ataller2.adapters.AmistadesListAdapter;
 import taller2.ataller2.services.AmistadesService;
+import taller2.ataller2.services.OnCallback;
 import taller2.ataller2.services.ServiceLocator;
 public class ListadoAmistadesFragment extends Fragment implements Refresh{
 
     private AmistadesListListener mAmistadesListListener;
     private FloatingActionButton mSearchView;
     private TextView mNoHayAmigosView;
+    private RecyclerView amistadesPendientesView;
 
     @Override
     public void refresh() {
@@ -53,7 +56,7 @@ public class ListadoAmistadesFragment extends Fragment implements Refresh{
                              Bundle savedInstanceState) {
 
         //View view = container.getChildAt(0);
-        View view = inflater.inflate(R.layout.fragment_amistades_nuevas, container, false);
+        final View view = inflater.inflate(R.layout.fragment_amistades_nuevas, container, false);
 
         mSearchView = view.findViewById(R.id.search);
         mSearchView.setOnClickListener(new View.OnClickListener() {
@@ -66,16 +69,24 @@ public class ListadoAmistadesFragment extends Fragment implements Refresh{
         });
 
         AmistadesService amistadesService = getAmistadesService();
-        List<Amistad> amistades = amistadesService.getAmistades();
-        mNoHayAmigosView = view.findViewById(R.id.textNoHayAmigos);
-        mNoHayAmigosView.setVisibility(amistades.isEmpty() ? View.VISIBLE : View.GONE);
+        amistadesService.getAmistades(this.getActivity(), new OnCallback() {
+            @Override
+            public void onFinish() {
+                AmistadesService amistadesService = getAmistadesService();
+                List<Amistad> amistades = amistadesService.getAmistades();
 
+                mNoHayAmigosView = view.findViewById(R.id.textNoHayAmigos);
+                mNoHayAmigosView.setVisibility(amistades.isEmpty() ? View.VISIBLE : View.GONE);
+
+
+                amistadesPendientesView = view.findViewById(R.id.listAmistadesNuevas);
+                amistadesPendientesView.setVisibility(!amistades.isEmpty() ? View.VISIBLE : View.GONE);
+                amistadesPendientesView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                amistadesPendientesView.setAdapter(new AmistadesListAdapter(amistades, mAmistadesListListener));
+            }
+        });
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            recyclerView.setAdapter(new AmistadesListAdapter(amistades, mAmistadesListListener));
-        }
+
         return view;
     }
 

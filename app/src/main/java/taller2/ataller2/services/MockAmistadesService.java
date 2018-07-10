@@ -47,7 +47,7 @@ public class MockAmistadesService implements AmistadesService {
     }
 
     @Override
-    public void getAmistades(Activity activity) {
+    public void getAmistades(Activity activity, OnCallback callback) {
 
     }
 
