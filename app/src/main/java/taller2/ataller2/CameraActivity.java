@@ -188,6 +188,7 @@ public class CameraActivity extends Activity {
                 @Override
                 public void onFinish(Uri uri) {
                     historia.setUri(uri);
+                    historia.setType("jpg");
                     getHistoriasService().crearHistoriaCorta(getFragmentManager(),historia,callback);
                 }
             });
@@ -201,17 +202,27 @@ public class CameraActivity extends Activity {
                 @Override
                 public void onFinish(Uri uri) {
                     historia.setUri(uri);
+                    historia.setType("jpg");
                     getHistoriasService().crearHistoria(getFragmentManager(),historia, callback);
                 }
             });
         }
     }
 
-    private void publicarHistoriaVideo(OnCallback callback) {
-        Historia historia = new Historia(tv.getText().toString());
+    private void publicarHistoriaVideo(final OnCallback callback) {
+        final Historia historia = new Historia(tv.getText().toString());
         historia.setVideo(uriVideo);
         historia.setDescription("muy buena foto");
        // getHistoriasService().crearHistoria(this.getFragmentManager(),historia);
+        ServiceLocator.get(HistoriasService.class).uploadVideoFromMemory(vvVideo, new OnCallbackImageUpload() {
+            @Override
+            public void onFinish(Uri uri) {
+                historia.setTieneVideo(true);
+                historia.setUri(uri);
+                historia.setType("mp3");
+                getHistoriasService().crearHistoria(getFragmentManager(),historia, callback);
+            }
+        });
 
     }
 

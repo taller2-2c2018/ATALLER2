@@ -15,6 +15,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,6 +31,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -163,6 +165,7 @@ public class HerokuHistoriasService implements HistoriasService {
                         Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_img);
                         historia.setPicture(icon);
                         historia.setPictureUsr(icon);
+                        historia.setType(fileType);
                     }
                     else{
                         Historia historia = new Historia(title);
@@ -175,6 +178,7 @@ public class HerokuHistoriasService implements HistoriasService {
                         historia.setLatitud(lat);
                         historia.setLongitud(lng);
                         historia.setPictureUsr(userPicture);
+                        historia.setType(fileType);
 
                         List<Comentario> lista = new ArrayList();
                         List<Reaccion> listaReacciones = new ArrayList();
@@ -435,7 +439,7 @@ public class HerokuHistoriasService implements HistoriasService {
             requestHistoriaJsonObject.put(file, historia.getUri().toString());
             //requestHistoriaJsonObject.put(file,"hola");
             final String fileType = "mFileType";
-            requestHistoriaJsonObject.put(fileType,"jpg");
+            requestHistoriaJsonObject.put(fileType,historia.getType());
             final String flash = "mFlash";
             requestHistoriaJsonObject.put(flash, false);
             final String privado = "mPrivate";
@@ -461,7 +465,7 @@ public class HerokuHistoriasService implements HistoriasService {
             //requestHistoriaJsonObject.put(file, BitMapToString(historia.getPicture()));
             requestHistoriaJsonObject.put(file, historia.getUri().toString());
             final String fileType = "mFileType";
-            requestHistoriaJsonObject.put(fileType,"jpg");
+            requestHistoriaJsonObject.put(fileType,historia.getType());
             final String flash = "mFlash";
             requestHistoriaJsonObject.put(flash, true);
             final String privado = "mPrivate";
@@ -658,5 +662,45 @@ public class HerokuHistoriasService implements HistoriasService {
                 callback.onFinish(downloadUri);
             }
         });
-        }
+    }
+
+    @Override
+    public void uploadVideoFromMemory(VideoView videoView, final OnCallbackImageUpload callback){
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+        StorageReference storageRef = storage.getReference();
+        String uniqueID = UUID.randomUUID().toString();
+        uniqueID = uniqueID + ".mp3";
+        StorageReference mountainRef = storageRef.child(uniqueID);
+
+        Uri mUri = null;
+        try {
+            Field mUriField = VideoView.class.getDeclaredField("mUri");
+            mUriField.setAccessible(true);
+            mUri = (Uri)mUriField.get(videoView);
+        } catch(Exception e) {}
+
+        UploadTask uploadTask = mountainRef.putFile(mUri);
+
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                    int b = 2;
+            }
+        }).addOnSuccessListener(
+            new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Uri downloadUri = taskSnapshot.getDownloadUrl();
+                    callback.onFinish(downloadUri);
+                }
+            }).addOnProgressListener(
+            new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                }
+            });
+    }
+
 }
