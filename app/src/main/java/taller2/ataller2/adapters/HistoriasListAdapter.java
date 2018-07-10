@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -129,6 +130,17 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
             holder.mVideo.start();
             holder.mVideo.setVisibility(View.VISIBLE);
             holder.mPicture.setVisibility(View.GONE);
+            holder.mVideo.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                public void onCompletion(MediaPlayer mp) {
+                    holder.mVideo.start(); //need to make transition seamless.
+                }
+            });
+            holder.mVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    mp.setLooping(true);
+                }
+            });
         }
         else{
             picasso.load(historia.getStringUri()).fit().centerCrop().placeholder(R.drawable.progress_animation).error(R.drawable.no_image).into(holder.mPicture);
