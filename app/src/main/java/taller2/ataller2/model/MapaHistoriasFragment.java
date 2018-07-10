@@ -72,7 +72,7 @@ public class MapaHistoriasFragment extends Fragment implements OnMapReadyCallbac
 
         //mCommercesFromMarkerMap.clear();
         List<Historia> historias = ServiceLocator.get(HistoriasService.class).getHistorias(getActivity());
-        if (historias == null){
+        if (historias != null){
             for (Historia historia : historias) {
                 double latitud = 0;
                 double longitud = 0;
