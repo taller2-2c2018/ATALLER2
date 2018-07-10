@@ -12,6 +12,7 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -139,6 +140,23 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
                 @Override
                 public void onPrepared(MediaPlayer mp) {
                     mp.setLooping(true);
+                }
+            });
+            holder.mVideo.setOnTouchListener(new View.OnTouchListener()
+            {
+                @Override
+                public boolean onTouch(View v, MotionEvent motionEvent)
+                {
+                    if (holder.mVideo.isPlaying())
+                    {
+                        holder.mVideo.pause();
+                        return false;
+                    }
+                    else
+                    {
+                        holder.mVideo.start();
+                        return false;
+                    }
                 }
             });
         }
