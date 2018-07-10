@@ -24,22 +24,24 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraint_layout_subir_historias"
-        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <ImageView
             android:id="@+id/imgMostrar"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="364dp"
+            android:layout_height="325dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
@@ -47,8 +49,10 @@
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+            app:layout_constraintVertical_bias="0.967" />
 
         <VideoView
             android:id="@+id/videoMostrar"
@@ -66,7 +70,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
-        <ImageView
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/botoneditar"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -75,16 +79,18 @@
             android:layout_marginEnd="25dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_gravity="bottom|end"
             android:clickable="true"
             android:elevation="20dp"
             android:src="@drawable/edit"
             android:visibility="visible"
+            app:backgroundTint="@color/blanco"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.928"
+            app:layout_constraintHorizontal_bias="0.895"
             app:layout_constraintStart_toStartOf="@+id/imgMostrar"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-            app:layout_constraintVertical_bias="0.918" />
+            app:layout_constraintVertical_bias="0.954" />
 
 
         <android.support.constraint.Guideline
@@ -92,15 +98,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.80" />
+            app:layout_constraintGuide_percent="0.91" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="10dp"
             android:gravity="center_vertical"
             android:textAlignment="center"
             app:layout_constraintEnd_toStartOf="@+id/checkBox"
@@ -109,6 +113,23 @@
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/text_input_historia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ingresa un título"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textDescripcionInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textAlignment="center"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/text_input_descripcion_historia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="¿En qué estas pensando?"
@@ -120,60 +141,65 @@
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline">
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/btn_camara"
-                android:layout_width="50dp"
+                android:layout_width="5dp"
                 android:layout_height="50dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="0dp"
+                android:scaleType="fitXY"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:src="@drawable/camera" />
 
-            <ImageView
+
+            <ImageButton
                 android:id="@+id/btn_subir_foto"
-                android:layout_width="50dp"
+                android:layout_width="5dp"
                 android:layout_height="50dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="0dp"
+                android:scaleType="fitXY"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:src="@drawable/galeria_fotos" />
 
-            <ImageView
+
+            <ImageButton
                 android:id="@+id/btn_subir_video"
-                android:layout_width="50dp"
+                android:layout_width="4dp"
                 android:layout_height="50dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="0dp"
+                android:scaleType="fitXY"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:src="@drawable/video" />
 
-            <ImageView
+
+            <ImageButton
                 android:id="@+id/button5"
-                android:layout_width="50dp"
+                android:layout_width="5dp"
                 android:layout_height="50dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="0dp"
+                android:scaleType="fitXY"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:src="@drawable/upload" />
@@ -184,7 +210,7 @@
             android:layout_width="70dp"
             android:layout_height="33dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="17dp"
             android:text="Flash"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

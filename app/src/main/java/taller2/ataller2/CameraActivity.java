@@ -64,6 +64,7 @@ public class CameraActivity extends Activity {
     private ImageView btm_publicar;
     private ImageView btn_subirfoto;
     private ImageView btn_subirvideo;
+    private boolean subioMultimedia;
 
     private ImageView btn_editar;
     private ImageView ivPhoto;
@@ -75,6 +76,7 @@ public class CameraActivity extends Activity {
     private Uri uriVideo;
 
     private TextView tv;
+    private TextView descripcionView;
 
     private CheckBox cb;
 
@@ -95,11 +97,12 @@ public class CameraActivity extends Activity {
 
         mConstraintLayout = findViewById(R.id.constraint_layout_subir_historias);
         mProgressBar = findViewById(R.id.progressBar_crear_historia);
-
+        subioMultimedia = false;
         ivPhoto = (ImageView) findViewById(R.id.imgMostrar);
         vvVideo = findViewById(R.id.videoMostrar);
 
         tv = (TextView) findViewById(R.id.text_input_historia);
+        descripcionView = (TextView) findViewById(R.id.text_input_descripcion_historia);
 
         myFilesDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.example.project/files");
         System.out.println (myFilesDir);
@@ -142,25 +145,29 @@ public class CameraActivity extends Activity {
         btm_publicar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (videoOn){
-                    ponerLoading();
-                    publicarHistoriaVideo(new OnCallback(){
-                        @Override
-                        public void onFinish() {
-                            finish();
-                            Toast.makeText(CameraActivity.this,"Su historia se ha subido satisfactoriamente", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-                else{
-                    ponerLoading();
-                    publicarHistoria(new OnCallback() {
-                        @Override
-                        public void onFinish() {
-                            finish();
-                            Toast.makeText(CameraActivity.this,"Su historia se ha subido satisfactoriamente", Toast.LENGTH_LONG).show();
-                        }
-                    });
+                if(subioMultimedia){
+                    if (videoOn){
+                        ponerLoading();
+                        publicarHistoriaVideo(new OnCallback(){
+                            @Override
+                            public void onFinish() {
+                                finish();
+                                Toast.makeText(CameraActivity.this,"Su historia se ha subido satisfactoriamente", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                    else{
+                        ponerLoading();
+                        publicarHistoria(new OnCallback() {
+                            @Override
+                            public void onFinish() {
+                                finish();
+                                Toast.makeText(CameraActivity.this,"Su historia se ha subido satisfactoriamente", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                } else {
+                    Toast.makeText(CameraActivity.this,"Todavía no has seleccionado un vídeo o una foto", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -196,8 +203,7 @@ public class CameraActivity extends Activity {
         else{
             final Historia historia = new Historia(tv.getText().toString());
             historia.setPicture(drawableToBitmap(ivPhoto.getDrawable()));
-            historia.setDescription("muy buena foto");
-
+            historia.setDescription(descripcionView.getText().toString());
             ServiceLocator.get(HistoriasService.class).uploadImageFromMemory(ivPhoto, new OnCallbackImageUpload() {
                 @Override
                 public void onFinish(Uri uri) {
@@ -268,29 +274,37 @@ public class CameraActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==TAKE_IMAGE){
             try {
-                ivPhoto.setImageURI(file);
+                if(file != null){
+                    ivPhoto.setImageURI(file);
+                    subioMultimedia = true;
+                }
             }
             catch(Exception e){
                 e.printStackTrace();
             }
         }
         if (requestCode==PICK_IMAGE){
-            Uri imageUri = data.getData();
-            ivPhoto.setImageURI(imageUri);
-            //ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
+            if(data != null) {
+                Uri imageUri = data.getData();
+                ivPhoto.setImageURI(imageUri);
+                subioMultimedia = true;
+                //ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
+            }
         }
 
         if (requestCode==PICK_VIDEO){
-
-            Uri uri = data.getData();
-            uriVideo = uri;
-            try{
-                vvVideo.setVideoURI(uri);
-                vvVideo.start();
-            }catch(Exception e){
-                e.printStackTrace();
+            if(data != null) {
+                Uri uri = data.getData();
+                uriVideo = uri;
+                try {
+                    vvVideo.setVideoURI(uri);
+                    vvVideo.start();
+                    subioMultimedia = true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
             }
-            //ServiceLocator.get(HistoriasService.class).updateHistoriasData(this);
         }
 
     }
