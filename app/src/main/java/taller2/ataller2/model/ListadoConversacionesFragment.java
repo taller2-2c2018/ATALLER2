@@ -11,11 +11,13 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import taller2.ataller2.R;
 import taller2.ataller2.adapters.ConversacionListAdapter;
 import taller2.ataller2.services.ConversacionService;
+import taller2.ataller2.services.MiPerfilService;
 import taller2.ataller2.services.OnCallback;
 import taller2.ataller2.services.PerfilService;
 import taller2.ataller2.services.ServiceLocator;
@@ -32,8 +34,6 @@ public class ListadoConversacionesFragment extends Fragment implements Refresh{
     public void refresh() {
 
     }
-
-
 
     public ListadoConversacionesFragment() {
     }
@@ -57,20 +57,29 @@ public class ListadoConversacionesFragment extends Fragment implements Refresh{
         mRecycleView = view.findViewById(R.id.listConversacionesRecientes);
         mRecycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mProgressBar = view.findViewById(R.id.progressBar_conversaciones);
-
+        mTextNoHayConversaciones = view.findViewById(R.id.textNoHayConversaciones);
+        mTextNoHayConversaciones.setVisibility(View.GONE);
         showLoadingHistorias(true);
 
-        PerfilService perfilService = getPerfilesService();
-        perfilService.updatePerfilData(this.getActivity(), ServiceLocator.get(FacebookService.class).getFacebookID(), new OnCallback() {
+        final ConversacionService conversacionService = ServiceLocator.get(ConversacionService.class);
+
+        conversacionService.getAmigosData(getActivity(), new OnCallback() {
             @Override
             public void onFinish() {
-                ConversacionService conversacionService = getConversacionesService();
-                mRecycleView.setAdapter(
-                        new ConversacionListAdapter(conversacionService.getConversaciones(getActivity()), mConversacionesListListener));
+                List<Conversacion> conversaciones = new ArrayList<>();
+                List<Amigo> amigos = conversacionService.getAmigos();
+                for (Amigo amigo: amigos){
+                    Conversacion conversacion = new Conversacion();
+                    conversacion.setNombreConver(amigo.getNombre() + " " + amigo.getApellido());
+                    conversaciones.add(conversacion);
+                    conversacion.setDestinoID(amigo.getId());
+                    conversacion.setOrigenID(ServiceLocator.get(FacebookService.class).getFacebookID());
+                }
+                mRecycleView.setAdapter(new ConversacionListAdapter(conversaciones, mConversacionesListListener));
                 showLoadingHistorias(false);
-                List<Conversacion> conversaciones = conversacionService.getConversaciones(getActivity());
-                mTextNoHayConversaciones = mRecycleView.findViewById(R.id.textNoHayAmigos);
-                mTextNoHayConversaciones.setVisibility(conversaciones.isEmpty() ? View.VISIBLE : View.GONE);
+                if (conversaciones.isEmpty()){
+                    mTextNoHayConversaciones.setVisibility(View.VISIBLE);
+                }
             }
         });
 

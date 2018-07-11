@@ -30,13 +30,24 @@ public class ConversationActivity extends AppCompatActivity {
     private static final int SIGN_IN_REQUEST_CODE = 99;
     private FirebaseListAdapter<ChatMessage> adapter;
 
+    private String origenID;
+    private String destinoID;
+    private String key;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.dialog_messages);
 
-        String ver = FirebaseAuth.getInstance().getCurrentUser().toString();
+        Bundle extras = getIntent().getExtras();
+        origenID = extras.getString("origID");
+        destinoID = extras.getString("destID");
+        if (origenID.compareTo(destinoID) <= 0){
+            key = origenID + destinoID;
+        }
+        else{
+            key = destinoID + origenID;
+        }
 
         if(FirebaseAuth.getInstance().getCurrentUser() == null) {
             // Start sign in/sign up activity
@@ -63,7 +74,7 @@ public class ConversationActivity extends AppCompatActivity {
                 FirebaseDatabase
                         .getInstance()
                         .getReference()
-                        .child("chats")
+                        .child("chats").child(key)
                         .push()
                         .setValue(new ChatMessage(input.getText().toString(),
                                 FirebaseAuth.getInstance()
@@ -82,7 +93,7 @@ public class ConversationActivity extends AppCompatActivity {
         ListView listOfMessages = (ListView)findViewById(R.id.list_of_messages);
 
         //Suppose you want to retrieve "chats" in your Firebase DB:
-        Query query = FirebaseDatabase.getInstance().getReference().child("chats");
+        Query query = FirebaseDatabase.getInstance().getReference().child("chats").child(key);
         //query = FirebaseDatabase.getInstance().getReference();
         //The error said the constructor expected FirebaseListOptions - here you create them:
         FirebaseListOptions<ChatMessage> options = new FirebaseListOptions.Builder<ChatMessage>()
