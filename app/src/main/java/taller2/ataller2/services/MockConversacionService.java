@@ -5,6 +5,7 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
 
+import taller2.ataller2.model.Amigo;
 import taller2.ataller2.model.Conversacion;
 import taller2.ataller2.model.Mensaje;
 
@@ -65,5 +66,15 @@ public class MockConversacionService implements ConversacionService {
     @Override
     public Conversacion getConversacion(int index) {
         return mConversaciones.get(index);
+    }
+
+    @Override
+    public void getAmigosData(Activity activity, OnCallback callback) {
+
+    }
+
+    @Override
+    public List<Amigo> getAmigos() {
+        return null;
     }
 }

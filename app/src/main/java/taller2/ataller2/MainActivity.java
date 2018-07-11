@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ServiceLocator.get(MiPerfilService.class).updatePerfilData(this);
         if(FirebaseAuth.getInstance().getCurrentUser() == null) {
             // Start sign in/sign up activity
             startActivityForResult(
@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                     SIGN_IN_REQUEST_CODE
             );
         }
-
 
         if (ContextCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
@@ -107,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         mTabLayout.getTabAt(4).setIcon(R.drawable.location);
 
 
-        ServiceLocator.get(MiPerfilService.class).updatePerfilData(this);
+
 //        ServiceLocator.get(AmistadesService.class).getAmistades(this);
 
     }

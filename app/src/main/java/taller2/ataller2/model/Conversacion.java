@@ -5,6 +5,9 @@ import java.util.List;
 
 public class Conversacion {
 
+    private String idDest;
+    private String idMia;
+
     private String mNombreConver = "";
     private String mDescription = "";
     private int mCantMsjSinLeer = 0;
@@ -12,6 +15,18 @@ public class Conversacion {
 
     public Conversacion() {
     }
+
+    public void setDestinoID(String destID){
+        idDest = destID;
+    }
+
+    public void setOrigenID(String origID){
+        idMia = origID;
+    }
+
+    public String getDestinoID() {return idDest;}
+
+    public String getOrigenID() {return idMia;}
 
     public String getNombreConver() {
         return mNombreConver;

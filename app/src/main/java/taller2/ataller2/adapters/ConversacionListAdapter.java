@@ -88,56 +88,10 @@ public class ConversacionListAdapter extends RecyclerView.Adapter<ConversacionLi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent().setClass(v.getContext(), ConversationActivity.class);
-                //Intent intent = new Intent(getActivity(), mFragmentFavorite.class);
+                intent.putExtra("origID", conversacion.getOrigenID());
+                intent.putExtra("destID", conversacion.getDestinoID());
                 v.getContext().startActivity(intent);
 
-                /*List<Mensaje> msjs = conversacion.getMensajeria();
-
-                mConversacion = new Dialog(v.getContext(), android.R.style.Theme_Holo_Light_Dialog);
-                mConversacion.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                mConversacion.setContentView(R.layout.dialog_conversacion);
-                mConversacion.setCanceledOnTouchOutside(false);
-                mConversacion.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                mConversacion.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                mConversacion.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-
-                LinearLayout ll = mConversacion.findViewById(R.id.lista_mensajes);
-                for ( Mensaje msj: msjs ) {
-                    CardView cv = createCardView(v.getContext());
-                    TextView text = createTextView(v.getContext());
-
-                    text.setText(msj.getMensaje());
-                    cv.addView(text);
-
-                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                            RelativeLayout.LayoutParams.WRAP_CONTENT,
-                            RelativeLayout.LayoutParams.WRAP_CONTENT);
-
-                    if (msj.getEsEmisor() == 1 ){
-                        //cv.setForegroundGravity(View.FOCUS_LEFT);
-                        layoutParams.gravity = Gravity.LEFT;
-                        //cv.setForegroundGravity(Gravity.LEFT);
-                    }
-                    else{
-                        layoutParams.gravity = Gravity.RIGHT;
-                        //cv.setForegroundGravity(Gravity.RIGHT);
-                        cv.setCardBackgroundColor(ContextCompat.getColor(v.getContext(), R.color.verde));
-                    }
-                    layoutParams.setMargins(5, 10, 5, 0);
-                    cv.setLayoutParams(layoutParams);
-                    ll.addView(cv);
-                }
-
-                ImageView em = mConversacion.findViewById(R.id.enviar_mensaje);
-                em.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View view){
-                        ServiceLocator.get(NotificationService.class).sendMessage();
-                    }
-                });
-
-                mConversacion.show();
-            */
             }
         });
     }
