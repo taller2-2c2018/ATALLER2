@@ -176,13 +176,6 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
         holder.mRecyclerView.setLayoutManager(new LinearLayoutManager((Activity)(holder.mRecyclerView.getContext())));
         holder.mRecyclerView.setAdapter(new ComentsListAdapter(historia.getComentarios()));
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mHistoriasListListener.onHistoriaClicked(historia);
-            }
-        });
-
         holder.mMeGusta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
