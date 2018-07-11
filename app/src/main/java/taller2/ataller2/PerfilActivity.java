@@ -1,6 +1,7 @@
 package taller2.ataller2;
 import android.app.Activity;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.media.FaceDetector;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -11,16 +12,24 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
 import taller2.ataller2.adapters.HistoriasListAdapter;
 import taller2.ataller2.model.ListadoHistoriasFragment;
 import taller2.ataller2.services.HistoriasService;
+import taller2.ataller2.services.MiPerfilService;
 import taller2.ataller2.services.PerfilService;
+import taller2.ataller2.services.Picasso.PicassoService;
 import taller2.ataller2.services.ServiceLocator;
+import taller2.ataller2.services.location.LocationService;
 
 public class PerfilActivity extends AppCompatActivity {
 
     private ImageView agregar_amigo;
     private ImageView subir;
+    private ImageView fotoPerfil;
 
     private TextView mNombre;
 
@@ -32,13 +41,22 @@ public class PerfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.perfil);
-        final Intent intent = getIntent();
-        final String id = intent.getStringExtra("id");
-        final String nombre = intent.getStringExtra("nombre");
+        Bundle extras = getIntent().getExtras();
+        final String id = extras.getString("id");
+        final String nombre = extras.getString("nombre");
+        final String fotoID = extras.getString("fotoID");
 
+        boolean esAmigo = estaEnAmigos(id);
 
+        fotoPerfil = findViewById(R.id.imageViewPerfil);
+        Picasso picasso = ServiceLocator.get(PicassoService.class).getPicasso();
+        picasso.load(fotoID).fit().centerCrop().placeholder(R.drawable.progress_animation).error(R.drawable.no_image).into(fotoPerfil);
+        
         agregar_amigo = findViewById(R.id.agregar_amigo);
         agregar_amigo.setVisibility(View.VISIBLE);
+        if (esAmigo){
+            agregar_amigo.setVisibility(View.GONE);
+        }
         agregar_amigo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +74,17 @@ public class PerfilActivity extends AppCompatActivity {
         HistoriasService historiasService = getHistoriasService();
         mRecyclerView.setAdapter(new HistoriasListAdapter(historiasService.getMisHistorias(this,id), mHistoriasListListener));
 
+    }
+
+    private boolean estaEnAmigos(String id){
+        boolean esta = false;
+        List<String> amigos =  ServiceLocator.get(MiPerfilService.class).getMiPerfil().getAmigos();
+        for (String amigo : amigos){
+            if (amigo.equals(id)){
+                return true;
+            }
+        }
+        return esta;
     }
 
     private HistoriasService getHistoriasService() {
