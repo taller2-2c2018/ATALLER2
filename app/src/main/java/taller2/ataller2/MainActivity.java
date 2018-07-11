@@ -28,6 +28,7 @@ import android.widget.SearchView;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,8 +45,10 @@ import taller2.ataller2.model.Perfil;
 import taller2.ataller2.model.PerfilFragment;
 import taller2.ataller2.services.AmistadesService;
 import taller2.ataller2.services.HistoriasService;
+import taller2.ataller2.services.MiPerfilService;
 import taller2.ataller2.services.PerfilService;
 import taller2.ataller2.services.ServiceLocator;
+import taller2.ataller2.services.SingletonPerfilService;
 import taller2.ataller2.services.facebook.FacebookService;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener,
@@ -103,9 +106,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         mTabLayout.getTabAt(3).setIcon(R.drawable.user_perfil);
         mTabLayout.getTabAt(4).setIcon(R.drawable.location);
 
-//
+
+        ServiceLocator.get(MiPerfilService.class).updatePerfilData(this);
 //        ServiceLocator.get(AmistadesService.class).getAmistades(this);
-//
+
     }
 
     private void setupViewPager(ViewPager viewPager) {

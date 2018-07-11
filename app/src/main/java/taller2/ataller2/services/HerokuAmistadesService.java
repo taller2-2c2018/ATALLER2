@@ -293,21 +293,10 @@ public class HerokuAmistadesService implements AmistadesService {
                     String mFirstName = obj.getString("mFirstName");
                     String mLastName = obj.getString("mLastName");
                     String picture = obj.getString("mProfilePicture");
-                    int mProfilePictureId = -1;
-                    try {
-                        mProfilePictureId = obj.getInt("mProfilePictureId");
-                    }catch (Exception ex )
-                    {
-                        mProfilePictureId = -1;
-                    }
 
                     Perfil perfil = new Perfil(mFirstName + " " + mLastName);
                     perfil.setId(mFacebookUserId);
                     perfil.setPicture(picture);
-                    if (mProfilePictureId != -1){
-                        //getHistoriaFile(perfil, mProfilePictureId);
-                    }
-
                     perfiles.add(perfil);
 
                 } catch (JSONException e) {

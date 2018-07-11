@@ -27,6 +27,7 @@ import java.net.URL;
 
 import taller2.ataller2.LoginActivity;
 import taller2.ataller2.adapters.HistoriasListAdapter;
+import taller2.ataller2.services.MiPerfilService;
 import taller2.ataller2.services.OnCallback;
 import taller2.ataller2.services.OnCallbackImageUpload;
 import taller2.ataller2.services.PerfilService;
@@ -91,28 +92,13 @@ public class PerfilFragment extends Fragment implements Refresh{
         mRecyclerView = view.findViewById(R.id.historias_perfil_local);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        ServiceLocator.get(PerfilService.class).
-                updatePerfilData(this.getActivity(),
-                                    ServiceLocator.get(FacebookService.class).getFacebookID(),
-                                    new OnCallback(){
-                                        @Override
-                                        public void onFinish() {
-                                            perfil = ServiceLocator.get(PerfilService.class).getMiPerfil();
-                                            if (perfil == null){
-                                                iv.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.default_img));
-                                                nombre.setText("");
-                                            }
-                                            else{
-                                                Picasso picasso = ServiceLocator.get(PicassoService.class).getPicasso();
-                                                picasso.load(perfil.getPicture()).fit().centerCrop().placeholder(R.drawable.progress_animation).error(R.drawable.no_image).into(iv);
-                                                nombre.setText(ServiceLocator.get(FacebookService.class).getName());
-                                            }
-                                            HistoriasService historiasService = getHistoriasService();
-                                            mRecyclerView.setAdapter(new HistoriasListAdapter(historiasService.getMisHistorias(getActivity()), mHistoriasListListener));
-                                            showLoadingPerfil(false);
-                                        }
-                                    }
-                );
+        perfil = ServiceLocator.get(MiPerfilService.class).getMiPerfil();
+        Picasso picasso = ServiceLocator.get(PicassoService.class).getPicasso();
+        picasso.load(perfil.getPicture()).fit().centerCrop().placeholder(R.drawable.progress_animation).error(R.drawable.no_image).into(iv);
+        nombre.setText(perfil.getNombre());
+        HistoriasService historiasService = getHistoriasService();
+        mRecyclerView.setAdapter(new HistoriasListAdapter(historiasService.getMisHistorias(getActivity()), mHistoriasListListener));
+        showLoadingPerfil(false);
 
         AppCompatButton exit = view.findViewById(R.id.salir_app);
         exit.setOnClickListener(new View.OnClickListener(){
@@ -143,6 +129,7 @@ public class PerfilFragment extends Fragment implements Refresh{
                 @Override
                 public void onFinish(Uri uri) {
                     ServiceLocator.get(PerfilService.class).updateFoto(getActivity(), uri);
+                    ServiceLocator.get(MiPerfilService.class).updateFoto(uri.toString());
                 }
             });
 

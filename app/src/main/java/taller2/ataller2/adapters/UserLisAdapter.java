@@ -61,13 +61,13 @@ public class UserLisAdapter extends RecyclerView.Adapter<UserLisAdapter.UserView
         picasso.load(perfil.getPicture()).fit().centerCrop().placeholder(R.drawable.progress_animation).error(R.drawable.no_image).into(holder.mPicture);
         holder.mName.setText(perfil.getNombre());
 
-
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), PerfilActivity.class);
                 intent.putExtra("id", perfil.getId());
                 intent.putExtra("nombre", perfil.getNombre());
+                intent.putExtra("fotoID", perfil.getPicture());
                 v.getContext().startActivity(intent);
             }
         });
