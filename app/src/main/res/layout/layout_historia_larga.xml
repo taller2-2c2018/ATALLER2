@@ -21,69 +21,71 @@
             android:gravity="left"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
-                app:srcCompat="@drawable/ic_sentiment_satisfied_black_18dp"
                 android:id="@+id/imgUsuarioHistoria"
                 android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/ic_sentiment_satisfied_black_18dp" />
+
             <TextView
+                android:id="@+id/nombreUsuarioHistoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:clickable="true"
                 android:text="Usuario"
                 android:textSize="26dp"
-                android:textStyle="bold"
-                android:id="@+id/nombreUsuarioHistoria"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textStyle="bold" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/textTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
             android:gravity="left"
-            android:textStyle="bold"
-            android:text="@string/txtHistoriaTitulo" />
+            android:text="@string/txtHistoriaTitulo"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textDescripcion"
             android:layout_width="match_parent"
-            android:textSize="18sp"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/textTitulo"
-            android:text="@string/txtHistoriaDescripcion" />
+            android:text="@string/txtHistoriaDescripcion"
+            android:textSize="18sp" />
 
         <VideoView
-            android:visibility="gone"
             android:id="@+id/videoHistoria"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+            android:visibility="gone" />
 
         <ImageView
-            android:visibility="visible"
             android:id="@+id/imageHistoria"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:gravity="center_horizontal"
+            android:visibility="visible"
             app:srcCompat="@drawable/river4" />
 
         <TextView
             android:id="@+id/textUbicacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
             android:layout_alignStart="@+id/imageHistoria"
-            android:text="@string/txtHistoriaUbicacion" />
+            android:text="@string/txtHistoriaUbicacion"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/textFechaHora"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
             android:layout_alignStart="@+id/textUbicacion"
-            android:text="@string/txtHistoriaFechaHora" />
+            android:text="@string/txtHistoriaFechaHora"
+            android:textSize="12sp" />
 
         <LinearLayout
             android:layout_marginTop="10dp"
@@ -253,11 +255,10 @@
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
-            android:visibility="gone"
             android:id="@+id/comentarios_historia"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="wrap_content"
+            android:visibility="gone"></android.support.v7.widget.RecyclerView>
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
