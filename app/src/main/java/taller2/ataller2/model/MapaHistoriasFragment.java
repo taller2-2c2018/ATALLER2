@@ -3,7 +3,10 @@ package taller2.ataller2.model;
 import android.app.Activity;
 import android.app.Dialog;
 
+import taller2.ataller2.HistoriaInfoActivity;
 import taller2.ataller2.R;
+
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -30,6 +33,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.HashMap;
 import java.util.List;
 
+import taller2.ataller2.adapters.HistoriaInfoWindowAdapter;
 import taller2.ataller2.services.HistoriasService;
 import taller2.ataller2.services.OnCallback;
 import taller2.ataller2.services.ServiceLocator;
@@ -41,6 +45,7 @@ public class MapaHistoriasFragment extends Fragment implements OnMapReadyCallbac
 
     private View mMapView;
     private GoogleMap mMap;
+    private HashMap<Marker, Historia> mHistoriasFromMarkerMap = new HashMap();
 
     //private HashMap<Marker, Commerce> mCommercesFromMarkerMap = new HashMap();
 
@@ -70,9 +75,9 @@ public class MapaHistoriasFragment extends Fragment implements OnMapReadyCallbac
         uiSettings.setAllGesturesEnabled(true);
         uiSettings.setCompassEnabled(true);
 
-        //mCommercesFromMarkerMap.clear();
+        mHistoriasFromMarkerMap.clear();
         List<Historia> historias = ServiceLocator.get(HistoriasService.class).getHistorias(getActivity());
-        if (historias == null){
+        if (historias != null){
             for (Historia historia : historias) {
                 double latitud = 0;
                 double longitud = 0;
@@ -81,7 +86,8 @@ public class MapaHistoriasFragment extends Fragment implements OnMapReadyCallbac
                     longitud = Double.parseDouble(historia.getLongitud());
                 }
                 LatLng location = new LatLng(latitud, longitud);
-                mMap.addMarker(new MarkerOptions().position(location).title("1").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                Marker marker = mMap.addMarker(new MarkerOptions().position(location).title("1").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                mHistoriasFromMarkerMap.put(marker,historia);
             }
 
             LocationService locationService = ServiceLocator.get(LocationService.class);
@@ -91,7 +97,7 @@ public class MapaHistoriasFragment extends Fragment implements OnMapReadyCallbac
             float zoomLevel = 16;
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, zoomLevel));
             mMap.setOnInfoWindowClickListener(this);
-            //mMap.setInfoWindowAdapter(new CommerceInfoWindowAdapter(LayoutInflater.from(getActivity()), mCommercesFromMarkerMap));
+            mMap.setInfoWindowAdapter(new HistoriaInfoWindowAdapter(LayoutInflater.from(getActivity()),mHistoriasFromMarkerMap));
 
         }
    }
@@ -110,6 +116,15 @@ public class MapaHistoriasFragment extends Fragment implements OnMapReadyCallbac
         }
     }
 
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Historia historia = mHistoriasFromMarkerMap.get(marker);
+        if (historia == null) return;
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), HistoriaInfoActivity.class);
+        intent.putExtra("id_historia", historia.getID());
+        startActivity(intent);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -143,22 +158,6 @@ public class MapaHistoriasFragment extends Fragment implements OnMapReadyCallbac
 
     private LocationService getLocationService() {
         return ServiceLocator.get(LocationService.class);
-    }
-
-    @Override
-    public void onInfoWindowClick(Marker marker) {
-
-            /*Commerce commerce = mCommercesFromMarkerMap.get(marker);
-            if (commerce == null) return;
-
-            Intent intent = new Intent();
-            intent.setClass(getActivity(), CommerceDetailsActivity.class);
-            intent.putExtra(getString(R.string.intent_data_commerce_id), commerce.getId());
-            intent.putExtra(getString(R.string.intent_data_commerce_longitud_id), commerce.getLocation().getLongitud());
-            intent.putExtra(getString(R.string.intent_data_commerce_latitud_id), commerce.getLocation().getLatitud());
-            intent.putExtra(getString(R.string.intent_data_fromFavourites), false);
-            startActivity(intent);
-            */
     }
 
     @Override
