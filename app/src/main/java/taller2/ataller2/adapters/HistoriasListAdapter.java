@@ -125,7 +125,9 @@ public class HistoriasListAdapter extends RecyclerView.Adapter<HistoriasListAdap
         final Historia historia = mHistoria.get(position);
         Picasso picasso = ServiceLocator.get(PicassoService.class).getPicasso();
         picasso.load(historia.getPictureUsr()).fit().transform(new CircleTransform()).error(R.drawable.no_image).placeholder(R.drawable.progress_animation).into(holder.mPictureUser);
-
+        if (historia.getStringUri() == null){
+            historia.setStringUri(historia.getUri().toString());
+        }
         if (historia.getType().equals("mp3")){
             Uri uri = Uri.parse(historia.getStringUri());
             holder.mVideo.setVideoURI(uri);
