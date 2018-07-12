@@ -25,12 +25,14 @@ import taller2.ataller2.services.OnCallback;
 import taller2.ataller2.services.PerfilService;
 import taller2.ataller2.services.Picasso.PicassoService;
 import taller2.ataller2.services.ServiceLocator;
+import taller2.ataller2.services.facebook.FacebookService;
 import taller2.ataller2.services.location.LocationService;
 
 public class PerfilActivity extends AppCompatActivity {
 
     private ImageView agregar_amigo;
     private ImageView amigo_agregado;
+    private ImageView amigo;
     private ImageView subir;
     private ImageView fotoPerfil;
 
@@ -51,6 +53,7 @@ public class PerfilActivity extends AppCompatActivity {
 
         boolean esAmigo = estaEnAmigos(id);
         boolean hayPeticion = estaEnPeticiones(id);
+        boolean noSoyYo = noSoyYo(id);
 
         fotoPerfil = findViewById(R.id.imageViewPerfil);
         Picasso picasso = ServiceLocator.get(PicassoService.class).getPicasso();
@@ -58,11 +61,14 @@ public class PerfilActivity extends AppCompatActivity {
         
         agregar_amigo = findViewById(R.id.agregar_amigo);
         amigo_agregado = findViewById(R.id.amigo_agregado);
+        amigo = findViewById(R.id.amigo);
 
-        if (!esAmigo && !hayPeticion){
+        if (!esAmigo && !hayPeticion && noSoyYo){
             agregar_amigo.setVisibility(View.VISIBLE);
-        } else if (!esAmigo && hayPeticion) {
+        } else if (!esAmigo && hayPeticion && noSoyYo) {
             amigo_agregado.setVisibility(View.VISIBLE);
+        } else if (esAmigo){
+            amigo.setVisibility(View.VISIBLE);
         }
 
         agregar_amigo.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +116,10 @@ public class PerfilActivity extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+    private boolean noSoyYo(String id){
+        return !id.equals(ServiceLocator.get(FacebookService.class).getFacebookID());
     }
 
     private HistoriasService getHistoriasService() {
