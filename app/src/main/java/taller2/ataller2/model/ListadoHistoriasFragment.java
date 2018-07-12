@@ -3,6 +3,11 @@ package taller2.ataller2.model;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
@@ -101,8 +106,14 @@ public class ListadoHistoriasFragment extends Fragment{
                         getHistorias(getActivity()), mHistoriasListListener));
                 List<HistoriaCorta> historiasCortas = historiasService.getHistoriasCortas(getActivity());
                 HistoriaCorta historia = new HistoriaCorta();
+//                Bitmap bitmap = drawableToBitmap(mScrollHistoria.getContext().getDrawable(R.drawable.rounded_image));
+                Bitmap icon = BitmapFactory.decodeResource(mScrollHistoria.getResources(), R.drawable.default_img);
+                historia.setPicture(icon);
+                historia.setMock(true);
+                historia.setPictureUsr(icon);
                 historia.setStringUri("https://th.seaicons.com/wp-content/uploads/2016/02/text-plus-icon-1.png");
-                historia.setType("png");
+//                historia.setPicture(bitmap);
+//                historia.setType("png");
                 historiasCortas.add(0,historia);
                 mRecyclerViewCortas.setAdapter(new HistoriasCortasListAdapter(historiasCortas, mHistoriasCortasListListener,getActivity()));
                 GridLayoutManager layoutManager = new GridLayoutManager(getContext(),1);
@@ -182,5 +193,27 @@ public class ListadoHistoriasFragment extends Fragment{
         mLoadingHistorias.setVisibility(loading ? View.VISIBLE : View.GONE);
         mScrollHistoria.setVisibility(loading ? View.GONE : View.VISIBLE);
         mButtonNuevaHistoriaView.setVisibility(loading ? View.GONE : View.VISIBLE);
+    }
+
+    private Bitmap drawableToBitmap (Drawable drawable) {
+        Bitmap bitmap = null;
+
+        if (drawable instanceof BitmapDrawable) {
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+            if(bitmapDrawable.getBitmap() != null) {
+                return bitmapDrawable.getBitmap();
+            }
+        }
+
+        if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
+        } else {
+            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        }
+
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
     }
 }

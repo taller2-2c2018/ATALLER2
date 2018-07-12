@@ -181,6 +181,15 @@ public class CameraActivity extends Activity {
         });
 
         cb = (CheckBox) this.findViewById(R.id.checkBox);
+        cb.setChecked(false);
+        Bundle b = getIntent().getExtras();
+        int value = -1; // or other values
+        if(b != null){
+            value = b.getInt("esFlash");
+            if (value == 1){
+                cb.setChecked(true);
+            }
+        }
 
     }
 

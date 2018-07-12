@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -87,12 +88,14 @@ public class HistoriasCortasListAdapter extends RecyclerView.Adapter<HistoriasCo
         }
         final Picasso picasso = ServiceLocator.get(PicassoService.class).getPicasso();
         picasso.load(historia.getStringUri()).fit().transform(new CircleTransform()).error(R.drawable.no_image).placeholder(R.drawable.progress_animation).into(holder.mPictureUser);
-
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (primero){
+                if(historia.getMock()){
                     Intent intent = new Intent(mActivity, CameraActivity.class);
+                    Bundle b = new Bundle();
+                    b.putInt("esFlash", 1);
+                    intent.putExtras(b);
                     mActivity.startActivity(intent);
                     primero = false;
                 } else {
