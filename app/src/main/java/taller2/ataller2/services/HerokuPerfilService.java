@@ -33,6 +33,7 @@ import taller2.ataller2.services.notifications.NotificationService;
 public class HerokuPerfilService implements PerfilService {
 
     private static final String PERFIL = "https://application-server-tdp2.herokuapp.com/user/profile/";
+    private static final String PERFIL_SIN_BARRA = "https://application-server-tdp2.herokuapp.com/user/profile";
     private static final String PERFIL_FOTO = "https://application-server-tdp2.herokuapp.com/user/profilePicture";
     private static final String REQUEST_AMISTAD = "https://application-server-tdp2.herokuapp.com/user/friendship";
     private static final String FILES = "https://application-server-tdp2.herokuapp.com/file/";
@@ -280,7 +281,7 @@ public class HerokuPerfilService implements PerfilService {
 
     private NetworkObject putPerfilNetworkObject(Perfil perfil) {
         String requestBody = putPerfilObject(perfil).toString();
-        NetworkObject networkObject = new NetworkObject(PERFIL, HttpMethodType.PUT, requestBody);
+        NetworkObject networkObject = new NetworkObject(PERFIL_SIN_BARRA, HttpMethodType.PUT, requestBody);
         networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
         networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
         networkObject.setFirebaseToken(ServiceLocator.get(NotificationService.class).getToken());
