@@ -26,12 +26,16 @@
                 android:id="@+id/imgUsuarioHistoria"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
                 app:srcCompat="@drawable/ic_sentiment_satisfied_black_18dp" />
 
             <TextView
                 android:id="@+id/nombreUsuarioHistoria"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="5dp"
                 android:clickable="true"
                 android:text="Usuario"
                 android:textSize="26dp"
@@ -43,6 +47,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:text="@string/txtHistoriaTitulo"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -51,6 +57,8 @@
             android:id="@+id/textDescripcion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_alignStart="@+id/textTitulo"
             android:text="@string/txtHistoriaDescripcion"
             android:textSize="18sp" />
@@ -76,6 +84,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/imageHistoria"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:text="@string/txtHistoriaUbicacion"
             android:textSize="12sp" />
 
@@ -83,6 +93,8 @@
             android:id="@+id/textFechaHora"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_alignStart="@+id/textUbicacion"
             android:text="@string/txtHistoriaFechaHora"
             android:textSize="12sp" />
@@ -92,6 +104,8 @@
             android:orientation="horizontal"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_height="wrap_content">
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -241,7 +255,8 @@
             </RelativeLayout>
         <LinearLayout
             android:layout_weight="8"
-            android:gravity="center"
+            android:gravity="right"
+            android:layout_marginEnd="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
