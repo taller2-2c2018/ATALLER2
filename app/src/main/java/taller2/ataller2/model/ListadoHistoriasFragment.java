@@ -99,8 +99,12 @@ public class ListadoHistoriasFragment extends Fragment{
                 HistoriasService historiasService = getHistoriasService();
                 mRecyclerView.setAdapter(new HistoriasListAdapter(historiasService.
                         getHistorias(getActivity()), mHistoriasListListener));
-                mRecyclerViewCortas.setAdapter(new HistoriasCortasListAdapter(historiasService.
-                        getHistoriasCortas(getActivity()), mHistoriasCortasListListener));
+                List<HistoriaCorta> historiasCortas = historiasService.getHistoriasCortas(getActivity());
+                HistoriaCorta historia = new HistoriaCorta();
+                historia.setStringUri("https://th.seaicons.com/wp-content/uploads/2016/02/text-plus-icon-1.png");
+                historia.setType("png");
+                historiasCortas.add(0,historia);
+                mRecyclerViewCortas.setAdapter(new HistoriasCortasListAdapter(historiasCortas, mHistoriasCortasListListener,getActivity()));
                 GridLayoutManager layoutManager = new GridLayoutManager(getContext(),1);
                 layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 mRecyclerViewCortas.setLayoutManager(layoutManager);
