@@ -230,7 +230,7 @@ public class HerokuPerfilService implements PerfilService {
     }
 
     @Override
-    public void solicitarAmistad(final Activity activity, String id) {
+    public void solicitarAmistad(final Activity activity, String id, final OnCallback callback) {
         final NetworkObject requestTokenObject = solicitarAmistadNetworkObject(id);
         final NetworkFragment networkFragment = NetworkFragment.getInstance(activity.getFragmentManager(), requestTokenObject);
         mDownloading = false;
@@ -255,6 +255,7 @@ public class HerokuPerfilService implements PerfilService {
 
                     }
                     mDownloading = false;
+                    callback.onFinish();
                 }
 
                 @Override

@@ -101,6 +101,20 @@
             app:layout_constraintBottom_toBottomOf="@+id/textNombre"
             app:layout_constraintStart_toEndOf="@+id/textNombre" />
 
+        <ImageView
+            android:id="@+id/amigo_agregado"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:tint="@color/gris_oscuro"
+            android:clickable="true"
+            android:elevation="20dp"
+            android:src="@drawable/agregar_amigo"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/textNombre"
+            app:layout_constraintStart_toEndOf="@+id/textNombre" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"

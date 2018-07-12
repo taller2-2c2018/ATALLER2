@@ -10,7 +10,7 @@ import taller2.ataller2.model.Perfil;
 public interface PerfilService extends CustomService{
     void updatePerfilData(Activity activity, String id, OnCallback callback);
     void updateFoto(Activity activity, Uri uri);
-    void solicitarAmistad(Activity activity, String id);
+    void solicitarAmistad(Activity activity, String id, OnCallback callback);
 
     List<String> getAmigos();
     Perfil getMiPerfil();
