@@ -276,6 +276,7 @@ public class CameraActivity extends Activity {
             try {
                 if(file != null){
                     ivPhoto.setImageURI(file);
+                    ivPhoto.setRotation(90);
                     subioMultimedia = true;
                 }
             }
