@@ -39,6 +39,8 @@ public class SingletonPerfilService implements MiPerfilService {
     private String fileType = "";
     private String picture = "";
     private JSONArray amigos = null;
+    private JSONArray peticiones = null;
+    private List<String> idPeticiones = null;
     private List<String> idAmigos = null;
 
     public SingletonPerfilService(){
@@ -73,6 +75,12 @@ public class SingletonPerfilService implements MiPerfilService {
     public void agregarAmigo(String idAmigo) {
         this.idAmigos.add(idAmigo);
         mMiPerfil.setAmigos(this.idAmigos);
+    }
+
+    @Override
+    public void agregarPeticion(String idPeticion) {
+        this.idPeticiones.add(idPeticion);
+        mMiPerfil.setPeticiones(this.idPeticiones);
     }
 
     @Override
@@ -150,6 +158,7 @@ public class SingletonPerfilService implements MiPerfilService {
                 fileType = resultadoPerfil.getString("mFileTypeProfilePicture");
                 picture = resultadoPerfil.getString("mProfilePicture");
                 amigos = resultadoPerfil.getJSONArray("mFriendshipList");
+                peticiones = resultadoPerfil.getJSONArray("mFriendshipSent");
 
                 idAmigos = new ArrayList();
                 for (int i = 0 ; i < amigos.length(); i++) {
@@ -163,12 +172,25 @@ public class SingletonPerfilService implements MiPerfilService {
                     catch (Exception ex){ }
                 }
 
+                idPeticiones = new ArrayList();
+
+                for (int i = 0 ; i < peticiones.length(); i++) {
+                    String obj = null;
+                    try {
+                        JSONObject peticion = (JSONObject) peticiones.get(i);
+                        String target = peticion.getString("target");
+                        idPeticiones.add(target);
+                    }
+                    catch (Exception ex){ }
+                }
+
                 mMiPerfil = new Perfil(nombre + " " + apellido );
                 mMiPerfil.setPicture(picture);
                 mMiPerfil.setFechaNacimiento(fechaNacimiento);
                 mMiPerfil.setMail(mail);
                 mMiPerfil.setSexo(sexo);
                 mMiPerfil.setAmigos(idAmigos);
+                mMiPerfil.setPeticiones(idPeticiones);
 
             } catch (JSONException e) {
                 e.printStackTrace();

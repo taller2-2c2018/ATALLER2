@@ -44,7 +44,7 @@ public class MockPerfilService implements PerfilService {
     }
 
     @Override
-    public void solicitarAmistad(Activity activity, String id) {
+    public void solicitarAmistad(Activity activity, String id, OnCallback callback) {
 
     }
 

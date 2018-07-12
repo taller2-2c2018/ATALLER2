@@ -20,6 +20,7 @@ public interface MiPerfilService extends CustomService{
     void updateSexo(String sexo);
     void updateMail(String mail);
     void agregarAmigo(String idAmigo);
+    void agregarPeticion(String peticion);
 
     //SOLO TIENE UN GET
     Perfil getMiPerfil();
