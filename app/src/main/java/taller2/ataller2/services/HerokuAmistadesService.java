@@ -112,7 +112,7 @@ public class HerokuAmistadesService implements AmistadesService {
     }
 
     @Override
-    public void getAmistades( final Activity activity) {
+    public void getAmistades( final Activity activity, final OnCallback callback) {
         contextActivity = activity;
         final NetworkObject requestTokenObject = createGetRequestsNetworkObject();
         final NetworkFragment networkFragment = NetworkFragment.getInstance(activity.getFragmentManager(), requestTokenObject);
@@ -130,6 +130,7 @@ public class HerokuAmistadesService implements AmistadesService {
                             if (status.equals("200")) {
                                 amistades_pendientes = resultToken.getJSONArray("data");
                                 updateAmistadesData();
+                                callback.onFinish();
                             }
                         }
                         catch (Throwable t) {
