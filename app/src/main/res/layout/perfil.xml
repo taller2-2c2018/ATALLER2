@@ -22,17 +22,19 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/perfil_view"
-        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <ImageView
             android:id="@+id/imageViewPerfil"
@@ -63,6 +65,47 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageViewPerfil" />
 
+        <TextView
+            android:id="@+id/mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:text="Mail"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textNombre" />
+
+        <TextView
+            android:id="@+id/sexo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Sexo"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mail" />
+
+        <TextView
+            android:id="@+id/fechaNacimiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="fecha de nacimiento"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sexo" />
+
+
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/salir_app"
             android:layout_width="wrap_content"
@@ -76,7 +119,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/subir_foto_perfil"
+            android:id="@+id/modificar_perfi"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
+            android:elevation="20dp"
+            android:src="@drawable/edit"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@+id/textNombre"
+            app:layout_constraintTop_toTopOf="@+id/textNombre" />
+
+        <ImageView
+            android:id="@+id/subir_foto_perfil2"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginBottom="8dp"
@@ -94,9 +150,9 @@
             android:layout_height="30dp"
             android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
-            android:tint="@color/celestito"
             android:elevation="20dp"
             android:src="@drawable/amigos"
+            android:tint="@color/celestito"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/textNombre"
             app:layout_constraintStart_toEndOf="@+id/textNombre" />
@@ -121,15 +177,15 @@
             android:layout_height="30dp"
             android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
-            android:tint="@color/gris_oscuro"
             android:elevation="20dp"
             android:src="@drawable/agregar_amigo"
+            android:tint="@color/gris_oscuro"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/textNombre"
             app:layout_constraintStart_toEndOf="@+id/textNombre" />
 
         <ScrollView
-            android:layout_width="match_parent"
+            android:layout_width="352dp"
             android:layout_height="0dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
@@ -137,14 +193,24 @@
             android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textNombre">
+            app:layout_constraintTop_toBottomOf="@+id/fechaNacimiento">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/historias_perfil_local"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"></android.support.v7.widget.RecyclerView>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+            </android.support.v7.widget.RecyclerView>
         </ScrollView>
+
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>
 
