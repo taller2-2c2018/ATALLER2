@@ -10,6 +10,7 @@ public class HistoriaCorta {
     private Uri mUri;
     private String mStringUri;
     private String mType;
+    private boolean mock = false;
 
     public HistoriaCorta() {
 
@@ -50,4 +51,10 @@ public class HistoriaCorta {
     public String getType() {
         return mType;
     }
+
+    public void setMock(boolean mock) {
+        this.mock = mock;
+    }
+
+    public boolean getMock() { return mock; }
 }

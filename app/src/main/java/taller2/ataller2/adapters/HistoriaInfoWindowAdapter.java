@@ -1,6 +1,7 @@
 package taller2.ataller2.adapters;
 
 
+import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 
@@ -23,6 +26,7 @@ public class HistoriaInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
     private LayoutInflater mInflater;
     private HashMap<Marker, Historia> mHistoriasFromMarkerMap = new HashMap();
+    private ImageView historiaPicture;
     private ListadoHistoriasFragment.HistoriasListListener mHistoriaListListener;
 
     public HistoriaInfoWindowAdapter(LayoutInflater inflater, final HashMap<Marker, Historia> historiaFromMarkerMap){
@@ -35,14 +39,19 @@ public class HistoriaInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         View v = mInflater.inflate(R.layout.layout_map_historia, null);
         final Historia historia = mHistoriasFromMarkerMap.get(marker);
 
+
         CardView cardView = v.findViewById(R.id.cv_historia_mapa);
-        ImageView historiaPicture = v.findViewById(R.id.image_mapa);
+        historiaPicture = v.findViewById(R.id.image_mapa);
         final TextView historiaName = (TextView) v.findViewById(R.id.nombre_historia_mapa);
+        final TextView fecha = (TextView) v.findViewById(R.id.fecha_historia_mapa);
 
         Picasso picasso = ServiceLocator.get(PicassoService.class).getPicasso();
         //picasso.load(historia.getStringUri()).fit().centerCrop().placeholder(R.drawable.progress_animation).error(R.drawable.no_image).into(historiaPicture);
-        picasso.load(historia.getPictureUsr()).fit().transform(new CircleTransform()).error(R.drawable.no_image).placeholder(R.drawable.progress_animation).into(historiaPicture);
+        picasso.load(historia.getPictureUsr()).transform(new CircleTransform()).placeholder(R.drawable.progress_animation).error(R.drawable.no_image).into(historiaPicture);
+        //picasso.load(historia.getPictureUsr()).fit().transform(new CircleTransform()).error(R.drawable.no_image).placeholder(R.drawable.progress_animation).into(historiaPicture);
+
         historiaName.setText(historia.getNombre());
+        fecha.setText(historia.getFecha());
 
         return v;
     }

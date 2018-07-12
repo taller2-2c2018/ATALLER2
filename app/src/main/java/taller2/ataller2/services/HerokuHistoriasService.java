@@ -149,7 +149,9 @@ public class HerokuHistoriasService implements HistoriasService {
                     String lng = obj.getString("mLongitude");
                     String file = obj.getString("mFile");
                     String userPicture = obj.getString("mProfilePicture");
+                    String date = getFormattedDate(obj.getString("mPublicationDate"));
                     String fileType = obj.getString("mFileType");
+
                     boolean isFlash = obj.getBoolean("mFlash");
                     String location = obj.getString("mLocation");
                     JSONArray reactions = obj.getJSONArray("mReactions");
@@ -179,6 +181,7 @@ public class HerokuHistoriasService implements HistoriasService {
                         historia.setLongitud(lng);
                         historia.setPictureUsr(userPicture);
                         historia.setType(fileType);
+                        historia.setFecha(date);
 
                         List<Comentario> lista = new ArrayList();
                         List<Reaccion> listaReacciones = new ArrayList();
@@ -701,6 +704,16 @@ public class HerokuHistoriasService implements HistoriasService {
 
                 }
             });
+    }
+
+    private String getFormattedDate(String serverDate){
+        String year = serverDate.substring(0,4);
+        String month = serverDate.substring(5,7);
+        String day = serverDate.substring(8, 10);
+        String hour = serverDate.substring(11, 13);
+        String minutes = serverDate.substring(14, 16);
+
+        return day+'/'+month+'/'+year+' '+hour+':'+minutes;
     }
 
 }
