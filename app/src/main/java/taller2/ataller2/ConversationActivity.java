@@ -24,6 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import taller2.ataller2.model.ChatMessage;
+import taller2.ataller2.services.ServiceLocator;
+import taller2.ataller2.services.facebook.FacebookService;
 
 
 public class ConversationActivity extends AppCompatActivity {
@@ -107,8 +109,10 @@ public class ConversationActivity extends AppCompatActivity {
                 // Get references to the views of message.xml
                 TextView messageText = (TextView)v.findViewById(R.id.message_text);
                 TextView messageTime = (TextView)v.findViewById(R.id.message_time);
+                TextView messageUser = (TextView)v.findViewById(R.id.message_user);
 
                 // Set their text
+                messageUser.setText(model.getMessageUser());
                 messageText.setText(model.getMessageText());
                 // Format the date before showing it
                 messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)", model.getMessageTime()));
