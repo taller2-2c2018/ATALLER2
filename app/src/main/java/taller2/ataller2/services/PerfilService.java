@@ -15,4 +15,5 @@ public interface PerfilService extends CustomService{
     List<String> getAmigos();
     Perfil getMiPerfil();
     Perfil getPerfil();
+    void updatePerfil(Activity activity, Perfil perfil);
 }

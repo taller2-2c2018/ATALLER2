@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,6 +18,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import taller2.ataller2.R;
 import taller2.ataller2.model.Perfil;
@@ -31,6 +33,7 @@ import taller2.ataller2.services.notifications.NotificationService;
 public class HerokuPerfilService implements PerfilService {
 
     private static final String PERFIL = "https://application-server-tdp2.herokuapp.com/user/profile/";
+    private static final String PERFIL_SIN_BARRA = "https://application-server-tdp2.herokuapp.com/user/profile";
     private static final String PERFIL_FOTO = "https://application-server-tdp2.herokuapp.com/user/profilePicture";
     private static final String REQUEST_AMISTAD = "https://application-server-tdp2.herokuapp.com/user/friendship";
     private static final String FILES = "https://application-server-tdp2.herokuapp.com/file/";
@@ -227,6 +230,83 @@ public class HerokuPerfilService implements PerfilService {
                 }
             });
         }
+    }
+
+    @Override
+    public void updatePerfil(final Activity activity, Perfil perfil){
+        final NetworkObject requestTokenObject = putPerfilNetworkObject(perfil);
+        final NetworkFragment networkFragment = NetworkFragment.getInstance(activity.getFragmentManager(), requestTokenObject);
+        mDownloading = false;
+        if (!mDownloading) {
+            mDownloading = true;
+            networkFragment.startDownload(new DownloadCallback<NetworkResult>() {
+                @Override
+                public void onResponseReceived(NetworkResult result) {
+                    if (result.mException == null) {
+                        JSONObject resultToken;
+                        try{
+                            resultToken = new JSONObject(result.mResultValue);
+                            String status = resultToken.getString("status");
+                            if (status.equals("201")) {
+                                Toast.makeText(mContext,"Se actualizo el perfil correctamente.", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        catch (Throwable t) {
+                            Log.e("My App", "Could not parse malformed JSON: \"" + result.mResultValue + "\"");
+                        }
+
+                    }
+                    mDownloading = false;
+                }
+
+                @Override
+                public NetworkInfo getActiveNetworkInfo(Context context) {
+                    ConnectivityManager connectivityManager =
+                            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                    return networkInfo;
+                }
+
+                @Override
+                public void onProgressUpdate(int progressCode, int percentComplete) {}
+
+                @Override
+                public void onFinishDownloading() {
+                    mDownloading = false;
+                }
+            });
+        }
+
+    }
+
+    private NetworkObject putPerfilNetworkObject(Perfil perfil) {
+        String requestBody = putPerfilObject(perfil).toString();
+        NetworkObject networkObject = new NetworkObject(PERFIL_SIN_BARRA, HttpMethodType.PUT, requestBody);
+        networkObject.setFacebookID(ServiceLocator.get(FacebookService.class).getFacebookID());
+        networkObject.setAuthToken(ServiceLocator.get(FacebookService.class).getAuthToken());
+        networkObject.setFirebaseToken(ServiceLocator.get(NotificationService.class).getToken());
+        return networkObject;
+    }
+
+    private JSONObject putPerfilObject(Perfil perfil) {
+        JSONObject requestHistoriaJsonObject = new JSONObject();
+        try {
+
+            final String nombre = "mFirstName";
+            requestHistoriaJsonObject.put(nombre, perfil.getNombrenombre());
+            final String apellido = "mLastName";
+            requestHistoriaJsonObject.put(apellido, perfil.getApellido());
+            final String cumple = "mBirthDate";
+            requestHistoriaJsonObject.put(cumple, perfil.getFechaNacimiento());
+            final String mail = "mEmail";
+            requestHistoriaJsonObject.put(mail, perfil.getMail());
+            final String sexo = "mSex";
+            requestHistoriaJsonObject.put(sexo, perfil.getSexo());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return requestHistoriaJsonObject;
     }
 
     @Override

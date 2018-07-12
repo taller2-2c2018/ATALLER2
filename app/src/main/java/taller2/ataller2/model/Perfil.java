@@ -15,6 +15,9 @@ public class Perfil {
     private List<String> mAmigos = null;
     private List<String> mPeticiones = null;
 
+    private String nombrenombre = "";
+    private String apellido = "";
+
     public Perfil(String nombre) {
         mNombre = nombre;
     }
@@ -81,5 +84,21 @@ public class Perfil {
 
     public String getId() {
         return id;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getNombrenombre() {
+        return nombrenombre;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public void setNombrenombre(String nombrenombre) {
+        this.nombrenombre = nombrenombre;
     }
 }

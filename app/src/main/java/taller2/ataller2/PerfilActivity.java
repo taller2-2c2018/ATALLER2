@@ -85,7 +85,7 @@ public class PerfilActivity extends AppCompatActivity {
                 });
             }
         });
-        subir = findViewById(R.id.subir_foto_perfil);
+        subir = findViewById(R.id.subir_foto_perfil2);
         subir.setVisibility(View.GONE);
 
         mNombre = findViewById(R.id.textNombre);

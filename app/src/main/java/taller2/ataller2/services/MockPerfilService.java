@@ -60,6 +60,11 @@ public class MockPerfilService implements PerfilService {
     }
 
     @Override
+    public void updatePerfil(Activity activity, Perfil perfil) {
+
+    }
+
+    @Override
     public Perfil getMiPerfil() {
 
         return mPerfiles.get(0);

@@ -103,17 +103,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      * @param messageBody FCM message body received.
      */
     private void sendNotification(String messageBody, RemoteMessage remoteMessage) {
-        boolean deliveredOrderNotification = messageBody.equals("Su pedido ya fué entregado! ¿Está todo en orden?");
         Intent intent;
-        if (deliveredOrderNotification && (remoteMessage.getData().size() > 0)) {
-            intent = new Intent(this, LoginActivity.class);
-            Long requestId = Long.valueOf(remoteMessage.getData().get("requestId"));
-            intent.putExtra(getString(R.string.intent_data_from_rate_notification), true);
-            intent.putExtra(getString(R.string.intent_data_request_id), requestId);
-        } else {
-            intent = new Intent(this, MainActivity.class);
-
-        }
+        intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
@@ -123,7 +114,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
                         .setSmallIcon(R.drawable.logo)
-                        .setContentTitle("Hoy Como")
+                        .setContentTitle("Fiubook")
                         .setContentText(messageBody)
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
