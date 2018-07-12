@@ -1,9 +1,12 @@
 package taller2.ataller2.adapters;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +28,7 @@ import com.zomato.photofilters.imageprocessors.subfilters.SaturationSubfilter;
 
 import java.util.List;
 
+import taller2.ataller2.CameraActivity;
 import taller2.ataller2.R;
 import taller2.ataller2.model.Historia;
 import taller2.ataller2.model.HistoriaCorta;
@@ -37,10 +41,13 @@ public class HistoriasCortasListAdapter extends RecyclerView.Adapter<HistoriasCo
 
     private final ListadoHistoriasFragment.HistoriasCortasListListener mHistoriasListListener;
     private List<HistoriaCorta> mHistoria;
+    private FragmentActivity mActivity;
+    private boolean primero = true;
 
-    public HistoriasCortasListAdapter(List<HistoriaCorta> historias, ListadoHistoriasFragment.HistoriasCortasListListener listener){
+    public HistoriasCortasListAdapter(List<HistoriaCorta> historias, ListadoHistoriasFragment.HistoriasCortasListListener listener, FragmentActivity activity){
         mHistoria = historias;
         mHistoriasListListener = listener;
+        mActivity = activity;
     }
 
     public static class HistoriasCortasViewHolder extends RecyclerView.ViewHolder {
@@ -70,7 +77,7 @@ public class HistoriasCortasListAdapter extends RecyclerView.Adapter<HistoriasCo
     }
 
     @Override
-    public void onBindViewHolder(HistoriasCortasViewHolder holder, int position) {
+    public void onBindViewHolder(HistoriasCortasViewHolder holder, final int position) {
         final HistoriaCorta historia = mHistoria.get(position);
 
         Bitmap originalBitmap = historia.getPictureUsr();
@@ -81,34 +88,42 @@ public class HistoriasCortasListAdapter extends RecyclerView.Adapter<HistoriasCo
         }
         final Picasso picasso = ServiceLocator.get(PicassoService.class).getPicasso();
         picasso.load(historia.getStringUri()).fit().transform(new CircleTransform()).error(R.drawable.no_image).placeholder(R.drawable.progress_animation).into(holder.mPictureUser);
-
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Dialog dialog = new Dialog(v.getContext());
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.dialog_historia_corta);
-                WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-                Window window = dialog.getWindow();
-                window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                lp.copyFrom(window.getAttributes());
-                lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
-                lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-                window.setAttributes(lp);
-                window.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+                if(historia.getMock()){
+                    Intent intent = new Intent(mActivity, CameraActivity.class);
+                    Bundle b = new Bundle();
+                    b.putInt("esFlash", 1);
+                    intent.putExtras(b);
+                    mActivity.startActivity(intent);
+                    primero = false;
+                } else {
+                    final Dialog dialog = new Dialog(v.getContext());
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setContentView(R.layout.dialog_historia_corta);
+                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                    Window window = dialog.getWindow();
+                    window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    lp.copyFrom(window.getAttributes());
+                    lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                    lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                    window.setAttributes(lp);
+                    window.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
-                ImageView imagen = dialog.findViewById(R.id.img_corta);
-                picasso.load(historia.getStringUri()).fit().centerCrop().placeholder(R.drawable.progress_animation).error(R.drawable.no_image).into(imagen);
+                    ImageView imagen = dialog.findViewById(R.id.img_corta);
+                    picasso.load(historia.getStringUri()).fit().centerCrop().placeholder(R.drawable.progress_animation).error(R.drawable.no_image).into(imagen);
 
-                ImageView cancelButton = dialog.findViewById(R.id.button_cerrar);
-                cancelButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
-                //mHistoriasListListener.onHistoriaCortaClicked(historia);
+                    ImageView cancelButton = dialog.findViewById(R.id.button_cerrar);
+                    cancelButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.show();
+                    //mHistoriasListListener.onHistoriaCortaClicked(historia);
+                }
             }
         });
     }
