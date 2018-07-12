@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -26,6 +27,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
@@ -188,8 +190,28 @@ public class CameraActivity extends Activity {
             value = b.getInt("esFlash");
             if (value == 1){
                 cb.setChecked(true);
+                TextInputLayout til = (TextInputLayout) findViewById(R.id.textInputLayout);
+                TextInputLayout tdl = (TextInputLayout) findViewById(R.id.textDescripcionInputLayout);
+                til.setVisibility(View.INVISIBLE);
+                tdl.setVisibility(View.INVISIBLE);
             }
         }
+        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    TextInputLayout til = (TextInputLayout) findViewById(R.id.textInputLayout);
+                    TextInputLayout tdl = (TextInputLayout) findViewById(R.id.textDescripcionInputLayout);
+                    til.setVisibility(View.INVISIBLE);
+                    tdl.setVisibility(View.INVISIBLE);
+                } else {
+                    TextInputLayout til = (TextInputLayout) findViewById(R.id.textInputLayout);
+                    TextInputLayout tdl = (TextInputLayout) findViewById(R.id.textDescripcionInputLayout);
+                    til.setVisibility(View.VISIBLE);
+                    tdl.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
     }
 
